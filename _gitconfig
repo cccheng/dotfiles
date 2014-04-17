@@ -1,0 +1,38 @@
+[user]
+	name = Chung-Chiang Cheng
+	email = shepjeng@gmail.com
+[core]
+	editor = vim
+[alias]
+	co = checkout
+	ci = commit
+	st = status
+	br = branch
+	unstage = reset HEAD --
+	last = log -1 HEAD
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	type = cat-file -t
+	dump = cat-file -p
+[merge]
+	tool = vimdiff
+[color]
+	ui = true
+[color "branch"]
+	current = yellow bold
+	local = yellow
+	remote = green
+[color "diff"]
+	meta = cyan bold
+	frag = yellow bold
+	old = red bold
+	new = green bold
+[color "interactive"]
+[color "status"]
+	added = yellow bold
+	changed = green bold
+	untracked = cyan bold
+[push]
+	default = current
+[format]
+	signoff = true

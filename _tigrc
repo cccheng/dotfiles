@@ -1,0 +1,66 @@
+#
+# Base configuration
+#
+# Syntax: set <option> = <value>
+
+set author-width = 15
+set line-graphics = default
+set show-author = abbreviated   # Show abbreviated author names.
+set show-date = default
+set show-refs = yes
+set show-rev-graph = yes        # Show revision graph?
+set line-number-interval = 5    # Interval between line numbers
+#set commit-encoding = UTF-8     # Commit encoding
+
+#
+# Key configuration
+#
+# Syntax: bind <keymap> <key> <request>
+
+
+
+#
+# Color configuration
+#
+# Syntax: color <line> <color> <color> [<attribute>]
+
+# UI colors
+## General
+#color default           default default         # Overwrite default terminal colors (see above).
+color cursor            yellow  blue    bold    # The cursor line.
+color status            default default         # The status window showing info messages.
+#color title-focus       default default         # The title window for the current view.
+#color title-blur        default default         # The title window of any backgrounded view.
+#color delimiter         default default         # Delimiter shown for truncated lines.
+#color line-number       default default         # Line numbers.
+color date              cyan    default bold    # The commit date.
+color author            green   default bold    # The commit author.
+#color mode              default default         # The file mode holding the permissions and type.
+
+## Main view colors
+color graph-commit      blue    default bold    # The commit dot in the revising graph.
+#color palette-[0-6]     default default         # 7 different colors, used for distinguishing branches or commits. example: palette-0 = red
+#color main-commit       default default         # The commit comment.
+#color main-head         default default         # Label of the current branch.
+#color main-remote       default default         # Label of a remote.
+#color main-tracked      default default         # Label of the remote tracked by the current branch.
+#color main-tag          default default         # Label of a signed tag.
+#color main-local-tag    default default         # Label of a local tag.
+#color main-ref          default default         # Label of any other reference.
+
+## Status view
+#color stat-head         default default         # The "On branch"-line.
+#color stat-section      default default         # Status section titles,
+#color stat-staged       default default         # Status flag of staged files.
+#color stat-unstaged     default default         # Status flag of unstaged files.
+#color stat-untracked    default default         # Status flag of untracked files.
+
+## Blame view
+#color blame-id          default default         # The commit ID.
+
+## Tree view
+color tree-head         blue    default bold    # The "Directory /"-line
+color tree-dir          yellow  default         # The directory name.
+color tree-file         green   default         # The file name.
+
+# Highlighting
