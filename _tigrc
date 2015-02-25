@@ -3,13 +3,7 @@
 #
 # Syntax: set <option> = <value>
 
-set author-width = 15
 set line-graphics = default
-set show-author = abbreviated   # Show abbreviated author names.
-set show-date = default
-set show-refs = yes
-set show-rev-graph = yes        # Show revision graph?
-set line-number-interval = 5    # Interval between line numbers
 #set commit-encoding = UTF-8     # Commit encoding
 
 #
@@ -59,8 +53,8 @@ color graph-commit      blue    default bold    # The commit dot in the revising
 #color blame-id          default default         # The commit ID.
 
 ## Tree view
-color tree-head         blue    default bold    # The "Directory /"-line
-color tree-dir          yellow  default         # The directory name.
-color tree-file         green   default         # The file name.
+#color tree.header       blue    default bold    # The "Directory /"-line
+#color tree.directory    yellow  default         # The directory name.
+color tree.file         green   default         # The file name.
 
 # Highlighting
