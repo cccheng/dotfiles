@@ -17,7 +17,9 @@
 	dump = cat-file -p
 [merge]
 	tool = vimdiff
+[pull]
+	rebase = true
 [pretty]
-    fixes = Fixes: %h (\"%s\")
+	fixes = Fixes: %h (\"%s\")
 [format]
 	signoff = true
