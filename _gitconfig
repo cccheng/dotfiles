@@ -3,6 +3,7 @@
 	email = shepjeng@gmail.com
 [core]
 	editor = vim
+	abbrev = 12
 [alias]
 	co = checkout
 	ci = commit
@@ -16,23 +17,7 @@
 	dump = cat-file -p
 [merge]
 	tool = vimdiff
-[color]
-	ui = true
-[color "branch"]
-	current = yellow bold
-	local = yellow
-	remote = green
-[color "diff"]
-	meta = cyan bold
-	frag = yellow bold
-	old = red bold
-	new = green bold
-[color "interactive"]
-[color "status"]
-	added = yellow bold
-	changed = green bold
-	untracked = cyan bold
-[push]
-	default = current
+[pretty]
+    fixes = Fixes: %h (\"%s\")
 [format]
 	signoff = true
