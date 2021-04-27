@@ -3,14 +3,12 @@
 #
 # Syntax: set <option> = <value>
 
-set line-graphics = default
-#set commit-encoding = UTF-8     # Commit encoding
+set line-graphics = utf-8
 
 #
 # Key configuration
 #
 # Syntax: bind <keymap> <key> <request>
-
 
 
 #
@@ -21,18 +19,18 @@ set line-graphics = default
 # UI colors
 ## General
 #color default           default default         # Overwrite default terminal colors (see above).
-color cursor            yellow  blue    bold    # The cursor line.
-color status            default default         # The status window showing info messages.
+#color cursor            yellow  blue    bold    # The cursor line.
+#color status            default default         # The status window showing info messages.
 #color title-focus       default default         # The title window for the current view.
 #color title-blur        default default         # The title window of any backgrounded view.
 #color delimiter         default default         # Delimiter shown for truncated lines.
 #color line-number       default default         # Line numbers.
-color date              cyan    default bold    # The commit date.
-color author            green   default bold    # The commit author.
+#color date              cyan    default bold    # The commit date.
+#color author            green   default bold    # The commit author.
 #color mode              default default         # The file mode holding the permissions and type.
 
 ## Main view colors
-color graph-commit      blue    default bold    # The commit dot in the revising graph.
+#color graph-commit      blue    default bold    # The commit dot in the revising graph.
 #color palette-[0-6]     default default         # 7 different colors, used for distinguishing branches or commits. example: palette-0 = red
 #color main-commit       default default         # The commit comment.
 #color main-head         default default         # Label of the current branch.
@@ -55,6 +53,6 @@ color graph-commit      blue    default bold    # The commit dot in the revising
 ## Tree view
 #color tree.header       blue    default bold    # The "Directory /"-line
 #color tree.directory    yellow  default         # The directory name.
-color tree.file         green   default         # The file name.
+#color tree.file         green   default         # The file name.
 
 # Highlighting
