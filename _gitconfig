@@ -23,3 +23,5 @@
 	fixes = Fixes: %h (\"%s\")
 [format]
 	signoff = true
+[protocol]
+	version = 2
