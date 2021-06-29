@@ -25,3 +25,5 @@
 	signoff = true
 [protocol]
 	version = 2
+[help]
+	autocorrect = 1
