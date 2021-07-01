@@ -27,3 +27,7 @@ alias rm='rm -i'
 alias ls='ls -CF --color'
 alias ll='ls -lF'
 alias la='ls -lFA'
+
++[[ -s "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
++[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
