@@ -1,6 +1,7 @@
 [user]
 	name = Chung-Chiang Cheng
 	email = shepjeng@gmail.com
+#	signingkey = 
 [core]
 	editor = vim
 	abbrev = 12
@@ -27,3 +28,5 @@
 	version = 2
 [help]
 	autocorrect = 1
+#[commit]
+#	gpgsign = true
