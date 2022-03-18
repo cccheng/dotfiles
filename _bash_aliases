@@ -24,7 +24,7 @@ export LESS_TERMCAP_ue=$'\E[m'          # end underline
 
 export GPG_TTY=$(tty)
 
-alias grep='grep --color'
+alias grep='grep --color -I'
 alias rm='rm -i'
 alias ls='ls -CF --color'
 alias ll='ls -lF'
