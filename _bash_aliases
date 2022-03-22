@@ -1,4 +1,6 @@
 
+. /usr/lib/git-core/git-sh-prompt
+
 # Customization
 CLEAR="\[\033[m\]"
 DARK_GREEN="\[\033[0;32m\]"
@@ -8,7 +10,8 @@ YELLOW="\[\033[1;33m\]"
 GREEN="\[\033[1;32m\]"
 CYAN="\[\033[1;36m\]"
 WHITE="\[\033[1;37m\]"
-export PS1="${CLEAR}[${CYAN}\u${WHITE}@${DARK_CYAN}\h${CLEAR}]${GREEN}\w${DARK_GREEN}${YELLOW}\\$ ${CLEAR}"
+GIT_PS1='$(__git_ps1 ".%s") '
+export PS1="${CLEAR}[${CYAN}\u${WHITE}@${DARK_CYAN}\h${CLEAR}]${GREEN}\w${DARK_GREEN}${GIT_PS1}${YELLOW}\\$ ${CLEAR}"
 export PS2="${YELLOW}>${CLEAR} "
 
 export LESS_TERMCAP_mb=$'\E[1;31m'      # begin blinking
