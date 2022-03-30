@@ -24,6 +24,8 @@ export LESS_TERMCAP_ue=$'\E[m'          # end underline
 
 export GPG_TTY=$(tty)
 
+bind '"\ee": "\C-asudo \C-e"'
+
 alias grep='grep --color -I'
 alias rm='rm -i'
 alias ls='ls -CF --color'
