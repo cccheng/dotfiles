@@ -11,7 +11,7 @@
 	br = branch
 	unstage = reset HEAD --
 	last = log -1 HEAD
-	lg = log --color --graph --date=short --pretty=format:'%C(bold yellow)%h %C(green)%ad %C(reset)- %s %C(brightblack)<%ae>%Creset' --abbrev-commit --
+	logs = log --color --graph --date=short --pretty=format:'%C(bold yellow)%h %C(green)%ad %C(reset)- %s %C(brightblack)<%ae>%Creset' --abbrev-commit --
 	type = cat-file -t
 	dump = cat-file -p
 [merge]
