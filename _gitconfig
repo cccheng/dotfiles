@@ -28,5 +28,7 @@
 	autocorrect = 1
 #[commit]
 #	gpgsign = true
+[fetch]
+	prune = true
 [diff]
 	external = difft
