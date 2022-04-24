@@ -37,3 +37,7 @@ alias la='ls -lFA'
 [ -s "$HOME/.rvm/scripts/rvm" ] && source "$HOME/.rvm/scripts/rvm"
 [ -s "$HOME/.nix-profile/etc/profile.d/nix.sh" ] && source "$HOME/.nix-profile/etc/profile.d/nix.sh"
 
+export STARSHIP_CONFIG="$HOME/.conf/starship.toml"
+if type -p starship &>/dev/null; then
+    eval "$(starship init bash)"
+fi
