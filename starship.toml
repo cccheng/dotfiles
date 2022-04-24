@@ -16,6 +16,8 @@ format = "[$hostname]($style)"
 truncation_length = 8
 truncation_symbol = "…/"
 truncate_to_repo = false
+read_only = "  ⃠"
+read_only_style = "red"
 style = "bold green"
 format = "[$path]($style)[$read_only]($read_only_style)"
 
