@@ -2,7 +2,7 @@ add_newline = false
 format = "\\[$username@(white)$hostname\\]$directory$git_branch$character "
 
 [username]
-style_root = "bold red"
+style_root = "bold purple"
 style_user = "bold cyan"
 format = "[$user]($style)"
 show_always = true
