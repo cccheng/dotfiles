@@ -5,6 +5,7 @@
 # Customize Bash prompt
 source "/usr/lib/git-core/git-sh-prompt"
 CLEAR="\[\033[m\]"
+DARK_YELLOW="\[\033[0;33m\]"
 DARK_GREEN="\[\033[0;32m\]"
 DARK_CYAN="\[\033[0;36m\]"
 DARK_GREY="\[\033[1;30m\]"
