@@ -3,7 +3,7 @@
 [[ -s "$HOME/.profile" ]] && source "$HOME/.profile"
 
 # Customize Bash prompt
-source /usr/lib/git-core/git-sh-prompt
+source "/usr/lib/git-core/git-sh-prompt"
 CLEAR="\[\033[m\]"
 DARK_GREEN="\[\033[0;32m\]"
 DARK_CYAN="\[\033[0;36m\]"
@@ -27,7 +27,7 @@ alias la='ls -lFA'
 # Key bindings
 bind '"\ee": "\C-asudo \C-e"'
 
-export GPG_TTY=$(tty)
+export GPG_TTY="$(tty)"
 
 [ -s "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
 [ -s "$HOME/.rvm/scripts/rvm" ] && source "$HOME/.rvm/scripts/rvm"
@@ -37,3 +37,4 @@ if type -p starship &>/dev/null; then
     export STARSHIP_CONFIG="$HOME/.conf/starship.toml"
     eval "$(starship init bash)"
 fi
+
