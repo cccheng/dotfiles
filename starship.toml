@@ -1,5 +1,5 @@
 add_newline = false
-format = "\\[$username@(white)$hostname\\]$directory$git_branch$character "
+format = "\\[$username@(white)$hostname\\]$directory$git_branch$git_state$character "
 
 [username]
 style_root = "bold purple"
