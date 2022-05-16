@@ -1,7 +1,4 @@
 
-# Load the default .profile
-[[ -s "$HOME/.profile" ]] && source "$HOME/.profile"
-
 # Customize Bash prompt
 source "/usr/lib/git-core/git-sh-prompt"
 CLEAR="\[\033[m\]"
