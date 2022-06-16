@@ -21,12 +21,14 @@ alias rm='rm -i'
 alias ls='ls -CF --color'
 alias ll='ls -lF'
 alias la='ls -lFA'
+alias ip='ip -c'
 
 # Key bindings
 bind '"\ee": "\C-asudo \C-e"'
 
 export GPG_TTY="$(tty)"
 
+# Misc
 [ -s "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
 [ -s "$HOME/.rvm/scripts/rvm" ] && source "$HOME/.rvm/scripts/rvm"
 [ -s "$HOME/.nix-profile/etc/profile.d/nix.sh" ] && source "$HOME/.nix-profile/etc/profile.d/nix.sh"
