@@ -31,5 +31,4 @@
 [fetch]
 	prune = true
 [diff]
-	external = difft
 	colormoved = default
