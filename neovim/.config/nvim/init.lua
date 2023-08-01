@@ -11,14 +11,25 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup(
+require("lazy").setup({
     {
         "folke/tokyonight.nvim",
         config = function()
             vim.cmd[[colorscheme tokyonight-night]]
         end
+    },
+    {
+        "dhananjaylatkar/cscope_maps.nvim",    
+        dependencies = {    
+            "folke/which-key.nvim", -- optional [for whichkey hints]    
+            -- "nvim-telescope/telescope.nvim", -- optional [for picker="telescope"]    
+            -- "ibhagwan/fzf-lua", -- optional [for picker="fzf-lua"]    
+            -- "nvim-tree/nvim-web-devicons", -- optional [for devicons in telescope or fzf]    
+        },    
+        opts = {    
+        },
     }
-)
+})
 
 vim.opt.showmode = true
 vim.opt.number = true
@@ -52,7 +63,6 @@ vim.opt.mouse = ""
 vim.opt.exrc = true
 vim.opt.wrap = false
 vim.opt.splitright = true
-vim.opt.fileencoding = "utf-8"
 vim.opt.ambiwidth = double
 
 vim.keymap.set("n", "<C-H>", "<CMD>:tabprev<CR>")
