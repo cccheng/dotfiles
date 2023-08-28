@@ -16,7 +16,7 @@ export PS2="${YELLOW}>${CLEAR} "
 
 # Aliases
 alias vim='vim -p'
-alias grep='grep --color -I'
+alias grep='grep --color'
 alias rm='rm -i'
 alias ls='ls -CF --color'
 alias ll='ls -lF'
