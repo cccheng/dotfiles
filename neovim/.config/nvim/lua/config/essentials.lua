@@ -9,6 +9,7 @@ vim.opt.completeopt = {"menuone", "noselect"}
 
 vim.opt.tabstop = 8
 vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
 vim.opt.expandtab = true
 vim.opt.shiftround = true
 vim.opt.autoindent = true
@@ -31,7 +32,6 @@ vim.opt.mouse = ""
 vim.opt.exrc = true
 vim.opt.wrap = false
 vim.opt.splitright = true
-vim.opt.ambiwidth = double
 
 vim.keymap.set("n", "<C-H>", "<CMD>:tabprev<CR>")
 vim.keymap.set("n", "<C-L>", "<CMD>:tabnext<CR>")
