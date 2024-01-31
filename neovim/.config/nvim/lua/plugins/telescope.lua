@@ -16,7 +16,16 @@ return {
             vim.keymap.set("n", "<leader>tb", telescope.buffers, { desc = "Buffers" })
             vim.keymap.set("n", "<leader>th", telescope.help_tags, { desc = "Help tags" })
 
-            require("telescope").setup {
+            require("telescope").setup({
+                defaults = {
+                    layout_strategy = "horizontal",
+                    layout_config = {
+                        horizontal = {
+                            height = 0.9,
+                            width = 0.95,
+                        },
+                    },
+                },
                 extensions = {
                     fzf = {
                         fuzzy = true,                    -- false will only do exact matching
@@ -26,7 +35,7 @@ return {
                         -- the default case_mode is "smart_case"
                     }
                 }
-            }
+            })
 
             require('telescope').load_extension("fzf")
         end,
