@@ -46,7 +46,6 @@ return {
                     "--fallback-style=llvm",
                     "--offset-encoding=utf-16",
                 },
-                capabilities = require("cmp_nvim_lsp").default_capabilities(),
             })
 
             lspconfig.rust_analyzer.setup({
@@ -78,16 +77,29 @@ return {
         config = function()
             local cmp = require("cmp")
             cmp.setup({
+                window = {
+                    -- completion = cmp.config.window.bordered(),
+                    -- documentation = cmp.config.window.bordered(),
+                },
+                mapping = cmp.mapping.preset.insert({
+                    -- overwrite for <c-n> and <c-p> ?
+                }),
                 completion = {
                     completeopt = "menu,menuone,noinsert",
                 },
                 sources = cmp.config.sources({
                     { name = "nvim_lsp" },
                     { name = "path" },
-                }, {
-                    { name = "buffer" },
-                }),
+                },
+                    {
+                        { name = "buffer" },
+                    }),
             })
+
+            local capabilities = require('cmp_nvim_lsp').default_capabilities()
+            require('lspconfig')["clangd"].setup {
+                capabilities = capabilities
+            }
         end
     }
 }
