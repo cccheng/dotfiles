@@ -59,11 +59,13 @@ return {
 
             vim.keymap.set("n", "<leader>ls", "<cmd>LspStart<cr>", { desc = "Start LSP server" })
             vim.keymap.set("n", "<leader>lS", "<cmd>LspStop<cr>", { desc = "Stop LSP server" })
-            vim.keymap.set("n", "<leader>lh", vim.lsp.buf.hover, { desc = "Hover" });
-            vim.keymap.set("n", "<leader>ld", vim.lsp.buf.definition, { desc = "Definition" });
-            vim.keymap.set("n", "<leader>lD", vim.lsp.buf.declaration, { desc = "Declaration" });
-            vim.keymap.set("n", "<leader>li", vim.lsp.buf.implementation, { desc = "Implementation" });
-            vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { desc = "Code action" });
+            vim.keymap.set("n", "<leader>lh", vim.lsp.buf.hover, { desc = "Hover" })
+            vim.keymap.set("n", "<leader>ld", vim.lsp.buf.definition, { desc = "Definition" })
+            vim.keymap.set("n", "<leader>lD", vim.lsp.buf.declaration, { desc = "Declaration" })
+            vim.keymap.set("n", "<leader>lr", vim.lsp.buf.references, { desc = "References" })
+            vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format" })
+            vim.keymap.set("n", "<leader>li", vim.lsp.buf.implementation, { desc = "Implementation" })
+            vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { desc = "Code action" })
         end
     },
     {
