@@ -56,14 +56,14 @@ return {
             })
 
             vim.keymap.set("n", "<leader>lh", vim.lsp.buf.hover, { desc = "Hover" })
-            vim.keymap.set("n", "<leader>ld", function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end, { desc = "Definition" })
-            vim.keymap.set("n", "<leader>lt", function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end, { desc = "Type definition" })
             vim.keymap.set("n", "<leader>lD", vim.lsp.buf.declaration, { desc = "Declaration" })
-            vim.keymap.set("n", "<leader>lr", "<cmd>Telescope lsp_references<cr>", { desc = "References" })
             vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format" })
-            vim.keymap.set("n", "<leader>li", function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end, { desc = "Implementation" })
             vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { desc = "Code action" })
             vim.keymap.set("n", "<leader>ls", vim.lsp.buf.signature_help, { desc = "Signature" })
+            vim.keymap.set("n", "<leader>lr", "<cmd>Telescope lsp_references<cr>", { desc = "References" })
+            vim.keymap.set("n", "<leader>ld", function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end, { desc = "Definition" })
+            -- vim.keymap.set("n", "<leader>lt", function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end, { desc = "Type definition" })
+            -- vim.keymap.set("n", "<leader>li", function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end, { desc = "Implementation" })
         end
     },
     {
@@ -101,5 +101,20 @@ return {
                 capabilities = capabilities
             }
         end
+    },
+    {
+        "DNLHC/glance.nvim",
+        config = function()
+            require('glance').setup({})
+
+            vim.keymap.set("n", "<leader>d", "<cmd>Glance definitions<cr>", { desc = "Definition" })
+            vim.keymap.set("n", "<leader>r", "<cmd>Glance references<cr>", { desc = "References" })
+            vim.keymap.set("n", "<leader>lt", "<cmd>Glance type_definitions<cr>", { desc = "Type Definition" })
+            vim.keymap.set("n", "<leader>li", "<cmd>Glance implementations<cr>", { desc = "Implementation" })
+        end
+    },
+    {
+        -- "nvimdev/lspsaga.nvim",
+        -- for hover
     }
 }
