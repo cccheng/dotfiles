@@ -15,7 +15,8 @@ export PS1="${CLEAR}[${CYAN}\u${WHITE}@${DARK_CYAN}\h${CLEAR}]${GREEN}\w${DARK_G
 export PS2="${YELLOW}>${CLEAR} "
 
 # Aliases
-alias vim='vim -p'
+alias vim='nvim -p'
+alias vimdiff='nvim -d'
 alias grep='grep --color'
 alias rm='rm -i'
 alias ls='ls -CF --color'
