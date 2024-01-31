@@ -1,34 +1,45 @@
 [user]
-	name = Chung-Chiang Cheng
-	email = shepjeng@gmail.com
-#	signingkey = 
+    name = Chung-Chiang Cheng
+    email = shepjeng@gmail.com
+    #signingkey = 
 [core]
-	editor = vim
-	abbrev = 12
+    editor = vim
+    abbrev = 12
 [alias]
-	co = checkout
-	st = status
-	br = branch
-	unstage = reset HEAD --
-	last = log -1 HEAD
-	logs = log --color --graph --date=short --pretty=format:'%C(bold yellow)%h %C(green)%ad %C(reset)- %s %C(brightblack)<%ae>%Creset' --abbrev-commit --
-	type = cat-file -t
-	dump = cat-file -p
+    co = checkout
+    st = status
+    br = branch
+    unstage = reset HEAD --
+    last = log -1 HEAD
+    logs = log --color --graph --date=short --pretty=format:'%C(bold yellow)%h %C(green)%ad %C(reset)- %s %C(brightblack)<%ae>%Creset' --abbrev-commit --
+    type = cat-file -t
+    dump = cat-file -p
 [merge]
-	tool = vimdiff
+    tool = vimdiff
 [pull]
-	rebase = true
+    rebase = true
 [pretty]
-	fixes = Fixes: %h (\"%s\")
+    fixes = Fixes: %h (\"%s\")
 [format]
-	signoff = true
+    signoff = true
+    coverLetter = auto
+    thread = shallow
+[sendemail]
+    #smtpserver = 
+    #smtpuser = 
+    #smtppass = 
+    #smtpencryption = tls
+    #smtpserverport = 587
 [protocol]
-	version = 2
+    version = 2
 [help]
-	autocorrect = 1
-#[commit]
-#	gpgsign = true
+    autocorrect = 1
+[commit]
+    gpgsign = true
 [fetch]
-	prune = true
+    prune = true
 [diff]
-	colormoved = default
+    colormoved = default
+    algorithm = histogram
+[safe]
+    directory = *
