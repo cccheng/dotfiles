@@ -64,10 +64,28 @@ if vim.fn.has("nvim-0.10") == 1 then
     opt.smoothscroll = true
 end
 
+-- better up/down
+vim.keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.keymap.set({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.keymap.set({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
-vim.keymap.set("n", "<C-H>", "<CMD>:tabprev<CR>")
-vim.keymap.set("n", "<C-L>", "<CMD>:tabnext<CR>")
+-- tabs
+vim.keymap.set("n", "<c-h>", "<CMD>:tabprev<CR>", { desc = "Previous tab" })
+vim.keymap.set("n", "<c-l>", "<CMD>:tabnext<CR>", { desc = "Next tab" })
 
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+-- buffers
+vim.keymap.set("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
+vim.keymap.set("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })
+
+-- move lines
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move down" })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move up" })
+
+-- Clear search with <esc>
+vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
+
+-- better indenting
+vim.keymap.set("v", "<", "<gv")
+vim.keymap.set("v", ">", ">gv")
 
