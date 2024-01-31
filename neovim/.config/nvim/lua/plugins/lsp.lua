@@ -14,15 +14,12 @@ return {
                 ensure_installed = {
                     "clangd",
                     "rust_analyzer",
-                    "typos_lsp",
-                    "lua_ls",
                 }
             })
         end
     },
     {
         "neovim/nvim-lspconfig",
-        event = "VeryLazy",
         config = function()
             local lspconfig = require("lspconfig")
 
@@ -51,11 +48,6 @@ return {
                     "--function-arg-placeholders",
                     "--fallback-style=llvm",
                 },
-                init_options = {
-                    usePlaceholders = true,
-                    completeUnimported = true,
-                    clangdFileStatus = true,
-                },
             })
 
             lspconfig.rust_analyzer.setup({
@@ -64,9 +56,9 @@ return {
                     ['rust-analyzer'] = {},
                 }
             })
-            lspconfig.lua_ls.setup({})
 
             vim.keymap.set("n", "<leader>ls", "<cmd>LspStart<cr>", { desc = "Start LSP server" })
+            vim.keymap.set("n", "<leader>lS", "<cmd>LspStop<cr>", { desc = "Stop LSP server" })
             vim.keymap.set("n", "<leader>lh", vim.lsp.buf.hover, { desc = "Hover" });
             vim.keymap.set("n", "<leader>ld", vim.lsp.buf.definition, { desc = "Definition" });
             vim.keymap.set("n", "<leader>lD", vim.lsp.buf.declaration, { desc = "Declaration" });
