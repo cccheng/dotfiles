@@ -24,7 +24,14 @@ return {
         config = function()
             require("treesitter-context").setup({
                 max_lines = 3,
-                mode = "topline",
+                mode = "cursor",
+                patterns = {
+                    default = {
+                        "class",
+                        "function",
+                        "method",
+                    },
+                },
             })
         end
     },
