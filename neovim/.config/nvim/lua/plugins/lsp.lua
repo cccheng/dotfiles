@@ -33,10 +33,7 @@ return {
                         ".clangd",
                         ".clang-tidy",
                         ".clang-format",
-                        "compile_commands.json",
-                        "compile_flags.txt",
-                        "configure.ac",
-                        ".git"
+                        "compile_commands.json"
                     )(fname) or require("lspconfig.util").find_git_ancestor(fname)
                 end,
                 cmd = {
@@ -47,7 +44,9 @@ return {
                     "--completion-style=detailed",
                     "--function-arg-placeholders",
                     "--fallback-style=llvm",
+                    "--offset-encoding=utf-16",
                 },
+                capabilities = require("cmp_nvim_lsp").default_capabilities(),
             })
 
             lspconfig.rust_analyzer.setup({
@@ -57,15 +56,15 @@ return {
                 }
             })
 
-            vim.keymap.set("n", "<leader>ls", "<cmd>LspStart<cr>", { desc = "Start LSP server" })
-            vim.keymap.set("n", "<leader>lS", "<cmd>LspStop<cr>", { desc = "Stop LSP server" })
             vim.keymap.set("n", "<leader>lh", vim.lsp.buf.hover, { desc = "Hover" })
-            vim.keymap.set("n", "<leader>ld", vim.lsp.buf.definition, { desc = "Definition" })
+            vim.keymap.set("n", "<leader>ld", function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end, { desc = "Definition" })
+            vim.keymap.set("n", "<leader>lt", function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end, { desc = "Type definition" })
             vim.keymap.set("n", "<leader>lD", vim.lsp.buf.declaration, { desc = "Declaration" })
-            vim.keymap.set("n", "<leader>lr", vim.lsp.buf.references, { desc = "References" })
+            vim.keymap.set("n", "<leader>lr", "<cmd>Telescope lsp_references<cr>", { desc = "References" })
             vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format" })
-            vim.keymap.set("n", "<leader>li", vim.lsp.buf.implementation, { desc = "Implementation" })
+            vim.keymap.set("n", "<leader>li", function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end, { desc = "Implementation" })
             vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { desc = "Code action" })
+            vim.keymap.set("n", "<leader>ls", vim.lsp.buf.signature_help, { desc = "Signature" })
         end
     },
     {
