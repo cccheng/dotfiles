@@ -6,7 +6,8 @@ return {
             require("nvim-treesitter.configs").setup({
                 ensure_installed = {
                     "c", "cpp", "rust", "ruby",
-                    "bash", "diff", "regex", "json", "strace",
+                    "bash", "diff", "regex", "json",
+                    "strace", "kconfig",
                     "markdown", "html", "yaml", "toml", "ini",
                     "lua", "vim", "vimdoc",
                 },
