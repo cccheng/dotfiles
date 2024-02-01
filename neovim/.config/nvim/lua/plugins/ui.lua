@@ -39,6 +39,9 @@ return {
         config = function()
             require('mini.notify').setup({
             })
+
+            require('mini.comment').setup({
+            })
         end
     },
     {
