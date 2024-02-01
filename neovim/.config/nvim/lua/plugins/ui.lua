@@ -37,10 +37,13 @@ return {
         "echasnovski/mini.nvim",
         event = "VeryLazy",
         config = function()
-            require('mini.notify').setup({
+            require("mini.notify").setup({
             })
 
-            require('mini.comment').setup({
+            require("mini.comment").setup({
+            })
+
+            require("mini.animate").setup({
             })
         end
     },
@@ -88,13 +91,4 @@ return {
             require('windows').setup()
         end
     },
-    -- {
-    --     "karb94/neoscroll.nvim",
-    --     config = function ()
-    --         require('neoscroll').setup({
-    --             easing_function = "quadratic", -- Default easing function
-    --             performance_mode = true,
-    --         })
-    --     end
-    -- }
 }
