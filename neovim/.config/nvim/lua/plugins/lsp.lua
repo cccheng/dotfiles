@@ -55,7 +55,7 @@ return {
                 }
             })
 
-            vim.keymap.set("n", "<leader>lh", vim.lsp.buf.hover, { desc = "Hover" })
+            vim.keymap.set("n", "<leader>s", vim.lsp.buf.hover, { desc = "Hover" })
             vim.keymap.set("n", "<leader>lD", vim.lsp.buf.declaration, { desc = "Declaration" })
             vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format" })
             vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { desc = "Code action" })
