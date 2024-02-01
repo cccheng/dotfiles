@@ -88,13 +88,13 @@ return {
             require('windows').setup()
         end
     },
-    {
-        "karb94/neoscroll.nvim",
-        config = function ()
-            require('neoscroll').setup({
-                easing_function = "quadratic", -- Default easing function
-                performance_mode = true,
-            })
-        end
-    }
+    -- {
+    --     "karb94/neoscroll.nvim",
+    --     config = function ()
+    --         require('neoscroll').setup({
+    --             easing_function = "quadratic", -- Default easing function
+    --             performance_mode = true,
+    --         })
+    --     end
+    -- }
 }
