@@ -87,5 +87,11 @@ return {
             vim.o.equalalways = false
             require('windows').setup()
         end
+    },
+    {
+        "karb94/neoscroll.nvim",
+        config = function ()
+            require('neoscroll').setup {}
+        end
     }
 }
