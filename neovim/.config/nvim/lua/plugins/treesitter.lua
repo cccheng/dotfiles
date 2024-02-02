@@ -5,11 +5,13 @@ return {
         config = function()
             require("nvim-treesitter.configs").setup({
                 ensure_installed = {
-                    "c", "cpp", "rust", "ruby",
+                    "c", "cpp", "rust", "ruby", "comment",
                     "bash", "diff", "regex", "json",
-                    "strace", "kconfig",
-                    "markdown", "html", "yaml", "toml", "ini",
-                    "lua", "vim", "vimdoc",
+                    "disassembly", "strace", "kconfig",
+                    "markdown", "markdown_inline", "html",
+                    "gitcommit", "git_rebase", "diff",
+                    "yaml", "toml", "ini", "dockerfile",
+                    "lua", "vim", "vimdoc", "gpg", "nix",
                 },
                 sync_install = false,
                 highlight = { enable = true },
