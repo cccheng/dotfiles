@@ -43,7 +43,14 @@ return {
             require("mini.comment").setup({
             })
 
-            require("mini.animate").setup({
+            local animate = require("mini.animate")
+            animate.setup({
+                cursor = {
+                    timing = animate.gen_timing.quadratic({ duration = 70, unit = 'total' }),
+                },
+                scroll = {
+                    timing = animate.gen_timing.linear({ duration = 50, unit = 'total' }),
+                },
             })
         end
     },
