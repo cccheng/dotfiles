@@ -97,13 +97,14 @@ return {
                 completion = {
                     completeopt = "menu,menuone,noinsert",
                 },
-                sources = cmp.config.sources({
-                    { name = "nvim_lsp" },
-                    { name = "path" },
-                },
+                sources = cmp.config.sources(
                     {
+                        { name = "nvim_lsp" },
+                        { name = "path" },
+                    }, {
                         { name = "buffer" },
-                    }),
+                    }
+                ),
             })
 
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
