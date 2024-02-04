@@ -82,6 +82,16 @@ return {
                 presets = {
                     lsp_doc_border = true, -- add a border to hover docs and signature help
                 },
+                views = {
+                    hover = {
+                        border = {
+                            style = "rounded",
+                        },
+                        win_options = {
+                            winblend = 17,
+                        },
+                    },
+                },
             })
 
             vim.keymap.set("n", "<leader>tn", "<cmd>NoiceTelescope<cr>", { desc = "Noice" })
