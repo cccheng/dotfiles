@@ -26,6 +26,24 @@ return {
                         },
                     },
                 },
+                pickers = {
+                    find_files = {
+                        theme = "ivy",
+                        winblend = 10,
+                    },
+                    live_grep = {
+                        theme = "ivy",
+                        winblend = 10,
+                    },
+                    buffers = {
+                        theme = "ivy",
+                        winblend = 10,
+                    },
+                    help_tags = {
+                        theme = "ivy",
+                        winblend = 10,
+                    },
+                },
                 extensions = {
                     fzf = {
                         fuzzy = true,                    -- false will only do exact matching
