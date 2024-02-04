@@ -4,7 +4,6 @@ vim.g.autoformat = true
 local opt = vim.opt
 
 opt.clipboard = "unnamedplus" -- Sync with system clipboard
-opt.completeopt = "menu,menuone,noselect"
 opt.cursorline = true -- Enable highlighting of the current line
 opt.formatoptions = "jcroqlnt" -- tcqj
 opt.grepformat = "%f:%l:%c:%m"
@@ -20,10 +19,10 @@ opt.relativenumber = false -- Relative line numbers
 opt.backspace = {"indent", "eol", "start"}
 opt.scrolloff = 4 -- Lines of context
 
-opt.wildmenu = true
-opt.wildmode = "longest:full,full" -- Command-line completion mode
-opt.completeopt = {"menuone", "noselect"}
-opt.winminwidth = 5 -- Minimum window width
+-- opt.wildmenu = true
+-- opt.wildmode = "longest:full,full" -- Command-line completion mode
+-- opt.completeopt = {"menuone", "noselect"}
+-- opt.winminwidth = 5 -- Minimum window width
 
 opt.tabstop = 8 -- Number of spaces tabs count for
 opt.shiftwidth = 4 -- Size of an indent
