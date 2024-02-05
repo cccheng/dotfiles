@@ -68,7 +68,7 @@ return {
     },
     {
         "hrsh7th/nvim-cmp",
-        event = "InsertEnter",
+        event = "VeryLazy",
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-buffer",
@@ -144,8 +144,4 @@ return {
             vim.keymap.set("n", "<leader>li", "<cmd>Glance implementations<cr>", { desc = "Implementation" })
         end
     },
-    {
-        -- "nvimdev/lspsaga.nvim",
-        -- for hover
-    }
 }
