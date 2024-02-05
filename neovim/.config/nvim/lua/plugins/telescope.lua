@@ -10,6 +10,7 @@ return {
         config = function()
             local telescope = require("telescope.builtin")
 
+            require("which-key").register({ ["<leader>t"] = { name = "+Telescope" } })
             vim.keymap.set("n", "<leader>tf", telescope.find_files, { desc = "Find files" })
             vim.keymap.set("n", "<leader>tF", require("telescope").extensions.file_browser.file_browser, { desc = "File browser" })
             vim.keymap.set("n", "<leader>tg", telescope.live_grep, { desc = "Live grep" })

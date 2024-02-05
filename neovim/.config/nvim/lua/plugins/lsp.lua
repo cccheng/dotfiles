@@ -60,9 +60,14 @@ return {
                 }
             })
 
-            vim.keymap.set("n", "<leader>es", vim.diagnostic.open_float,  { desc = "Show diagnostic" })
+            local wk = require("which-key")
+
+            wk.register({ ["<leader>e"] = { name = "+Disgnostic" } })
+            wk.register({ ["<leader>l"] = { name = "+LSP" } })
+
             vim.keymap.set("n", "[d",         vim.diagnostic.goto_prev,   { desc = "Prev diagnostic" })
             vim.keymap.set("n", "]d",         vim.diagnostic.goto_next,   { desc = "Next diagnostic" })
+            vim.keymap.set("n", "<leader>es", vim.diagnostic.open_float,  { desc = "Show diagnostic" })
             vim.keymap.set("n", "<leader>el", vim.diagnostic.setloclist,  { desc = "Diagnostic List" })
             vim.keymap.set("n", "<leader>s",  vim.lsp.buf.hover,          { desc = "Hover" })
             vim.keymap.set("n", "<leader>lD", vim.lsp.buf.declaration,    { desc = "Declaration" })
