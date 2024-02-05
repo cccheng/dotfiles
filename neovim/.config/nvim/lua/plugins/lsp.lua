@@ -14,6 +14,11 @@ return {
                 ensure_installed = {
                     "clangd",
                     "rust_analyzer",
+                    "bashls",
+                    "dockerls",
+                    "marksman", -- markdown
+                    "taplo", -- toml
+                    "yamlls",
                 }
             })
         end
