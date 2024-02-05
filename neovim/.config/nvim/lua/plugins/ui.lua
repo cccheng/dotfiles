@@ -46,10 +46,19 @@ return {
             local animate = require("mini.animate")
             animate.setup({
                 cursor = {
-                    timing = animate.gen_timing.quadratic({ duration = 70, unit = 'total' }),
+                    enable = false,
                 },
                 scroll = {
                     timing = animate.gen_timing.linear({ duration = 50, unit = 'total' }),
+                },
+                resize = {
+                    enable = false,
+                },
+                open = {
+                    enable = false,
+                },
+                close = {
+                    enable = false,
                 },
             })
         end
@@ -97,17 +106,17 @@ return {
             vim.keymap.set("n", "<leader>tn", "<cmd>NoiceTelescope<cr>", { desc = "Noice" })
         end
     },
-    {
-        "anuvyklack/windows.nvim",
-        dependencies = {
-            "anuvyklack/middleclass",
-            "anuvyklack/animation.nvim"
-        },
-        config = function()
-            vim.o.winwidth = 10
-            vim.o.winminwidth = 10
-            vim.o.equalalways = false
-            require('windows').setup()
-        end
-    },
+    -- {
+    --     "anuvyklack/windows.nvim",
+    --     dependencies = {
+    --         "anuvyklack/middleclass",
+    --         "anuvyklack/animation.nvim"
+    --     },
+    --     config = function()
+    --         vim.o.winwidth = 10
+    --         vim.o.winminwidth = 10
+    --         vim.o.equalalways = false
+    --         require('windows').setup()
+    --     end
+    -- },
 }
