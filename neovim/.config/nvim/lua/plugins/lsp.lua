@@ -60,10 +60,14 @@ return {
                 }
             })
 
-            vim.keymap.set("n", "<leader>s", vim.lsp.buf.hover, { desc = "Hover" })
-            vim.keymap.set("n", "<leader>lD", vim.lsp.buf.declaration, { desc = "Declaration" })
-            vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format" })
-            vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { desc = "Code action" })
+            vim.keymap.set("n", "<leader>es", vim.diagnostic.open_float,  { desc = "Show diagnostic" })
+            vim.keymap.set("n", "[d",         vim.diagnostic.goto_prev,   { desc = "Prev diagnostic" })
+            vim.keymap.set("n", "]d",         vim.diagnostic.goto_next,   { desc = "Next diagnostic" })
+            vim.keymap.set("n", "<leader>el", vim.diagnostic.setloclist,  { desc = "Diagnostic List" })
+            vim.keymap.set("n", "<leader>s",  vim.lsp.buf.hover,          { desc = "Hover" })
+            vim.keymap.set("n", "<leader>lD", vim.lsp.buf.declaration,    { desc = "Declaration" })
+            vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format,         { desc = "Format" })
+            vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action,    { desc = "Code action" })
             vim.keymap.set("n", "<leader>ls", vim.lsp.buf.signature_help, { desc = "Signature" })
             vim.keymap.set("n", "<leader>lr", "<cmd>Telescope lsp_references<cr>", { desc = "References" })
             vim.keymap.set("n", "<leader>ld", function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end, { desc = "Definition" })
