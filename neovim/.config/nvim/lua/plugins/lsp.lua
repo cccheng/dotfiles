@@ -86,6 +86,8 @@ return {
             vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action,    { desc = "Code action" })
             vim.keymap.set("n", "<leader>ls", vim.lsp.buf.signature_help, { desc = "Signature" })
             vim.keymap.set("n", "<leader>lr", "<cmd>Telescope lsp_references<cr>", { desc = "References" })
+            vim.keymap.set("n", "<leader>lS", "<cmd>LspStop<cr>", { desc = "Stop LSP" })
+            vim.keymap.set("n", "<leader>lI", "<cmd>LspInfo<cr>", { desc = "LSP Info" })
             vim.keymap.set("n", "<leader>ld", function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end, { desc = "Definition" })
             -- vim.keymap.set("n", "<leader>lt", function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end, { desc = "Type definition" })
             -- vim.keymap.set("n", "<leader>li", function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end, { desc = "Implementation" })
