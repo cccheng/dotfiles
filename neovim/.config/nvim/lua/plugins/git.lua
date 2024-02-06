@@ -58,7 +58,7 @@ return {
                     map("n", "<leader>htb", gs.toggle_current_line_blame, { desc = "Toggle current line blame" })
                     map("n", "<leader>htd", gs.toggle_deleted, { desc = "Tottle deleted" })
 
-                    -- Text objet
+                    -- Text object
                     map({"o", "x"}, "ih", ":<C-U>Gitsigns select_hunk<CR>")
                 end
             })
