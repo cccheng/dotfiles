@@ -14,6 +14,7 @@ return {
                 ensure_installed = {
                     "clangd",
                     "rust_analyzer",
+                    "ruby_ls",
                     "bashls",
                     "dockerls",
                     "marksman", -- markdown
