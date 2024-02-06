@@ -149,12 +149,15 @@ return {
                 }),
             })
 
-            -- cmp.setup.cmdline({ "/", "?" }, {
-            --     mapping = cmp.mapping.preset.cmdline(),
-            --     sources = {
-            --         { name = "buffer" }
-            --     }
-            -- })
+            cmp.setup.cmdline({ "/", "?" }, {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = {
+                    { name = "buffer" }
+                },
+                completion = {
+                    autocomplete = false,
+                },
+            })
 
             cmp.setup.cmdline(":", {
                 mapping = cmp.mapping.preset.cmdline(),
@@ -162,6 +165,9 @@ return {
                     { name = "path" },
                     { name = "cmdline" }
                 }),
+                completion = {
+                    autocomplete = false,
+                },
             })
 
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
