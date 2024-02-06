@@ -29,6 +29,7 @@ return {
             require("treesitter-context").setup({
                 max_lines = 3,
                 mode = "cursor",
+                trim_scope = "inner",
                 patterns = {
                     default = {
                         "class",
