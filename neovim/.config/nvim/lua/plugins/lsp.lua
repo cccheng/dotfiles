@@ -1,25 +1,23 @@
 return {
     {
         "williamboman/mason.nvim",
-        event = "VeryLazy",
         config = function()
-            require("mason").setup({})
+            require("mason").setup({
+                PATH = "prepend", -- "skip" seems to cause the spawning error
+            })
         end
     },
     {
         "williamboman/mason-lspconfig.nvim",
-        event = "VeryLazy",
         config = function()
             require("mason-lspconfig").setup({
                 ensure_installed = {
                     "clangd",
                     "rust_analyzer",
-                    "ruby_ls",
-                    "bashls",
-                    "dockerls",
+                    "lua_ls",
+                    "typos_lsp",
                     "marksman", -- markdown
                     "taplo", -- toml
-                    "yamlls",
                 }
             })
         end
@@ -61,9 +59,14 @@ return {
                 }
             })
 
+            lspconfig.lua_ls.setup({})
+            lspconfig.typos_lsp.setup({})
+            lspconfig.marksman.setup({})
+            lspconfig.taplo.setup({})
+
             local wk = require("which-key")
 
-            wk.register({ ["<leader>e"] = { name = "+Disgnostic" } })
+            wk.register({ ["<leader>e"] = { name = "+Diagnostic" } })
             wk.register({ ["<leader>l"] = { name = "+LSP" } })
 
             vim.keymap.set("n", "[d",         vim.diagnostic.goto_prev,   { desc = "Prev diagnostic" })
