@@ -94,12 +94,18 @@ return {
         end
     },
     {
+        "L3MON4D3/LuaSnip",
+        event = "VeryLazy",
+        build = "make install_jsregexp"
+    },
+    {
         "hrsh7th/nvim-cmp",
         event = "VeryLazy",
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
+            "L3MON4D3/LuaSnip",
         },
         config = function()
             local cmp = require("cmp")
@@ -108,6 +114,14 @@ return {
                 window = {
                     -- completion = cmp.config.window.bordered(),
                     -- documentation = cmp.config.window.bordered(),
+                },
+                snippet = {
+                    expand = function(args)
+                        -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+                        require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+                        -- require'snippy'.expand_snippet(args.body) -- For `snippy` users.
+                        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+                    end,
                 },
                 mapping = cmp.mapping.preset.insert({
                     ["<CR>"] = cmp.mapping({
@@ -125,33 +139,28 @@ return {
                 completion = {
                     completeopt = "menu,menuone,noinsert",
                 },
-                sources = cmp.config.sources(
-                    {
+                sources = cmp.config.sources({
                         { name = "nvim_lsp" },
+                        { name = "luasnip" },
                         { name = "path" },
-                    }, {
                         { name = "buffer" },
-                    }
-                ),
+                }),
             })
 
-            -- cmp.setup.cmdline({ "/", "?" }, {
-            --     mapping = cmp.mapping.preset.cmdline(),
-            --     sources = {
-            --         { name = "buffer" }
-            --     }
-            -- })
+            cmp.setup.cmdline({ "/", "?" }, {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = {
+                    { name = "buffer" }
+                }
+            })
 
-            -- cmp.setup.cmdline(":", {
-            --     mapping = cmp.mapping.preset.cmdline(),
-            --     sources = cmp.config.sources(
-            --         {
-            --             { name = "path" }
-            --         }, {
-            --             { name = "cmdline" }
-            --         }
-            --     ),
-            -- })
+            cmp.setup.cmdline(":", {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = cmp.config.sources({
+                    { name = "path" },
+                    { name = "cmdline" }
+                }),
+            })
 
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
             require('lspconfig')["clangd"].setup {
