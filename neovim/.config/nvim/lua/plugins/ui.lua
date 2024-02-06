@@ -45,25 +45,6 @@ return {
 
             require("mini.comment").setup({
             })
-
-            local animate = require("mini.animate")
-            animate.setup({
-                cursor = {
-                    enable = false,
-                },
-                scroll = {
-                    timing = animate.gen_timing.linear({ duration = 50, unit = 'total' }),
-                },
-                resize = {
-                    enable = false,
-                },
-                open = {
-                    enable = false,
-                },
-                close = {
-                    enable = false,
-                },
-            })
         end
     },
     {
