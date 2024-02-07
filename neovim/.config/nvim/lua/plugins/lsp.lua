@@ -34,6 +34,7 @@ return {
         config = function()
             local lspconfig = require("lspconfig")
 
+            -- :help lspconfig-server-configurations
             lspconfig.clangd.setup({
                 root_dir = function(fname)
                     return require("lspconfig.util").root_pattern(
@@ -62,7 +63,7 @@ return {
             lspconfig.rust_analyzer.setup({
                 -- Server-specific settings. See `:help lspconfig-setup`
                 settings = {
-                    ['rust-analyzer'] = {},
+                    ["rust-analyzer"] = {},
                 }
             })
 
@@ -120,8 +121,8 @@ return {
                 snippet = {
                     expand = function(args)
                         -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-                        require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-                        -- require'snippy'.expand_snippet(args.body) -- For `snippy` users.
+                        require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
+                        -- require("snippy").expand_snippet(args.body) -- For `snippy` users.
                         -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
                     end,
                 },
@@ -170,17 +171,27 @@ return {
                 },
             })
 
-            local capabilities = require('cmp_nvim_lsp').default_capabilities()
-            require('lspconfig')["clangd"].setup {
-                capabilities = capabilities
+            local lsp_servers = {
+                "clangd",
+                "rust_analyzer",
+                "lua_ls",
+                "typos_lsp",
+                "marksman",
+                "taplo",
             }
+            local capabilities = require("cmp_nvim_lsp").default_capabilities()
+            for i = 1, #lsp_servers do
+                require("lspconfig")[lsp_servers[i]].setup({
+                    capabilities = capabilities
+                })
+            end
         end
     },
     {
         "DNLHC/glance.nvim",
         event = "VeryLazy",
         config = function()
-            require('glance').setup({})
+            require("glance").setup({})
 
             vim.keymap.set("n", "<leader>d", "<cmd>Glance definitions<cr>", { desc = "Definition" })
             vim.keymap.set("n", "<leader>r", "<cmd>Glance references<cr>", { desc = "References" })
