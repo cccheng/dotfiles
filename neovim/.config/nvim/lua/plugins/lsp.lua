@@ -86,6 +86,7 @@ return {
             vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format,         { desc = "Format" })
             vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action,    { desc = "Code action" })
             vim.keymap.set("n", "<leader>ls", vim.lsp.buf.signature_help, { desc = "Signature" })
+            vim.keymap.set("n", "<leader>lR", vim.lsp.buf.rename,         { desc = "Rename" })
             vim.keymap.set("n", "<leader>lr", "<cmd>Telescope lsp_references<cr>", { desc = "References" })
             vim.keymap.set("n", "<leader>lS", "<cmd>LspStop<cr>", { desc = "Stop LSP" })
             vim.keymap.set("n", "<leader>lI", "<cmd>LspInfo<cr>", { desc = "LSP Info" })
@@ -112,6 +113,7 @@ return {
         },
         config = function()
             local cmp = require("cmp")
+            local select_opts = { behavior = cmp.SelectBehavior.Select }
 
             cmp.setup({
                 window = {
@@ -126,6 +128,20 @@ return {
                         -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
                     end,
                 },
+                formatting = {
+                    fields = {"menu", "abbr", "kind"},
+                    format = function(entry, item)
+                        local menu_icon = {
+                            nvim_lsp = "λ",
+                            luasnip = "⋗",
+                            buffer = "Ω",
+                            path = "🖫",
+                        }
+
+                        item.menu = menu_icon[entry.source.name]
+                        return item
+                    end,
+                },
                 mapping = cmp.mapping.preset.insert({
                     ["<CR>"] = cmp.mapping({
                         i = function(fallback)
@@ -137,7 +153,11 @@ return {
                         end,
                         s = cmp.mapping.confirm({ select = true }),
                         c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-                    })
+                    }),
+                    ["<Up>"] = cmp.mapping.select_prev_item(select_opts),
+                    ["<Down>"] = cmp.mapping.select_next_item(select_opts),
+                    ["<C-p>"] = cmp.mapping.select_prev_item(select_opts),
+                    ["<C-n>"] = cmp.mapping.select_next_item(select_opts),
                 }),
                 completion = {
                     completeopt = "menu,menuone,noinsert",
