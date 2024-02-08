@@ -190,21 +190,6 @@ return {
                     autocomplete = false,
                 },
             })
-
-            local lsp_servers = {
-                "clangd",
-                "rust_analyzer",
-                "lua_ls",
-                "typos_lsp",
-                "marksman",
-                "taplo",
-            }
-            local capabilities = require("cmp_nvim_lsp").default_capabilities()
-            for i = 1, #lsp_servers do
-                require("lspconfig")[lsp_servers[i]].setup({
-                    capabilities = capabilities
-                })
-            end
         end
     },
     {
