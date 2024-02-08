@@ -72,15 +72,30 @@ return {
             lspconfig.marksman.setup({})
             lspconfig.taplo.setup({})
 
+
+            vim.api.nvim_create_user_command("ToggleDiagnostics", function()
+                if vim.g.diagnostics_enabled == nil then
+                    vim.g.diagnostics_enabled = false
+                    vim.diagnostic.disable()
+                elseif vim.g.diagnostics_enabled then
+                    vim.g.diagnostics_enabled = false
+                    vim.diagnostic.disable()
+                else
+                    vim.g.diagnostics_enabled = true
+                    vim.diagnostic.enable()
+                end
+            end, {})
+
             local wk = require("which-key")
 
             wk.register({ ["<leader>e"] = { name = "+Diagnostic" } })
             wk.register({ ["<leader>l"] = { name = "+LSP" } })
 
-            vim.keymap.set("n", "[d",         vim.diagnostic.goto_prev,   { desc = "Prev diagnostic" })
-            vim.keymap.set("n", "]d",         vim.diagnostic.goto_next,   { desc = "Next diagnostic" })
+            vim.keymap.set("n", "[e",         vim.diagnostic.goto_prev,   { desc = "Prev diagnostic" })
+            vim.keymap.set("n", "]e",         vim.diagnostic.goto_next,   { desc = "Next diagnostic" })
             vim.keymap.set("n", "<leader>es", vim.diagnostic.open_float,  { desc = "Show diagnostic" })
             vim.keymap.set("n", "<leader>el", vim.diagnostic.setloclist,  { desc = "Diagnostic List" })
+            vim.keymap.set("n", "<leader>et", "<cmd>ToggleDiagnostics<cr>", { desc = "Toggle diagnostic" })
             vim.keymap.set("n", "<leader>s",  vim.lsp.buf.hover,          { desc = "Hover" })
             vim.keymap.set("n", "<leader>lD", vim.lsp.buf.declaration,    { desc = "Declaration" })
             vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format,         { desc = "Format" })

@@ -44,6 +44,7 @@ return {
 
                     -- Actions
                     require("which-key").register({ ["<leader>h"] = { name = "+Hunk" } })
+                    require("which-key").register({ ["<leader>ht"] = { name = "+Toggle" } })
                     map("n", "<leader>hs", gs.stage_hunk, { desc = "Stage hunk" })
                     map("n", "<leader>hr", gs.reset_hunk, { desc = "Reset hunk" })
                     map("v", "<leader>hs", function() gs.stage_hunk {vim.fn.line("."), vim.fn.line("v")} end, { desc = "Stage hunk" })
