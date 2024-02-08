@@ -95,11 +95,11 @@ return {
             -- vim.keymap.set("n", "<leader>li", function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end, { desc = "Implementation" })
         end
     },
-    {
-        "L3MON4D3/LuaSnip",
-        event = "VeryLazy",
-        build = "make install_jsregexp"
-    },
+    -- {
+    --     "L3MON4D3/LuaSnip",
+    --     event = "VeryLazy",
+    --     build = "make install_jsregexp"
+    -- },
     {
         "hrsh7th/nvim-cmp",
         event = "VeryLazy",
@@ -108,8 +108,8 @@ return {
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-cmdline",
-            "saadparwaiz1/cmp_luasnip",
-            "L3MON4D3/LuaSnip",
+            -- "saadparwaiz1/cmp_luasnip",
+            -- "L3MON4D3/LuaSnip",
         },
         config = function()
             local cmp = require("cmp")
@@ -122,8 +122,9 @@ return {
                 },
                 snippet = {
                     expand = function(args)
+                        vim.snippet.expand(args.body)  -- Use native snippets. Only works on Neovim >= 2.10!
                         -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-                        require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
+                        -- require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
                         -- require("snippy").expand_snippet(args.body) -- For `snippy` users.
                         -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
                     end,
