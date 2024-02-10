@@ -4,6 +4,10 @@ return {
         event = "VeryLazy",
     },
     {
+        "sindrets/diffview.nvim",
+        event = "VeryLazy",
+    },
+    {
         "lewis6991/gitsigns.nvim",
         event = "VeryLazy",
         config = function()
