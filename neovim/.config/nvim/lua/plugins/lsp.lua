@@ -1,14 +1,20 @@
 return {
     {
         "williamboman/mason.nvim",
-        config = function()
-            require("mason").setup({
-                PATH = "prepend", -- "skip" seems to cause the spawning error
-            })
-        end
+        event = "BufReadPre",
+        opts = {
+            ui = {
+                icons = {
+                    package_installed = "✓",
+                    package_pending = "➜",
+                    package_uninstalled = "✗",
+                },
+            },
+        },
     },
     {
         "williamboman/mason-lspconfig.nvim",
+        event = "BufReadPre",
         dependencies = {
             "williamboman/mason.nvim",
         },
