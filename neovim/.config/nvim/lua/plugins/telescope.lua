@@ -16,6 +16,7 @@ return {
             vim.keymap.set("n", "<leader>tg", telescope.live_grep, { desc = "Live grep" })
             vim.keymap.set("n", "<leader>tb", telescope.buffers, { desc = "Buffers" })
             vim.keymap.set("n", "<leader>th", telescope.help_tags, { desc = "Help tags" })
+            vim.keymap.set("n", "<leader>tk", telescope.keymaps, { desc = "Show keymaps" })
 
             require("telescope").setup({
                 defaults = {
