@@ -107,7 +107,7 @@ return {
             vim.keymap.set("n", "]e",         vim.diagnostic.goto_next,   { desc = "Next diagnostic" })
             vim.keymap.set("n", "<leader>es", vim.diagnostic.open_float,  { desc = "Show diagnostic" })
             vim.keymap.set("n", "<leader>el", vim.diagnostic.setloclist,  { desc = "Diagnostic List" })
-            vim.keymap.set("n", "<leader>et", "<cmd>ToggleDiagnostics<cr>", { desc = "Toggle diagnostic" })
+            vim.keymap.set("n", "<leader>ee", "<cmd>ToggleDiagnostics<cr>", { desc = "Toggle diagnostic" })
             vim.keymap.set("n", "<leader>s",  vim.lsp.buf.hover,          { desc = "Hover" })
             vim.keymap.set("n", "<leader>lD", vim.lsp.buf.declaration,    { desc = "Declaration" })
             vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format,         { desc = "Format" })
