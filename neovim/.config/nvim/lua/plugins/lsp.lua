@@ -30,48 +30,60 @@ return {
         event = "VeryLazy",
         dependencies = {
             "williamboman/mason-lspconfig.nvim",
+            "hrsh7th/nvim-cmp",
         },
         config = function()
             local lspconfig = require("lspconfig")
 
+            -- nvim-cmp supports additional completion capabilities
+            local capabilities = vim.lsp.protocol.make_client_capabilities()
+            local default_capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+
             -- :help lspconfig-server-configurations
-            lspconfig.clangd.setup({
-                root_dir = function(fname)
-                    return require("lspconfig.util").root_pattern(
-                        "Makefile",
-                        "configure.ac",
-                        "configure.in",
-                        "config.h.in",
-                        ".clangd",
-                        ".clang-tidy",
-                        ".clang-format",
-                        "compile_commands.json"
-                    )(fname) or require("lspconfig.util").find_git_ancestor(fname)
-                end,
-                cmd = {
-                    "clangd",
-                    "--background-index",
-                    "--clang-tidy",
-                    "--header-insertion=iwyu",
-                    "--completion-style=detailed",
-                    "--function-arg-placeholders",
-                    "--fallback-style=llvm",
-                    "--offset-encoding=utf-16",
+            local servers = {
+                clangd = {
+                    root_dir = function(fname)
+                        return require("lspconfig.util").root_pattern(
+                            "Makefile",
+                            "configure.ac",
+                            "configure.in",
+                            "config.h.in",
+                            ".clangd",
+                            ".clang-tidy",
+                            ".clang-format",
+                            "compile_commands.json"
+                        )(fname) or require("lspconfig.util").find_git_ancestor(fname)
+                    end,
+                    cmd = {
+                        "clangd",
+                        "--background-index",
+                        "--clang-tidy",
+                        "--header-insertion=iwyu",
+                        "--completion-style=detailed",
+                        "--function-arg-placeholders",
+                        "--fallback-style=llvm",
+                        "--offset-encoding=utf-16",
+                    },
                 },
-            })
+                rust_analyzer = {
+                    settings = {
+                        ["rust-analyzer"] = {},
+                    }
+                },
+                lua_ls = {},
+                typos_lsp = {},
+                marksman = {},
+                taplo = {},
+            }
 
-            lspconfig.rust_analyzer.setup({
-                -- Server-specific settings. See `:help lspconfig-setup`
-                settings = {
-                    ["rust-analyzer"] = {},
-                }
-            })
-
-            lspconfig.lua_ls.setup({})
-            lspconfig.typos_lsp.setup({})
-            lspconfig.marksman.setup({})
-            lspconfig.taplo.setup({})
-
+            -- Iterate over our servers and set them up
+            for name, config in pairs(servers) do
+                lspconfig[name].setup({
+                    capabilities = default_capabilities,
+                    filetypes = config.filetypes,
+                    settings = config.settings,
+                })
+            end
 
             vim.api.nvim_create_user_command("ToggleDiagnostics", function()
                 if vim.g.diagnostics_enabled == nil then
