@@ -7,7 +7,16 @@ return {
         config = function()
             vim.cmd.colorscheme("iceberg")
         end
-    }, {
+    },
+    {
+        "rebelot/kanagawa.nvim",
+        event = "VeryLazy",
+    },
+    {
+        "sainnhe/gruvbox-material",
+        event = "VeryLazy",
+    },
+    {
         "catppuccin/nvim",
         event = "VeryLazy",
         config = function()
