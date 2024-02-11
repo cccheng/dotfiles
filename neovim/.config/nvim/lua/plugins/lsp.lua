@@ -23,6 +23,8 @@ return {
                 ensure_installed = {
                     "clangd",
                     "rust_analyzer",
+                    "ruby_ls",
+                    "autotools_ls",
                     "lua_ls",
                     "typos_lsp",
                     "marksman", -- markdown
@@ -81,6 +83,8 @@ return {
                         },
                     }
                 },
+                ruby_ls = {},
+                autotools_ls = {},
                 lua_ls = {},
                 typos_lsp = {},
                 marksman = {},
@@ -176,12 +180,13 @@ return {
                 mapping = cmp.mapping.preset.insert({
                     ["<CR>"] = cmp.mapping({
                         i = function(fallback)
-                            if cmp.visible() and cmp.get_active_entry() then
+                            if cmp.visible() then
                                 cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
                             else
                                 fallback()
                             end
                         end,
+                        -- i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
                         s = cmp.mapping.confirm({ select = true }),
                         c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
                     }),
