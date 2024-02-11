@@ -73,7 +73,12 @@ return {
                 },
                 rust_analyzer = {
                     settings = {
-                        ["rust-analyzer"] = {},
+                        ["rust-analyzer"] = {
+                            check = {
+                                command = "clippy",
+                                features = "all",
+                            },
+                        },
                     }
                 },
                 lua_ls = {},
