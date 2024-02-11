@@ -1,5 +1,13 @@
 return {
     {
+        -- "cocopon/iceberg.vim",
+        "oahlen/iceberg.nvim",
+        lazy = false,
+        priority = 1000,
+        config = function()
+            vim.cmd.colorscheme("iceberg")
+        end
+    }, {
         "catppuccin/nvim",
         event = "VeryLazy",
         config = function()
@@ -31,13 +39,5 @@ return {
                 vim.api.nvim_set_hl(0, group, {})
             end
         end,
-    }, {
-        -- "cocopon/iceberg.vim",
-        "oahlen/iceberg.nvim",
-        lazy = false,
-        priority = 1000,
-        config = function()
-            vim.cmd.colorscheme("iceberg")
-        end
     }
 }
