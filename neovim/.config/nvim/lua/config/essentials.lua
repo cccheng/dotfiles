@@ -47,16 +47,20 @@ opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift t
 opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
 opt.mouse = "" -- Disable mouse mode
 opt.wrap = true -- Enable line wrap
+-- opt.breakindent = true -- set indents when wrapped
 opt.splitright = true -- Put new windows right of current
 opt.splitbelow = true -- Put new windows below current
+opt.listchars = { tab = "  ", trail = "·", extends = "»", precedes = "«", nbsp = "░" }
+opt.list = true
 opt.fillchars = {
     foldopen = "",
     foldclose = "",
-    -- fold = "⸱",
-    fold = " ",
+    fold = "⸱",
+    -- fold = " ",
     foldsep = " ",
     diff = "╱",
     eob = " ",
+    vert = "▒",
 }
 
 if vim.fn.has("nvim-0.10") == 1 then
