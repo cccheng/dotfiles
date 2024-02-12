@@ -46,6 +46,11 @@ return {
             -- nvim-cmp supports additional completion capabilities
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             local default_capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+            local handlers = {
+                -- none, single, double, rounded, shadow 
+                ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
+                ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
+            }
 
             -- :help lspconfig-server-configurations
             local servers = {
@@ -97,6 +102,7 @@ return {
                     capabilities = default_capabilities,
                     filetypes = config.filetypes,
                     settings = config.settings,
+                    handlers = handlers,
                 })
             end
 
