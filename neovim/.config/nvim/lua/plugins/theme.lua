@@ -9,11 +9,7 @@ return {
         end
     },
     {
-        "rebelot/kanagawa.nvim",
-        event = "VeryLazy",
-    },
-    {
-        "sainnhe/gruvbox-material",
+        "fcancelinha/northern.nvim",
         event = "VeryLazy",
     },
     {
