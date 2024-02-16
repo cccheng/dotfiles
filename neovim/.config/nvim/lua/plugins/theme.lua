@@ -9,10 +9,6 @@ return {
         end
     },
     {
-        "fcancelinha/northern.nvim",
-        event = "VeryLazy",
-    },
-    {
         "catppuccin/nvim",
         event = "VeryLazy",
         config = function()
