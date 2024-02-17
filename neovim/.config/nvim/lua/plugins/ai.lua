@@ -21,6 +21,13 @@ return {
                     },
                 },
             },
+            popup_layout = {
+                default = "right",
+                right = {
+                    width = "45%",
+                    width_parameters_open = "45%",
+                },
+            },
         },
     },
 }
