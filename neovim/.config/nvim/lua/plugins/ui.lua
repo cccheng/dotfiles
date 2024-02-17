@@ -66,6 +66,10 @@ return {
         },
         config = function()
             require("noice").setup({
+                cmdline = {
+                    enabled = true, -- enables the Noice cmdline UI
+                    view = "cmdline", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
+                },
                 lsp = {
                     -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
                     override = {
