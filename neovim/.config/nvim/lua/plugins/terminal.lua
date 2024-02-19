@@ -5,6 +5,7 @@ return {
         config = function()
             require("toggleterm").setup({
                 open_mapping = "<leader>`",
+                size = 25,
             })
 
             vim.keymap.set("t", "<leader><esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
