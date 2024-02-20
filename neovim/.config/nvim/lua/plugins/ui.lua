@@ -21,7 +21,10 @@ return {
         event = "VeryLazy",
         config = function()
             require("scrollbar").setup({
-                hide_if_all_visible = true, -- Hides everything if all lines are visible
+                handle = {
+                    blend = 17,
+                    hide_if_all_visible = true, -- Hides everything if all lines are visible
+                },
                 handlers = {
                     cursor = true,
                     diagnostic = true,
