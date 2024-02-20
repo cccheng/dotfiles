@@ -75,6 +75,9 @@ return {
                         },
                     },
                 },
+                messages = {
+                    view_search = false,
+                },
             })
 
             vim.keymap.set("n", "<leader>tn", "<cmd>NoiceTelescope<cr>", { desc = "Noice" })
