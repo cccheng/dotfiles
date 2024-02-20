@@ -11,12 +11,14 @@ return {
             local telescope = require("telescope.builtin")
 
             require("which-key").register({ ["<leader>t"] = { name = "+Telescope" } })
-            vim.keymap.set("n", "<leader>tf", telescope.find_files, { desc = "Find files" })
-            vim.keymap.set("n", "<leader>tF", require("telescope").extensions.file_browser.file_browser, { desc = "File browser" })
-            vim.keymap.set("n", "<leader>tg", telescope.live_grep, { desc = "Live grep" })
-            vim.keymap.set("n", "<leader>tb", telescope.buffers, { desc = "Buffers" })
-            vim.keymap.set("n", "<leader>th", telescope.help_tags, { desc = "Help tags" })
-            vim.keymap.set("n", "<leader>tk", telescope.keymaps, { desc = "Show keymaps" })
+            vim.keymap.set("n", "<leader>ts", telescope.find_files, { desc = "Search files" })
+            vim.keymap.set("n", "<leader>tg", telescope.live_grep,  { desc = "Live grep" })
+            vim.keymap.set("n", "<leader>tb", telescope.buffers,    { desc = "Buffers" })
+            vim.keymap.set("n", "<leader>th", telescope.help_tags,  { desc = "Help tags" })
+            vim.keymap.set("n", "<leader>tk", telescope.keymaps,    { desc = "Show keymaps" })
+            -- open file_browser with the path of the current buffer
+            vim.keymap.set("n", "<leader>tf", "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", { desc = "File browser" })
+            vim.keymap.set("n", "<leader>tF", "<cmd>Telescope file_browser<cr>", { desc = "File browser" })
 
             require("telescope").setup({
                 defaults = {
