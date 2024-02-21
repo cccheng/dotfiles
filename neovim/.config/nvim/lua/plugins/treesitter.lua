@@ -18,7 +18,8 @@ return {
                     enable = true
                 },
                 indent = {
-                    enable = true
+                    enable = false,
+                    disabled = {"c", "cpp"}, -- disabled for C proprocessor directive indent reset
                 },
             })
         end
