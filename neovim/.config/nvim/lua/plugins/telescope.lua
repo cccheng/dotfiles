@@ -9,8 +9,11 @@ return {
         },
         config = function()
             local telescope = require("telescope.builtin")
+            local which_key = require("which-key")
 
-            require("which-key").register({ ["<leader>t"] = { name = "+Telescope" } })
+            which_key.register({ ["<leader>t"] = { name = "+Telescope" } })
+            which_key.register({ ["<leader>g"] = { name = "+Git/GPT" } })
+
             vim.keymap.set("n", "<leader>ts", telescope.find_files,  { desc = "Search files" })
             vim.keymap.set("n", "<leader>tg", telescope.live_grep,   { desc = "Live grep" })
             vim.keymap.set("n", "<leader>tG", telescope.grep_string, { desc = "Grep current string" })
@@ -20,6 +23,9 @@ return {
             -- open file_browser with the path of the current buffer
             vim.keymap.set("n", "<leader>tf", "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", { desc = "File browser" })
             vim.keymap.set("n", "<leader>tF", "<cmd>Telescope file_browser<cr>", { desc = "File browser" })
+
+            vim.keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<cr>", { desc = "Git status" })
+            vim.keymap.set("n", "<leader>gB", "<cmd>Telescope git_bcommits<cr>", { desc = "Git commits of current buffer" })
 
             require("telescope").setup({
                 defaults = {
@@ -45,6 +51,14 @@ return {
                         winblend = 10,
                     },
                     help_tags = {
+                        theme = "ivy",
+                        winblend = 10,
+                    },
+                    git_status = {
+                        theme = "ivy",
+                        winblend = 10,
+                    },
+                    git_bcommits = {
                         theme = "ivy",
                         winblend = 10,
                     },
