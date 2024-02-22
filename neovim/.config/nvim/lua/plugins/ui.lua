@@ -24,7 +24,7 @@ return {
         config = function()
             require("scrollbar").setup({
                 handle = {
-                    blend = 17,
+                    blend = 10,
                     hide_if_all_visible = true, -- Hides everything if all lines are visible
                 },
                 handlers = {
@@ -76,7 +76,7 @@ return {
                             style = "rounded",
                         },
                         win_options = {
-                            winblend = 17,
+                            winblend = 10,
                         },
                     },
                 },

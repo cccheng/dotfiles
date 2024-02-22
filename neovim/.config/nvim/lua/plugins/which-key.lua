@@ -26,7 +26,7 @@ return {
             },
         },
         window = {
-            winblend = 17,
+            winblend = 10,
         },
     },
 }

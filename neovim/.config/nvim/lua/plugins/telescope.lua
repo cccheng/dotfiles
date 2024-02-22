@@ -34,19 +34,19 @@ return {
                 pickers = {
                     find_files = {
                         theme = "ivy",
-                        winblend = 17,
+                        winblend = 10,
                     },
                     live_grep = {
                         theme = "ivy",
-                        winblend = 17,
+                        winblend = 10,
                     },
                     buffers = {
                         theme = "ivy",
-                        winblend = 17,
+                        winblend = 10,
                     },
                     help_tags = {
                         theme = "ivy",
-                        winblend = 17,
+                        winblend = 10,
                     },
                 },
                 extensions = {
@@ -79,7 +79,7 @@ return {
                 extensions = {
                     ["ui-select"] = {
                         require("telescope.themes").get_dropdown({
-                            winblend = 17,
+                            winblend = 10,
                         })
                     }
                 }
@@ -100,7 +100,7 @@ return {
                 extensions = {
                     file_browser = {
                         theme = "ivy",
-                        winblend = 17,
+                        winblend = 10,
                         -- disables netrw and use telescope-file-browser in its place
                         hijack_netrw = true,
                     },
