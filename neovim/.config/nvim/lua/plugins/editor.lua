@@ -14,6 +14,14 @@ return {
 
             require("mini.cursorword").setup({
             })
+
+            require("mini.trailspace").setup({
+            })
+
+            require("mini.tabline").setup({
+                set_vim_settings = false,
+                tabpage_section = "none",
+            })
         end
     },
     {
