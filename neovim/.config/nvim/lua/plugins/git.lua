@@ -1,7 +1,7 @@
 return {
     {
         "sindrets/diffview.nvim",
-        event = "VeryLazy",
+        event = "BufReadPre",
         config = function()
             vim.keymap.set("n", "<leader>gd", "<cmd>DiffviewOpen<cr>", { desc = "Git diff view" })
             vim.keymap.set("n", "<leader>gD", "<cmd>DiffviewClose<cr>", { desc = "Git diff view close" })
@@ -9,14 +9,14 @@ return {
     },
     {
         "FabijanZulj/blame.nvim",
-        event = "VeryLazy",
+        event = "BufReadPre",
         config = function()
             vim.keymap.set("n", "<leader>gb", "<cmd>ToggleBlame virtual<cr>", { desc = "Git blame" })
         end,
     },
     {
         "lewis6991/gitsigns.nvim",
-        event = "VeryLazy",
+        event = "BufReadPre",
         config = function()
             require("gitsigns").setup({
                 signs = {

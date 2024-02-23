@@ -1,7 +1,7 @@
 return {
     {
         "lukas-reineke/indent-blankline.nvim",
-        event = "VeryLazy",
+        event = "BufReadPre",
         config = function()
             require("ibl").setup({
                 indent = { char = "▏" },
@@ -20,7 +20,7 @@ return {
     },
     {
         "petertriho/nvim-scrollbar",
-        event = "VeryLazy",
+        event = "BufReadPre",
         config = function()
             require("scrollbar").setup({
                 handle = {

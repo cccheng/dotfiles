@@ -1,7 +1,7 @@
 return {
     {
         "williamboman/mason.nvim",
-        event = "BufReadPre",
+        event = "VeryLazy",
         opts = {
             ui = {
                 icons = {
@@ -14,7 +14,7 @@ return {
     },
     {
         "williamboman/mason-lspconfig.nvim",
-        event = "BufReadPre",
+        event = "VeryLazy",
         dependencies = {
             "williamboman/mason.nvim",
         },
@@ -237,7 +237,7 @@ return {
     },
     {
         "DNLHC/glance.nvim",
-        event = "VeryLazy",
+        event = "BufReadPre",
         config = function()
             require("glance").setup({})
 
