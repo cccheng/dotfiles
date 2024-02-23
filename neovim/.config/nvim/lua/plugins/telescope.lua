@@ -23,6 +23,7 @@ return {
             vim.keymap.set("n", "<leader>tm", "<cmd>Telescope man_pages<cr>", { desc = "Man pages" })
             vim.keymap.set("n", "<leader>tf", "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", { desc = "File browser" })
             vim.keymap.set("n", "<leader>tF", "<cmd>Telescope file_browser<cr>", { desc = "File browser" })
+            vim.keymap.set("n", "<leader>tj", "<cmd>Telescope jumplist<cr>", { desc = "Jump list" })
 
             vim.keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<cr>", { desc = "Git status" })
             vim.keymap.set("n", "<leader>gB", "<cmd>Telescope git_bcommits<cr>", { desc = "Git commits of current buffer" })
@@ -63,6 +64,10 @@ return {
                         winblend = 10,
                     },
                     man_pages = {
+                        theme = "ivy",
+                        winblend = 10,
+                    },
+                    jumplist = {
                         theme = "ivy",
                         winblend = 10,
                     },
