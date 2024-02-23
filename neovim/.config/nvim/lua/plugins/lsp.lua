@@ -1,7 +1,7 @@
 return {
     {
         "williamboman/mason.nvim",
-        event = "VeryLazy",
+        event = "BufReadPre",
         opts = {
             ui = {
                 icons = {
@@ -14,7 +14,7 @@ return {
     },
     {
         "williamboman/mason-lspconfig.nvim",
-        event = "VeryLazy",
+        event = "BufReadPre",
         dependencies = {
             "williamboman/mason.nvim",
         },
@@ -35,7 +35,7 @@ return {
     },
     {
         "neovim/nvim-lspconfig",
-        event = "VeryLazy",
+        event = "BufReadPre",
         dependencies = {
             "williamboman/mason-lspconfig.nvim",
             "hrsh7th/nvim-cmp",
