@@ -239,7 +239,17 @@ return {
         "DNLHC/glance.nvim",
         event = "BufReadPre",
         config = function()
-            require("glance").setup({})
+            local glance = require('glance')
+            local actions = glance.actions
+
+            require("glance").setup({
+                mappings = {
+                    list = {
+                        ['<c-e>'] = actions.preview_scroll_win(-1),
+                        ['<c-y>'] = actions.preview_scroll_win(1),
+                    },
+                },
+            })
 
             vim.keymap.set("n", "<leader>d", "<cmd>Glance definitions<cr>", { desc = "Definition" })
             vim.keymap.set("n", "<leader>r", "<cmd>Glance references<cr>", { desc = "References" })
