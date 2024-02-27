@@ -17,11 +17,6 @@ return {
 
             require("mini.trailspace").setup({
             })
-
-            require("mini.tabline").setup({
-                set_vim_settings = false,
-                tabpage_section = "none",
-            })
         end
     },
     {
@@ -34,19 +29,17 @@ return {
             -- { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
             -- { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
         },
-        opts = {
-            modes = {
-                search = {
-                    enabled = false,
+        config = function()
+            require("flash").setup({
+                modes = {
+                    search = {
+                        enabled = false,
+                    },
                 },
-            },
-            highlight = {
-                groups = {
-                    match = "SpecialKey",
-                    current = "Search",
-                    label = "Special"
-                },
-            },
-        },
+            })
+            vim.api.nvim_set_hl(0, "FlashMatch", { fg = "#392313", bg = "#e4aa81", bold = true })
+            vim.api.nvim_set_hl(0, "FlashCurrent", { fg = "#333913", bg = "#b9c289", bold = true })
+            vim.api.nvim_set_hl(0, "FlashLabel", { fg = "#1d1339", bg = "#a69acb", bold = true })
+        end,
     },
 }
