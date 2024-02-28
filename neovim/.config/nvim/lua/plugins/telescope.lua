@@ -71,6 +71,10 @@ return {
                         theme = "ivy",
                         winblend = 10,
                     },
+                    lsp_references = {
+                        theme = "ivy",
+                        winblend = 10,
+                    },
                 },
                 extensions = {
                     fzf = {
