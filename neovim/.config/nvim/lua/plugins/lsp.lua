@@ -147,7 +147,10 @@ return {
     },
     {
         "hrsh7th/nvim-cmp",
-        event = "VeryLazy",
+        event = {
+            "InsertEnter",
+            "CmdlineEnter"
+        },
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-buffer",
@@ -206,13 +209,13 @@ return {
                     ["<C-n>"] = cmp.mapping.select_next_item(select_opts),
                 }),
                 completion = {
-                    completeopt = "menu,menuone,noinsert",
+                    completeopt = "menu,menuone,noinsert,noselect",
                 },
                 sources = cmp.config.sources({
-                        { name = "nvim_lsp" },
-                        { name = "buffer" },
-                        { name = "path" },
-                        { name = "vsnip" },
+                        { name = "nvim_lsp", max_item_count = 10 },
+                        { name = "buffer",   max_item_count = 10 },
+                        { name = "path",     max_item_count = 10 },
+                        { name = "vsnip",    max_item_count = 10 },
                 }),
             })
 
