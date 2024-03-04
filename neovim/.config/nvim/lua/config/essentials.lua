@@ -22,7 +22,13 @@ opt.winminwidth = 5 -- Minimum window width
 
 -- opt.wildmenu = true
 -- opt.wildmode = "longest:full,full" -- Command-line completion mode
-opt.completeopt = {"menu", "menuone", "noselect"}
+
+-- -- Set completeopt to have a better completion experience
+-- :help completeopt
+-- menuone: popup even when there's only one match
+-- noinsert: Do not insert text until a selection is made
+-- noselect: Do not auto-select, nvim-cmp plugin will handle this for us.
+opt.completeopt = {"menu", "menuone", "noinsert", "noselect"}
 
 opt.tabstop = 8 -- Number of spaces tabs count for
 opt.shiftwidth = 4 -- Size of an indent
