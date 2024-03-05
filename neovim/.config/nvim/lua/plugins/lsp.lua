@@ -184,6 +184,7 @@ return {
                             nvim_lsp = "λ",
                             buffer = "Ω",
                             path = "🖫",
+                            vsnip = "⋗",
                         }
 
                         item.menu = menu_icon[entry.source.name]
@@ -213,9 +214,9 @@ return {
                 },
                 sources = cmp.config.sources({
                         { name = "nvim_lsp", max_item_count = 10 },
-                        { name = "buffer",   max_item_count = 10 },
-                        { name = "path",     max_item_count = 10 },
-                        { name = "vsnip",    max_item_count = 10 },
+                        { name = "buffer",   max_item_count = 10, keyword_length = 2 },
+                        { name = "path",     max_item_count = 10, keyword_length = 3 },
+                        { name = "vsnip",    max_item_count = 10, keyword_length = 2 },
                 }),
             })
 
