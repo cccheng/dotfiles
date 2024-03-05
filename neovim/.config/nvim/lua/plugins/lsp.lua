@@ -80,12 +80,32 @@ return {
                     },
                 },
                 rust_analyzer = {
+                    -- on_attach = function(client, bufnr)
+                    --     vim.lsp.inlay_hint.enable(bufnr)
+                    -- end,
                     settings = {
                         ["rust-analyzer"] = {
+                            imports = {
+                                granularity = {
+                                    group = "module",
+                                },
+                                prefix = "self",
+                            },
+                            cargo = {
+                                buildScripts = {
+                                    enable = true,
+                                },
+                            },
+                            procMacro = {
+                                enable = true,
+                            },
                             check = {
                                 command = "clippy",
                                 features = "all",
                             },
+                            diagnostics = {
+                                enable = true,
+                            }
                         },
                     }
                 },
