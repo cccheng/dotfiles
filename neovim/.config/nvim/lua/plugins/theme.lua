@@ -13,7 +13,6 @@ return {
         event = "VeryLazy",
         config = function()
             require("nvim-tundra").setup({
-                transparent_background = true,
             })
         end
     },
