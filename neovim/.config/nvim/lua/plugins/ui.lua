@@ -50,7 +50,7 @@ return {
                 },
                 handlers = {
                     cursor = true,
-                    diagnostic = true,
+                    diagnostic = false,
                     gitsigns = true, -- Requires gitsigns
                     handle = true,
                     search = false, -- Requires hlslens
