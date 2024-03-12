@@ -56,6 +56,20 @@ return {
                     search = false, -- Requires hlslens
                     ale = false, -- Requires ALE
                 },
+                marks = {
+                    Cursor = {
+                        text = "∙",
+                    },
+                    GitAdd = {
+                        text = "┆",
+                    },
+                    GitChange = {
+                        text = "┊",
+                    },
+                    GitDelete = {
+                        text = "┄",
+                    },
+                },
             })
         end
     },
