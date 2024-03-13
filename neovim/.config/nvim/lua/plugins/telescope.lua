@@ -41,39 +41,43 @@ return {
                 pickers = {
                     find_files = {
                         theme = "ivy",
-                        winblend = 10,
+                        winblend = 15,
                     },
                     live_grep = {
                         theme = "ivy",
-                        winblend = 10,
+                        winblend = 15,
+                    },
+                    grep_string = {
+                        theme = "ivy",
+                        winblend = 15,
                     },
                     buffers = {
                         theme = "ivy",
-                        winblend = 10,
+                        winblend = 15,
                     },
                     help_tags = {
                         theme = "ivy",
-                        winblend = 10,
+                        winblend = 15,
                     },
                     git_status = {
                         theme = "ivy",
-                        winblend = 10,
+                        winblend = 15,
                     },
                     git_bcommits = {
                         theme = "ivy",
-                        winblend = 10,
+                        winblend = 15,
                     },
                     man_pages = {
                         theme = "ivy",
-                        winblend = 10,
+                        winblend = 15,
                     },
                     jumplist = {
                         theme = "ivy",
-                        winblend = 10,
+                        winblend = 15,
                     },
                     lsp_references = {
                         theme = "ivy",
-                        winblend = 10,
+                        winblend = 15,
                     },
                 },
                 extensions = {
