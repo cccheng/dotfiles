@@ -129,17 +129,13 @@ return {
             vim.keymap.set("n", "<leader>tn", "<cmd>NoiceTelescope<cr>", { desc = "Noice" })
         end
     },
-    -- {
-    --     "anuvyklack/windows.nvim",
-    --     dependencies = {
-    --         "anuvyklack/middleclass",
-    --         "anuvyklack/animation.nvim"
-    --     },
-    --     config = function()
-    --         vim.o.winwidth = 10
-    --         vim.o.winminwidth = 10
-    --         vim.o.equalalways = false
-    --         require('windows').setup()
-    --     end
-    -- },
+    {
+        "miversen33/sunglasses.nvim",
+        config = function()
+            require("sunglasses").setup({
+                filter_type = "SHADE",
+                filter_percent = 0.5,
+            })
+        end
+    },
 }
