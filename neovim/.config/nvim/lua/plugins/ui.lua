@@ -130,11 +130,10 @@ return {
         end
     },
     {
-        "miversen33/sunglasses.nvim",
+        "levouh/tint.nvim",
         config = function()
-            require("sunglasses").setup({
-                filter_type = "SHADE",
-                filter_percent = 0.5,
+            require("tint").setup({
+                tint = -50,
             })
         end
     },
