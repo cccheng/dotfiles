@@ -2,8 +2,15 @@ return {
     {
         "echasnovski/mini.nvim",
         event = "VeryLazy",
+        keys = {
+            { "<LEADER>f", mode = {"n"}, function() require("mini.files").open() end, desc = "Open File browser" },
+            { "<LEADER>F", mode = {"n"}, function() require("mini.files").close() end, desc = "Close File browser" },
+        },
         config = function()
             require("mini.align").setup({
+            })
+
+            require("mini.files").setup({
             })
 
             require("mini.notify").setup({
