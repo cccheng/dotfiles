@@ -4,7 +4,6 @@ return {
         event = "VeryLazy",
         dependencies = {
             "nvim-lua/plenary.nvim",
-            "BurntSushi/ripgrep",
             "nvim-telescope/telescope-fzf-native.nvim",
         },
         config = function()
