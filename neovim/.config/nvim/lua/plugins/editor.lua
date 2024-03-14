@@ -7,23 +7,14 @@ return {
             { "<LEADER>F", mode = {"n"}, function() require("mini.files").close() end, desc = "Close File browser" },
         },
         config = function()
-            require("mini.align").setup({
-            })
-
-            require("mini.files").setup({
-            })
-
-            require("mini.notify").setup({
-            })
-
-            require("mini.comment").setup({
-            })
-
-            require("mini.cursorword").setup({
-            })
-
-            require("mini.trailspace").setup({
-            })
+            require("mini.ai").setup({})
+            require("mini.align").setup({})
+            require("mini.comment").setup({})
+            require("mini.cursorword").setup({})
+            require("mini.files").setup({})
+            require("mini.move").setup({})
+            require("mini.notify").setup({})
+            require("mini.trailspace").setup({})
         end
     },
     {

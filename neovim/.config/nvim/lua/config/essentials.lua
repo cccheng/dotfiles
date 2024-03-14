@@ -90,10 +90,6 @@ vim.keymap.set("n", "<c-l>", "<CMD>:tabnext<CR>", { desc = "Next tab" })
 vim.keymap.set("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 vim.keymap.set("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })
 
--- move lines
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move down" })
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move up" })
-
 -- Clear search with <esc>
 vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
 
