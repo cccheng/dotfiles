@@ -24,11 +24,15 @@ return {
                     "clangd",
                     "rust_analyzer",
                     "ruby_ls",
+                    "bashls",
                     "autotools_ls",
                     "lua_ls",
                     "typos_lsp",
                     "marksman", -- markdown
+                    "yamlls",
+                    "jsonls",
                     "taplo", -- toml
+                    "dockerls",
                 }
             })
         end
@@ -110,11 +114,15 @@ return {
                     }
                 },
                 ruby_ls = {},
+                bashls = {},
                 autotools_ls = {},
                 lua_ls = {},
                 typos_lsp = {},
                 marksman = {},
+                yamlls = {},
+                jsonls = {},
                 taplo = {},
+                dockerls = {},
             }
 
             -- Iterate over our servers and set them up
