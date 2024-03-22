@@ -176,8 +176,8 @@ return {
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-cmdline",
-            "hrsh7th/vim-vsnip",  -- remove it after neovim 0.10
-            "hrsh7th/cmp-vsnip",  -- remove it after neovim 0.10
+            -- "hrsh7th/vim-vsnip",  -- remove it after neovim 0.10
+            -- "hrsh7th/cmp-vsnip",  -- remove it after neovim 0.10
         },
         config = function()
             local cmp = require("cmp")
@@ -190,8 +190,8 @@ return {
                 },
                 snippet = {
                     expand = function(args)
-                        -- vim.snippet.expand(args.body)  -- Use native snippets. Only works on Neovim >= 0.10!
-                        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+                        vim.snippet.expand(args.body)  -- Use native snippets. Only works on Neovim >= 0.10!
+                        -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
                         -- require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
                         -- require("snippy").expand_snippet(args.body) -- For `snippy` users.
                         -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
