@@ -195,6 +195,12 @@ return {
                 window = {
                     -- completion = cmp.config.window.bordered(),
                     -- documentation = cmp.config.window.bordered(),
+                    completion = {
+                        winblend = 10,
+                    },
+                    documentation = {
+                        winblend = 10,
+                    },
                 },
                 snippet = {
                     expand = function(args)
