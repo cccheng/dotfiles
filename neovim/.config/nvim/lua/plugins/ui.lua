@@ -50,25 +50,11 @@ return {
                 },
                 handlers = {
                     cursor = true,
-                    diagnostic = false,
-                    gitsigns = true, -- Requires gitsigns
+                    diagnostic = true,
+                    gitsigns = false, -- Requires gitsigns
                     handle = true,
                     search = false, -- Requires hlslens
                     ale = false, -- Requires ALE
-                },
-                marks = {
-                    Cursor = {
-                        text = "∙",
-                    },
-                    GitAdd = {
-                        text = "┆",
-                    },
-                    GitChange = {
-                        text = "┊",
-                    },
-                    GitDelete = {
-                        text = "┄",
-                    },
                 },
             })
         end
