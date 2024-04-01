@@ -45,7 +45,7 @@ return {
     },
     {
         "petertriho/nvim-scrollbar",
-        event = "VeryLazy",
+        event = "BufReadPre",
         config = function()
             require("scrollbar").setup({
                 handle = {
