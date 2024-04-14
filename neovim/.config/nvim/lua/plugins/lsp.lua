@@ -23,7 +23,7 @@ return {
                 ensure_installed = {
                     "clangd",
                     "rust_analyzer",
-                    "ruby_ls",
+                    "ruby_lsp",
                     "bashls",
                     "autotools_ls",
                     "lua_ls",
@@ -114,7 +114,7 @@ return {
                         },
                     }
                 },
-                ruby_ls = {},
+                ruby_lsp = {},
                 bashls = {},
                 autotools_ls = {},
                 lua_ls = {},
