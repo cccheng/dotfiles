@@ -40,4 +40,8 @@ return {
             vim.api.nvim_set_hl(0, "FlashLabel", { fg = "#1d1339", bg = "#a69acb", bold = true })
         end,
     },
+    {
+        "kevinhwang91/nvim-bqf",
+        ft = { "qf" },
+    },
 }
