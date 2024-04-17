@@ -10,8 +10,11 @@ return {
     {
         "FabijanZulj/blame.nvim",
         event = "BufReadPre",
+        keys = {
+            { "<LEADER>gb", mode = {"n"}, "<CMD>BlameToggle virtual<CR>", desc = "Git blame" },
+        },
         config = function()
-            vim.keymap.set("n", "<leader>gb", "<cmd>ToggleBlame virtual<cr>", { desc = "Git blame" })
+            require("blame").setup()
         end,
     },
     {
