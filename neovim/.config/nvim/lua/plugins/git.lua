@@ -2,10 +2,10 @@ return {
     {
         "sindrets/diffview.nvim",
         event = "BufReadPre",
-        config = function()
-            vim.keymap.set("n", "<leader>gd", "<cmd>DiffviewOpen<cr>", { desc = "Git diff view" })
-            vim.keymap.set("n", "<leader>gD", "<cmd>DiffviewClose<cr>", { desc = "Git diff view close" })
-        end,
+        keys = {
+            { "<LEADER>gd", mode = {"n"}, "<CMD>DiffviewOpen<CR>", desc = "Git diff view" },
+            { "<LEADER>gD", mode = {"n"}, "<CMD>DiffviewClose<CR>", desc = "Git diff view close" },
+        },
     },
     {
         "FabijanZulj/blame.nvim",
