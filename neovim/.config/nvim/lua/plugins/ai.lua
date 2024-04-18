@@ -8,18 +8,10 @@ return {
             "nvim-telescope/telescope.nvim"
         },
         keys = {
-            {
-                "<leader>gc", "<cmd>OGPT<cr>", desc = "GPT chat",
-            },
-            {
-                "<leader>ga", "<cmd>OGPTActAs<cr>", desc = "GPT act as",
-            },
-            {
-                "<leader>gg", "<cmd>OGPTRun grammar_correction<cr>", desc = "GPT Grammar Correction", mode = { "v" },
-            },
-            {
-                "<leader>gt", "<cmd>OGPTRun translate<cr>", desc = "GPT Translate", mode = { "v" },
-            },
+            { "<LEADER>gc", "<CMD>OGPT<CR>", desc = "GPT chat" },
+            { "<LEADER>ga", "<CMD>OGPTActAs<CR>", desc = "GPT act as" },
+            { "<LEADER>gg", "<CMD>OGPTRun grammar_correction<CR>", desc = "GPT Grammar Correction", mode = { "v" } },
+            { "<LEADER>gt", "<CMD>OGPTRun translate<CR>", desc = "GPT Translate", mode = { "v" } },
         },
         opts = {
             default_provider = "gemini",

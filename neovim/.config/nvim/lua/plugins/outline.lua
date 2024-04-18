@@ -2,9 +2,10 @@ return {
     {
         "hedyhli/outline.nvim",
         event = "BufReadPre",
+        keys = {
+            { "<LEADER>o", mode = {"n"}, "<CMD>Outline<CR>", desc = "Outline" },
+        },
         config = function()
-            vim.keymap.set("n", "<leader>o", "<cmd>Outline<CR>", { desc = "Outline" })
-
             require("outline").setup({
             })
         end,

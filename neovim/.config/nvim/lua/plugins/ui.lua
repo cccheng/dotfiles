@@ -77,6 +77,9 @@ return {
             --   If not available, we use `mini` as the fallback
             -- "rcarriga/nvim-notify",
         },
+        keys = {
+            { "<LEADER>tn", mode = {"n"}, "<CMD>NoiceTelescope<CR>",  desc = "Noice" },
+        },
         config = function()
             require("noice").setup({
                 cmdline = {
@@ -115,8 +118,6 @@ return {
                     },
                 },
             })
-
-            vim.keymap.set("n", "<leader>tn", "<cmd>NoiceTelescope<cr>", { desc = "Noice" })
         end
     },
     {
