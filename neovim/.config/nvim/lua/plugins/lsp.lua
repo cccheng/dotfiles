@@ -28,6 +28,7 @@ return {
                     "autotools_ls",
                     "lua_ls",
                     "typos_lsp",
+                    "gitlab_ci_ls",
                     "dotls",
                     "marksman", -- markdown
                     "yamlls",
@@ -119,6 +120,7 @@ return {
                 autotools_ls = {},
                 lua_ls = {},
                 typos_lsp = {},
+                gitlab_ci_ls = {},
                 dotls = {},
                 marksman = {},
                 yamlls = {},
