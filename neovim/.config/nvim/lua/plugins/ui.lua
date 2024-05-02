@@ -4,8 +4,13 @@ return {
         event = "BufReadPre",
         config = function()
             require("ibl").setup({
-                indent = { char = "▏" },
+                indent = {
+                    char = "▎",
+                    tab_char = "▏",
+                    smart_indent_cap = true,
+                },
                 scope = {
+                    enabled = true,
                     show_start = false,
                     show_end = false,
                 },
