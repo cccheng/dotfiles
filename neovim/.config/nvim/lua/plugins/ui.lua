@@ -19,6 +19,13 @@ return {
         end
     },
     {
+        "m4xshen/smartcolumn.nvim",
+        event = "BufReadPre",
+        opts = {
+            colorcolumn = {"100"},
+        }
+    },
+    {
         "nvim-lualine/lualine.nvim",
         event = "VeryLazy",
         dependencies = {
