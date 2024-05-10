@@ -139,6 +139,13 @@ return {
                 })
             end
 
+            vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+                pattern = ".gitlab*",
+                callback = function()
+                    vim.bo.filetype = "yaml.gitlab"
+                end,
+            })
+
             vim.api.nvim_create_user_command("ToggleDiagnostics", function()
                 if vim.g.diagnostics_enabled == nil then
                     vim.g.diagnostics_enabled = false
