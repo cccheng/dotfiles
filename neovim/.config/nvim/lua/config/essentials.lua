@@ -56,8 +56,8 @@ opt.wrap = true -- Enable line wrap
 -- opt.breakindent = true -- set indents when wrapped
 opt.splitright = true -- Put new windows right of current
 opt.splitbelow = true -- Put new windows below current
-opt.listchars = { tab = "▏  ⃯", trail = "•", extends = "»", precedes = "«", nbsp = "░" }
-opt.list = true
+opt.listchars = { tab = "▏┈", trail = "•", extends = "»", precedes = "«", nbsp = "░" }
+opt.list = false
 opt.foldmethod = "expr"
 opt.foldexpr = "nvim_treesitter#foldexpr()"
 opt.foldenable = false
