@@ -15,12 +15,12 @@ return {
 
             vim.keymap.set("n", "<leader>ts", telescope.find_files,  { desc = "Search files" })
             vim.keymap.set("n", "<leader>tg", telescope.live_grep,   { desc = "Live grep" })
-            vim.keymap.set("n", "<leader>tG", telescope.grep_string, { desc = "Grep current string" })
+            vim.keymap.set("n", "<leader>tf", telescope.grep_string, { desc = "Find current string" })
             vim.keymap.set("n", "<leader>tb", telescope.buffers,     { desc = "Buffers" })
             vim.keymap.set("n", "<leader>th", telescope.help_tags,   { desc = "Help tags" })
             vim.keymap.set("n", "<leader>tk", telescope.keymaps,     { desc = "Show keymaps" })
             vim.keymap.set("n", "<leader>tm", "<cmd>Telescope man_pages<cr>", { desc = "Man pages" })
-            vim.keymap.set("n", "<leader>tf", "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", { desc = "File browser" })
+            vim.keymap.set("n", "<leader>f",  "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", { desc = "File browser" })
             vim.keymap.set("n", "<leader>tF", "<cmd>Telescope file_browser<cr>", { desc = "File browser" })
             vim.keymap.set("n", "<leader>tj", "<cmd>Telescope jumplist<cr>", { desc = "Jump list" })
 
