@@ -43,3 +43,6 @@
     algorithm = histogram
 [safe]
     directory = *
+[pager]
+    show = vim -R -
+    color = false
