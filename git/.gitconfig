@@ -6,6 +6,7 @@
     editor = vim
     abbrev = 12
 [alias]
+    d = difftool
     co = checkout
     st = status
     br = branch
@@ -39,6 +40,7 @@
 [fetch]
     prune = true
 [diff]
+    tool = vimdiff
     colormoved = default
     algorithm = histogram
 [safe]
@@ -46,3 +48,6 @@
 [pager]
     show = vim -R -
     color = false
+[difftool]
+    prompt = false
+    trustExitCode = true
