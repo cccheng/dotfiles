@@ -83,6 +83,7 @@ vim.keymap.set({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, si
 vim.keymap.set({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
 -- tabs
+vim.keymap.set("n", "<c-n>", "<CMD>:tabnew<CR>", { desc = "New tab" })
 vim.keymap.set("n", "<c-h>", "<CMD>:tabprev<CR>", { desc = "Previous tab" })
 vim.keymap.set("n", "<c-l>", "<CMD>:tabnext<CR>", { desc = "Next tab" })
 
