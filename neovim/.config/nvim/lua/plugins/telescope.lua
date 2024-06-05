@@ -28,56 +28,8 @@ return {
             vim.keymap.set("n", "<leader>gB", "<cmd>Telescope git_bcommits<cr>", { desc = "Git commits of current buffer" })
 
             require("telescope").setup({
-                defaults = {
-                    layout_strategy = "horizontal",
-                    layout_config = {
-                        horizontal = {
-                            height = 0.9,
-                            width = 0.95,
-                        },
-                    },
-                },
-                pickers = {
-                    find_files = {
-                        theme = "ivy",
-                        winblend = 10,
-                    },
-                    live_grep = {
-                        theme = "ivy",
-                        winblend = 10,
-                    },
-                    grep_string = {
-                        theme = "ivy",
-                        winblend = 10,
-                    },
-                    buffers = {
-                        theme = "ivy",
-                        winblend = 10,
-                    },
-                    help_tags = {
-                        theme = "ivy",
-                        winblend = 10,
-                    },
-                    git_status = {
-                        theme = "ivy",
-                        winblend = 10,
-                    },
-                    git_bcommits = {
-                        theme = "ivy",
-                        winblend = 10,
-                    },
-                    man_pages = {
-                        theme = "ivy",
-                        winblend = 10,
-                    },
-                    jumplist = {
-                        theme = "ivy",
-                        winblend = 10,
-                    },
-                    lsp_references = {
-                        theme = "ivy",
-                        winblend = 10,
-                    },
+                defaults = require('telescope.themes').get_ivy {
+                    winblend = 10,
                 },
                 extensions = {
                     fzf = {
@@ -129,8 +81,6 @@ return {
             require("telescope").setup({
                 extensions = {
                     file_browser = {
-                        theme = "ivy",
-                        winblend = 10,
                         -- disables netrw and use telescope-file-browser in its place
                         hijack_netrw = true,
                     },
