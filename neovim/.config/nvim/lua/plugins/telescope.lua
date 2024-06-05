@@ -19,6 +19,7 @@ return {
             vim.keymap.set("n", "<leader>tb", telescope.buffers,     { desc = "Buffers" })
             vim.keymap.set("n", "<leader>th", telescope.help_tags,   { desc = "Help tags" })
             vim.keymap.set("n", "<leader>tk", telescope.keymaps,     { desc = "Show keymaps" })
+            vim.keymap.set("n", "<leader>td", "<cmd>Telescope diagnostics<cr>", { desc = "Diagnostics" })
             vim.keymap.set("n", "<leader>tm", "<cmd>Telescope man_pages<cr>", { desc = "Man pages" })
             vim.keymap.set("n", "<leader>f",  "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", { desc = "File browser" })
             vim.keymap.set("n", "<leader>tF", "<cmd>Telescope file_browser<cr>", { desc = "File browser" })
