@@ -31,6 +31,8 @@ return {
             require("telescope").setup({
                 defaults = require('telescope.themes').get_ivy {
                     winblend = 10,
+                    prompt_prefix = ">> ",
+                    -- borderchars = { "━", "┃", "━", "┃", "┏", "┓", "┛", "┗" },
                 },
                 extensions = {
                     fzf = {
