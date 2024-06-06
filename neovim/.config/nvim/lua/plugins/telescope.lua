@@ -31,8 +31,14 @@ return {
             require("telescope").setup({
                 defaults = require('telescope.themes').get_ivy {
                     winblend = 10,
-                    prompt_prefix = ">> ",
+                    prompt_prefix = "   ",
+                    selection_caret = " ",
                     -- borderchars = { "━", "┃", "━", "┃", "┏", "┓", "┛", "┗" },
+                    mappings = {
+                        n = {
+                            ["q"] = require("telescope.actions").close
+                        },
+                    },
                 },
                 extensions = {
                     fzf = {
