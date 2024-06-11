@@ -47,7 +47,6 @@
     directory = *
 [pager]
     show = vim -R -
-    color = false
 [difftool]
     prompt = false
     trustExitCode = true
