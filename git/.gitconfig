@@ -45,8 +45,6 @@
     algorithm = histogram
 [safe]
     directory = *
-[pager]
-    show = vim -R -
 [difftool]
     prompt = false
     trustExitCode = true
