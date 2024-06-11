@@ -9,10 +9,18 @@ return {
             require("mini.cursorword").setup({})
             require("mini.move").setup({})
             require("mini.notify").setup({})
+            require("mini.tabline").setup({
+                set_vim_settings = false,
+                format =  function(buf_id, label)
+                    local suffix = vim.bo[buf_id].modified and '+ ' or ''
+                    return MiniTabline.default_format(buf_id, label) .. suffix
+                end
+            })
             require("mini.trailspace").setup({})
 
             vim.api.nvim_set_hl(0, "MiniCursorword", { link = "CursorLineNr" })
             vim.api.nvim_set_hl(0, "MiniCursorwordCurrent", { link = "CursorLineNr" })
+            vim.api.nvim_set_hl(0, "MiniTablineTabpagesection", { link = "CursorLineNr" })
         end
     },
     {
