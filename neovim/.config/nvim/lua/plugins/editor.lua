@@ -10,6 +10,9 @@ return {
             require("mini.move").setup({})
             require("mini.notify").setup({})
             require("mini.trailspace").setup({})
+
+            vim.api.nvim_set_hl(0, "MiniCursorword", { link = "CursorLineNr" })
+            vim.api.nvim_set_hl(0, "MiniCursorwordCurrent", { link = "CursorLineNr" })
         end
     },
     {
