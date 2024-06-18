@@ -30,6 +30,8 @@ opt.winminwidth = 5 -- Minimum window width
 -- noselect: Do not auto-select, nvim-cmp plugin will handle this for us.
 opt.completeopt = {"menu", "menuone", "noinsert", "noselect"}
 
+opt.modeline = true
+
 opt.tabstop = 8 -- Number of spaces tabs count for
 opt.shiftwidth = 4 -- Size of an indent
 opt.softtabstop = 4
@@ -65,7 +67,6 @@ opt.fillchars = {
     foldopen = "",
     foldclose = "",
     fold = "⸱",
-    -- fold = " ",
     foldsep = " ",
     diff = "╱",
     eob = " ",
