@@ -50,8 +50,8 @@ return {
                         }
                     },
                     lualine_x = {'encoding', 'fileformat', 'filetype'},
-                    lualine_y = {'progress'},
-                    lualine_z = {'location'}
+                    lualine_y = {'searchcount', 'progress'},
+                    lualine_z = {'selectioncount', 'location'}
                 },
             })
         end
