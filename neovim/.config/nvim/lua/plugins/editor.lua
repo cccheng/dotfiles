@@ -11,6 +11,7 @@ return {
                 },
             })
             require("mini.cursorword").setup({})
+            require("mini.git").setup({})
             require("mini.move").setup({})
             require("mini.notify").setup({})
             require("mini.trailspace").setup({})
