@@ -5,7 +5,11 @@ return {
         config = function()
             require("mini.ai").setup({})
             require("mini.align").setup({})
-            require("mini.comment").setup({})
+            require("mini.comment").setup({
+                options = {
+                    ignore_blank_line = true,
+                },
+            })
             require("mini.cursorword").setup({})
             require("mini.move").setup({})
             require("mini.notify").setup({})
