@@ -16,7 +16,9 @@ return {
             { "<LEADER>gb", mode = {"n"}, "<CMD>BlameToggle virtual<CR>", desc = "Git blame" },
         },
         config = function()
-            require("blame").setup()
+            require("blame").setup({
+                date_format = "%Y.%m.%d",
+            })
         end,
     },
     {
