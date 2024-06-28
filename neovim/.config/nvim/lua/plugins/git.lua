@@ -18,6 +18,18 @@ return {
             { "<LEADER>gh", mode = {"n"}, "<CMD>DiffviewFileHistory %<CR>", desc = "Git history for the current file" },
             { "<LEADER>gH", mode = {"n"}, "<CMD>DiffviewFileHistory<CR>", desc = "Git history for the current branch" },
         },
+        config = function()
+            require("diffview").setup({
+                enhanced_diff_hl = true,
+                view = {
+                    default = {
+                        layout = "diff2_horizontal",
+                        disable_diagnostics = true,
+                        winbar_info = true,
+                    },
+                },
+            })
+        end
     },
     {
         "FabijanZulj/blame.nvim",
