@@ -3,8 +3,18 @@ return {
         "sindrets/diffview.nvim",
         event = "BufReadPre",
         keys = {
-            { "<LEADER>gd", mode = {"n"}, "<CMD>DiffviewOpen<CR>", desc = "Git diff view" },
-            { "<LEADER>gD", mode = {"n"}, "<CMD>DiffviewClose<CR>", desc = "Git diff view close" },
+            {
+                "<LEADER>gd",
+                mode = {"n"},
+                function()
+                    if next(require("diffview.lib").views) == nil then
+                        vim.cmd("DiffviewOpen")
+                    else
+                        vim.cmd("DiffviewClose")
+                    end
+                end,
+                desc = "Git diff view"
+            },
             { "<LEADER>gh", mode = {"n"}, "<CMD>DiffviewFileHistory %<CR>", desc = "Git history for the current file" },
             { "<LEADER>gH", mode = {"n"}, "<CMD>DiffviewFileHistory<CR>", desc = "Git history for the current branch" },
         },
