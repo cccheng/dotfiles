@@ -12,8 +12,17 @@ return {
             })
             require("mini.cursorword").setup({})
             require("mini.git").setup({})
+            require("mini.hipatterns").setup({
+                highlighters = {
+                    hex_color = require("mini.hipatterns").gen_highlighter.hex_color(),
+                },
+            })
             require("mini.move").setup({})
-            require("mini.notify").setup({})
+            require("mini.notify").setup({
+                window = {
+                    winblend = 10,
+                },
+            })
             require("mini.trailspace").setup({})
 
             vim.api.nvim_set_hl(0, "MiniCursorword", { link = "VisualNOS" })

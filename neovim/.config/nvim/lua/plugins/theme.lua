@@ -12,13 +12,4 @@ return {
             vim.api.nvim_set_hl(0, "TabLineSel", { fg = "#9a9ca5", bg = "#2b335a", bold = true })
         end
     },
-    {
-        "sam4llis/nvim-tundra",
-        event = "VeryLazy",
-        config = function()
-            require("nvim-tundra").setup({
-                transparent_background = true,
-            })
-        end
-    },
 }
