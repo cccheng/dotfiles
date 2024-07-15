@@ -25,8 +25,10 @@ return {
                 g = true, -- bindings for prefixed with g
             },
         },
-        window = {
-            winblend = 10,
+        win = {
+            wo = {
+                winblend = 10,
+            },
         },
     },
 }

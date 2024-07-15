@@ -159,10 +159,10 @@ return {
                 end
             end, {})
 
-            local wk = require("which-key")
-
-            wk.register({ ["<leader>e"] = { name = "+Diagnostic" } })
-            wk.register({ ["<leader>l"] = { name = "+LSP" } })
+            require("which-key").add({
+                { "<leader>e", group = "Diagnostic" },
+                { "<leader>l", group = "LSP" },
+            })
 
             vim.keymap.set("n", "[e",          vim.diagnostic.goto_prev,            { desc = "Prev diagnostic" })
             vim.keymap.set("n", "]e",          vim.diagnostic.goto_next,            { desc = "Next diagnostic" })

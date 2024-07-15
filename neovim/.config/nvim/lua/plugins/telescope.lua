@@ -8,10 +8,11 @@ return {
         },
         config = function()
             local telescope = require("telescope.builtin")
-            local which_key = require("which-key")
 
-            which_key.register({ ["<leader>t"] = { name = "+Telescope" } })
-            which_key.register({ ["<leader>g"] = { name = "+Git/GPT" } })
+            require("which-key").add({
+                { "<leader>t", group = "Telescope" },
+                { "<leader>g", group = "Git/GPT" },
+            })
 
             vim.keymap.set("n", "<leader>ts", telescope.find_files,  { desc = "Search files" })
             vim.keymap.set("n", "<leader>tg", telescope.live_grep,   { desc = "Live grep" })
