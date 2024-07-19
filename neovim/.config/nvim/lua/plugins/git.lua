@@ -35,7 +35,7 @@ return {
         "FabijanZulj/blame.nvim",
         event = "BufReadPre",
         keys = {
-            { "<LEADER>gb", mode = {"n"}, "<CMD>BlameToggle virtual<CR>", desc = "Git blame" },
+            { "<LEADER>gb", mode = {"n"}, "<CMD>BlameToggle window<CR>", desc = "Git blame" },
         },
         config = function()
             require("blame").setup({
