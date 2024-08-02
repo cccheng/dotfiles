@@ -11,7 +11,7 @@ return {
                 },
             })
             require("mini.cursorword").setup({})
-            require("mini.git").setup({})
+            -- require("mini.git").setup({})
             require("mini.hipatterns").setup({
                 highlighters = {
                     hex_color = require("mini.hipatterns").gen_highlighter.hex_color(),
