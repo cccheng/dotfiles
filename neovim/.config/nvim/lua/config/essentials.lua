@@ -15,7 +15,7 @@ opt.pumheight = 30 -- Maximum number of entries in a popup
 
 opt.showmode = false -- Dont show mode since we have a statusline
 opt.number = true -- Print line number
-opt.relativenumber = false -- Relative line numbers
+opt.relativenumber = true -- Relative line numbers
 opt.backspace = {"indent", "eol", "start"}
 opt.scrolloff = 4 -- Lines of context
 opt.winminwidth = 5 -- Minimum window width
