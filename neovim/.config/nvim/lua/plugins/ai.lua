@@ -1,67 +1,94 @@
 return {
     {
-        "huynle/ogpt.nvim",
+        "frankroeder/parrot.nvim",
         event = "VeryLazy",
         dependencies = {
-            "MunifTanjim/nui.nvim",
-            "nvim-lua/plenary.nvim",
-            "nvim-telescope/telescope.nvim"
+            "nvim-lua/plenary.nvim"
         },
         keys = {
-            { "<LEADER>gc", "<CMD>OGPT<CR>", desc = "GPT chat" },
-            { "<LEADER>ga", "<CMD>OGPTActAs<CR>", desc = "GPT act as" },
-            { "<LEADER>gg", "<CMD>OGPTRun grammar_correction<CR>", desc = "GPT Grammar Correction", mode = { "v" } },
-            { "<LEADER>gt", "<CMD>OGPTRun translate<CR>", desc = "GPT Translate", mode = { "v" } },
+            { "<LEADER>gc", "<CMD>PrtAsk<CR>", desc = "GPT chat" },
+            -- { "<LEADER>gc", "<CMD>PrtChatToggle<CR>", desc = "GPT chat" },
+            -- { "<LEADER>gg", "<CMD>PrtGrammar<CR>", desc = "GPT Grammar Correction", mode = { "v" } },
+            -- { "<LEADER>gt", "<CMD>PrtTranslate<CR>", desc = "GPT Translate", mode = { "v" } },
+            -- { "<LEADER>ge", "<CMD>PrtExplain<CR>", desc = "GPT Explain", mode = { "v" } },
         },
-        opts = {
-            default_provider = "gemini",
-            input_window = {
-                border = {
-                    text = {
-                        top = "",
+        config = function()
+            require("parrot").setup({
+                providers = {
+                    gemini = {
+                        api_key = os.getenv("GEMINI_API_KEY"),
                     },
                 },
-            },
-            output_window = {
-                border = {
-                    text = {
-                        top = "",
-                    },
-                },
-            },
-            actions = {
-                grammar_correction = {
-                    type = "popup",
-                    template = "Correct the given text to standard English:\n\n```{{{input}}}```",
-                    system = "You are a helpful note writing assistant, given a text input, correct the text only for grammar and spelling error. You are to keep all formatting the same, e.g. markdown bullets, should stay as a markdown bullet in the result, and indents should stay the same. Return ONLY the corrected text.",
-                    strategy = "display", -- replace
-                    params = {
-                        temperature = 0.3,
-                    },
-                    args = {
-                        lang = {
-                            type = "string",
-                            optional = "true",
-                            default = "english",
-                        },
-                    },
-                },
-                translate = {
-                    type = "popup",
-                    template = "Translate this into Traditional Chinese:\n\n{{{input}}}",
-                    strategy = "display",
-                    params = {
-                        temperature = 0.3,
-                    },
-                    args = {
-                        lang = {
-                            type = "string",
-                            optional = "true",
-                            default = "chinese",
-                        },
-                    },
-                },
-            },
-        },
+                toggle_target = "vsplit", -- popup / split / vsplit / tabnew
+                style_popup_border = "single",
+                spinner_type = "dots", -- "dots", "line", "star", "bouncing_bar", "bouncing_ball"
+                hooks = {
+                    Grammar = function(prt, params)
+                        local chat_prompt = [[
+                            Your task is to take the text provided and rewrite it into a clear,
+                            grammatically correct version while preserving the original meaning
+                            as closely as possible. Correct any spelling mistakes, punctuation
+                            errors, verb tense issues, word choice problems, and other
+                            grammatical mistakes.
+
+                            ```
+                            {{selection}}
+                            ```
+                        ]]
+                        local model = prt.get_model("chat")
+                        prt.Prompt(params, prt.ui.Target.new, model, nil, chat_prompt)
+                        -- prt.ChatNew(params, chat_prompt)
+                    end,
+                    Translate = function(prt, params)
+                        local chat_prompt = [[
+                            Please translate this into Traditional Chinese:
+                            ```
+                            {{selection}}
+                            ```
+                        ]]
+                        local model = prt.get_model("chat")
+                        prt.Prompt(params, prt.ui.Target.new, model, nil, chat_prompt)
+                    end,
+                    Explain = function(prt, params)
+                        local template = [[
+                            Your task is to take the code snippet from {{filename}} and explain it with gradually increasing complexity.
+                            Break down the code's functionality, purpose, and key components.
+                            The goal is to help the reader understand what the code does and how it works.
+
+                            ```{{filetype}}
+                            {{selection}}
+                            ```
+
+                            Use the markdown format with codeblocks and inline code.
+                            Explanation of the code above:
+                        ]]
+                        local model = prt.get_model("chat")
+                        prt.logger.info("Explaining selection with model: " .. model.name)
+                        prt.Prompt(params, prt.ui.Target.new, model, nil, template)
+                    end,
+                    CommitMsg = function(prt, params)
+                        local futils = require "parrot.file_utils"
+                        if futils.find_git_root() == "" then
+                            prt.logger.warning "Not in a git repository"
+                            return
+                        else
+                            local template = [[
+                                I want you to act as a commit message generator. I will provide you
+                                with information about the task and the prefix for the task code, and
+                                I would like you to generate an appropriate commit message using the
+                                conventional commit format. Do not write any explanations or other
+                                words, just reply with the commit message.
+                                Start with a short headline as summary but then list the individual
+                                changes in more detail.
+
+                                Here are the changes that should be considered by this message:
+                            ]] .. vim.fn.system "git diff --no-color --no-ext-diff --staged"
+                            local model_obj = prt.get_model "command"
+                            prt.Prompt(params, prt.ui.Target.append, model_obj, nil, template)
+                        end
+                    end,
+                }
+            })
+        end
     },
 }
