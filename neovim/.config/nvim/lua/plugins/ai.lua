@@ -79,13 +79,49 @@ return {
                                 conventional commit format. Do not write any explanations or other
                                 words, just reply with the commit message.
                                 Start with a short headline as summary but then list the individual
-                                changes in more detail.
+                                changes in more detail. Text other than Summary needs to be wrapped
+                                if it exceeds 80 characters.
 
                                 Here are the changes that should be considered by this message:
                             ]] .. vim.fn.system "git diff --no-color --no-ext-diff --staged"
                             local model_obj = prt.get_model "command"
-                            prt.Prompt(params, prt.ui.Target.append, model_obj, nil, template)
+                            prt.Prompt(params, prt.ui.Target.prepend, model_obj, nil, template)
                         end
+                    end,
+                    ProofReader = function(prt, params)
+                        local chat_prompt = [[
+                            I want you to act as a proofreader. I will provide you with texts and
+                            I would like you to review them for any spelling, grammar, or
+                            punctuation errors. Once you have finished reviewing the text,
+                            provide me with any necessary corrections or suggestions to improve the
+                            text. Highlight the corrected fragments (if any) using markdown backticks.
+
+                            When you have done that subsequently provide me with a slightly better
+                            version of the text, but keep close to the original text.
+
+                            Finally provide me with an ideal version of the text.
+
+                            Whenever I provide you with text, you reply in this format directly:
+
+                            ## Corrected text:
+
+                            ```
+                            {corrected text, or say "NO_CORRECTIONS_NEEDED" instead if there are no corrections made}
+                            ```
+
+                            ## Slightly better text:
+
+                            ```
+                            {slightly better text}
+                            ```
+
+                            ## Ideal text:
+
+                            ```
+                            {ideal text}
+                            ```
+                        ]]
+                        prt.ChatNew(params, chat_prompt)
                     end,
                 }
             })
