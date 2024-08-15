@@ -8,9 +8,9 @@ return {
         keys = {
             { "<LEADER>gc", "<CMD>PrtAsk<CR>", desc = "GPT chat" },
             -- { "<LEADER>gc", "<CMD>PrtChatToggle<CR>", desc = "GPT chat" },
-            -- { "<LEADER>gg", "<CMD>PrtGrammar<CR>", desc = "GPT Grammar Correction", mode = { "v" } },
-            -- { "<LEADER>gt", "<CMD>PrtTranslate<CR>", desc = "GPT Translate", mode = { "v" } },
-            -- { "<LEADER>ge", "<CMD>PrtExplain<CR>", desc = "GPT Explain", mode = { "v" } },
+            { "<LEADER>gg", ":<C-u>'<,'>PrtGrammar<CR>", desc = "GPT Grammar Correction", mode = { "v" } },
+            { "<LEADER>gt", ":<C-u>'<,'>PrtTranslate<CR>", desc = "GPT Translate", mode = { "v" } },
+            { "<LEADER>ge", ":<C-u>'<,'>PrtExplain<CR>", desc = "GPT Explain", mode = { "v" } },
         },
         config = function()
             require("parrot").setup({
