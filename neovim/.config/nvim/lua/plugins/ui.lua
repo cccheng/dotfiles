@@ -23,6 +23,17 @@ return {
         event = "BufReadPre",
         opts = {
             colorcolumn = {"100"},
+            scope = "window",
+            disabled_filetypes = {
+                "netrw",
+                "Lazy",
+                "mason",
+                "help",
+                "text",
+                "markdown",
+                "tex",
+                "html",
+            },
         }
     },
     {
