@@ -142,4 +142,8 @@ return {
             })
         end
     },
+    {
+        "nacro90/numb.nvim",
+        opts = {},
+    },
 }
