@@ -10,24 +10,24 @@ return {
             local telescope = require("telescope.builtin")
 
             require("which-key").add({
-                { "<leader>t", group = "Telescope" },
-                { "<leader>g", group = "Git/GPT" },
+                { "<LEADER>t", group = "Telescope" },
+                { "<LEADER>g", group = "Git/GPT" },
             })
 
-            vim.keymap.set("n", "<leader>ts", telescope.find_files,  { desc = "Search files" })
-            vim.keymap.set("n", "<leader>tg", telescope.live_grep,   { desc = "Live grep" })
-            vim.keymap.set("n", "<leader>tf", telescope.grep_string, { desc = "Find current string" })
-            vim.keymap.set("n", "<leader>tb", telescope.buffers,     { desc = "Buffers" })
-            vim.keymap.set("n", "<leader>th", telescope.help_tags,   { desc = "Help tags" })
-            vim.keymap.set("n", "<leader>tk", telescope.keymaps,     { desc = "Show keymaps" })
-            vim.keymap.set("n", "<leader>td", "<cmd>Telescope diagnostics<cr>", { desc = "Diagnostics" })
-            vim.keymap.set("n", "<leader>tm", "<cmd>Telescope man_pages<cr>", { desc = "Man pages" })
-            vim.keymap.set("n", "<leader>f",  "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", { desc = "File browser" })
-            vim.keymap.set("n", "<leader>tF", "<cmd>Telescope file_browser<cr>", { desc = "File browser" })
-            vim.keymap.set("n", "<leader>tj", "<cmd>Telescope jumplist<cr>", { desc = "Jump list" })
+            vim.keymap.set("n", "<LEADER>ts", telescope.find_files,  { desc = "Search files" })
+            vim.keymap.set("n", "<LEADER>tg", telescope.live_grep,   { desc = "Live grep" })
+            vim.keymap.set("n", "<LEADER>tf", telescope.grep_string, { desc = "Find current string" })
+            vim.keymap.set("n", "<LEADER>tb", telescope.buffers,     { desc = "Buffers" })
+            vim.keymap.set("n", "<LEADER>th", telescope.help_tags,   { desc = "Help tags" })
+            vim.keymap.set("n", "<LEADER>tk", telescope.keymaps,     { desc = "Show keymaps" })
+            vim.keymap.set("n", "<LEADER>td", "<CMD>Telescope diagnostics<CR>", { desc = "Diagnostics" })
+            vim.keymap.set("n", "<LEADER>tm", "<CMD>Telescope man_pages<CR>", { desc = "Man pages" })
+            vim.keymap.set("n", "<LEADER>f",  "<CMD>Telescope file_browser path=%:p:h select_buffer=true<CR>", { desc = "File browser" })
+            vim.keymap.set("n", "<LEADER>tF", "<CMD>Telescope file_browser<CR>", { desc = "File browser" })
+            vim.keymap.set("n", "<LEADER>tj", "<CMD>Telescope jumplist<CR>", { desc = "Jump list" })
 
-            vim.keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<cr>", { desc = "Git status" })
-            vim.keymap.set("n", "<leader>gB", "<cmd>Telescope git_bcommits<cr>", { desc = "Git commits of current buffer" })
+            vim.keymap.set("n", "<LEADER>gs", "<CMD>Telescope git_status<CR>", { desc = "Git status" })
+            vim.keymap.set("n", "<LEADER>gB", "<CMD>Telescope git_bcommits<CR>", { desc = "Git commits of current buffer" })
 
             require("telescope").setup({
                 defaults = require('telescope.themes').get_ivy {

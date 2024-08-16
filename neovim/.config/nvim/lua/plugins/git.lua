@@ -84,23 +84,23 @@ return {
 
                     -- Actions
                     require("which-key").add({
-                        { "<leader>h", group = "Hunk" },
-                        { "<leader>ht", group = "Toggle" },
+                        { "<LEADER>h", group = "Hunk" },
+                        { "<LEADER>ht", group = "Toggle" },
                     })
 
-                    map("n", "<leader>hs", gs.stage_hunk, { desc = "Stage hunk" })
-                    map("n", "<leader>hr", gs.reset_hunk, { desc = "Reset hunk" })
-                    map("v", "<leader>hs", function() gs.stage_hunk {vim.fn.line("."), vim.fn.line("v")} end, { desc = "Stage hunk" })
-                    map("v", "<leader>hr", function() gs.reset_hunk {vim.fn.line("."), vim.fn.line("v")} end, { desc = "Reset hunk" })
-                    map("n", "<leader>hS", gs.stage_buffer, { desc = "Stage buffer" })
-                    map("n", "<leader>hu", gs.undo_stage_hunk, { desc = "Undo stage hunk" })
-                    map("n", "<leader>hR", gs.reset_buffer, { desc = "Reset buffer" })
-                    map("n", "<leader>hp", gs.preview_hunk, { desc = "Preview hunk" })
-                    map("n", "<leader>hb", function() gs.blame_line{full=true} end, { desc = "Blame current line" })
-                    map("n", "<leader>hd", gs.diffthis, { desc = "Diff" })
-                    map("n", "<leader>hD", function() gs.diffthis("~") end, { desc = "Diff ~" })
-                    map("n", "<leader>htb", gs.toggle_current_line_blame, { desc = "Toggle current line blame" })
-                    map("n", "<leader>htd", gs.toggle_deleted, { desc = "Tottle deleted" })
+                    map("n", "<LEADER>hs", gs.stage_hunk, { desc = "Stage hunk" })
+                    map("n", "<LEADER>hr", gs.reset_hunk, { desc = "Reset hunk" })
+                    map("v", "<LEADER>hs", function() gs.stage_hunk {vim.fn.line("."), vim.fn.line("v")} end, { desc = "Stage hunk" })
+                    map("v", "<LEADER>hr", function() gs.reset_hunk {vim.fn.line("."), vim.fn.line("v")} end, { desc = "Reset hunk" })
+                    map("n", "<LEADER>hS", gs.stage_buffer, { desc = "Stage buffer" })
+                    map("n", "<LEADER>hu", gs.undo_stage_hunk, { desc = "Undo stage hunk" })
+                    map("n", "<LEADER>hR", gs.reset_buffer, { desc = "Reset buffer" })
+                    map("n", "<LEADER>hp", gs.preview_hunk, { desc = "Preview hunk" })
+                    map("n", "<LEADER>hb", function() gs.blame_line{full=true} end, { desc = "Blame current line" })
+                    map("n", "<LEADER>hd", gs.diffthis, { desc = "Diff" })
+                    map("n", "<LEADER>hD", function() gs.diffthis("~") end, { desc = "Diff ~" })
+                    map("n", "<LEADER>htb", gs.toggle_current_line_blame, { desc = "Toggle current line blame" })
+                    map("n", "<LEADER>htd", gs.toggle_deleted, { desc = "Tottle deleted" })
 
                     -- Text object
                     map({"o", "x"}, "ih", ":<C-U>Gitsigns select_hunk<CR>")

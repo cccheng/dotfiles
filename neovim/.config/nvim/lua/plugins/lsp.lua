@@ -160,28 +160,28 @@ return {
             end, {})
 
             require("which-key").add({
-                { "<leader>e", group = "Diagnostic" },
-                { "<leader>l", group = "LSP" },
+                { "<LEADER>e", group = "Diagnostic" },
+                { "<LEADER>l", group = "LSP" },
             })
 
             vim.keymap.set("n", "[e",          vim.diagnostic.goto_prev,            { desc = "Prev diagnostic" })
             vim.keymap.set("n", "]e",          vim.diagnostic.goto_next,            { desc = "Next diagnostic" })
-            vim.keymap.set("n", "<leader>s",   vim.lsp.buf.hover,                   { desc = "Hover" })
-            vim.keymap.set("n", "<leader>lD",  vim.lsp.buf.declaration,             { desc = "Declaration" })
-            vim.keymap.set("n", "<leader>lf",  vim.lsp.buf.format,                  { desc = "Format" })
-            vim.keymap.set("n", "<leader>la",  vim.lsp.buf.code_action,             { desc = "Code action" })
-            vim.keymap.set("n", "<leader>ls",  vim.lsp.buf.signature_help,          { desc = "Signature" })
-            vim.keymap.set("n", "<leader>lR",  vim.lsp.buf.rename,                  { desc = "Rename" })
-            vim.keymap.set("n", "<leader>les", vim.diagnostic.open_float,           { desc = "Show diagnostic" })
-            vim.keymap.set("n", "<leader>lel", vim.diagnostic.setloclist,           { desc = "Diagnostic List" })
-            vim.keymap.set("n", "<leader>lee", "<cmd>ToggleDiagnostics<cr>",        { desc = "Toggle diagnostic" })
-            vim.keymap.set("n", "<leader>lr",  "<cmd>Telescope lsp_references<cr>", { desc = "References" })
-            vim.keymap.set("n", "<leader>lh",  "<cmd>ClangdToggleInlayHints<cr>",   { desc = "Toggle inlay hints" })
-            vim.keymap.set("n", "<leader>lS",  "<cmd>LspStop<cr>",                  { desc = "Stop LSP" })
-            vim.keymap.set("n", "<leader>lI",  "<cmd>LspInfo<cr>",                  { desc = "LSP Info" })
-            vim.keymap.set("n", "<leader>ld", function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end, { desc = "Definition" })
-            -- vim.keymap.set("n", "<leader>lt", function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end, { desc = "Type definition" })
-            -- vim.keymap.set("n", "<leader>li", function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end, { desc = "Implementation" })
+            vim.keymap.set("n", "<LEADER>s",   vim.lsp.buf.hover,                   { desc = "Hover" })
+            vim.keymap.set("n", "<LEADER>lD",  vim.lsp.buf.declaration,             { desc = "Declaration" })
+            vim.keymap.set("n", "<LEADER>lf",  vim.lsp.buf.format,                  { desc = "Format" })
+            vim.keymap.set("n", "<LEADER>la",  vim.lsp.buf.code_action,             { desc = "Code action" })
+            vim.keymap.set("n", "<LEADER>ls",  vim.lsp.buf.signature_help,          { desc = "Signature" })
+            vim.keymap.set("n", "<LEADER>lR",  vim.lsp.buf.rename,                  { desc = "Rename" })
+            vim.keymap.set("n", "<LEADER>les", vim.diagnostic.open_float,           { desc = "Show diagnostic" })
+            vim.keymap.set("n", "<LEADER>lel", vim.diagnostic.setloclist,           { desc = "Diagnostic List" })
+            vim.keymap.set("n", "<LEADER>lee", "<CMD>ToggleDiagnostics<CR>",        { desc = "Toggle diagnostic" })
+            vim.keymap.set("n", "<LEADER>lr",  "<CMD>Telescope lsp_references<CR>", { desc = "References" })
+            vim.keymap.set("n", "<LEADER>lh",  "<CMD>ClangdToggleInlayHints<CR>",   { desc = "Toggle inlay hints" })
+            vim.keymap.set("n", "<LEADER>lS",  "<CMD>LspStop<CR>",                  { desc = "Stop LSP" })
+            vim.keymap.set("n", "<LEADER>lI",  "<CMD>LspInfo<CR>",                  { desc = "LSP Info" })
+            vim.keymap.set("n", "<LEADER>ld", function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end, { desc = "Definition" })
+            -- vim.keymap.set("n", "<LEADER>lt", function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end, { desc = "Type definition" })
+            -- vim.keymap.set("n", "<LEADER>li", function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end, { desc = "Implementation" })
         end
     },
     {
@@ -302,16 +302,16 @@ return {
             require("glance").setup({
                 mappings = {
                     list = {
-                        ['<c-e>'] = actions.preview_scroll_win(-1),
-                        ['<c-y>'] = actions.preview_scroll_win(1),
+                        ["<C-e>"] = actions.preview_scroll_win(-1),
+                        ["<C-y>"] = actions.preview_scroll_win(1),
                     },
                 },
             })
 
-            vim.keymap.set("n", "<leader>d", "<cmd>Glance definitions<cr>", { desc = "Definition" })
-            vim.keymap.set("n", "<leader>r", "<cmd>Glance references<cr>", { desc = "References" })
-            vim.keymap.set("n", "<leader>lt", "<cmd>Glance type_definitions<cr>", { desc = "Type Definition" })
-            vim.keymap.set("n", "<leader>li", "<cmd>Glance implementations<cr>", { desc = "Implementation" })
+            vim.keymap.set("n", "<LEADER>d", "<CMD>Glance definitions<CR>", { desc = "Definition" })
+            vim.keymap.set("n", "<LEADER>r", "<CMD>Glance references<CR>", { desc = "References" })
+            vim.keymap.set("n", "<LEADER>lt", "<CMD>Glance type_definitions<CR>", { desc = "Type Definition" })
+            vim.keymap.set("n", "<LEADER>li", "<CMD>Glance implementations<CR>", { desc = "Implementation" })
         end
     },
 }
