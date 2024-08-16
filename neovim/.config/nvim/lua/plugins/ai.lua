@@ -6,11 +6,12 @@ return {
             "nvim-lua/plenary.nvim"
         },
         keys = {
-            { "<LEADER>gc", "<CMD>PrtAsk<CR>", desc = "GPT chat" },
-            -- { "<LEADER>gc", "<CMD>PrtChatToggle<CR>", desc = "GPT chat" },
-            { "<LEADER>gg", ":<C-u>'<,'>PrtGrammar<CR>", desc = "GPT Grammar Correction", mode = { "v" } },
-            { "<LEADER>gt", ":<C-u>'<,'>PrtTranslate<CR>", desc = "GPT Translate", mode = { "v" } },
-            { "<LEADER>ge", ":<C-u>'<,'>PrtExplain<CR>", desc = "GPT Explain", mode = { "v" } },
+            { "<LEADER>pa", "<CMD>PrtAsk<CR>", desc = "GPT Ask" },
+            { "<LEADER>pc", "<CMD>PrtChatToggle<CR>", desc = "GPT chat" },
+            { "<LEADER>pg", "<CMD>PrtCommitMsg<CR>", desc = "GPT Commit message" },
+            { "<LEADER>pr", ":<C-u>'<,'>PrtRefine<CR>", desc = "GPT Refine", mode = { "v" } },
+            { "<LEADER>pt", ":<C-u>'<,'>PrtTranslate<CR>", desc = "GPT Translate", mode = { "v" } },
+            { "<LEADER>pe", ":<C-u>'<,'>PrtExplain<CR>", desc = "GPT Explain", mode = { "v" } },
         },
         config = function()
             require("parrot").setup({
