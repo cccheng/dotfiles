@@ -20,10 +20,18 @@ vim.keymap.set("n", "<C-l>", "<CMD>:tabnext<CR>", { desc = "Next tab" })
 vim.keymap.set("n", "[b", "<CMD>bprevious<CR>", { desc = "Prev buffer" })
 vim.keymap.set("n", "]b", "<CMD>bnext<CR>", { desc = "Next buffer" })
 
--- Clear search with <ESC>
+-- clear search with <ESC>
 vim.keymap.set({ "i", "n" }, "<ESC><ESC>", "<CMD>noh<CR><ESC>", { desc = "Escape and clear hlsearch" })
 
--- better indenting
-vim.keymap.set("v", "<", "<gv")
-vim.keymap.set("v", ">", ">gv")
+-- better indenting in visual mode
+vim.keymap.set("v", "<", "<gv", { silent = true })
+vim.keymap.set("v", ">", ">gv", { silent = true })
+
+-- move selected line / block of text in visual mode
+vim.keymap.set("x", "K", ":move '<-2<CR>gv-gv", { silent = true })
+vim.keymap.set("x", "J", ":move '>+1<CR>gv-gv", { silent = true })
+
+-- case change in visual mode
+vim.keymap.set("v", "`", "u", { silent = true })
+vim.keymap.set("v", "<A-`>", "U", { silent = true })
 

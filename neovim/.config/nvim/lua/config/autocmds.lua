@@ -20,7 +20,6 @@ vim.api.nvim_create_autocmd({ 'InsertEnter', 'WinLeave' }, {
     end,
 })
 
-
 -- relative line numbers in normal mode
 -- absolute line numbers in insert/command mode
 local numbertoggle = vim.api.nvim_create_augroup("numbertoggle", {})
