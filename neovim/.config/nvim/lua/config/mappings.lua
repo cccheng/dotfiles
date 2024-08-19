@@ -17,8 +17,8 @@ vim.keymap.set("n", "<C-l>", "<CMD>:tabnext<CR>", { desc = "Next tab" })
 vim.keymap.set("n", "[b", "<CMD>bprevious<CR>", { desc = "Prev buffer" })
 vim.keymap.set("n", "]b", "<CMD>bnext<CR>", { desc = "Next buffer" })
 
--- Clear search with <esc>
-vim.keymap.set({ "i", "n" }, "<ESC>", "<CMD>noh<CR><ESC>", { desc = "Escape and clear hlsearch" })
+-- Clear search with <ESC>
+vim.keymap.set({ "i", "n" }, "<ESC><ESC>", "<CMD>noh<CR><ESC>", { desc = "Escape and clear hlsearch" })
 
 -- better indenting
 vim.keymap.set("v", "<", "<gv")
