@@ -18,6 +18,7 @@ opt.number = true -- Print line number
 opt.relativenumber = true -- Relative line numbers
 opt.backspace = {"indent", "eol", "start"}
 opt.scrolloff = 4 -- Lines of context
+opt.smoothscroll = true
 opt.winminwidth = 5 -- Minimum window width
 
 -- opt.wildmenu = true
@@ -73,6 +74,3 @@ opt.fillchars = {
     vert = "▒",
 }
 
-if vim.fn.has("nvim-0.10") == 1 then
-    opt.smoothscroll = true
-end

@@ -6,8 +6,8 @@ vim.keymap.set({ "n", "x" }, "<UP>", "v:count == 0 ? 'gk' : 'k'", { expr = true,
 
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { noremap = true, silent = true })
-vim.keymap.set("n", "<C-b>", "<C-b>zz", { noremap = true, silent = true })
-vim.keymap.set("n", "<C-f>", "<C-f>zz", { noremap = true, silent = true })
+-- vim.keymap.set("n", "<C-b>", "<C-b>zz", { noremap = true, silent = true })
+-- vim.keymap.set("n", "<C-f>", "<C-f>zz", { noremap = true, silent = true })
 
 -- tabs
 vim.keymap.set("n", "<C-h>", "<CMD>:tabprev<CR>", { desc = "Previous tab" })
