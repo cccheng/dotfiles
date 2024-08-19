@@ -4,10 +4,13 @@ vim.keymap.set({ "n", "x" }, "<DOWN>", "v:count == 0 ? 'gj' : 'j'", { expr = tru
 vim.keymap.set({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set({ "n", "x" }, "<UP>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
+-- focus scrolling
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { noremap = true, silent = true })
--- vim.keymap.set("n", "<C-b>", "<C-b>zz", { noremap = true, silent = true })
--- vim.keymap.set("n", "<C-f>", "<C-f>zz", { noremap = true, silent = true })
+
+-- focus highlight searches
+vim.keymap.set("n", "n", "nzzzv", { noremap = true, silent = true })
+vim.keymap.set("n", "N", "Nzzzv", { noremap = true, silent = true })
 
 -- tabs
 vim.keymap.set("n", "<C-h>", "<CMD>:tabprev<CR>", { desc = "Previous tab" })
