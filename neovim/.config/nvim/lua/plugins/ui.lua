@@ -150,6 +150,15 @@ return {
         config = function()
             require("tint").setup({
                 tint = -50,
+                highlight_ignore_patterns = {
+                    "SignColumn",
+                    "LineNr",
+                    "CursorLine",
+                    "WinSeparator",
+                    "VertSplit",
+                    "StatusLineNC",
+                },
+
             })
         end
     },
