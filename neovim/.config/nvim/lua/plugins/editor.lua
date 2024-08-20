@@ -23,6 +23,7 @@ return {
                     winblend = 30,
                 },
             })
+            require("mini.pairs").setup({})
             require("mini.trailspace").setup({})
 
             vim.api.nvim_set_hl(0, "MiniCursorword", { link = "VisualNOS" })
@@ -68,12 +69,4 @@ return {
             })
         end,
     },
-    {
-        "m4xshen/autoclose.nvim",
-        event = "BufReadPre",
-        config = function()
-            require("autoclose").setup({
-            })
-        end,
-    }
 }
