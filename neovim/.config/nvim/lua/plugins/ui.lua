@@ -26,7 +26,7 @@ return {
             scope = "window",
             disabled_filetypes = {
                 "netrw",
-                "Lazy",
+                "lazy",
                 "mason",
                 "help",
                 "text",

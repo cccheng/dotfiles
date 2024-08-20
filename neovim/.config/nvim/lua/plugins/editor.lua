@@ -20,7 +20,7 @@ return {
             require("mini.move").setup({})
             require("mini.notify").setup({
                 window = {
-                    winblend = 10,
+                    winblend = 30,
                 },
             })
             require("mini.trailspace").setup({})
