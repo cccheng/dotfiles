@@ -36,9 +36,9 @@ return {
             require("mini.trailspace").setup({})
 
             vim.api.nvim_set_hl(0, "MiniJump", { reverse = true })
-            vim.api.nvim_set_hl(0, 'MiniJump2dSpot', { reverse = true })
-            vim.api.nvim_set_hl(0, "MiniCursorword", { link = "VisualNOS" })
-            vim.api.nvim_set_hl(0, "MiniCursorwordCurrent", { link = "NormalFloat" })
+            vim.api.nvim_set_hl(0, "MiniJump2dSpot", { reverse = true })
+            vim.api.nvim_set_hl(0, "MiniCursorword", { bold = true })
+            vim.api.nvim_set_hl(0, "MiniCursorwordCurrent", { bold = true })
         end
     },
     {
