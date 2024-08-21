@@ -9,7 +9,7 @@ return {
             { "<LEADER>pa", "<CMD>PrtAsk<CR>", desc = "GPT Ask" },
             { "<LEADER>pc", "<CMD>PrtChatToggle<CR>", desc = "GPT chat" },
             { "<LEADER>pg", "<CMD>PrtCommitMsg<CR>", desc = "GPT Commit message" },
-            { "<LEADER>pr", ":<C-u>'<,'>PrtRefine<CR>", desc = "GPT Refine", mode = { "v" } },
+            { "<LEADER>pr", ":<C-u>'<,'>PrtGrammar<CR>", desc = "GPT Refine", mode = { "v" } },
             { "<LEADER>pt", ":<C-u>'<,'>PrtTranslate<CR>", desc = "GPT Translate", mode = { "v" } },
             { "<LEADER>pe", ":<C-u>'<,'>PrtExplain<CR>", desc = "GPT Explain", mode = { "v" } },
         },
