@@ -27,10 +27,6 @@ vim.keymap.set({ "i", "n" }, "<ESC><ESC>", "<CMD>noh<CR><ESC>", { desc = "Escape
 vim.keymap.set("v", "<", "<gv", { silent = true })
 vim.keymap.set("v", ">", ">gv", { silent = true })
 
--- move selected line / block of text in visual mode
-vim.keymap.set("x", "K", ":move '<-2<CR>gv-gv", { silent = true })
-vim.keymap.set("x", "J", ":move '>+1<CR>gv-gv", { silent = true })
-
 -- case change in visual mode
 vim.keymap.set("v", "`", "u", { silent = true })
 vim.keymap.set("v", "<A-`>", "U", { silent = true })
