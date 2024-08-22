@@ -92,15 +92,14 @@ return {
                     map("n", "<LEADER>hr", gs.reset_hunk, { desc = "Reset hunk" })
                     map("v", "<LEADER>hs", function() gs.stage_hunk {vim.fn.line("."), vim.fn.line("v")} end, { desc = "Stage hunk" })
                     map("v", "<LEADER>hr", function() gs.reset_hunk {vim.fn.line("."), vim.fn.line("v")} end, { desc = "Reset hunk" })
-                    map("n", "<LEADER>hS", gs.stage_buffer, { desc = "Stage buffer" })
                     map("n", "<LEADER>hu", gs.undo_stage_hunk, { desc = "Undo stage hunk" })
-                    map("n", "<LEADER>hR", gs.reset_buffer, { desc = "Reset buffer" })
                     map("n", "<LEADER>hp", gs.preview_hunk, { desc = "Preview hunk" })
                     map("n", "<LEADER>hb", function() gs.blame_line{full=true} end, { desc = "Blame current line" })
                     map("n", "<LEADER>hd", gs.diffthis, { desc = "Diff" })
-                    map("n", "<LEADER>hD", function() gs.diffthis("~") end, { desc = "Diff ~" })
                     map("n", "<LEADER>htb", gs.toggle_current_line_blame, { desc = "Toggle current line blame" })
-                    map("n", "<LEADER>htd", gs.toggle_deleted, { desc = "Tottle deleted" })
+                    map("n", "<LEADER>htd", gs.toggle_deleted, { desc = "Toggle show deleted" })
+                    map("n", "<LEADER>htl", gs.toggle_linehl, { desc = "Toggle line highlight" })
+                    map("n", "<LEADER>htw", gs.toggle_word_diff, { desc = "Toggle word diff" })
 
                     -- Text object
                     map({"o", "x"}, "ih", ":<C-U>Gitsigns select_hunk<CR>")
