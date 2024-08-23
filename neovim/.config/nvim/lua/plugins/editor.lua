@@ -33,6 +33,21 @@ return {
                 },
             })
             require("mini.pairs").setup({})
+            require("mini.surround").setup({
+                -- Module mappings. Use `""` (empty string) to disable one.
+                mappings = {
+                    add            = "<LEADER>sa", -- Add surrounding in Normal and Visual modes
+                    delete         = "<LEADER>sd", -- Delete surrounding
+                    find           = "<LEADER>sf", -- Find surrounding (to the right)
+                    find_left      = "<LEADER>sF", -- Find surrounding (to the left)
+                    highlight      = "<LEADER>sh", -- Highlight surrounding
+                    replace        = "<LEADER>sr", -- Replace surrounding
+                    update_n_lines = "<LEADER>sn", -- Update `n_lines`
+
+                    suffix_last    = "<LEADER>l", -- Suffix to search with "prev" method
+                    suffix_next    = "<LEADER>n", -- Suffix to search with "next" method
+                },
+            })
             require("mini.trailspace").setup({})
 
             vim.api.nvim_set_hl(0, "MiniJump", { reverse = true })

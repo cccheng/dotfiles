@@ -166,11 +166,11 @@ return {
 
             vim.keymap.set("n", "[e",          vim.diagnostic.goto_prev,            { desc = "Prev diagnostic" })
             vim.keymap.set("n", "]e",          vim.diagnostic.goto_next,            { desc = "Next diagnostic" })
-            vim.keymap.set("n", "<LEADER>s",   vim.lsp.buf.hover,                   { desc = "Hover" })
+            vim.keymap.set("n", "<LEADER>ls",  vim.lsp.buf.hover,                   { desc = "Hover" })
             vim.keymap.set("n", "<LEADER>lD",  vim.lsp.buf.declaration,             { desc = "Declaration" })
             vim.keymap.set("n", "<LEADER>lf",  vim.lsp.buf.format,                  { desc = "Format" })
             vim.keymap.set("n", "<LEADER>la",  vim.lsp.buf.code_action,             { desc = "Code action" })
-            vim.keymap.set("n", "<LEADER>ls",  vim.lsp.buf.signature_help,          { desc = "Signature" })
+            vim.keymap.set("n", "<LEADER>lS",  vim.lsp.buf.signature_help,          { desc = "Signature" })
             vim.keymap.set("n", "<LEADER>lR",  vim.lsp.buf.rename,                  { desc = "Rename" })
             vim.keymap.set("n", "<LEADER>les", vim.diagnostic.open_float,           { desc = "Show diagnostic" })
             vim.keymap.set("n", "<LEADER>lel", vim.diagnostic.setloclist,           { desc = "Diagnostic List" })
