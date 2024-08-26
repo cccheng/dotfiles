@@ -29,7 +29,7 @@ return {
             require("mini.move").setup({})
             require("mini.notify").setup({
                 window = {
-                    winblend = 30,
+                    winblend = 50,
                 },
             })
             require("mini.pairs").setup({})
