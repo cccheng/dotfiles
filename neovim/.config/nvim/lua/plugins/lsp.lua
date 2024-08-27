@@ -216,6 +216,10 @@ return {
                         winblend = 10,
                     },
                 },
+                performance = {
+                    debounce = 0, -- default is 60ms
+                    throttle = 0, -- default is 30ms     
+                },
                 snippet = {
                     expand = function(args)
                         vim.snippet.expand(args.body)  -- Use native snippets. Only works on Neovim >= 0.10!
