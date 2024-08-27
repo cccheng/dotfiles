@@ -30,29 +30,59 @@ return {
             vim.keymap.set("n", "<LEADER>gB", "<CMD>Telescope git_bcommits<CR>", { desc = "Git commits of current buffer" })
 
             require("telescope").setup({
-                defaults = require('telescope.themes').get_ivy {
+                defaults = require("telescope.themes").get_ivy {
                     winblend = 10,
                     prompt_prefix = "   ",
                     selection_caret = " ",
                     -- borderchars = { "━", "┃", "━", "┃", "┏", "┓", "┛", "┗" },
                     mappings = {
-                        n = {
-                            ["q"] = require("telescope.actions").close
+                        ["n"] = {
+                            ["<C-c>"] = "close",
+                            ["<C-j>"] = "move_selection_next",
+                            ["<C-k>"] = "move_selection_previous",
+                        },
+                        ["i"] = {
+                            ["<C-c>"] = "close",
+                            ["<C-j>"] = "move_selection_next",
+                            ["<C-k>"] = "move_selection_previous",
                         },
                     },
                 },
                 extensions = {
-                    fzf = {
+                    ["fzf"] = {
                         fuzzy = true,                    -- false will only do exact matching
                         override_generic_sorter = true,  -- override the generic sorter
                         override_file_sorter = true,     -- override the file sorter
                         case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
                         -- the default case_mode is "smart_case"
+                    },
+                    ["file_browser"] = {
+                        -- disables netrw and use telescope-file-browser in its place
+                        hijack_netrw = true,
+                        mappings = {
+                            ["n"] = {
+                                ["<C-c>"] = "close",
+                                ["<C-j>"] = "move_selection_next",
+                                ["<C-k>"] = "move_selection_previous",
+                            },
+                            ["i"] = {
+                                ["<C-c>"] = "close",
+                                ["<C-j>"] = "move_selection_next",
+                                ["<C-k>"] = "move_selection_previous",
+                            },
+                        },
+                    },
+                    ["ui-select"] = {
+                        require("telescope.themes").get_ivy({
+                            winblend = 10,
+                        })
                     }
                 }
             })
 
-            require('telescope').load_extension("fzf")
+            require("telescope").load_extension("fzf")
+            require("telescope").load_extension("ui-select")
+            require("telescope").load_extension("file_browser")
         end,
     },
     {
@@ -63,22 +93,6 @@ return {
     {
         "nvim-telescope/telescope-ui-select.nvim",
         event = "VeryLazy",
-        dependencies = {
-            "nvim-telescope/telescope.nvim",
-        },
-        config = function()
-            require("telescope").setup({
-                extensions = {
-                    ["ui-select"] = {
-                        require("telescope.themes").get_dropdown({
-                            winblend = 10,
-                        })
-                    }
-                }
-            })
-
-            require("telescope").load_extension("ui-select")
-        end
     },
     {
         "nvim-telescope/telescope-file-browser.nvim",
@@ -87,17 +101,5 @@ return {
             "nvim-telescope/telescope.nvim",
             "nvim-lua/plenary.nvim"
         },
-        config = function()
-            require("telescope").setup({
-                extensions = {
-                    file_browser = {
-                        -- disables netrw and use telescope-file-browser in its place
-                        hijack_netrw = true,
-                    },
-                },
-            })
-
-            require("telescope").load_extension("file_browser")
-        end
     }
 }
