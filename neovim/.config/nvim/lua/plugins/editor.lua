@@ -23,7 +23,7 @@ return {
                     dim = true,
                 },
                 mappings = {
-                    start_jumping = "s",
+                    start_jumping = "<LEADER>ss",
                 },
             })
             require("mini.move").setup({})
