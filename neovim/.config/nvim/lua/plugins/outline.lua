@@ -7,6 +7,9 @@ return {
         },
         config = function()
             require("outline").setup({
+                symbol_folding = {
+                    autofold_depth = false,
+                },
             })
         end,
     },
