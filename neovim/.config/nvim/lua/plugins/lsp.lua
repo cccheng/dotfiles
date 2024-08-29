@@ -170,9 +170,9 @@ return {
             vim.keymap.set("n", "<LEADER>la",  vim.lsp.buf.code_action,             { desc = "Code action" })
             vim.keymap.set("n", "<LEADER>lS",  vim.lsp.buf.signature_help,          { desc = "Signature" })
             vim.keymap.set("n", "<LEADER>lR",  vim.lsp.buf.rename,                  { desc = "Rename" })
-            vim.keymap.set("n", "<LEADER>les", vim.diagnostic.open_float,           { desc = "Show diagnostic" })
-            vim.keymap.set("n", "<LEADER>lel", vim.diagnostic.setloclist,           { desc = "Diagnostic List" })
-            vim.keymap.set("n", "<LEADER>lee", "<CMD>ToggleDiagnostics<CR>",        { desc = "Toggle diagnostic" })
+            vim.keymap.set("n", "<LEADER>lds", vim.diagnostic.open_float,           { desc = "Show diagnostic" })
+            vim.keymap.set("n", "<LEADER>ldl", vim.diagnostic.setloclist,           { desc = "Diagnostic List" })
+            vim.keymap.set("n", "<LEADER>ldd", "<CMD>ToggleDiagnostics<CR>",        { desc = "Toggle diagnostic" })
             vim.keymap.set("n", "<LEADER>lr",  "<CMD>Telescope lsp_references<CR>", { desc = "References" })
             vim.keymap.set("n", "<LEADER>lh",  "<CMD>ClangdToggleInlayHints<CR>",   { desc = "Toggle inlay hints" })
             vim.keymap.set("n", "<LEADER>lS",  "<CMD>LspStop<CR>",                  { desc = "Stop LSP" })
@@ -205,13 +205,14 @@ return {
             local cmp = require("cmp")
             local select_opts = { behavior = cmp.SelectBehavior.Select }
 
-            -- vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+            vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
 
             cmp.setup({
                 window = {
                     -- completion = cmp.config.window.bordered(),
                     -- documentation = cmp.config.window.bordered(),
                     completion = {
+                        completeopt = "menu,menuone,noinsert",
                         winblend = 10,
                     },
                     documentation = {
@@ -236,9 +237,9 @@ return {
                     format = function(entry, item)
                         local menu_icon = {
                             nvim_lsp = "λ",
-                            buffer = "Ω",
+                            buffer = "󰻫",
                             path = "🖫",
-                            vsnip = "⋗",
+                            calc = "󰍛",
                         }
 
                         item.menu = menu_icon[entry.source.name]
@@ -247,6 +248,11 @@ return {
                 },
                 mapping = cmp.mapping.preset.insert({
                     ["<CR>"] = cmp.mapping({
+                        i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
+                        s = cmp.mapping.confirm({ select = true }),
+                        c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+                    }),
+                    ["<TAB>"] = cmp.mapping({
                         i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
                         s = cmp.mapping.confirm({ select = true }),
                         c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
@@ -268,12 +274,10 @@ return {
                         { name = "calc",     max_item_count = 10, keyword_length = 2 },
                         -- { name = "vsnip",    max_item_count = 10, keyword_length = 2 },
                 }),
-                -- experimental = {
-                --     ghost_text = {
-                --         hl_group = "CmpGhostText",
-                --     },
-                -- },
-                -- sorting = require("cmp.config.default")().sorting,
+                experimental = {
+                    ghost_text = false -- { hl_group = "CmpGhostText" },
+                },
+                sorting = require("cmp.config.default")().sorting,
             })
 
             cmp.setup.cmdline({ "/", "?" }, {
