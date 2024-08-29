@@ -17,8 +17,12 @@ vim.keymap.set("n", "<C-h>", "<CMD>:tabprev<CR>", { desc = "Previous tab" })
 vim.keymap.set("n", "<C-l>", "<CMD>:tabnext<CR>", { desc = "Next tab" })
 
 -- buffers
-vim.keymap.set("n", "[b", "<CMD>bprevious<CR>", { desc = "Prev buffer" })
+vim.keymap.set("n", "[b", "<CMD>bprevious<CR>", { desc = "Previous buffer" })
 vim.keymap.set("n", "]b", "<CMD>bnext<CR>", { desc = "Next buffer" })
+
+-- quickfix
+vim.keymap.set("n", "[q", vim.cmd.cprev, { desc = "Previous quickfix" })
+vim.keymap.set("n", "]q", vim.cmd.cnext, { desc = "Next quickfix" })
 
 -- clear search with <ESC>
 vim.keymap.set({ "i", "n" }, "<ESC><ESC>", "<CMD>noh<CR><ESC>", { desc = "Escape and clear hlsearch" })

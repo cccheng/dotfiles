@@ -164,8 +164,6 @@ return {
                 { "<LEADER>l", group = "LSP" },
             })
 
-            vim.keymap.set("n", "[e",          vim.diagnostic.goto_prev,            { desc = "Prev diagnostic" })
-            vim.keymap.set("n", "]e",          vim.diagnostic.goto_next,            { desc = "Next diagnostic" })
             vim.keymap.set("n", "<LEADER>ls",  vim.lsp.buf.hover,                   { desc = "Hover" })
             vim.keymap.set("n", "<LEADER>lD",  vim.lsp.buf.declaration,             { desc = "Declaration" })
             vim.keymap.set("n", "<LEADER>lf",  vim.lsp.buf.format,                  { desc = "Format" })
@@ -182,6 +180,10 @@ return {
             vim.keymap.set("n", "<LEADER>ld", function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end, { desc = "Definition" })
             -- vim.keymap.set("n", "<LEADER>lt", function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end, { desc = "Type definition" })
             -- vim.keymap.set("n", "<LEADER>li", function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end, { desc = "Implementation" })
+            vim.keymap.set("n", "[e", function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity["ERROR"] }) end, { desc = "Previous error" })
+            vim.keymap.set("n", "]e", function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity["ERROR"] }) end, { desc = "Next error" })
+            vim.keymap.set("n", "[w", function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity["WARN"] }) end, { desc = "Previous warning" })
+            vim.keymap.set("n", "]w", function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity["WARN"] }) end, { desc = "Next warning" })
         end
     },
     {
