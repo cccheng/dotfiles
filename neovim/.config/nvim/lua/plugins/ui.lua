@@ -33,6 +33,7 @@ return {
                 "markdown",
                 "tex",
                 "html",
+                "DiffviewFileHistory",
             },
         }
     },
