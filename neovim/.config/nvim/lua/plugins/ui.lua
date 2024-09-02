@@ -44,11 +44,11 @@ return {
             "nvim-tree/nvim-web-devicons",
         },
         config = function()
-            require('lualine').setup({
+            require("lualine").setup({
                 sections = {
-                    lualine_a = {'mode'},
+                    lualine_a = {"mode"},
                     lualine_b = {
-                        'branch', 'diff', 'diagnostics',
+                        "branch", "diff", "diagnostics",
                         {
                             require("noice").api.statusline.mode.get,
                             cond = require("noice").api.statusline.mode.has,
@@ -57,13 +57,30 @@ return {
                     },
                     lualine_c = {
                         {
-                            'filename',
-                            path = 3,
+                            function() return vim.fn.getcwd() end,
+                            padding = { right = 0 },
+                            separator = "⫽",
+                        },
+                        {
+                            "filename",
+                            newfile_status = true,
+                            path = 1,
+                            padding = { left = 0 },
                         }
                     },
-                    lualine_x = {'encoding', 'fileformat', 'filetype'},
-                    lualine_y = {'searchcount', 'progress'},
-                    lualine_z = {'selectioncount', 'location'}
+                    lualine_x = {
+                        {
+                            "encoding",
+                            show_bomb = true,
+                        },
+                        "fileformat",
+                        {
+                            "filetype",
+                            colored = false,
+                        },
+                    },
+                    lualine_y = {"searchcount", "progress"},
+                    lualine_z = {"selectioncount", "location"}
                 },
             })
         end
