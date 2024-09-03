@@ -25,6 +25,7 @@ return {
             colorcolumn = {"100"},
             scope = "window",
             disabled_filetypes = {
+                "qf",
                 "netrw",
                 "lazy",
                 "mason",
