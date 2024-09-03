@@ -83,6 +83,9 @@ return {
                     lualine_y = {"searchcount", "progress"},
                     lualine_z = {"selectioncount", "location"}
                 },
+                extensions = {
+                    "lazy", "mason", "man", "quickfix", "toggleterm", "symbols-outline",
+                },
             })
         end
     },
