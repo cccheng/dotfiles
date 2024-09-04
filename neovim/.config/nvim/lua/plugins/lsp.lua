@@ -28,6 +28,7 @@ return {
                     "autotools_ls",
                     "lua_ls",
                     "typos_lsp",
+                    "harper_ls",
                     "gitlab_ci_ls",
                     "dotls",
                     "marksman", -- markdown
@@ -120,6 +121,38 @@ return {
                 autotools_ls = {},
                 lua_ls = {},
                 typos_lsp = {},
+                harper_ls = {
+                    settings = {
+                        ["harper-ls"] = {
+                            -- userDictPath = "",
+                            diagnosticSeverity = "hint", -- "hint", "information", "warning", or "error"
+                            linters = {
+                                spell_check = true,
+                                spelled_numbers = true,
+                                an_a = true,
+                                sentence_capitalization = false,
+                                unclosed_quotes = true,
+                                wrong_quotes = true,
+                                long_sentences = true,
+                                repeated_words = true,
+                                spaces = true,
+                                matcher = true,
+                                correct_number_suffix = true,
+                                number_suffix_capitalization = true,
+                                multiple_sequential_pronouns = true,
+                                linking_verbs = true,
+                                avoid_curses = true,
+                            },
+                        },
+                    },
+                    filetypes = {
+                        "text",
+                        "markdown",
+                        "gitcommit",
+                        "gitsendemail",
+                        "changelog",
+                    },
+                },
                 gitlab_ci_ls = {},
                 dotls = {},
                 marksman = {},
