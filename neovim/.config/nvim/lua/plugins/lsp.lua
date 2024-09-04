@@ -56,40 +56,17 @@ return {
             local default_capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
             local handlers = {
                 -- none, single, double, rounded, shadow 
-                ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
-                ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
+                ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
+                ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
             }
 
             -- :help lspconfig-server-configurations
             local servers = {
-                clangd = {
-                    root_dir = function(fname)
-                        return require("lspconfig.util").root_pattern(
-                            "Makefile",
-                            "configure.ac",
-                            "configure.in",
-                            "config.h.in",
-                            ".clangd",
-                            ".clang-tidy",
-                            ".clang-format",
-                            "compile_commands.json"
-                        )(fname) or require("lspconfig.util").find_git_ancestor(fname)
-                    end,
-                    cmd = {
-                        "clangd",
-                        "--background-index",
-                        "--clang-tidy",
-                        "--header-insertion=iwyu",
-                        "--completion-style=detailed",
-                        "--function-arg-placeholders",
-                        "--fallback-style=llvm",
-                        "--offset-encoding=utf-16",
-                    },
-                },
+                clangd = {},
                 rust_analyzer = {
-                    -- on_attach = function(client, bufnr)
-                    --     vim.lsp.inlay_hint.enable(bufnr)
-                    -- end,
+                    on_attach = function(_, bufnr)
+                        vim.lsp.inlay_hint.enable(bufnr)
+                    end,
                     settings = {
                         ["rust-analyzer"] = {
                             imports = {
@@ -120,15 +97,19 @@ return {
                 bashls = {},
                 autotools_ls = {},
                 lua_ls = {},
-                typos_lsp = {},
+                typos_lsp = {
+                    init_options = {
+                        diagnosticSeverity = "warning",
+                    },
+                },
                 harper_ls = {
                     settings = {
                         ["harper-ls"] = {
-                            -- userDictPath = "",
-                            diagnosticSeverity = "hint", -- "hint", "information", "warning", or "error"
+                            -- userDictPath = vim.fn.stdpath("config") .. "/dict/spell.txt",
+                            diagnosticSeverity = "warning", -- "hint", "information", "warning", or "error"
                             linters = {
                                 spell_check = true,
-                                spelled_numbers = true,
+                                spelled_numbers = false,
                                 an_a = true,
                                 sentence_capitalization = false,
                                 unclosed_quotes = true,
@@ -166,6 +147,8 @@ return {
             for name, config in pairs(servers) do
                 lspconfig[name].setup({
                     capabilities = default_capabilities,
+                    init_options = config.init_options,
+                    on_attach = config.on_attach,
                     filetypes = config.filetypes,
                     settings = config.settings,
                     handlers = handlers,
