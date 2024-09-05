@@ -62,7 +62,25 @@ return {
 
             -- :help lspconfig-server-configurations
             local servers = {
-                clangd = {},
+                clangd = {
+                    capabilities = {
+                        offsetEncoding = { "utf-16" },
+                    },
+                    cmd = {
+                        "clangd",
+                        "--background-index",
+                        "--clang-tidy",
+                        "--header-insertion=iwyu",
+                        "--completion-style=detailed",
+                        "--function-arg-placeholders",
+                        "--fallback-style=llvm",
+                    },
+                    init_options = {
+                        usePlaceholders = true,
+                        completeUnimported = true,
+                        clangdFileStatus = true,
+                    },
+                },
                 rust_analyzer = {
                     on_attach = function(_, bufnr)
                         vim.lsp.inlay_hint.enable(bufnr)
@@ -146,7 +164,7 @@ return {
             -- Iterate over our servers and set them up
             for name, config in pairs(servers) do
                 lspconfig[name].setup({
-                    capabilities = default_capabilities,
+                    capabilities = config.capabilities or default_capabilities,
                     init_options = config.init_options,
                     on_attach = config.on_attach,
                     filetypes = config.filetypes,
@@ -176,7 +194,6 @@ return {
             end, {})
 
             require("which-key").add({
-                { "<LEADER>e", group = "Diagnostic" },
                 { "<LEADER>l", group = "LSP" },
             })
 
@@ -322,7 +339,7 @@ return {
         "DNLHC/glance.nvim",
         event = "BufReadPre",
         config = function()
-            local glance = require('glance')
+            local glance = require("glance")
             local actions = glance.actions
 
             require("glance").setup({
