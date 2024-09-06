@@ -10,6 +10,7 @@ return {
                     "bash", "diff", "regex", "json", "make",
                     "disassembly", "strace", "kconfig",
                     "markdown", "markdown_inline", "html",
+                    "git_config", "gitignore", "gitattributes",
                     "gitcommit", "git_rebase", "diff", "dot",
                     "yaml", "toml", "ini", "dockerfile",
                     "lua", "vim", "vimdoc", "gpg", "nix",
