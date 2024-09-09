@@ -131,7 +131,7 @@ return {
                                 an_a = true,
                                 sentence_capitalization = false,
                                 unclosed_quotes = true,
-                                wrong_quotes = true,
+                                wrong_quotes = false,
                                 long_sentences = true,
                                 repeated_words = true,
                                 spaces = true,
