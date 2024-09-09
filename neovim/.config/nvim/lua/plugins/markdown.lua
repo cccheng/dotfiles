@@ -16,5 +16,17 @@ return {
                 left_pad = 1,
             },
         },
+        keys = {
+            { "<LEADER>lm", mode = {"n"}, "<CMD>ToggleMarkdown<CR>", desc = "Markdown render" },
+        },
+        config = function()
+            vim.api.nvim_create_user_command("ToggleMarkdown", function()
+                if require("render-markdown.state").enabled then
+                    require("render-markdown").disable();
+                else
+                    require("render-markdown").enable();
+                end
+            end, {})
+        end,
     }
 }
