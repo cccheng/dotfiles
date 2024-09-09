@@ -43,9 +43,6 @@ return {
                     highlight      = "<LEADER>sh", -- Highlight surrounding
                     replace        = "<LEADER>sr", -- Replace surrounding
                     update_n_lines = "<LEADER>sn", -- Update `n_lines`
-
-                    suffix_last    = "<LEADER>l", -- Suffix to search with "prev" method
-                    suffix_next    = "<LEADER>n", -- Suffix to search with "next" method
                 },
             })
             require("mini.trailspace").setup({})
