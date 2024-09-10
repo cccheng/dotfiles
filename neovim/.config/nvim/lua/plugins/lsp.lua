@@ -231,6 +231,7 @@ return {
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-calc",
             "hrsh7th/cmp-cmdline",
+            "uga-rosa/cmp-dictionary",
             -- "hrsh7th/vim-vsnip",  -- remove it after neovim 0.10
             -- "hrsh7th/cmp-vsnip",  -- remove it after neovim 0.10
         },
@@ -239,6 +240,11 @@ return {
             local select_opts = { behavior = cmp.SelectBehavior.Select }
 
             vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+
+            require("cmp_dictionary").setup({
+                paths = { "/usr/share/dict/words" },
+                exact_length = 2,
+            })
 
             cmp.setup({
                 window = {
@@ -273,6 +279,7 @@ return {
                             buffer = "󰻫",
                             path = "🖫",
                             calc = "󰍛",
+                            dictionary = "",
                         }
 
                         item.menu = menu_icon[entry.source.name]
@@ -305,6 +312,7 @@ return {
                         { name = "buffer",   max_item_count = 10, keyword_length = 2 },
                         { name = "path",     max_item_count = 10, keyword_length = 3 },
                         { name = "calc",     max_item_count = 10, keyword_length = 2 },
+                        { name = "dictionary", max_item_count = 10, keyword_length = 2 },
                         -- { name = "vsnip",    max_item_count = 10, keyword_length = 2 },
                 }),
                 experimental = {
