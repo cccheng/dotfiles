@@ -94,8 +94,15 @@ return {
                     map("v", "<LEADER>hr", function() gs.reset_hunk {vim.fn.line("."), vim.fn.line("v")} end, { desc = "Reset hunk" })
                     map("n", "<LEADER>hu", gs.undo_stage_hunk, { desc = "Undo stage hunk" })
                     map("n", "<LEADER>hp", gs.preview_hunk, { desc = "Preview hunk" })
-                    map("n", "<LEADER>hb", function() gs.blame_line{full=true} end, { desc = "Blame current line" })
-                    map("n", "<LEADER>hd", gs.diffthis, { desc = "Diff" })
+                    map("n", "<LEADER>hb", function() gs.blame_line {full=true} end, { desc = "Blame current line" })
+                    map("n", "<LEADER>hd", function()
+                        if vim.wo.diff then
+                            vim.cmd("diffoff")
+                            vim.cmd("only")
+                        else
+                            gs.diffthis()
+                        end
+                    end, { desc = "Diff" })
                     map("n", "<LEADER>htb", gs.toggle_current_line_blame, { desc = "Toggle current line blame" })
                     map("n", "<LEADER>htd", gs.toggle_deleted, { desc = "Toggle show deleted" })
                     map("n", "<LEADER>htl", gs.toggle_linehl, { desc = "Toggle line highlight" })
