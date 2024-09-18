@@ -37,12 +37,12 @@ return {
                     -- borderchars = { "━", "┃", "━", "┃", "┏", "┓", "┛", "┗" },
                     mappings = {
                         ["n"] = {
-                            ["<C-c>"] = "close",
+                            ["<C-w>"] = "close",
                             ["<C-j>"] = "move_selection_next",
                             ["<C-k>"] = "move_selection_previous",
                         },
                         ["i"] = {
-                            ["<C-c>"] = "close",
+                            ["<C-w>"] = "close",
                             ["<C-j>"] = "move_selection_next",
                             ["<C-k>"] = "move_selection_previous",
                         },
@@ -61,12 +61,12 @@ return {
                         hijack_netrw = true,
                         mappings = {
                             ["n"] = {
-                                ["<C-c>"] = "close",
+                                ["<C-w>"] = "close",
                                 ["<C-j>"] = "move_selection_next",
                                 ["<C-k>"] = "move_selection_previous",
                             },
                             ["i"] = {
-                                ["<C-c>"] = "close",
+                                ["<C-w>"] = "close",
                                 ["<C-j>"] = "move_selection_next",
                                 ["<C-k>"] = "move_selection_previous",
                             },
