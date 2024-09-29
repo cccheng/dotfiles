@@ -32,7 +32,7 @@ return {
                     winblend = 50,
                 },
             })
-            require("mini.pairs").setup({})
+            -- require("mini.pairs").setup({})
             require("mini.surround").setup({
                 -- Module mappings. Use `""` (empty string) to disable one.
                 mappings = {
