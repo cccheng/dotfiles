@@ -14,6 +14,10 @@ return {
             { "<LEADER>pe", ":<C-u>'<,'>PrtExplain<CR>", desc = "GPT Explain", mode = { "v" } },
         },
         config = function()
+            require("which-key").add({
+                { "<LEADER>p", group = "Parrot" },
+            })
+
             require("parrot").setup({
                 providers = {
                     anthropic = {

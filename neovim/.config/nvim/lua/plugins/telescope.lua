@@ -11,7 +11,7 @@ return {
 
             require("which-key").add({
                 { "<LEADER>t", group = "Telescope" },
-                { "<LEADER>g", group = "Git/GPT" },
+                { "<LEADER>g", group = "Git" },
             })
 
             vim.keymap.set("n", "<LEADER>ts", telescope.find_files,  { desc = "Search files" })
