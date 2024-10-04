@@ -8,6 +8,10 @@ vim.keymap.set({ "n", "x" }, "<UP>", "v:count == 0 ? 'gk' : 'k'", { expr = true,
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { noremap = true, silent = true })
 
+-- search for word under cursor without moving the cursor
+vim.keymap.set("n", "*", "*``", { noremap = true, silent = true })
+vim.keymap.set("n", "#", "#``", { noremap = true, silent = true })
+
 -- tabs
 vim.keymap.set("n", "<C-h>", "<CMD>:tabprev<CR>", { desc = "Previous tab" })
 vim.keymap.set("n", "<C-l>", "<CMD>:tabnext<CR>", { desc = "Next tab" })
