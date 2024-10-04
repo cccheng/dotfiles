@@ -101,7 +101,7 @@ return {
                 handlers = {
                     cursor = true,
                     diagnostic = true,
-                    gitsigns = false, -- Requires gitsigns
+                    gitsigns = true , -- Requires gitsigns
                     handle = true,
                     search = false, -- Requires hlslens
                     ale = false, -- Requires ALE
@@ -184,8 +184,4 @@ return {
             })
         end
     },
-    -- {
-    --     "nacro90/numb.nvim",
-    --     opts = {},
-    -- },
 }
