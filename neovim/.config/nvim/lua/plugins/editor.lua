@@ -2,6 +2,9 @@ return {
     {
         "echasnovski/mini.nvim",
         event = "VeryLazy",
+        keys = {
+            { "<LEADER>s", "", desc = "Surrounding/Jump" },
+        },
         config = function()
             require("mini.ai").setup({})
             require("mini.align").setup({})
@@ -47,9 +50,6 @@ return {
             })
             require("mini.trailspace").setup({})
 
-            require("which-key").add({
-                { "<LEADER>s", group = "Surrounding/Jump2d" },
-            })
             vim.api.nvim_set_hl(0, "MiniJump", { reverse = true })
             vim.api.nvim_set_hl(0, "MiniJump2dSpot", { reverse = true })
             vim.api.nvim_set_hl(0, "MiniCursorword", { bold = true })

@@ -6,13 +6,11 @@ return {
             "nvim-lua/plenary.nvim",
             "nvim-telescope/telescope-fzf-native.nvim",
         },
+        keys = {
+            { "<LEADER>t", "", desc = "Telescope" },
+        },
         config = function()
             local telescope = require("telescope.builtin")
-
-            require("which-key").add({
-                { "<LEADER>t", group = "Telescope" },
-                { "<LEADER>g", group = "Git" },
-            })
 
             vim.keymap.set("n", "<LEADER>ts", telescope.find_files,  { desc = "Search files" })
             vim.keymap.set("n", "<LEADER>tg", telescope.live_grep,   { desc = "Live grep" })

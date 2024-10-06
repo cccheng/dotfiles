@@ -3,6 +3,7 @@ return {
         "sindrets/diffview.nvim",
         event = "BufReadPre",
         keys = {
+            { "<LEADER>g", "", desc = "Git" },
             {
                 "<LEADER>gd",
                 mode = {"n"},
@@ -46,6 +47,10 @@ return {
     {
         "lewis6991/gitsigns.nvim",
         event = "BufReadPre",
+        keys = {
+            { "<LEADER>h", "", desc = "Hunk" },
+            { "<LEADER>ht", "", desc = "Toggle" },
+        },
         config = function()
             require("gitsigns").setup({
                 signs = {
@@ -83,11 +88,6 @@ return {
                     end, { expr = true, desc = "Prev hunk" })
 
                     -- Actions
-                    require("which-key").add({
-                        { "<LEADER>h", group = "Hunk" },
-                        { "<LEADER>ht", group = "Toggle" },
-                    })
-
                     map("n", "<LEADER>hs", gs.stage_hunk, { desc = "Stage hunk" })
                     map("n", "<LEADER>hr", gs.reset_hunk, { desc = "Reset hunk" })
                     map("v", "<LEADER>hs", function() gs.stage_hunk {vim.fn.line("."), vim.fn.line("v")} end, { desc = "Stage hunk" })

@@ -6,18 +6,16 @@ return {
             "nvim-lua/plenary.nvim"
         },
         keys = {
+            { "<LEADER>p", "", desc = "Parrot", mode = { "n", "v" } },
             { "<LEADER>pa", "<CMD>PrtAsk<CR>", desc = "GPT Ask" },
             { "<LEADER>pc", "<CMD>PrtChatToggle<CR>", desc = "GPT chat" },
             { "<LEADER>pg", "<CMD>PrtCommitMsg<CR>", desc = "GPT Commit message" },
+            { "<LEADER>pp", ":<C-u>'<,'>PrtProofReader<CR>", desc = "GPT Proofreader", mode = { "v" } },
             { "<LEADER>pr", ":<C-u>'<,'>PrtGrammar<CR>", desc = "GPT Refine", mode = { "v" } },
             { "<LEADER>pt", ":<C-u>'<,'>PrtTranslate<CR>", desc = "GPT Translate", mode = { "v" } },
             { "<LEADER>pe", ":<C-u>'<,'>PrtExplain<CR>", desc = "GPT Explain", mode = { "v" } },
         },
         config = function()
-            require("which-key").add({
-                { "<LEADER>p", group = "Parrot" },
-            })
-
             require("parrot").setup({
                 providers = {
                     anthropic = {

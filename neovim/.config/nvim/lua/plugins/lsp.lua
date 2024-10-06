@@ -48,6 +48,10 @@ return {
             "hrsh7th/nvim-cmp",
             "p00f/clangd_extensions.nvim",
         },
+        keys = {
+            { "<LEADER>l", "", desc = "LSP" },
+            { "<LEADER>ld", "", desc = "Diagnostic" },
+        },
         config = function()
             local lspconfig = require("lspconfig")
 
@@ -55,7 +59,7 @@ return {
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             local default_capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
             local handlers = {
-                -- none, single, double, rounded, shadow 
+                -- none, single, double, rounded, shadow
                 ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
                 ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
             }
@@ -193,11 +197,6 @@ return {
                 end
             end, {})
 
-            require("which-key").add({
-                { "<LEADER>l", group = "LSP" },
-                { "<LEADER>ld", group = "Diagnostic" },
-            })
-
             vim.keymap.set("n", "<LEADER>ls",  vim.lsp.buf.hover,                   { desc = "Hover" })
             vim.keymap.set("n", "<LEADER>lD",  vim.lsp.buf.declaration,             { desc = "Declaration" })
             vim.keymap.set("n", "<LEADER>lf",  vim.lsp.buf.format,                  { desc = "Format" })
@@ -261,7 +260,7 @@ return {
                 },
                 performance = {
                     debounce = 0, -- default is 60ms
-                    throttle = 0, -- default is 30ms     
+                    throttle = 0, -- default is 30ms
                 },
                 snippet = {
                     expand = function(args)
