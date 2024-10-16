@@ -8,7 +8,8 @@ return {
                 ensure_installed = {
                     "c", "cpp", "rust", "ruby", "printf", "comment",
                     "bash", "diff", "regex", "json", "make",
-                    "disassembly", "strace", "kconfig", "rst", "typst",
+                    "disassembly", "strace", "kconfig",
+                    "udev", "rst", "typst",
                     "markdown", "markdown_inline", "html",
                     "git_config", "gitignore", "gitattributes",
                     "gitcommit", "git_rebase", "diff", "dot",
