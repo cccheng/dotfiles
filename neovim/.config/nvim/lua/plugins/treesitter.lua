@@ -8,14 +8,15 @@ return {
                 ensure_installed = {
                     "c", "cpp", "rust", "ruby", "printf", "comment",
                     "bash", "diff", "regex", "json", "make",
-                    "disassembly", "strace", "kconfig",
-                    "udev", "rst", "typst",
+                    "disassembly", "strace", "objdump",
+                    "kconfig", "editorconfig", "passwd",
+                    "udev", "rst", "typst", "gnuplot",
                     "markdown", "markdown_inline", "html",
                     "git_config", "gitignore", "gitattributes",
                     "gitcommit", "git_rebase", "diff", "dot",
                     "yaml", "toml", "ini", "dockerfile",
                     "lua", "vim", "vimdoc", "gpg",
-                    "hyprlang", "nix",
+                    "hyprlang", "nix", "tmux",
                 },
                 sync_install = false,
                 highlight = {
