@@ -14,7 +14,8 @@ return {
                     "git_config", "gitignore", "gitattributes",
                     "gitcommit", "git_rebase", "diff", "dot",
                     "yaml", "toml", "ini", "dockerfile",
-                    "lua", "vim", "vimdoc", "gpg", "nix",
+                    "lua", "vim", "vimdoc", "gpg",
+                    "hyprlang", "nix",
                 },
                 sync_install = false,
                 highlight = {
