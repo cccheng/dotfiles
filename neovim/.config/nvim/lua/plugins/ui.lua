@@ -167,20 +167,12 @@ return {
         end
     },
     {
-        "levouh/tint.nvim",
-        event = "VeryLazy",
+        "miversen33/sunglasses.nvim",
+        event = "UIEnter",
         config = function()
-            require("tint").setup({
-                tint = -50,
-                highlight_ignore_patterns = {
-                    "SignColumn",
-                    "LineNr",
-                    "CursorLine",
-                    "WinSeparator",
-                    "VertSplit",
-                    "StatusLineNC",
-                },
-
+            require("sunglasses").setup({
+                filter_type = "SHADE",
+                filter_percent = .25,
             })
         end
     },
