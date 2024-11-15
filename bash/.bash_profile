@@ -24,8 +24,6 @@ alias ll='ls -lF'
 alias la='ls -lFA'
 alias ip='ip -c'
 
-# Key bindings
-bind '"\ee": "\C-asudo \C-e"'
 
 export GPG_TTY="$(tty)"
 
