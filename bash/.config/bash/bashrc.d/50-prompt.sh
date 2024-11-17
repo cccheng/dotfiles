@@ -19,8 +19,12 @@ if false && tput setaf 1 &> /dev/null; then
 else
     CLEAR="\[\e[m\]"
     BOLD=""
-    DARK_YELLOW="\[\e[0;33m\]"
+    DARK_BLACK="\[\e[0;30m\]"
+    DARK_RED="\[\e[0;31m\]"
     DARK_GREEN="\[\e[0;32m\]"
+    DARK_YELLOW="\[\e[0;33m\]"
+    DARK_BLUE="\[\e[0;34m\]"
+    DARK_VIOLET="\[\e[0;35m\]"
     DARK_CYAN="\[\e[0;36m\]"
     DARK_WHITE="\[\e[0;37m\]"
     BLACK="\[\e[1;30m\]"
@@ -39,19 +43,22 @@ if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
 else
     color_prompt=no
 fi
-#
+
+USER_STYLE="${CYAN}"
+HOST_STYLE="${BOLD}${DARK_CYAN}"
+GIT_STYLE="${DARK_GREEN}"
+SYMBOL_STYLE="${CLEAR}"
+
 # Highlight the user name when logged in as root.
 if [ "${USER}" == "root" ]; then
-    USER_STYLE="${CYAN}"
-    HOST_STYLE="${DARK_CYAN}"
-    GIT_STYLE="${DARK_GREEN}"
-else
+    SYMBOL_STYLE="${RED}"
+fi
+
+if [ -f "$XDG_CONFIG_HOME/prompt-green" ]; then
     USER_STYLE="${GREEN}"
     HOST_STYLE="${BOLD}${DARK_GREEN}"
     GIT_STYLE="${DARK_YELLOW}"
-fi
-
-if [ -f "$XDG_CONFIG_HOME/visitor" ]; then
+elif [ -f "$XDG_CONFIG_HOME/prompt-yellow" ]; then
     USER_STYLE="${YELLOW}"
     HOST_STYLE="${BOLD}${DARK_YELLOW}"
     GIT_STYLE="${GREEN}"
@@ -59,9 +66,9 @@ fi
 
 # Highlight the @ symbol when connected via ssh.
 if [ "${SSH_TTY}" ]; then
-    AT_STYLE="${DARK_WHITE}"
+    :
 else
-    AT_STYLE="${WHITE}"
+    :
 fi
 
 ## Set the prompt based on color support
@@ -74,15 +81,15 @@ elif [ -r "/usr/share/git/completion/git-prompt.sh" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1="${CLEAR}["
+    PS1="${SYMBOL_STYLE}["
     PS1+="${USER_STYLE}\u"        # username
-    PS1+="${AT_STYLE}@"
+    PS1+="${CLEAR}@"
     PS1+="${HOST_STYLE}\h"   # host
-    PS1+="${CLEAR}]"
+    PS1+="${SYMBOL_STYLE}]"
     PS1+="${GREEN}\w"       # working directory full path
     PS1+="${GIT_STYLE}${GIT_PS1}"
     PS1+="${DARK_YELLOW}\\$ ${CLEAR}"
-    PS2="${YELLOW}→${CLEAR} ";
+    PS2="  ${YELLOW}→${CLEAR} ";
 else
     PS1="[\u@\h]\w\\$ "
     PS2="→ ";

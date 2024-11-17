@@ -45,6 +45,12 @@ alias cdtmp="cd $(mktemp -d)"
 # Generate random string `rand-str 10`
 alias rand-str="openssl rand -base64"
 
+# Convenient `open` and `trash` commands for Linux and macOS
+if [[ "$OSTYPE" =~ linux ]]; then
+    command -v xdg-open > /dev/null && alias open='xdg-open'
+    command -v gio > /dev/null && alias trash='gio trash'
+fi
+
 alias week="date +%V"
 alias camera="ffplay /dev/video0"
 

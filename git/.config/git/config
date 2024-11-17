@@ -36,7 +36,7 @@
 [help]
     autocorrect = 1
 [commit]
-    template = ~/.git-commit-template
+    template = ~/.config/git/commit-template
     gpgsign = true
 [fetch]
     prune = true

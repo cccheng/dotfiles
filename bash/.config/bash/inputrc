@@ -20,8 +20,10 @@ set bell-style "none"                   # do not bell on tab-completion
 set colored-stats on                    # colorize the output of ls
 set completion-prefix-display-length 3
 set completion-ignore-case on           # case-insensitive tab completion
+set completion-map-case on              # treats hyphens ('-') and underscores ('_') as equivalent when performing case-insensitive filename matching and completion.
 set show-all-if-ambiguous on            # show all possible completions first time tab is pressed
 set page-completions off                # do not display completion list page by page
+set completion-query-items 200          # ask to show them all if there are more than 200 possible completions
 set match-hidden-files off              # autocomplete hidden files unless the pattern explicitly begins with a dot
 set mark-symlinked-directories on       # append a trailing slash / when autocompleting symlinks to directories
 set visible-stats on                    # Show item type like 'ls -F', displays /,*,@ next to name
@@ -38,6 +40,10 @@ set skip-completed-text on
 set input-meta on
 set output-meta on
 set convert-meta off
+
+# Enable colorized `bash_completion` for files and folders (bash 4.3+)
+set colored-stats on
+set colored-completion-prefix on
 
 # Use the text that has already been typed as the prefix for searching through
 # commands (i.e. more intelligent Up/Down behavior)
