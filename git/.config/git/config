@@ -1,12 +1,13 @@
 [user]
     name = Chung-Chiang Cheng
     email = shepjeng@gmail.com
-    #signingkey = 
+    ; signingkey = 
 [core]
     editor = vim
     abbrev = 12
+    excludesfile = ~/.config/git/ignore
+    whitespace = trailing-space, space-before-tab, blank-at-eof
 [alias]
-    d = difftool
     co = checkout
     st = status
     br = branch
@@ -15,37 +16,51 @@
     logs = log --color --graph --date=short --pretty=format:'%C(bold yellow)%h %C(green)%ad %C(reset)- %s %C(brightblack)<%ae>%Creset' --abbrev-commit --
     type = cat-file -t
     dump = cat-file -p
+[color]
+    ui = auto
+    branch = auto
+    diff = auto
+    status = auto
 [merge]
     tool = vimdiff
 [pull]
     rebase = true
-[pretty]
-    fixes = Fixes: %h (\"%s\")
+[rebase]
+    autostash = true
+[tag]
+    forceSignAnnotated = true
 [format]
     signoff = true
     coverLetter = auto
     thread = shallow
 [sendemail]
-    #smtpserver = 
-    #smtpuser = 
-    #smtppass = 
-    #smtpencryption = tls
-    #smtpserverport = 587
+    ; smtpserver = 
+    ; smtpuser = 
+    ; smtppass = 
+    smtpencryption = tls
+    smtpserverport = 587
 [protocol]
     version = 2
 [help]
     autocorrect = 1
 [commit]
+    verbose
     template = ~/.config/git/commit-template
     gpgsign = true
 [fetch]
     prune = true
+    prunetags = true
 [diff]
     tool = vimdiff
     colormoved = default
     algorithm = histogram
 [safe]
-    directory = *
-[difftool]
-    prompt = false
-    trustExitCode = true
+    # Allow repositories owned by other UIDs
+    # (Note: Adding NFS paths will cause Git to stat() them every time it
+    # consults this list, e.g. when `cd`-ing to /srv/dist.)
+    #directory = *
+[grep]
+    lineNumber = true
+    extendedRegexp = true
+[pretty]
+    fixes = Fixes: %h (\"%s\")

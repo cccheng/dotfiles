@@ -1,0 +1,22 @@
+# backup files
+*~
+
+# build output
+*.a
+*.o
+
+# JIT cache
+*.py[co]
+__pycache__
+
+# lock & runtime files
+
+# Windows
+Thumbs.db
+
+# KDE Dolphin
+.directory
+
+# macOS
+.DS_Store
+
