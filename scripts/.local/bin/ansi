@@ -1,0 +1,1128 @@
+#!/usr/bin/env bash
+
+source "$HOME/.config/bash/bashrc.d/ansi-color.sh"
+
+#
+# ANSI code generator
+#
+# © Copyright 2015 Tyler Akins
+# Licensed under the MIT license with an additional non-advertising clause
+# See http://github.com/fidian/ansi
+# More example: https://github.com/fidian/ansi/tree/master/examples 
+#
+
+ansi::color-codes()
+{
+    local code i j
+
+    printf 'Standard: '
+    ansi::bold
+    ansi::white
+
+    for code in 0 1 2 3 4 5 6 7; do
+        if [[ "$code" == 7 ]]; then
+            ansi::black
+        fi
+        ansi::color-code-patch "$code"
+    done
+
+    ansi::reset-foreground
+    ansi::normal
+    printf '\nIntense:  '
+    ansi::white
+
+    for code in 8 9 10 11 12 13 14 15; do
+        if [[ "$code" == 9 ]]; then
+            ansi::black
+        fi
+        ansi::color-code-patch "$code"
+    done
+
+    ansi::reset-foreground
+    printf '\n\n'
+
+    # for i in 16 22 28 34 40 46; do
+    for i in 16 22 28; do
+        for j in $i $((i+36)) $((i+72)) $((i+108)) $((i+144)) $((i+180)); do
+            ansi::white
+            ansi::bold
+
+            for code in $j $((j+1)) $((j+2)) $((j+3)) $((j+4)) $((j+5)); do
+                ansi::color-code-patch "$code"
+            done
+
+            ansi::normal
+            ansi::reset-foreground
+            printf '    '
+            ansi::black
+
+            for code in $((j+18)) $((j+19)) $((j+20)) $((j+21)) $((j+22)) $((j+23)); do
+                ansi::color-code-patch "$code"
+            done
+
+            ansi::reset-foreground
+            printf '\n'
+        done
+
+        printf '\n'
+    done
+
+    printf 'Grays:    '
+    ansi::bold
+    ansi::white
+
+    for code in 232 233 234 235 236 237 238 239 240 241 242 243; do
+        ansi::color-code-patch "$code"
+    done
+
+    ansi::reset-foreground
+    ansi::normal
+    printf '\n          '
+    ansi::black
+
+    for code in 244 245 246 247 248 249 250 251 252 253 254 255; do
+        ansi::color-code-patch "$code"
+    done
+
+    ansi::reset-foreground
+    printf '\n'
+}
+
+ansi::color-code-patch()
+{
+    ansi::bg-color "$1"
+    printf ' %3s ' "$1"
+    ansi::reset-background
+}
+
+ansi::color-table()
+{
+    local colorLabel counter fnbLower fnbUpper functionName IFS resetFunction
+
+    fnbLower="$(
+        ansi::faint
+        printf f
+        ansi::normal
+        printf n
+        ansi::bold
+        printf b
+        ansi::normal
+        )"
+    fnbUpper="$(
+        ansi::faint
+        printf F
+        ansi::normal
+        printf N
+        ansi::bold
+        printf B
+        ansi::normal
+    )"
+    IFS=$' \n'
+    counter=
+
+    while read -r colorLabel functionName resetFunction; do
+        printf -- '--%s ' "$colorLabel"
+        $functionName
+        printf 'Sample'
+        $resetFunction
+
+        if [[ "$counter" == "x" ]]; then
+            counter=
+            printf '\n'
+        else
+            counter=x
+            ansi::column 40
+        fi
+    done <<END
+bold ansi::bold ansi::normal
+faint ansi::faint ansi::normal
+italic ansi::italic ansi::plain
+fraktur ansi::fraktur ansi::plain
+underline ansi::underline ansi::no-underline
+double-underline ansi::double-underline ansi::no-underline
+blink ansi::blink ansi::no-blink
+rapid-blink ansi::rapid-blink ansi::no-blink
+inverse ansi::inverse ansi::no-inverse
+invisible ansi::invisible ansi::visible
+strike ansi::strike ansi::no-strike
+frame ansi::frame ansi::no-border
+encircle ansi::encircle ansi::no-border
+overline ansi::overline ansi::no-overline
+ideogram-right ansi::ideogram-right ansi::reset-ideogram
+ideogram-right-double ansi::ideogram-right-double ansi::reset-ideogram
+ideogram-left ansi::ideogram-left ansi::reset-ideogram
+ideogram-left-double ansi::ideogram-left-double ansi::reset-ideogram
+ideogram-stress ansi::ideogram-stress ansi::reset-ideogram
+END
+
+    if [[ -n "$counter" ]]; then
+        printf '\n'
+    fi
+    printf '\n'
+    printf '            black   red   green  yellow  blue  magenta cyan  white\n'
+    ansi::color-table-line "(none)" "ansi::reset-background" "$fnbLower" "$fnbUpper"
+    ansi::color-table-line "bg-black" "ansi::bg-black" "$fnbLower" "$fnbUpper"
+    ansi::color-table-line "+ intense" "ansi::bg-black-intense" "$fnbLower" "$fnbUpper"
+    ansi::color-table-line "bg-red" "ansi::bg-red" "$fnbLower" "$fnbUpper"
+    ansi::color-table-line "+ intense" "ansi::bg-red-intense" "$fnbLower" "$fnbUpper"
+    ansi::color-table-line "bg-green" "ansi::bg-green" "$fnbLower" "$fnbUpper"
+    ansi::color-table-line "+ intense" "ansi::bg-green-intense" "$fnbLower" "$fnbUpper"
+    ansi::color-table-line "bg-yellow" "ansi::bg-yellow" "$fnbLower" "$fnbUpper"
+    ansi::color-table-line "+ intense" "ansi::bg-yellow-intense" "$fnbLower" "$fnbUpper"
+    ansi::color-table-line "bg-blue" "ansi::bg-blue" "$fnbLower" "$fnbUpper"
+    ansi::color-table-line "+ intense" "ansi::bg-blue-intense" "$fnbLower" "$fnbUpper"
+    ansi::color-table-line "bg-magenta" "ansi::bg-magenta" "$fnbLower" "$fnbUpper"
+    ansi::color-table-line "+ intense" "ansi::bg-magenta-intense" "$fnbLower" "$fnbUpper"
+    ansi::color-table-line "bg-cyan" "ansi::bg-cyan" "$fnbLower" "$fnbUpper"
+    ansi::color-table-line "+ intense" "ansi::bg-cyan-intense" "$fnbLower" "$fnbUpper"
+    ansi::color-table-line "bg-white" "ansi::bg-white" "$fnbLower" "$fnbUpper"
+    ansi::color-table-line "+ intense" "ansi::bg-white-intense" "$fnbLower" "$fnbUpper"
+
+    printf '\n'
+    printf 'Legend:\n'
+    printf '    Normal color:  f = faint, n = normal, b = bold.\n'
+    printf '    Intense color:  F = faint, N = normal, B = bold.\n'
+}
+
+ansi::color-table-line()
+{
+    local fn
+
+    printf '%-12s' "$1"
+    for fn in ansi::black ansi::red ansi::green ansi::yellow ansi::blue ansi::magenta ansi::cyan ansi::white; do
+        $2
+        ${fn}
+        printf '%s' "$3"
+        ${fn}-intense
+        printf '%s' "$4"
+        ansi::reset-foreground
+        ansi::reset-background
+
+        if [[ "$fn" != "ansi::white" ]]; then
+            printf ' '
+        fi
+    done
+    printf '\n'
+}
+
+ansi::show-help()
+{
+    cat <<EOF
+Generate ANSI escape codes
+
+Please keep in mind that your terminal must support the code in order for you
+to see the effect properly.
+
+Usage
+    ansi [OPTIONS] [TEXT TO OUTPUT]
+
+Option processing stops at the first unknown option or at "--".  Options
+are applied in order as specified on the command line.  Unless --no-restore
+is used, the options are unapplied in reverse order, restoring your
+terminal to normal.
+
+Optional parameters are surrounded in brackets and use reasonable defaults.
+For instance, using --down will move the cursor down one line and --down=10
+moves the cursor down 10 lines.
+
+Display Manipulation
+    --insert-chars[=N], --insert-char[=N], --ich[=N]
+                             Insert blanks at cursor, shifting the line right.
+    --erase-display[=N], --ed[=N]
+                             Erase in display. 0=below, 1=above, 2=all,
+                             3=saved.
+    --erase-line=[N], --el[=N]
+                             Erase in line. 0=right, 1=left, 2=all.
+    --insert-lines[=N], --insert-line[=N], --il[=N]
+    --delete-lines[=N], --delete-line[=N], --dl[=N]
+    --delete-chars[=N], --delete-char[=N], --dch[=N]
+    --scroll-up[=N], --su[=N]
+    --scroll-down[=N], --sd[=N]
+    --erase-chars[=N], --erase-char[=N], --ech[=N]
+    --repeat[=N], --rep[=N]  Repeat preceding character N times.
+
+Cursor:
+    --up[=N], --cuu[=N]
+    --down[=N], --cud[=N]
+    --forward[=N], --cuf[=N]
+    --backward[=N], --cub[=N]
+    --next-line[=N], --cnl[=N]
+    --previous-line[=N], --prev-line[=N], --cpl[=N]
+    --column[=N], --cha[=N]
+    --position[=[ROW],[COL]], --cup[=[ROW],[=COL]]
+    --tab-forward[=N]        Move forward N tab stops.
+    --tab-backward[=N]       Move backward N tab stops.
+    --column-relative[=N], --hpr[=N]
+    --line[=N], --vpa[=N]
+    --line-relative[=N], --vpr[=N]
+    --save-cursor            Saves the cursor position.  Restores the cursor
+                             after writing text to the terminal unless
+                             --no-restore is also used.
+    --restore-cursor         Just restores the cursor.
+    --hide-cursor            Will automatically show cursor unless --no-restore
+                             is also used.
+    --show-cursor
+
+Text:
+    Attributes:
+        --bold, --faint, --normal
+        --italic, --fraktur, --plain
+        --underline, --double-underline, --no-underline
+        --blink, --rapid-blink, --no-blink
+        --inverse, --no-inverse
+        --invisible, --visible
+        --strike, --no-strike
+        --frame, --encircle, --no-border
+        --overline, --no-overline
+        --ideogram-right, --ideogram-right-double, --ideogram-left,
+        --ideogram-left-double, --ideogram-stress, --reset-ideogram
+        --font=NUM (NUM must be from 0 through 9 and 0 is the primary font)
+    Foreground:
+        --black, --red, --green, --yellow, --blue, --magenta, --cyan, --white,
+        --black-intense, --red-intense, --green-intense, --yellow-intense,
+        --blue-intense, --magenta-intense, --cyan-intense, --white-intense,
+        --color=CODE, --rgb=R,G,B
+    Background:
+        --bg-black, --bg-red, --bg-green, --bg-yellow, --bg-blue,
+        --bg-magenta, --bg-cyan, --bg-white, --bg-black-intense,
+        --bg-red-intense, --bg-green-intense, --bg-yellow-intense,
+        --bg-blue-intense, --bg-magenta-intense, --bg-cyan-intense,
+        --bg-white-intense, --bg-color=CODE, --bg-rgb=R,G,B
+    Reset:
+        --reset-attrib       Removes bold, italics, etc.
+        --reset-foreground   Sets foreground to default color.
+        --reset-background   Sets background to default color.
+        --reset-color        Resets attributes, foreground, background.
+        --reset-font         Switches back to the primary font.
+
+Report:
+    ** NOTE:  These require reading from stdin.  Results are sent to stdout.
+    ** If no response from terminal in 1 second, these commands fail.
+    --report-position        ROW,COL
+    --report-window-state    "open" or "iconified"
+    --report-window-position X,Y
+    --report-window-pixels   HEIGHT,WIDTH
+    --report-window-chars    ROWS,COLS
+    --report-screen-chars    ROWS,COLS of the entire screen
+    --report-icon
+    --report-title
+
+Miscellaneous:
+    --color-table            Display a color table.
+    --color-codes            Show the different color codes.
+    --icon=NAME              Set the terminal's icon name.
+    --title=TITLE            Set the terminal's window title.
+    --no-restore             Do not issue reset codes when changing colors.
+                             For example, if you change the color to green,
+                             normally the color is restored to default
+                             afterwards.  With this flag, the color will
+                             stay green even when the command finishes.
+    -n, --no-newline         Suppress newline at the end of the line.
+    --bell                   Add the terminal's bell sequence to the output.
+    --reset                  Reset colors, clear screen, show cursor, move
+                             cursor to (1,1), and reset the font.
+EOF
+}
+
+ansi()
+{
+    local addNewline b g m r readOptions restoreText restoreCursorPosition restoreCursorVisibility supported triggerRestore
+    local m10 m22 m23 m24 m25 m27 m28 m29 m39 m49 m54 m55 m65
+
+    addNewline=true
+    m10=
+    m22=
+    m23=
+    m24=
+    m25=
+    m27=
+    m28=
+    m29=
+    m39=
+    m49=
+    m54=
+    m55=
+    m65=
+    readOptions=true
+    restoreCursorPosition=false
+    restoreCursorVisibility=false
+    restoreText=false
+    supported=true
+    triggerRestore=true
+
+    if ! ansi::is-ansi-supported; then
+        supported=false
+    fi
+
+    if [[ $# -eq 0 ]]; then
+        ansi::show-help
+        return
+    fi
+
+    while $readOptions && [[ $# -gt 0 ]]; do
+        case "$1" in
+            --help | -h | -\?)
+                ansi::show-help
+                return 0
+                ;;
+
+            # Display Manipulation
+            --insert-chars | --insert-char | --ich)
+                $supported && ansi::insert-chars
+                ;;
+
+            --insert-chars=* | insert-char=* | --ich=*)
+                $supported && ansi::insert-chars "${1#*=}"
+                ;;
+
+            --erase-display | --ed)
+                $supported && ansi::erase-display
+                ;;
+
+            --erase-display=* | --ed=*)
+                $supported && ansi::erase-display "${1#*=}"
+                ;;
+
+            --erase-line | --el)
+                $supported && ansi::erase-line
+                ;;
+
+            --erase-line=* | --el=*)
+                $supported && ansi::erase-line "${1#*=}"
+                ;;
+
+            --insert-lines | --insert-line | --il)
+                $supported && ansi::insert-lines
+                ;;
+
+            --insert-lines=* | --insert-line=* | --il=*)
+                $supported && ansi::insert-lines "${1#*=}"
+                ;;
+
+            --delete-lines | --delete-line | --dl)
+                $supported && ansi::delete-lines
+                ;;
+
+            --delete-lines=* | --delete-line=* | --dl=*)
+                $supported && ansi::delete-lines "${1#*=}"
+                ;;
+
+            --delete-chars | --delete-char | --dch)
+                $supported && ansi::delete-chars
+                ;;
+
+            --delete-chars=* | --delete-char=* | --dch=*)
+                $supported && ansi::delete-chars "${1#*=}"
+                ;;
+
+            --scroll-up | --su)
+                $supported && ansi::scroll-up
+                ;;
+
+            --scroll-up=* | --su=*)
+                $supported && ansi::scroll-up "${1#*=}"
+                ;;
+
+            --scroll-down | --sd)
+                $supported && ansi::scroll-down
+                ;;
+
+            --scroll-down=* | --sd=*)
+                $supported && ansi::scroll-down "${1#*=}"
+                ;;
+
+            --erase-chars | --erase-char | --ech)
+                $supported && ansi::erase-chars
+                ;;
+
+            --erase-chars=* | --erase-char=* | --ech=*)
+                $supported && ansi::erase-chars "${1#*=}"
+                ;;
+
+            --repeat | --rep)
+                $supported && ansi::repeat
+                ;;
+
+            --repeat=* | --rep=N)
+                $supported && ansi::repeat "${1#*=}"
+                ;;
+
+            # Cursor Positioning
+            --up | --cuu)
+                $supported && ansi::up
+                ;;
+
+            --up=* | --cuu=*)
+                $supported && ansi::up "${1#*=}"
+                ;;
+
+            --down | --cud)
+                $supported && ansi::down
+                ;;
+
+            --down=* | --cud=*)
+                $supported && ansi::down "${1#*=}"
+                ;;
+
+            --forward | --cuf)
+                $supported && ansi::forward
+                ;;
+
+            --forward=* | --cuf=*)
+                $supported && ansi::forward "${1#*=}"
+                ;;
+
+            --backward | --cub)
+                $supported && ansi::backward
+                ;;
+
+            --backward=* | --cub=*)
+                $supported && ansi::backward "${1#*=}"
+                ;;
+
+            --next-line | --cnl)
+                $supported && ansi::next-line
+                ;;
+
+            --next-line=* | --cnl=*)
+                $supported && ansi::next-line "${1#*=}"
+                ;;
+
+            --previous-line | --prev-line | --cpl)
+                $supported && ansi::previous-line
+                ;;
+
+            --previous-line=* | --prev-line=* | --cpl=*)
+                $supported && ansi::previous-line "${1#*=}"
+                ;;
+
+            --column | --cha)
+                $supported && ansi::column
+                ;;
+
+            --column=* | --cha=*)
+                $supported && ansi::column "${1#*=}"
+                ;;
+
+            --position | --cup)
+                $supported && ansi::position
+                ;;
+
+            --position=* | --cup=*)
+                $supported && ansi::position "${1#*=}"
+                ;;
+
+            --tab-forward | --cht)
+                $supported && ansi::tab-forward
+                ;;
+
+            --tab-forward=* | --cht=*)
+                $supported && ansi::tab-forward "${1#*=}"
+                ;;
+
+            --tab-backward | --cbt)
+                $supported && ansi::tab-backward
+                ;;
+
+            --tab-backward=* | --cbt=*)
+                $supported && ansi::tab-backward "${1#*=}"
+                ;;
+
+            --column-relative | --hpr)
+                $supported && ansi::column-relative
+                ;;
+
+            --column-relative=* | --hpr=*)
+                $supported && ansi::column-relative "${1#*=}"
+                ;;
+
+            --line | --vpa)
+                $supported && ansi::line
+                ;;
+
+            --line=* | --vpa=*)
+                $supported && ansi::line "${1#*=}"
+                ;;
+
+            --line-relative | --vpr)
+                $supported && ansi::line-relative
+                ;;
+
+            --line-relative=* | --vpr=*)
+                $supported && ansi::line-relative "${1#*=}"
+                ;;
+
+            --save-cursor)
+                $supported && ansi::save-cursor
+                restoreCursorPosition=true
+                ;;
+
+            --restore-cursor)
+                $supported && ansi::restore-cursor
+                ;;
+
+            --hide-cursor)
+                $supported && ansi::hide-cursor
+                restoreCursorVisibility=true
+                ;;
+
+            --show-cursor)
+                $supported && ansi::show-cursor
+                ;;
+
+            # Colors - Attributes
+            --bold)
+                $supported && ansi::bold
+                restoreText=true
+                m22="22;"
+                ;;
+
+            --faint)
+                $supported && ansi::faint
+                restoreText=true
+                m22="22;"
+                ;;
+
+            --italic)
+                $supported && ansi::italic
+                restoreText=true
+                m23="23;"
+                ;;
+
+            --underline)
+                $supported && ansi::underline
+                restoreText=true
+                m24="24;"
+                ;;
+
+            --blink)
+                $supported && ansi::blink
+                restoreText=true
+                m25="25;"
+                ;;
+
+            --rapid-blink)
+                $supported && ansi::rapid-blink
+                restoreText=true
+                m25="25;"
+                ;;
+
+            --inverse)
+                $supported && ansi::inverse
+                restoreText=true
+                m27="27;"
+                ;;
+
+            --invisible)
+                $supported && ansi::invisible
+                restoreText=true
+                m28="28;"
+                ;;
+
+            --strike)
+                $supported && ansi::strike
+                restoreText=true
+                m29="29;"
+                ;;
+
+            --font|--font=0)
+                $supported && ansi::reset-font
+                ;;
+
+            --font=[123456789])
+                $supported && ansi::font "${1#*=}"
+                restoreText=true
+                m10="10;"
+                ;;
+
+            --fraktur)
+                $supported && ansi::fraktur
+                restoreText=true
+                m23="23;"
+                ;;
+
+            --double-underline)
+                $supported && ansi::double-underline
+                restoreText=true
+                m24="24;"
+                ;;
+
+            --normal)
+                $supported && ansi::normal
+                ;;
+
+            --plain)
+                $supported && ansi::plain
+                ;;
+
+            --no-underline)
+                $supported && ansi::no-underline
+                ;;
+
+            --no-blink)
+                $supported && ansi::no-blink
+                ;;
+
+            --no-inverse)
+                $supported && ansi::no-inverse
+                ;;
+
+            --visible)
+                $supported && ansi::visible
+                ;;
+
+            --no-strike)
+                $supported && ansi::no-strike
+                ;;
+
+            --frame)
+                $supported && ansi::frame
+                restoreText=true
+                m54="54;"
+                ;;
+
+            --encircle)
+                $supported && ansi::encircle
+                restoreText=true
+                m54="54;"
+                ;;
+
+            --overline)
+                $supported && ansi::overline
+                restoreText=true
+                m55="55;"
+                ;;
+
+            --no-border)
+                $supported && ansi::no-border
+                ;;
+
+            --no-overline)
+                $supported && ansi::no-overline
+                ;;
+
+            # Colors - Foreground
+            --black)
+                $supported && ansi::black
+                restoreText=true
+                m39="39;"
+                ;;
+
+            --red)
+                $supported && ansi::red
+                restoreText=true
+                m39="39;"
+                ;;
+
+            --green)
+                $supported && ansi::green
+                restoreText=true
+                m39="39;"
+                ;;
+
+            --yellow)
+                $supported && ansi::yellow
+                restoreText=true
+                m39="39;"
+                ;;
+
+            --blue)
+                $supported && ansi::blue
+                restoreText=true
+                m39="39;"
+                ;;
+
+            --magenta)
+                $supported && ansi::magenta
+                restoreText=true
+                m39="39;"
+                ;;
+
+            --cyan)
+                $supported && ansi::cyan
+                restoreText=true
+                m39="39;"
+                ;;
+
+            --white)
+                $supported && ansi::white
+                restoreText=true
+                m39="39;"
+                ;;
+
+            --black-intense)
+                $supported && ansi::black-intense
+                restoreText=true
+                m39="39;"
+                ;;
+
+            --red-intense)
+                $supported && ansi::red-intense
+                restoreText=true
+                m39="39;"
+                ;;
+
+            --green-intense)
+                $supported && ansi::green-intense
+                restoreText=true
+                m39="39;"
+                ;;
+
+            --yellow-intense)
+                $supported && ansi::yellow-intense
+                restoreText=true
+                m39="39;"
+                ;;
+
+            --blue-intense)
+                $supported && ansi::blue-intense
+                restoreText=true
+                m39="39;"
+                ;;
+
+            --magenta-intense)
+                $supported && ansi::magenta-intense
+                restoreText=true
+                m39="39;"
+                ;;
+
+            --cyan-intense)
+                $supported && ansi::cyan-intense
+                restoreText=true
+                m39="39;"
+                ;;
+
+            --white-intense)
+                $supported && ansi::white-intense
+                restoreText=true
+                m39="39;"
+                ;;
+
+            --rgb=*,*,*)
+                r=${1#*=}
+                b=${r##*,}
+                g=${r#*,}
+                g=${g%,*}
+                r=${r%%,*}
+                $supported && ansi::rgb "$r" "$g" "$b"
+                restoreText=true
+                m39="39;"
+                ;;
+
+            --color=*)
+                $supported && ansi::color "${1#*=}"
+                restoreText=true
+                m39="39;"
+                ;;
+
+            # Colors - Background
+            --bg-black)
+                $supported && ansi::bg-black
+                restoreText=true
+                m49="49;"
+                ;;
+
+            --bg-red)
+                $supported && ansi::bg-red
+                restoreText=true
+                m49="49;"
+                ;;
+
+            --bg-green)
+                $supported && ansi::bg-green
+                restoreText=true
+                m49="49;"
+                ;;
+
+            --bg-yellow)
+                $supported && ansi::bg-yellow
+                restoreText=true
+                m49="49;"
+                ;;
+
+            --bg-blue)
+                $supported && ansi::bg-blue
+                restoreText=true
+                m49="49;"
+                ;;
+
+            --bg-magenta)
+                $supported && ansi::bg-magenta
+                restoreText=true
+                m49="49;"
+                ;;
+
+            --bg-cyan)
+                $supported && ansi::bg-cyan
+                restoreText=true
+                m49="49;"
+                ;;
+
+            --bg-white)
+                $supported && ansi::bg-white
+                restoreText=true
+                m49="49;"
+                ;;
+
+            --bg-black-intense)
+                $supported && ansi::bg-black-intense
+                restoreText=true
+                m49="49;"
+                ;;
+
+            --bg-red-intense)
+                $supported && ansi::bg-red-intense
+                restoreText=true
+                m49="49;"
+                ;;
+
+            --bg-green-intense)
+                $supported && ansi::bg-green-intense
+                restoreText=true
+                m49="49;"
+                ;;
+
+            --bg-yellow-intense)
+                $supported && ansi::bg-yellow-intense
+                restoreText=true
+                m49="49;"
+                ;;
+
+            --bg-blue-intense)
+                $supported && ansi::bg-blue-intense
+                restoreText=true
+                m49="49;"
+                ;;
+
+            --bg-magenta-intense)
+                $supported && ansi::bg-magenta-intense
+                restoreText=true
+                m49="49;"
+                ;;
+
+            --bg-cyan-intense)
+                $supported && ansi::bg-cyan-intense
+                restoreText=true
+                m49="49;"
+                ;;
+
+            --bg-white-intense)
+                $supported && ansi::bg-white-intense
+                restoreText=true
+                m49="49;"
+                ;;
+
+            --bg-rgb=*,*,*)
+                r=${1#*=}
+                b=${r##*,}
+                g=${r#*,}
+                g=${g%,*}
+                r=${r%%,*}
+                $supported && ansi::bg-rgb "$r" "$g" "$b"
+                restoreText=true
+                m49="49;"
+                ;;
+
+            --bg-color=*)
+                $supported && ansi::bg-color "${1#*=}"
+                restoreText=true
+                m49="49;"
+                ;;
+
+            # Colors - Reset
+            --reset-attrib)
+                $supported && ansi::reset-attributes
+                ;;
+
+            --reset-foreground)
+                $supported && ansi::reset-foreground
+                ;;
+
+            --reset-background)
+                $supported && ansi::reset-background
+                ;;
+
+            --reset-color)
+                $supported && ansi::reset-color
+                ;;
+
+            --reset-font)
+                $supported && ansi::reset-font
+                ;;
+
+            # Reporting
+            --report-position)
+                $supported || return 1
+                ansi::report-position || return $?
+                ;;
+
+            --report-window-state)
+                $supported || return 1
+                ansi::report-window-state || return $?
+                ;;
+
+            --report-window-position)
+                $supported || return 1
+                ansi::report-window-position || return $?
+                ;;
+
+            --report-window-pixels)
+                $supported || return 1
+                ansi::report-window-pixels || return $?
+                ;;
+
+            --report-window-chars)
+                $supported || return 1
+                ansi::report-window-chars || return $?
+                ;;
+
+            --report-screen-chars)
+                $supported || return 1
+                ansi::report-screen-chars || return $?
+                ;;
+
+            --report-icon)
+                $supported || return 1
+                ansi::report-icon || return $?
+                ;;
+
+            --report-title)
+                $supported || return 1
+                ansi::report-title || return $?
+                ;;
+
+            --ideogram-right)
+                $supported && ansi::ideogram-right
+                restoreText=true
+                m65="65;"
+                ;;
+
+            --ideogram-right-double)
+                $supported && ansi::ideogram-right-double
+                restoreText=true
+                m65="65;"
+                ;;
+
+            --ideogram-left)
+                $supported && ansi::ideogram-left
+                restoreText=true
+                m65="65;"
+                ;;
+
+            --ideogram-left-double)
+                $supported && ansi::ideogram-left-double
+                restoreText=true
+                m65="65;"
+                ;;
+
+            --ideogram-stress)
+                $supported && ansi::ideogram-stress
+                restoreText=true
+                m65="65;"
+                ;;
+
+            --reset-ideogram)
+                $supported && ansi::noIdeogram
+                ;;
+
+            # Miscellaneous
+            --color-codes)
+                if ! $supported; then
+                    echo "ANSI is not supported in this terminal."
+                else
+                    ansi::color-codes
+                fi
+
+                return 0
+                ;;
+
+            --color-table)
+                if ! $supported; then
+                    echo "ANSI is not supported in this terminal."
+                else
+                    ansi::color-table
+                fi
+
+                return 0
+                ;;
+
+            --icon)
+                $supported && ansi::icon ""
+                ;;
+
+            --icon=*)
+                $supported && ansi::icon "${1#*=}"
+                ;;
+
+            --title)
+                $supported && ansi::title ""
+                ;;
+
+            --title=*)
+                $supported && ansi::title "${1#*=}"
+                ;;
+
+            --no-restore)
+                triggerRestore=false
+                ;;
+
+            -n | --no-newline)
+                addNewline=false
+                ;;
+
+            --bell)
+                ansi::bell
+                ;;
+
+            --reset)
+                $supported || return 0
+                ansi::reset
+                ;;
+
+            --)
+                readOptions=false
+                shift
+                ;;
+
+            *)
+                readOptions=false
+                ;;
+        esac
+
+        if $readOptions; then
+            shift
+        fi
+    done
+
+    printf '%s' "${1-}"
+
+    if [[ "$#" -gt 1 ]]; then
+        shift || :
+        printf "${IFS:0:1}%s" "${@}"
+    fi
+
+    if $supported && $triggerRestore; then
+        if $restoreCursorPosition; then
+            ansi::restore-cursor
+        fi
+
+        if $restoreCursorVisibility; then
+            ansi::show-cursor
+        fi
+
+        if $restoreText; then
+            m="$m10$m22$m23$m24$m25$m27$m28$m29$m39$m49$m54$m55$m65"
+            printf '%s%sm' "$ANSI_CSI" "${m%;}"
+        fi
+    fi
+
+    if $addNewline; then
+        printf '\n'
+    fi
+}
+
+
+# Run if not sourced
+if [[ "$0" == "${BASH_SOURCE[0]}" ]]; then
+    ansi "$@" || exit $?
+fi

@@ -1,0 +1,26 @@
+# Searches case insensitively if the pattern is all lowercase.
+# Search case sensitively otherwise.
+--smart-case
+
+# Don’t group matches by each file.
+--no-heading
+
+# Follow symbolic links while traversing directories, and will check for 
+# symbolic link loops and report errors if it finds one.
+--follow
+
+# Out of the box rg doesn't work like grep does searching every directory.
+# Specifically the dot-directories. This is unexpected behavior so add it back.
+--hidden
+
+# Out of the box rg also knows to ignore Git's own data directory in addition
+# to Git's ignores that the user sets up. Since ~--hidden~ forces rg to search
+# *every* directory, including Git's data directory, we have to teach rg to
+# ignore Git's data directory. Add that configuration in a file to accommodate
+# further changes.
+--glob=!.git/
+
+# Don't respect ignore files (.gitignore, .ignore, etc.).
+--no-ignore
+#--ignore-file=$HOME/.config/ripgrep/ignore
+

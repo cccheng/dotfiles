@@ -5,8 +5,6 @@
 if [ "$SHLVL" = 1 ]; then
     if [ -x /usr/bin/clear_console ]; then
         /usr/bin/clear_console -q
-    elif [ -x /usr/bin/reset ]; then
-        /usr/bin/reset
     fi
 fi
 

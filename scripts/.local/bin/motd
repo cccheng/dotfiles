@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+cat <<-EOF
+
+   (__)
+\\\\\\'',)
+  \\/  \\ ^
+  .\\._/_)  Hello $USER (${SSH_CLIENT%% *}). This is $HOSTNAME!
+
+EOF
+

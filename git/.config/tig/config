@@ -3,7 +3,8 @@
 #
 # Syntax: set <option> = <value>
 
-set line-graphics = utf-8
+set line-graphics           = utf-8
+set truncation-delimiter    = utf-8
 
 #
 # Key configuration
@@ -19,14 +20,14 @@ set line-graphics = utf-8
 # UI colors
 ## General
 #color default           default default         # Overwrite default terminal colors (see above).
-#color cursor            yellow  blue    bold    # The cursor line.
+color cursor            black   cyan    bold    # The cursor line.
 #color status            default default         # The status window showing info messages.
 #color title-focus       default default         # The title window for the current view.
 #color title-blur        default default         # The title window of any backgrounded view.
 #color delimiter         default default         # Delimiter shown for truncated lines.
 #color line-number       default default         # Line numbers.
 #color date              cyan    default bold    # The commit date.
-#color author            green   default bold    # The commit author.
+#color author            cyan    default         # The commit author.
 #color mode              default default         # The file mode holding the permissions and type.
 
 ## Main view colors

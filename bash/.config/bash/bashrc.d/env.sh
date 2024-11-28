@@ -1,17 +1,23 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC1090,SC1091,SC2034
 
-# Local variables that might be used
-test "$UID"      || UID=$(id -u)
-test "$USER"     || USER=$(id -un)
-test "$HOSTNAME" || HOSTNAME=$(hostname)
+add-path() { case :$PATH: in *:$1:*) ;; *) PATH=$1:$PATH;; esac }
+path-add() { case :$PATH: in *:$1:*) ;; *) PATH=$PATH:$1;; esac }
 
-add_path() case :$PATH: in *:$1:*) ;; *) PATH=$1:$PATH;; esac
-path_add() case :$PATH: in *:$1:*) ;; *) PATH=$PATH:$1;; esac
+add-path "$HOME/.local/bin"
 
 # Enable allexport
 set -a
 
-add_path "$HOME/.local/bin"
+test "$UID"      || UID="$(id -u)"
+test "$USER"     || USER="$(id -un)"
+test "$HOSTNAME" || HOSTNAME="$(hostname)"
+
+[[ "$OSTYPE" =~ gnu$ ]] && GNU=1
+
+OS_ARCH="$(uname -m)"
+OS_NAME="$(uname)"
+OS_VERSION="$(uname -r)"
 
 # Prefer US English and use UTF-8.
 LANG="en_US.UTF-8"
@@ -31,56 +37,35 @@ PREFIX="$HOME/.local"
 # Default programs variables
 EDITOR="nvim"
 VISUAL="nvim"
-PAGER="less -r"
-MANPAGER="less -X"                      # Don’t clear the screen after quitting a manual page.
-
-# Enable colors in your shell
-CLICOLOR=1
-TERM="xterm-256color"
-GREP_OPTIONS="--color=always"
-S_COLORS="auto"                         # Sysstat/iostat - enable colors (probably on by default, now)
-
-# Less - various options
-# -e	Quit at second EOF
-# -M	Detailed status/prompt
-# -q	Use visual instead of audible bell at EOF
-# -Q	Always use visual bell
-# -R	Pass through formatting sequences
-# -F	Immediately quit if one screen
-# -X	Don't use alternate screen
-# -z-3	Keep 3 line context when scrolling
-LESS="e M q R F X z-3"
-
-# Set colors for less. Borrowed from https://wiki.archlinux.org/title/Color_output_in_console#less
-# Source: http://unix.stackexchange.com/a/147
-# More info: http://unix.stackexchange.com/a/108840
-LESS_TERMCAP_mb=$'\E[1;31m'     # begin bold
-LESS_TERMCAP_md=$'\E[1;36m'     # begin blink
-LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
-LESS_TERMCAP_so=$'\E[01;44;33m' # begin reverse video
-LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
-LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
-LESS_TERMCAP_ue=$'\E[0m'        # reset underline
+PAGER="less"
+#MANPAGER="less"
+MANPAGER='nvim --cmd ":lua vim.g.noplugins=1" +Man!'
 
 # Cleaning up $HOME dir
 # https://wiki.archlinux.org/title/XDG_Base_Directory
+# https://github.com/b3nj5m1n/xdg-ninja.git
 
 ## To relocate configuration:
-INPUTRC="$XDG_CONFIG_HOME/bash/inputrc"
+INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 GIT_CONFIG_GLOBAL="$XDG_CONFIG_HOME/git/config"
 GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
 IRBRC="$XDG_CONFIG_HOME/ruby/irbrc"
 PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonrc"
+RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/config"
 SCREENRC="$XDG_CONFIG_HOME/screen/screenrc"
 WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
+GEF_RC="$XDG_CONFIG_HOME/gdb/gef.rc"
 CCACHE_CONFIGPATH="$XDG_CONFIG_HOME/ccache"
 NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
 
 ## To relocate cache/history:
+GDBHISTFILE="$XDG_STATE_HOME/gdb/history"
 PYTHON_HISTORY="$XDG_STATE_HOME/python/history"
 SQLITE_HISTORY="$XDG_STATE_HOME/sqlite/history"
-LESSHISTFILE="$XDG_STATE_HOME/lesshst"	# is the default now
+RLWRAP_HOME="$XDG_STATE_HOME/readline"
+LESSHISTFILE="$XDG_STATE_HOME/lesshst"
+RANDFILE="$XDG_STATE_HOME/openssl.rnd"
 CCACHE_DIR="$XDG_CACHE_HOME/ccache"
 
 ## To relocate runtime data & IPC sockets:
@@ -89,7 +74,10 @@ XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
 TMUX_TMPDIR="$XDG_RUNTIME_DIR/tmux"
 SCREENDIR="$XDG_RUNTIME_DIR/screen"
 
+TERMINFO="$XDG_DATA_HOME/terminfo"
+TERMINFO_DIRS="$XDG_DATA_HOME/terminfo:/usr/share/terminfo"
 rvm_path="$XDG_DATA_HOME/rvm"
+GEMRC="$XDG_CONFIG_HOME/gem/gemrc"
 GEM_HOME="$XDG_DATA_HOME/gem"
 GEM_SPEC_CACHE="$XDG_DATA_HOME/gem"
 CARGO_HOME="$XDG_DATA_HOME/cargo"
@@ -98,3 +86,17 @@ VSCODE_PORTABLE="$XDG_DATA_HOME/vscode"
 
 # Disable allexport again
 set +a
+
+# Local environment customized settings
+if [ -r "$XDG_CONFIG_HOME/bash/bashrc.d/env.${HOSTNAME,,}.sh" ]; then
+    source "$XDG_CONFIG_HOME/bash/bashrc.d/env.${HOSTNAME,,}.sh"
+fi
+
+if [ -r "$XDG_CONFIG_HOME/bash/bashrc.d/env.local.sh" ]; then
+    source "$XDG_CONFIG_HOME/bash/bashrc.d/env.local.sh"
+fi
+
+if [ -r "$HOME/.envrc" ]; then
+    source "$HOME/.envrc"
+fi
+

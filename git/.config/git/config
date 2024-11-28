@@ -6,61 +6,104 @@
     editor = vim
     abbrev = 12
     excludesfile = ~/.config/git/ignore
+    hooksPath = ~/.config/git/hooks
     whitespace = trailing-space, space-before-tab, blank-at-eof
 [alias]
     co = checkout
-    st = status
-    br = branch
+    st = status --show-stash
+    br = branch -vv
+    alias = config --get-regexp alias
     unstage = reset HEAD --
     last = log -1 HEAD
     logs = log --color --graph --date=short --pretty=format:'%C(bold yellow)%h %C(green)%ad %C(reset)- %s %C(brightblack)<%ae>%Creset' --abbrev-commit --
     type = cat-file -t
     dump = cat-file -p
+    branches = branch -vv --all
+    remotes = remote --verbose
+    find = log --graph --oneline --all --decorate --date-order --regexp-ignore-case --extended-regexp --grep
+    contributors = shortlog --summary --numbered
 [color]
-    ui = auto
+    advice = auto
     branch = auto
     diff = auto
+    grep = auto
+    interactive = auto
+    pager = true
+    push = auto
+    remote = auto
+    showBranch = auto
     status = auto
-[merge]
-    tool = vimdiff
-[pull]
-    rebase = true
-[rebase]
-    autostash = true
-[tag]
-    forceSignAnnotated = true
-[format]
-    signoff = true
-    coverLetter = auto
-    thread = shallow
-[sendemail]
-    ; smtpserver = 
-    ; smtpuser = 
-    ; smtppass = 
-    smtpencryption = tls
-    smtpserverport = 587
-[protocol]
-    version = 2
-[help]
-    autocorrect = 1
+    transport = auto
+    ui = auto
+[color "branch"]
+    ; current =
+    ; local =
+    ; remote =
+    ; upstream =
+    ; plain = 
+[color "status"]
+    ; header =
+    ; added =
+    ; updated = 
+    ; changed =
+    ; untracked =
+    ; branch =
+    ; nobranch =
+    ; localBranch =
+    ; remoteBranch =
+    ; unmerged =
 [commit]
-    verbose
+    gpgSign = true
+    status = true
     template = ~/.config/git/commit-template
-    gpgsign = true
-[fetch]
-    prune = true
-    prunetags = true
+    verbose = true
 [diff]
     tool = vimdiff
     colormoved = default
     algorithm = histogram
+[fetch]
+    prune = true
+[format]
+    signoff = true
+    coverLetter = auto
+    thread = shallow
+[grep]
+    lineNumber = true
+    extendedRegexp = true
+[help]
+    autoCorrect = 1
+[merge]
+    tool = vimdiff
+[protocol]
+    version = 2
+[pull]
+    rebase = true
+[rebase]
+    autoStash = true
+    stat = true
 [safe]
     # Allow repositories owned by other UIDs
     # (Note: Adding NFS paths will cause Git to stat() them every time it
     # consults this list, e.g. when `cd`-ing to /srv/dist.)
     #directory = *
-[grep]
-    lineNumber = true
-    extendedRegexp = true
-[pretty]
-    fixes = Fixes: %h (\"%s\")
+[sendemail]
+    ; smtpServer = 
+    ; smtpUser = 
+    ; smtpPass = 
+    smtpEncryption = tls
+    smtpServerPort = 587
+[status]
+    branch = true
+    showStash = true
+    ; submodulesummary = true
+    showUntrackedFiles = all
+[tag]
+    forceSignAnnotated = true
+[include]
+    path = ~/.config/git/config.local
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+

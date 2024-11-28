@@ -1,0 +1,7 @@
+{
+  :verbose        true
+  :show-original  true
+  :hl             "en"
+  :tl             "zh-TW"
+  :theme          "happiness.trans"
+}

@@ -1,4 +1,4 @@
-# To source this file:
+#To source this file:
 #   bind -f {thefilename}
 # To know the list of functions, bound or not
 #   bind -p | less
@@ -24,7 +24,7 @@ set completion-map-case on              # treats hyphens ('-') and underscores (
 set show-all-if-ambiguous on            # show all possible completions first time tab is pressed
 set page-completions off                # do not display completion list page by page
 set completion-query-items 200          # ask to show them all if there are more than 200 possible completions
-set match-hidden-files off              # autocomplete hidden files unless the pattern explicitly begins with a dot
+set match-hidden-files on               # autocomplete hidden files
 set mark-symlinked-directories on       # append a trailing slash / when autocompleting symlinks to directories
 set visible-stats on                    # Show item type like 'ls -F', displays /,*,@ next to name
 set enable-bracketed-paste on
@@ -51,8 +51,15 @@ set colored-completion-prefix on
 "\e[A": history-search-backward
 
 # Mapping Alt-arrows for word mmoving
-"\e[1;3D": backward-word                # Alt left
-"\e[1;3C": forward-word                 # Alt right
+"\e[1;3D": backward-word                # Alt-Left
+"\e[1;3C": forward-word                 # Alt-Right
+"\e[1;5D": backward-word                # Ctrl-Left
+"\e[1;5C": forward-word                 # Ctrl-Right
+# "\e[5D": backward-word
+# "\e[5C": forward-word
+"\e\e[D": backward-word                 # Mac Option + Left
+"\e\e[C": forward-word                  # Mac Option + Right
 
 "\ee": "\C-asudo \C-e"                  # Alt-e to prepend sudo
-"\el": "\C-e | ${PAGER:-less}"          # Alt-l to append PAGER
+"\el": "\C-e | $PAGER"                  # Alt-l to append PAGER
+"\ea": "\C-a"                           # Alt-a to the begin of line. Ctrl-a may be used by tmux.
