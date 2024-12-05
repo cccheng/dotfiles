@@ -81,7 +81,13 @@ return {
                         },
                     },
                     lualine_y = {"searchcount", "progress"},
-                    lualine_z = {"selectioncount", "location"}
+                    lualine_z = {"selectioncount",
+                        {
+                            function()
+                                return string.format("%2d:%d/%d", vim.fn.virtcol("."), vim.fn.line("."), vim.fn.line("$"))
+                            end,
+                        }
+                    },
                 },
                 extensions = {
                     "lazy", "mason", "man", "quickfix", "toggleterm", "symbols-outline",
