@@ -73,6 +73,7 @@ opt.list = false
 opt.foldmethod = "expr"
 opt.foldexpr = "nvim_treesitter#foldexpr()"
 opt.foldenable = false
+-- opt.foldmarker = "<!--,-->"
 opt.fillchars = {
     foldopen = "",
     foldclose = "",
