@@ -8,11 +8,7 @@ return {
         config = function()
             require("mini.ai").setup({})
             require("mini.align").setup({})
-            require("mini.comment").setup({
-                options = {
-                    ignore_blank_line = true,
-                },
-            })
+            require("mini.comment").setup({})
             require("mini.cursorword").setup({})
             -- require("mini.git").setup({})
             require("mini.hipatterns").setup({

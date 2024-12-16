@@ -8,7 +8,14 @@ return {
         opts = {
         },
         config = function()
-            require("hardtime").setup()
+            require("hardtime").setup({
+                restricted_keys = {
+                    ["h"] = {},
+                    ["j"] = {},
+                    ["k"] = {},
+                    ["l"] = {},
+                }
+            })
         end
     },
 }
