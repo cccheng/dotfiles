@@ -6,7 +6,7 @@ set -o noclobber                    # Prevent file overwrite on stdout redirecti
                                     # Use `>|` to force redirection to an existing file
 # set -o physical                     # resolve symlinks when 'cd'ing
 
-shopt -s autocd                     # assume 'cd' when trying to exec a directory
+# shopt -s autocd                     # assume 'cd' when trying to exec a directory
 shopt -s cdspell                    # spell check the path when changing directories.
 shopt -s checkhash                  # re-check $PATH on hash failure
 shopt -s checkjobs                  # print job status on exit
