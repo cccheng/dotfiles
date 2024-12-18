@@ -12,6 +12,7 @@
     co = checkout
     st = status --show-stash
     br = branch -vv
+    amend = commit --amend --no-edit
     alias = config --get-regexp alias
     unstage = reset HEAD --
     last = log -1 HEAD
