@@ -114,7 +114,7 @@ return {
                         },
                     }
                 },
-                ruby_lsp = {},
+                -- ruby_lsp = {},
                 bashls = {},
                 autotools_ls = {},
                 lua_ls = {},
