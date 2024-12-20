@@ -12,7 +12,7 @@ alias rm="rm -iv ${GNU:+--one-file-system}"
 # alias rm="trash"
 
 alias ls="\ls -F --color=auto ${GNU:+--group-directories-first -v}"
-alias ll="ls -lh ${GNU:+--time-style='+[%Y-%m-%d %H:%M]'}"
+alias ll="ls -lhi ${GNU:+--time-style='+[%Y-%m-%d %H:%M]'}"
 alias la="ll -A"
 
 # Always enable colored `grep` output
