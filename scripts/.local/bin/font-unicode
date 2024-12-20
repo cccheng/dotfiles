@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-for CODE in $@; do
-    echo -e "$CODE - \u$CODE"
-done
-

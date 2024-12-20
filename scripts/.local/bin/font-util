@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+font_help()
+{
+    cat <<-EOF
+Usage:
+    $(basename "$0") <command>
+
+    commands:
+        list
+        list-char <file>
+        unicode <code>...
+EOF
+}
+
+font_list()
+{
+    fc-list -f '%{family}\n' | awk '!x[$0]++'
+}
+
+font_list_char() # $1: file
+{
+    local width=100
+    local start end range char
+    [ -f "$1" ] || { echo "font file not found" >&2; exit 1; }
+
+    for range in $(fc-query --format='%{charset}\n' "$1"); do
+        IFS=- read -r start end <<< "$range"
+
+        if [ "$end" ]; then
+            start=$((16#$start))
+            end=$((16#$end))
+            for (( i = start; i <= end; i++)); do
+                printf -v char '\\U%x' "$i"
+                printf '%b' "$char"
+            done
+        else
+            printf '%b' "\\U$start"
+        fi
+    done | grep -oP '.{'"$width"'}'
+}
+
+font_unicode()
+{
+    local _code
+
+    for _code in "$@"; do
+        echo -e "$_code - \u$_code"
+    done
+}
+
+if [ -z "$1" ]; then
+    font_help
+elif type -p "font_${1//-/_}"; then
+    cmd="${1//-/_}"; shift
+    font_"$cmd" "$@"
+else
+    ERROR "Command $1 not found"
+fi
+
