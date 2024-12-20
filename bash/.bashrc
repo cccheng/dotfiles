@@ -25,5 +25,9 @@ while read -r f; do
 done < <(find "$HOME/.config/bash/bashrc.d/" -name "*-*.sh" | sort)
 
 # Resolve symlinks for initial working directory
-cd -P . || true
+# cd -P . || true
+
+if [ -r "$HOME/.envrc" ]; then
+    source "$HOME/.envrc"
+fi
 

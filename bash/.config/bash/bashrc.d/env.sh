@@ -97,7 +97,3 @@ if [ -r "$XDG_CONFIG_HOME/bash/bashrc.d/env.local.sh" ]; then
     source "$XDG_CONFIG_HOME/bash/bashrc.d/env.local.sh"
 fi
 
-if [ -r "$HOME/.envrc" ]; then
-    source "$HOME/.envrc"
-fi
-
