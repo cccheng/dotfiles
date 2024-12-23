@@ -5,6 +5,11 @@ alias vim="nvim -p"
 alias vimdiff="nvim -d"
 alias view="nvim -R"
 
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+
 # Verbosity and settings that you pretty much just always are going to want.
 alias cp="cp -iv"
 alias mv="mv -iv"
