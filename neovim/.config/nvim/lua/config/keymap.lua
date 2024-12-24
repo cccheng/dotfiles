@@ -23,6 +23,15 @@ map({ "n", "x" }, "<DOWN>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent =
 map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 map({ "n", "x" }, "<UP>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
+map("n", "<LEADER>tc",
+    function()
+        vim.o.signcolumn = vim.o.signcolumn == "yes" and "no" or "yes"
+        vim.o.number = not vim.o.number
+        vim.o.relativenumber = not vim.o.relativenumber
+        require("ibl").update({ enabled = not require("ibl.config").get_config(-1).enabled })
+    end,
+    { desc = "Toggle sign and number columns" })
+
 -- focus scrolling
 map("n", "<C-u>", "<C-u>zz", { noremap = true, silent = true })
 map("n", "<C-d>", "<C-d>zz", { noremap = true, silent = true })
