@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+source "$HOME/.config/bash/bashrc.d/env.local.sh"
+
+"$HOME/.local/bin/tw_caldav_sync" \
+    --caldav-calendar "$CALDAV_CALENDER" \
+    --caldav-url "$CALDAV_URL" \
+    --caldav-user "$CALDAV_USER" \
+    --taskwarrior-tags "$CALDAV_TAGS" \
+

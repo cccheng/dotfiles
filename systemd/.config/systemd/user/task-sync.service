@@ -1,0 +1,10 @@
+[Unit]
+Description=Sync tasks for TaskWarrior
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h
+ExecStart=%h/.local/bin/task-sync
+
+[Install]
+WantedBy=default.target
