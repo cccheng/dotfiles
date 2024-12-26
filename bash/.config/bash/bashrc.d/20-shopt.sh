@@ -33,3 +33,7 @@ shopt -s promptvars                 # allow prompt strings to contain shell vari
 # Ex: CDPATH=".:~:~/projects" will look for targets in the current working directory, in home and in the ~/projects folder
 CDPATH="."
 
+# 022 is the "historical" value in Debian for UMASK
+# 027, or even 077, could be considered better for privacy
+umask 077
+
