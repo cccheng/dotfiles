@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC1091
 
-if [ -s "${CARGO_HOME:-$HOME/.cargo}/env" ]; then
-    source "${CARGO_HOME:-$HOME/.cargo}/env"
+if [ -d "${CARGO_HOME:-$HOME/.cargo}/bin" ]; then
+    add-path "${CARGO_HOME:-$HOME/.cargo}/bin"
 fi
 
 if [ -s "${rvm_path:-$HOME/.rvm}/scripts/rvm" ]; then 
