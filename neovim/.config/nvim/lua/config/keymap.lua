@@ -29,6 +29,7 @@ map("n", "<LEADER>tc",
         vim.o.number = not vim.o.number
         vim.o.relativenumber = not vim.o.relativenumber
         require("ibl").update({ enabled = not require("ibl.config").get_config(-1).enabled })
+        require("scrollbar.utils").toggle()
     end,
     { desc = "Toggle sign and number columns" })
 
