@@ -30,6 +30,7 @@ XDG_DATA_HOME="$HOME/.local/share"
 XDG_STATE_HOME="$HOME/.local/state"
 XDG_CACHE_HOME="$HOME/.cache"
 XDG_RUNTIME_DIR="/run/user/$(id -u)"
+[ "$UID" = 0 ] && XDG_RUNTIME_DIR="/run"
 
 # Default install base for npm and some other stuff
 PREFIX="$HOME/.local"
@@ -74,6 +75,7 @@ ICEAUTHORITY="$XDG_RUNTIME_DIR/ICEauthority"
 XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
 TMUX_TMPDIR="$XDG_RUNTIME_DIR/tmux"
 SCREENDIR="$XDG_RUNTIME_DIR/screen"
+SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 TERMINFO="$XDG_DATA_HOME/terminfo"
 TERMINFO_DIRS="$XDG_DATA_HOME/terminfo:/usr/share/terminfo"
