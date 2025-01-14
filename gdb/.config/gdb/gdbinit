@@ -1,1 +1,7 @@
 source /usr/share/gef/gef.py
+
+# make scripts_gdb
+# https://blog.quarkslab.com/linux-kernel-instrumentation-from-qemu-and-gdb.html
+add-auto-load-safe-path ~/Workspace/linux-dev/scripts/gdb/vmlinux-gdb.py
+# add-auto-load-safe-path $WORKSPACE/linux-dev/scripts/gdb/vmlinux-gdb.py
+
