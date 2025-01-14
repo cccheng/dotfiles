@@ -22,8 +22,8 @@ set truncation-delimiter    = utf-8
 #color default           default default         # Overwrite default terminal colors (see above).
 color cursor            black   cyan    bold    # The cursor line.
 #color status            default default         # The status window showing info messages.
-#color title-focus       default default         # The title window for the current view.
-#color title-blur        default default         # The title window of any backgrounded view.
+color title-focus       black   blue    bold    # The title window for the current view.
+color title-blur        black   blue            # The title window of any backgrounded view.
 #color delimiter         default default         # Delimiter shown for truncated lines.
 #color line-number       default default         # Line numbers.
 #color date              cyan    default bold    # The commit date.
