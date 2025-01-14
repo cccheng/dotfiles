@@ -93,6 +93,10 @@
     ; smtpPass = 
     smtpEncryption = tls
     smtpServerPort = 587
+[stash]
+    showStat = true
+    showPatch = true
+    showIncludeUntracked = true
 [status]
     branch = true
     showStash = true
