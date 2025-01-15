@@ -62,4 +62,5 @@ set colored-completion-prefix on
 
 "\ee": "\C-asudo \C-e"                  # Alt-e to prepend sudo
 "\el": "\C-e | $PAGER"                  # Alt-l to append PAGER
+"\ev": "\C-e | vim -"                   # Atl-l to redirect to vim
 "\ea": "\C-a"                           # Alt-a to the begin of line. Ctrl-a may be used by tmux.
