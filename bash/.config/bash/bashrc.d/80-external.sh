@@ -18,3 +18,16 @@ if [ -d "/usr/local/opt/ruby/bin" ]; then
     add-path "/usr/local/opt/ruby/bin"
 fi
 
+if type eza &>/dev/null; then
+    alias eza="\eza -F --group-directories-first"
+    alias la="\eza -agHilSF --git --time-style=long-iso --group-directories-first"
+fi
+
+if type lsd &>/dev/null; then
+    alias lsd="\lsd -AFlig --icon never --group-dirs first --date '+%Y-%m-%d %H:%M'"
+fi
+
+if type bat &>/dev/null; then
+    alias cat="\bat -p --theme=Nord"
+fi
+
