@@ -75,7 +75,7 @@ ICEAUTHORITY="$XDG_RUNTIME_DIR/ICEauthority"
 XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
 TMUX_TMPDIR="$XDG_RUNTIME_DIR/tmux"
 SCREENDIR="$XDG_RUNTIME_DIR/screen"
-SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+: "${SSH_AUTH_SOCK:="$XDG_RUNTIME_DIR/ssh-agent.socket"}"
 
 TERMINFO="$XDG_DATA_HOME/terminfo"
 TERMINFO_DIRS="$XDG_DATA_HOME/terminfo:/usr/share/terminfo"
