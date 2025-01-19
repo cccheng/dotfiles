@@ -14,13 +14,17 @@ fi
 # Add tab completion for SSH hostnames based on ~/.ssh/config
 # ignoring wildcards
 [[ -e "$HOME/.ssh/config" ]] && complete -o "default" \
-	-o "nospace" \
-	-W "$(grep "^Host" ~/.ssh/config | \
-	grep -v "[?*]" | cut -d " " -f2 | \
-	tr ' ' '\n')" scp sftp ssh
+    -o "nospace" \
+    -W "$(grep "^Host" ~/.ssh/config | \
+    grep -v "[?*]" | cut -d " " -f2 | \
+    tr ' ' '\n')" scp sftp ssh
 
 # get the rustup completions
 if hash rustup 2>/dev/null; then
-	eval "$(rustup completions bash)"
+    eval "$(rustup completions bash)"
+fi
+
+if hash procs 2>/dev/null; then
+    eval "$(procs --gen-completion-out bash)"
 fi
 
