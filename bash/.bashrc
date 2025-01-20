@@ -21,13 +21,12 @@ GPG_TTY="$(tty)"; export GPG_TTY
 
 # Pull in bash modules. 
 while read -r f; do
-    source "$f";
+    source "$f"
 done < <(find "$HOME/.config/bash/bashrc.d/" -name "*-*.sh" | sort)
 
 # Resolve symlinks for initial working directory
 # cd -P . || true
 
-if [ -r "$HOME/.envrc" ]; then
-    source "$HOME/.envrc"
-fi
-
+for f in .env .envrc .env.*; do
+    [ -r "$f" ] && source "$f"
+done
