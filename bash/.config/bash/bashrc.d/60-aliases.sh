@@ -10,6 +10,10 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
+# Passing aliases
+# https://wiki.archlinux.org/title/Sudo#Passing_aliases
+alias sudo="sudo -u root -g adm "
+
 # Verbosity and settings that you pretty much just always are going to want.
 alias cp="cp -iv"
 alias mv="mv -iv"
