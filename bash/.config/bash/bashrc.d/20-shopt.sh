@@ -35,5 +35,5 @@ CDPATH="."
 
 # 022 is the "historical" value in Debian for UMASK
 # 027, or even 077, could be considered better for privacy
-umask 077
+umask 027
 
