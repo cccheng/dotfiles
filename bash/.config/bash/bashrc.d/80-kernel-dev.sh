@@ -8,8 +8,16 @@ build-image()
         KCFLAGS="$KCFLAGS -fdiagnostics-color=auto -Werror"
 }
 
+build-ramdisk()
+{
+    sudo modprobe -r brd
+    sudo modprobe brd brd rd_nr=1 rd_size=$((4096 * 1024))
+}
+
 boot-image()
 {
+    [ -b "/dev/ram0" ] && IMG_DISK="/dev/ram0"
+
     qemu-system-x86_64 \
         -nographic -enable-kvm -m size=4G \
         -cpu host -smp cpus=4,sockets=1,dies=1,cores=4,threads=1 \
@@ -29,7 +37,6 @@ boot-image()
 
         # -device virtio-net,netdev=vmnic -netdev bridge,br=virbr0,id=vmnic \
 }
-
 
 kgdb()
 {
