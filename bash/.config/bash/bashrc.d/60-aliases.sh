@@ -66,5 +66,6 @@ if [[ "$OSTYPE" =~ linux ]]; then
 fi
 
 alias week="date +%V"
+alias datetime="date -Iseconds"
 alias camera="ffplay /dev/video0"
 
