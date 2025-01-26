@@ -3,7 +3,7 @@
     email = shepjeng@gmail.com
     ; signingkey = 
 [core]
-    editor = vim
+    editor = nvim
     abbrev = 12
     excludesfile = ~/.config/git/ignore
     hooksPath = ~/.config/git/hooks
