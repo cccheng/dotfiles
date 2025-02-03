@@ -707,6 +707,12 @@ transparent_background_colors = true
 #             regex              =              "(ipfs:|ipns:|magnet:|mailto:|gemini://|go‐
 #             pher://|https://|http://|news:|file:|git://|ssh:|ftp://)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩‘]+"
 
+[keyboard]
+bindings = [
+    { key = "Insert", mods = "Shift", action = "Paste" },
+    { key = "Insert", mods = "Control", action = "Copy" },
+]
+
 # KEYBOARD
 #     This section documents the [keyboard] table of the configuration file.
 #
