@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# The rawer option will avoid closing the socat process by pressing ^C or ^D, and will pass it
+# through the connection allowing you to control remote processes.
+#
+# The escape=0x1d option is here to actually close the process by pressing ^].
+socat file:"$(tty)",rawer,escape=0x1d TCP:"${1?No IP}":"${2?No Port}"
+
