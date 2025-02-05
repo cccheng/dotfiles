@@ -19,7 +19,8 @@ if [ -d "/usr/local/opt/ruby/bin" ]; then
 fi
 
 if type eza &>/dev/null; then
-    alias eza="\eza -F --group-directories-first"
+    alias ls="\eza -F --group-directories-first"
+    alias ll="\eza -gHilSF --time-style=long-iso --group-directories-first"
     alias la="\eza -agHilSF --git --time-style=long-iso --group-directories-first"
 fi
 
