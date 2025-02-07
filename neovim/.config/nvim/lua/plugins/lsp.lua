@@ -354,6 +354,9 @@ return {
                     list = {
                         ["<C-e>"] = actions.preview_scroll_win(-1),
                         ["<C-y>"] = actions.preview_scroll_win(1),
+                        ["<C-v>"] = actions.jump_vsplit, -- Open location in vertical split
+                        ["<C-s>"] = actions.jump_split, -- Open location in horizontal split
+                        ["<C-t>"] = actions.jump_tab, -- Open in new tab
                     },
                 },
             })
