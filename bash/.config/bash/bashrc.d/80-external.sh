@@ -20,8 +20,8 @@ fi
 
 if type eza &>/dev/null; then
     alias ls="\eza -F --group-directories-first"
-    alias ll="\eza -gHilSF --time-style=long-iso --group-directories-first"
-    alias la="\eza -agHilSF --git --time-style=long-iso --group-directories-first"
+    alias ll="\eza -bgHilSF --time-style=long-iso --group-directories-first"
+    alias la="\eza -abgHilSF --git --time-style=long-iso --group-directories-first"
 fi
 
 if type lsd &>/dev/null; then
