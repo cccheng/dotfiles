@@ -12,7 +12,9 @@ alias .....="cd ../../../.."
 
 # Passing aliases
 # https://wiki.archlinux.org/title/Sudo#Passing_aliases
-alias sudo="sudo -u root -g adm "
+if [[ "$OSTYPE" =~ linux ]]; then
+    alias sudo="sudo -u root -g adm "
+fi
 
 # Verbosity and settings that you pretty much just always are going to want.
 alias cp="cp -iv"
