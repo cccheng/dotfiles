@@ -20,6 +20,7 @@ fi
 if [ -f "$XDG_CONFIG_HOME/bash/.prompt-green" ]; then
     USER_STYLE="\[$(ansi::green-intense)\]"
     HOST_STYLE="\[$(ansi::green)\]"
+    PATH_STYLE="\[$(ansi::cyan-intense)\]"
     GIT_STYLE="\[$(ansi::yellow)\]"
 elif [ -f "$XDG_CONFIG_HOME/bash/.prompt-yellow" ]; then
     USER_STYLE="\[$(ansi::yellow-intense)\]"
