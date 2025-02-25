@@ -12,6 +12,7 @@
     co = checkout
     st = status --show-stash
     br = branch -vv
+    brs = branch -vv --all
     amend = commit --amend --no-edit
     alias = config --get-regexp alias
     unstage = reset HEAD --
@@ -19,7 +20,6 @@
     logs = log --color --graph --date=short --pretty=format:'%C(bold yellow)%h %C(green)%ad %C(reset)- %s %C(brightblack)<%ae>%Creset' --abbrev-commit --
     type = cat-file -t
     dump = cat-file -p
-    branches = branch -vv --all
     remotes = remote --verbose
     find = log --graph --oneline --all --decorate --date-order --regexp-ignore-case --extended-regexp --grep
     contributors = shortlog --summary --numbered
@@ -41,11 +41,11 @@
     ; local =
     ; remote =
     ; upstream =
-    ; plain = 
+    ; plain =
 [color "status"]
     ; header =
     ; added =
-    ; updated = 
+    ; updated =
     ; changed =
     ; untracked =
     ; branch =
@@ -86,11 +86,11 @@
     # Allow repositories owned by other UIDs
     # (Note: Adding NFS paths will cause Git to stat() them every time it
     # consults this list, e.g. when `cd`-ing to /srv/dist.)
-    #directory = *
+    ; directory = *
 [sendemail]
-    ; smtpServer = 
-    ; smtpUser = 
-    ; smtpPass = 
+    ; smtpServer =
+    ; smtpUser =
+    ; smtpPass =
     smtpEncryption = tls
     smtpServerPort = 587
 [stash]
