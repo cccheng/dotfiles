@@ -1,11 +1,35 @@
 #!/usr/bin/env bash
 
-cat <<-EOF
+motd_cat()
+{
+cat <<-CAT
 
-   (__)
-\\\\\\'',)
-  \\/  \\ ^
-  .\\._/_)  Hello $USER (${SSH_CLIENT%% *}). This is $HOSTNAME!
+   ╱|、  
+  (˚ˎ 。7  
+   |、˜〵  
+   じしˍ,)ノ  Hello $USER (${SSH_CLIENT%% *}). This is $HOSTNAME!
 
-EOF
+CAT
+}
+
+motd_daemon()
+{
+cat <<-DAEMON
+
+     (__)
+  \\\\\\'',)
+    \\/  \\ ^
+    .\\._/_)   Hello $USER (${SSH_CLIENT%% *}). This is $HOSTNAME!
+
+DAEMON
+}
+
+case $((RANDOM % 2)) in
+    0)
+        motd_cat
+        ;;
+    1)
+        motd_daemon
+        ;;
+esac
 
