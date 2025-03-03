@@ -46,7 +46,7 @@ return {
         dependencies = {
             "williamboman/mason-lspconfig.nvim",
             "hrsh7th/nvim-cmp",
-            "p00f/clangd_extensions.nvim",
+            -- "p00f/clangd_extensions.nvim",
         },
         keys = {
             { "<LEADER>l", "", desc = "LSP" },
@@ -203,7 +203,7 @@ return {
             -- vim.keymap.set("n", "<LEADER>ldl", vim.diagnostic.setloclist,           { desc = "Diagnostic List" })
             vim.keymap.set("n", "<LEADER>lD", "<CMD>ToggleDiagnostics<CR>",        { desc = "Toggle diagnostic" })
             vim.keymap.set("n", "<LEADER>llr", "<CMD>Telescope lsp_references<CR>", { desc = "LSP References" })
-            vim.keymap.set("n", "<LEADER>lh",  "<CMD>ClangdToggleInlayHints<CR>",   { desc = "Toggle inlay hints" })
+            vim.keymap.set("n", "<LEADER>lh",  function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, { desc = "Toggle inlay hints" })
             vim.keymap.set("n", "<LEADER>lS",  "<CMD>LspStop<CR>",                  { desc = "Stop LSP" })
             vim.keymap.set("n", "<LEADER>lI",  "<CMD>LspInfo<CR>",                  { desc = "LSP Info" })
             vim.keymap.set("n", "<LEADER>lld", function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end, { desc = "LSP Definition" })
