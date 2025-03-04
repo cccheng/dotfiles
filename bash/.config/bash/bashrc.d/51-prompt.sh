@@ -13,8 +13,8 @@ SIGN_STYLE="\[$(ansi::yellow)\]"
 
 # Highlight the brackets when logged in as root.
 if [ "${USER}" = "root" ]; then
-    SYMBOL_STYLE="\[$(ansi::magenta-intense)\]"
-    SIGN_STYLE="\[$(ansi::magenta-intense)\]"
+    SYMBOL_STYLE="\[$(ansi::black-intense)\]"
+    SIGN_STYLE="\[$(ansi::black-intense)\]"
 fi
 
 if [ -f "$XDG_CONFIG_HOME/bash/.prompt-green" ]; then
