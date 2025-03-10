@@ -33,7 +33,8 @@ boot-image()
         -pidfile "$XDG_RUNTIME_DIR/qemu.pid" \
         -kernel "$IMG_KERNEL" \
         -drive if=virtio,format=raw,aio=io_uring,cache=writeback,discard=on,detect-zeroes=on,file="$IMG_ROOT" \
-        -drive if=virtio,format=raw,aio=io_uring,cache=writeback,discard=on,detect-zeroes=on,file="$IMG_DISK"
+        -drive if=virtio,format=raw,aio=io_uring,cache=writeback,discard=on,detect-zeroes=on,file="$IMG_TEST" \
+        -drive if=virtio,format=raw,aio=io_uring,cache=writeback,discard=on,detect-zeroes=on,file="$IMG_SCRATCH"
 
         # -device virtio-net,netdev=vmnic -netdev bridge,br=virbr0,id=vmnic \
 }
