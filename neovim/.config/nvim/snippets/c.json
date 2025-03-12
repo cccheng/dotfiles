@@ -1,0 +1,66 @@
+{
+    "#if": {
+        "prefix": "#if",
+        "body": [
+            "#if defined($1)",
+            "$0",
+            "#endif /* $1 */"
+        ]
+    },
+    "#ifdef": {
+        "prefix": "#ifdef",
+        "body": [
+            "#ifdef $1",
+            "$0",
+            "#endif /* $1 */"
+        ]
+    },
+    "for loop": {
+        "prefix": "for",
+        "body": [
+            "for ($1 = ${2:0}; $1 < $3; ++$1) {",
+            "   $0",
+            "}"
+        ]
+    },
+    "while loop": {
+        "prefix": "while",
+        "body": [
+            "while ($1) {",
+            "   $0",
+            "}"
+        ]
+    },
+    "if": {
+        "prefix": "if",
+        "body": [
+            "if ($1) {",
+            "   $0",
+            "}"
+        ]
+    },
+    "else": {
+        "prefix": "else",
+        "body": [
+            "else {",
+            "   $0",
+            "}"
+        ]
+    },
+    "else if": {
+        "prefix": "else if",
+        "body": [
+            "else if ($1) {",
+            "   $0",
+            "}"
+        ]
+    },
+    "struct": {
+        "prefix": "struct",
+        "body": [
+            "struct $1 {",
+            "   $0",
+            "};"
+        ]
+    }
+}

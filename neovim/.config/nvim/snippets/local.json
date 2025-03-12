@@ -1,0 +1,10 @@
+{
+    "git signature": {
+        "prefix": "sign",
+        "body": [
+            "Ref: $1",
+            "Compare-whitelist: linux-4.4.x, linux-3.10.x, linux-3.10.x-bsp",
+            "Reviewed-by: $0"
+        ]
+    }
+}

@@ -37,6 +37,8 @@ return {
                     -- Load custom file with global snippets first (adjust for Windows)
                     require("mini.snippets").gen_loader.from_file("~/.config/nvim/snippets/global.json"),
 
+                    require("mini.snippets").gen_loader.from_file("~/.config/nvim/snippets/local.json"),
+
                     -- Load snippets based on current language by reading files from
                     -- "snippets/" subdirectories from 'runtimepath' directories.
                     require("mini.snippets").gen_loader.from_lang(),
