@@ -29,6 +29,14 @@ return {
                         winbar_info = true,
                     },
                 },
+                file_panel = {
+                    listing_style = "list",
+                    win_config = {
+                        type = "split",
+                        position = "bottom",
+                        height = 5,
+                    },
+                },
             })
         end
     },
