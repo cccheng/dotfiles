@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC1090,SC1091,SC2034
 
-add-path() { case :$PATH: in *:$1:*) ;; *) PATH=$1:$PATH;; esac }
-path-add() { case :$PATH: in *:$1:*) ;; *) PATH=$PATH:$1;; esac }
+add_path() { case :$PATH: in *:$1:*) ;; *) PATH=$1:$PATH;; esac }
+path_add() { case :$PATH: in *:$1:*) ;; *) PATH=$PATH:$1;; esac }
 
-add-path "$HOME/.local/bin"
+add_path "$HOME/.local/bin"
 
 # Enable allexport
 set -a

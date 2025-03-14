@@ -2,7 +2,7 @@
 # shellcheck disable=SC1091
 
 if [ -d "${CARGO_HOME:-$HOME/.cargo}/bin" ]; then
-    add-path "${CARGO_HOME:-$HOME/.cargo}/bin"
+    add_path "${CARGO_HOME:-$HOME/.cargo}/bin"
 fi
 
 if [ -s "${rvm_path:-$HOME/.rvm}/scripts/rvm" ]; then 
@@ -15,7 +15,7 @@ fi
 
 # Homebrew ruby
 if [ -d "/usr/local/opt/ruby/bin" ]; then
-    add-path "/usr/local/opt/ruby/bin"
+    add_path "/usr/local/opt/ruby/bin"
 fi
 
 if type eza &>/dev/null; then
