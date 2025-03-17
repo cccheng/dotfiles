@@ -1,6 +1,6 @@
 [user]
     name = Chung-Chiang Cheng
-    email = shepjeng@gmail.com
+    email = cccheng@cccheng.net
     ; signingkey = 
 [core]
     editor = nvim
@@ -8,6 +8,8 @@
     excludesfile = ~/.config/git/ignore
     hooksPath = ~/.config/git/hooks
     whitespace = trailing-space, space-before-tab, blank-at-eof
+    fsmonitor = true
+    untrackedCache = true
 [alias]
     co = checkout
     st = status --show-stash
@@ -23,6 +25,8 @@
     remotes = "! git remote --verbose | column -t"
     find = log --graph --oneline --all --decorate --date-order --regexp-ignore-case --extended-regexp --grep
     contributors = shortlog --summary --numbered
+[branch]
+    sort = -committerdate
 [color]
     advice = auto
     branch = auto
@@ -53,6 +57,8 @@
     ; localBranch =
     ; remoteBranch =
     ; unmerged =
+[column]
+    ; ui = auto
 [commit]
     gpgSign = true
     status = true
@@ -60,10 +66,13 @@
     verbose = true
 [diff]
     tool = vimdiff
-    colormoved = default
+    colorMoved = plain
     algorithm = histogram
+    mnemonicPrefix = true
+    renames = true
 [fetch]
     prune = true
+    all = true
 [format]
     signoff = true
     coverLetter = auto
@@ -74,14 +83,22 @@
 [help]
     autoCorrect = 1
 [merge]
+    conflictstyle = zdiff3
     tool = vimdiff
 [protocol]
     version = 2
 [pull]
     rebase = true
+[push]
+    default = simple
 [rebase]
     autoStash = true
+    autoSquash = true
+    updateRefs = true
     stat = true
+[rerere]
+    enabled = true
+    autoupdate = true
 [safe]
     # Allow repositories owned by other UIDs
     # (Note: Adding NFS paths will cause Git to stat() them every time it
@@ -103,6 +120,7 @@
     ; submodulesummary = true
     showUntrackedFiles = all
 [tag]
+    sort = version:refname
     forceSignAnnotated = true
 [include]
     path = ~/.config/git/config.local
