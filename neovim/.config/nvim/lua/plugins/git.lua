@@ -73,6 +73,9 @@ return {
                 numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
                 linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
                 word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
+                diff_opts = {
+                    algorithm = "histogram",
+                },
                 on_attach = function(bufnr)
                     local gs = package.loaded.gitsigns
 

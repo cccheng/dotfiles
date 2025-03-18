@@ -84,3 +84,11 @@ opt.fillchars = {
     vert = "▒",
 }
 
+opt.diffopt = {
+    "internal",
+    "filler",
+    "closeoff",
+    "algorithm:histogram",
+    "indent-heuristic",
+}
+
