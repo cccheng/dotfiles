@@ -3,8 +3,9 @@
 
 eval "$(fzf --bash 2>/dev/null)"
 
-FZF_DEFAULT_COMMAND="fd --type f --strip-cwd-prefix --hidden --follow --exclude .git"
-FZF_DEFAULT_OPTS="--multi --color='dark,fg+:bright-green,pointer:bright-cyan' --preview 'less {}'"
+FZF_DEFAULT_OPTS="--multi --info=right --prompt='» '"
 FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --bind ctrl-b:page-up,ctrl-f:page-down"
-#FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --bind tab:down,shift-tab:up"
-FZF_COMPLETION_TRIGGER="~~"
+FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color='dark,fg:bright-black,preview-fg:white,pointer:cyan,marker:blue'"
+export FZF_DEFAULT_OPTS
+export FZF_DEFAULT_COMMAND="fd --type f --strip-cwd-prefix --hidden --follow --exclude .git"
+export FZF_COMPLETION_TRIGGER="~~"
