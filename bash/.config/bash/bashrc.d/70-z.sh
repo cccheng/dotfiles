@@ -2,6 +2,7 @@
 
 # source: https://github.com/rupa/z
 
+_Z_CMD="c"
 _Z_DATA="$HOME/.local/state/bash/z"
 
 # maintains a jump-list of the directories you actually use
