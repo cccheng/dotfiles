@@ -81,15 +81,13 @@
 #         the specified value is always added at both opposing sides.
 #
 #         Default: { x = 0, y = 0 }
-padding = { x = 7, y = 7 }
-
+#
 #     dynamic_padding = true | false
 #
 #         Spread additional padding evenly around the terminal content.
 #
 #         Default: false
-dynamic_padding = true
-
+#
 #     decorations = "Full" | "None" | "Transparent" | "Buttonless"
 #
 #         Window decorations.
@@ -112,7 +110,7 @@ decorations = "None"
 #         completely transparent and 1.0 is opaque.
 #
 #         Default: 1.0
-opacity = 0.8
+opacity = 0.95
 
 #     blur = true | false # (works on macOS/KDE Wayland)
 #
@@ -458,6 +456,7 @@ transparent_background_colors = true
 #         When true, bold text is drawn using the bright color variants.
 #
 #         Default: false
+draw_bold_text_with_bright_colors = true
 
 # BELL
 #     This section documents the [bell] table of the configuration file.
