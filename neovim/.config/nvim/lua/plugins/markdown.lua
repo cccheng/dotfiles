@@ -10,7 +10,14 @@ return {
         },
         config = function()
             require("render-markdown").setup({
-                file_types = { "markdown", "Avante" },
+                file_types = {
+                    "markdown",
+                    "Avante",
+                },
+                completions = {
+                    lsp = { enabled = true },
+                    blink = { enabled = true },
+                },
                 heading = {
                     sign = false,
                     icons = {},

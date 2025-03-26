@@ -45,7 +45,7 @@ return {
         event = "BufReadPre",
         dependencies = {
             "williamboman/mason-lspconfig.nvim",
-            "hrsh7th/nvim-cmp",
+            "saghen/blink.cmp",
             -- "p00f/clangd_extensions.nvim",
         },
         keys = {
@@ -54,9 +54,6 @@ return {
         config = function()
             local lspconfig = require("lspconfig")
 
-            -- nvim-cmp supports additional completion capabilities
-            local capabilities = vim.lsp.protocol.make_client_capabilities()
-            local default_capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
             local handlers = {
                 -- none, single, double, rounded, shadow
                 ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
@@ -164,7 +161,7 @@ return {
             -- Iterate over our servers and set them up
             for name, config in pairs(servers) do
                 lspconfig[name].setup({
-                    capabilities = config.capabilities or default_capabilities,
+                    capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities),
                     init_options = config.init_options,
                     on_attach = config.on_attach,
                     filetypes = config.filetypes,
@@ -216,128 +213,145 @@ return {
         end
     },
     {
-        "hrsh7th/nvim-cmp",
+        "saghen/blink.cmp",
+        dependencies = {
+            "echasnovski/mini.nvim",
+            "Kaiser-Yang/blink-cmp-dictionary",
+            "moyiz/blink-emoji.nvim",
+        },
         event = {
             "InsertEnter",
             "CmdlineEnter"
         },
-        dependencies = {
-            "hrsh7th/cmp-nvim-lsp",
-            "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-path",
-            "hrsh7th/cmp-calc",
-            "hrsh7th/cmp-cmdline",
-            "uga-rosa/cmp-dictionary",
-            -- "hrsh7th/vim-vsnip",  -- remove it after neovim 0.10
-            -- "hrsh7th/cmp-vsnip",  -- remove it after neovim 0.10
-        },
-        config = function()
-            local cmp = require("cmp")
-            local select_opts = { behavior = cmp.SelectBehavior.Select }
+        version = "1.*",
+        opts = {
+            -- "default" (recommended) for mappings similar to built-in completions (C-y to accept)
+            -- "super-tab" for mappings similar to vscode (tab to accept)
+            -- "enter" for enter to accept
+            -- "none" for no mappings
+            --
+            -- All presets have the following mappings:
+            -- C-space: Open menu or open docs if already open
+            -- C-n/C-p or Up/Down: Select next/previous item
+            -- C-e: Hide menu
+            -- C-k: Toggle signature help (if signature.enabled = true)
+            --
+            -- See :h blink-cmp-config-keymap for defining your own keymap
+            keymap = {
+                preset = "enter",
+                ["<C-e>"] = { "show", "fallback" },
+                ["<C-k>"] = { "select_prev", "fallback" },
+                ["<C-j>"] = { "select_next", "fallback" },
+            },
 
-            vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+            signature = {
+                -- enabled = true,
+            },
 
-            require("cmp_dictionary").setup({
-                paths = { "/usr/share/dict/words" },
-                exact_length = 2,
-            })
+            appearance = {
+                -- "mono" (default) for "Nerd Font Mono" or "normal" for "Nerd Font"
+                -- Adjusts spacing to ensure icons are aligned
+                nerd_font_variant = "mono"
+            },
 
-            cmp.setup({
-                window = {
-                    -- completion = cmp.config.window.bordered(),
-                    -- documentation = cmp.config.window.bordered(),
-                    completion = {
-                        completeopt = "menu,menuone,noinsert",
-                        winblend = 10,
-                    },
-                    documentation = {
-                        winblend = 10,
-                    },
+            completion = {
+                -- Display a preview of the selected item on the current line
+                ghost_text = {
+                    enabled = false,
                 },
-                performance = {
-                    debounce = 0, -- default is 60ms
-                    throttle = 0, -- default is 30ms
+
+                -- (Default) Only show the documentation popup when manually triggered
+                documentation = {
+                    auto_show = false
                 },
-                snippet = {
-                    expand = function(args)
-                        vim.snippet.expand(args.body)  -- Use native snippets. Only works on Neovim >= 0.10!
-                        -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-                        -- require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
-                        -- require("snippy").expand_snippet(args.body) -- For `snippy` users.
-                        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-                    end,
+
+                -- "prefix" will fuzzy match on the text before the cursor
+                -- "full" will fuzzy match on the text before _and_ after the cursor
+                -- example: "foo_|_bar" will match "foo_" for "prefix" and "foo__bar" for "full"
+                keyword = {
+                    range = "full"
                 },
-                formatting = {
-                    fields = {"menu", "abbr", "kind"},
-                    format = function(entry, item)
-                        local menu_icon = {
-                            nvim_lsp = "λ",
-                            buffer = "󰻫",
-                            path = "🖫",
-                            calc = "󰍛",
-                            dictionary = "",
+            },
+
+            -- Default list of enabled providers defined so that you can extend it
+            -- elsewhere in your config, without redefining it, due to `opts_extend`
+            sources = {
+                default = {
+                    "lsp",
+                    "path",
+                    "snippets",
+                    "buffer",
+                    "dictionary",
+                    "emoji",
+                },
+                providers = {
+                    dictionary = {
+                        module = "blink-cmp-dictionary",
+                        name = "Dict",
+                        -- Make sure this is at least 2.
+                        -- 3 is recommended
+                        min_keyword_length = 3,
+                        opts = {
+                            dictionary_files = {
+                                "/usr/share/dict/words",
+                            },
                         }
+                    },
+                    emoji = {
+                        module = "blink-emoji",
+                        name = "Emoji",
+                        score_offset = 15, -- Tune by preference
+                        opts = { insert = true }, -- Insert emoji (default) or complete its name
+                        -- should_show_items = function()
+                        --     return vim.tbl_contains(
+                        --     -- Enable emoji completion only for git commits and markdown.
+                        --     { "gitcommit", "markdown" },
+                        --     vim.o.filetype
+                        --     )
+                        -- end,
+                    },
+                    cmdline = {
+                        min_keyword_length = function(ctx)
+                            -- when typing a command, only show when the keyword is 3 characters or longer
+                            if ctx.mode == 'cmdline' and string.find(ctx.line, ' ') == nil then return 3 end
+                            return 0
+                        end
+                    },
+                },
+            },
 
-                        item.menu = menu_icon[entry.source.name]
-                        return item
-                    end,
-                },
-                mapping = cmp.mapping.preset.insert({
-                    ["<CR>"] = cmp.mapping({
-                        i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
-                        s = cmp.mapping.confirm({ select = true }),
-                        c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-                    }),
-                    ["<TAB>"] = cmp.mapping({
-                        i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
-                        s = cmp.mapping.confirm({ select = true }),
-                        c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-                    }),
-                    ["<Up>"] = cmp.mapping.select_prev_item(select_opts),
-                    ["<Down>"] = cmp.mapping.select_next_item(select_opts),
-                    ["<C-k>"] = cmp.mapping.select_prev_item(select_opts),
-                    ["<C-j>"] = cmp.mapping.select_next_item(select_opts),
-                    ["<C-p>"] = cmp.mapping.select_prev_item(select_opts),
-                    ["<C-n>"] = cmp.mapping.select_next_item(select_opts),
-                }),
-                completion = {
-                    completeopt = "menu,menuone,noinsert,noselect",
-                },
-                sources = cmp.config.sources({
-                        { name = "nvim_lsp", max_item_count = 10 },
-                        { name = "buffer",   max_item_count = 10, keyword_length = 2 },
-                        { name = "path",     max_item_count = 10, keyword_length = 3 },
-                        { name = "calc",     max_item_count = 10, keyword_length = 2 },
-                        { name = "dictionary", max_item_count = 10, keyword_length = 2 },
-                        -- { name = "vsnip",    max_item_count = 10, keyword_length = 2 },
-                }),
-                experimental = {
-                    ghost_text = false -- { hl_group = "CmpGhostText" },
-                },
-                sorting = require("cmp.config.default")().sorting,
-            })
+            -- Use a preset for snippets, check the snippets documentation for more information
+            snippets = {
+                preset = "mini_snippets"
+            },
 
-            cmp.setup.cmdline({ "/", "?" }, {
-                mapping = cmp.mapping.preset.cmdline(),
-                sources = {
-                    { name = "buffer" }
-                },
-                completion = {
-                    autocomplete = false,
-                },
-            })
+            -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
+            -- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
+            -- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
+            --
+            -- See the fuzzy documentation for more information
+            fuzzy = {
+                implementation = "prefer_rust_with_warning"
+            },
 
-            cmp.setup.cmdline(":", {
-                mapping = cmp.mapping.preset.cmdline(),
-                sources = cmp.config.sources({
-                    { name = "path" },
-                    { name = "cmdline" }
-                }),
-                completion = {
-                    autocomplete = false,
+            cmdline = {
+                keymap = {
+                    preset = "inherit",
+                    ["<Tab>"] = { "accept" },
+                    ["<CR>"] = { "accept_and_enter", "fallback" },
                 },
-            })
-        end
+                completion = {
+                    menu = {
+                        auto_show = function(ctx)
+                            return vim.fn.getcmdtype() == ':'
+                        end,
+                    },
+                },
+            },
+        },
+        opts_extend = {
+            "sources.default"
+        },
     },
     {
         "DNLHC/glance.nvim",
