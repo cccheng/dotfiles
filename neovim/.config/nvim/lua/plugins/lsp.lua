@@ -177,16 +177,27 @@ return {
                 end,
             })
 
+            vim.diagnostic.config({
+                virtual_text = true,
+                virtual_lines = false,
+                underline = false,
+                signs = false,
+            })
             vim.api.nvim_create_user_command("ToggleDiagnostics", function()
-                if vim.g.diagnostics_enabled == nil then
-                    vim.g.diagnostics_enabled = false
+                if vim.g.diagnostics_mode == nil then
+                    vim.g.diagnostics_mode = "disabled"
                     vim.diagnostic.disable()
-                elseif vim.g.diagnostics_enabled then
-                    vim.g.diagnostics_enabled = false
-                    vim.diagnostic.disable()
-                else
-                    vim.g.diagnostics_enabled = true
+                elseif vim.g.diagnostics_mode == "disabled" then
+                    vim.g.diagnostics_mode = "virtual_line"
+                    vim.diagnostic.config({ virtual_text = false, virtual_lines = true, })
                     vim.diagnostic.enable()
+                elseif vim.g.diagnostics_mode == "virtual_line" then
+                    vim.g.diagnostics_mode = "virtual_text"
+                    vim.diagnostic.config({ virtual_text = true, virtual_lines = false, })
+                    vim.diagnostic.enable()
+                elseif vim.g.diagnostics_mode == "virtual_text" then
+                    vim.g.diagnostics_mode = "disabled"
+                    vim.diagnostic.disable()
                 end
             end, {})
 
