@@ -1,5 +1,6 @@
 return {
     "dhananjaylatkar/cscope_maps.nvim",
+    ft = { "c", "cpp" },
     event = "VeryLazy",
     dependencies = {
         "folke/which-key.nvim", -- optional [for whichkey hints]
