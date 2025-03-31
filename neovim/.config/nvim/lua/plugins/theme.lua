@@ -5,7 +5,10 @@ return {
         lazy = false,
         priority = 1000,
         config = function()
-            vim.cmd.colorscheme("iceberg")
+            if vim.env.NVIM_COLORSCHEME == nil or
+               vim.env.NVIM_COLORSCHEME == "iceberg" then
+                vim.cmd.colorscheme("iceberg")
+            end
 
             vim.api.nvim_set_hl(0, "TabLine", { fg = "#9a9ca5", bg = "#1f2233", bold = false })
             vim.api.nvim_set_hl(0, "TabLineFill", { fg = "#101218", bg = "#1f2233", bold = false })
@@ -14,25 +17,35 @@ return {
     },
     {
         "sam4llis/nvim-tundra",
-        lazy = true,
+        lazy = false,
         priority = 1000,
         config = function()
             require("nvim-tundra").setup({
                 -- transparent_background = true,
             })
-            vim.cmd.colorscheme("tundra")
+
+            if vim.env.NVIM_COLORSCHEME == "tundra" then
+                vim.cmd.colorscheme("tundra")
+            end
         end
     },
     {
         "sho-87/kanagawa-paper.nvim",
-        lazy = true,
+        lazy = false,
         priority = 1000,
         config = function()
             require("kanagawa-paper").setup({
                 dimInactive = false,
                 -- transparent = true,
             })
-            vim.cmd.colorscheme("kanagawa-paper")
+
+            if vim.env.NVIM_COLORSCHEME == "kanagawa" then
+                vim.cmd.colorscheme("kanagawa-paper")
+            end
+
+            vim.api.nvim_set_hl(0, "TabLine", { fg = "#9a9ca5", bg = "#1f2233", bold = false })
+            vim.api.nvim_set_hl(0, "TabLineFill", { fg = "#101218", bg = "#1f2233", bold = false })
+            vim.api.nvim_set_hl(0, "TabLineSel", { fg = "#9a9ca5", bg = "#2b335a", bold = true })
         end
     },
 }
