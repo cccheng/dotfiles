@@ -178,24 +178,36 @@ return {
             })
 
             vim.diagnostic.config({
-                virtual_text = true,
-                virtual_lines = false,
+                virtual_text = {
+                    severity = {
+                        max = vim.diagnostic.severity.WARN,
+                    }
+                },
+                virtual_lines = {
+                    severity = {
+                        min = vim.diagnostic.severity.ERROR,
+                    }
+                },
                 underline = false,
                 signs = false,
+                update_in_insert = false, -- false so diags are updated on InsertLeave
+                severity_sort = true,
+                float = {
+                    focusable = false,
+                    style = "minimal",
+                    border = "single",
+                    source = true,
+                    header = "",
+                },
             })
             vim.api.nvim_create_user_command("ToggleDiagnostics", function()
-                if vim.g.diagnostics_mode == nil then
+                if vim.g.diagnostics_mode == "enabled" then
                     vim.g.diagnostics_mode = "disabled"
                     vim.diagnostic.disable()
                 elseif vim.g.diagnostics_mode == "disabled" then
-                    vim.g.diagnostics_mode = "virtual_line"
-                    vim.diagnostic.config({ virtual_text = false, virtual_lines = true, })
+                    vim.g.diagnostics_mode = "enabled"
                     vim.diagnostic.enable()
-                elseif vim.g.diagnostics_mode == "virtual_line" then
-                    vim.g.diagnostics_mode = "virtual_text"
-                    vim.diagnostic.config({ virtual_text = true, virtual_lines = false, })
-                    vim.diagnostic.enable()
-                elseif vim.g.diagnostics_mode == "virtual_text" then
+                else
                     vim.g.diagnostics_mode = "disabled"
                     vim.diagnostic.disable()
                 end
