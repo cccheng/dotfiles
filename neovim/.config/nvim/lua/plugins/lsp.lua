@@ -372,6 +372,11 @@ return {
                         end,
                     },
                 },
+                sources = function()
+                    local type = vim.fn.getcmdtype()
+                    if type == ":" or type == "@" then return { "cmdline" } end
+                    return {}
+                end,
             },
         },
         opts_extend = {
