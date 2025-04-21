@@ -34,12 +34,12 @@ cmd::run() # $1: message, $@ command
     pid="$COPROC_PID"
     stderr::enable
 
-    trap 'ansi::show-cursor; set -m; kill "$pid" 2>/dev/null; return' SIGINT SIGTERM
+    trap 'ansi::show-cursor; ansi::reset-color; set -m; kill "$pid" 2>/dev/null; return' SIGINT SIGTERM
     ansi::save-cursor
     while kill -0 "$pid" 2>/dev/null; do
         ansi::restore-cursor
         echo -n "$(ansi::cyan)${SPINNER:$((idx++ % ${#SPINNER})):1} "
-        echo -ne "$(ansi::reset-color)$msg"
+        echo -ne "$(ansi::white-intense)$msg"
         sleep 0.10
     done
 
@@ -48,10 +48,12 @@ cmd::run() # $1: message, $@ command
     set -m
 
     if wait "$pid"; then
-        echo "$(ansi::green)» $(ansi::reset-color)$msg"
+        echo "$(ansi::green)» $(ansi::white-intense)$msg"
+        ansi::reset-color
         true
     else
-        echo "$(ansi::red)» $(ansi::reset-color)$msg"
+        echo "$(ansi::red)» $(ansi::white-intense)$msg"
+        ansi::reset-color
         false
     fi
 }
