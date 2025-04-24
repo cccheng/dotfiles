@@ -19,15 +19,15 @@ fi
     grep -v "[?*]" | cut -d " " -f2 | \
     tr ' ' '\n')" scp sftp ssh
 
-if hash rustup 2>/dev/null; then
+if command -v rustup >/dev/null; then
     eval "$(rustup completions bash)"
 fi
 
-if hash mise 2>/dev/null && hash usage 2>/dev/null; then
+if command -v mise >/dev/null && command -v usage >/dev/null; then
     eval "$(mise completion bash --include-bash-completion-lib)"
 fi
 
-if hash procs 2>/dev/null; then
+if command -v procs >/dev/null; then
     eval "$(procs --gen-completion-out bash)"
 fi
 

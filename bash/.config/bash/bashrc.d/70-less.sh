@@ -28,9 +28,9 @@ LESS="e M q R F X z-3"
 set +a
 
 # Make less more friendly for non-text input files, see lesspipe(1)
-if hash lesspipe 2>/dev/null; then
+if command -v lesspipe >/dev/null; then
     eval "$(SHELL=/bin/sh lesspipe)"
-elif hash lesspipe.sh 2>/dev/null; then
+elif command -v lesspipe.sh >/dev/null; then
     eval "$(SHELL=/bin/sh lesspipe.sh)"
 fi
 

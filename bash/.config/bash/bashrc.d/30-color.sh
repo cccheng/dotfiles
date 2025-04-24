@@ -12,7 +12,7 @@ S_COLORS="auto"                         # Sysstat/iostat - enable colors (probab
 # © Copyright 2015 Tyler Akins
 # Licensed under the MIT license with an additional non-advertising clause
 # See http://github.com/fidian/ansi
-# 
+#
 
 ANSI_ESC=$'\033'
 ANSI_CSI="${ANSI_ESC}["
@@ -227,7 +227,7 @@ ansi::is-ansi-supported()
         return 0
     fi
 
-    if hash tput &> /dev/null; then
+    if command -v tput >/dev/null; then
         if [[ "$(tput colors)" -lt 8 ]]; then
             return 1
         fi
