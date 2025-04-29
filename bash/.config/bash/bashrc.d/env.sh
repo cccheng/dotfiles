@@ -68,6 +68,7 @@ SQLITE_HISTORY="$XDG_STATE_HOME/sqlite/history"
 RLWRAP_HOME="$XDG_STATE_HOME/readline"
 LESSHISTFILE="$XDG_STATE_HOME/lesshst"
 RANDFILE="$XDG_STATE_HOME/openssl.rnd"
+DISTCC_DIR="$XDG_STATE_HOME/distcc"
 CCACHE_DIR="$XDG_CACHE_HOME/ccache"
 
 ## To relocate runtime data & IPC sockets:
