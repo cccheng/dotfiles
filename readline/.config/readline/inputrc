@@ -63,6 +63,6 @@ set colored-completion-prefix on
 # https://www.gnu.org/software/bash/manual/html_node/Commands-For-Killing.html
 "\C-b": unix-filename-rubout            # Ctrl-b to delete one element from unix path (i.e. until previous '/')
 "\ee": "\C-asudo \C-e"                  # Alt-e to prepend sudo
-"\el": "\C-e | $PAGER"                  # Alt-l to append PAGER
-"\ev": "\C-e | vim -"                   # Atl-l to redirect to vim
+"\el": "\C-e| $PAGER"                  # Alt-l to append PAGER
+"\ev": "\C-e| vim -"                   # Atl-l to redirect to vim
 "\ea": "\C-a"                           # Alt-a to the begin of line. Ctrl-a may be used by tmux.
