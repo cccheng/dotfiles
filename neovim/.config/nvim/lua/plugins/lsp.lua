@@ -270,7 +270,11 @@ return {
             },
 
             signature = {
-                -- enabled = true,
+                enabled = true,
+                window = {
+                    border = "rounded",
+                    winblend = 10,
+                }
             },
 
             appearance = {
@@ -285,9 +289,20 @@ return {
                     enabled = false,
                 },
 
-                -- (Default) Only show the documentation popup when manually triggered
+                menu = {
+                    winblend = 10,
+                    draw = {
+                        treesitter = { "lsp" },
+                    },
+                },
+
                 documentation = {
-                    auto_show = false
+                    auto_show = true,
+                    auto_show_delay_ms = 100,
+                    window = {
+                        border = "single",
+                        winblend = 10,
+                    },
                 },
 
                 -- "prefix" will fuzzy match on the text before the cursor
@@ -310,12 +325,60 @@ return {
                     "emoji",
                 },
                 providers = {
+                    lsp = {
+                        name = "LSP",
+                        module = "blink.cmp.sources.lsp",
+                        score_offset = 10,
+                        fallbacks = {
+                            "buffer",
+                        },
+                        transform_items = function(_, items)
+                            return vim.tbl_filter(function(item)
+                                return item.kind ~= require("blink.cmp.types").CompletionItemKind.Keyword
+                            end, items)
+                        end,
+                    },
+                    buffer = {
+                        score_offset = 5,
+                        -- keep case of first char
+                        transform_items = function (a, items)
+                            local keyword = a.get_keyword()
+                            local correct, case
+                            if keyword:match('^%l') then
+                                correct = '^%u%l+$'
+                                case = string.lower
+                            elseif keyword:match('^%u') then
+                                correct = '^%l+$'
+                                case = string.upper
+                            else
+                                return items
+                            end
+
+                            -- avoid duplicates from the corrections
+                            local seen = {}
+                            local out = {}
+                            for _, item in ipairs(items) do
+                                local raw = item.insertText
+                                if raw:match(correct) then
+                                    local text = case(raw:sub(1,1)) .. raw:sub(2)
+                                    item.insertText = text
+                                    item.label = text
+                                end
+                                if not seen[item.insertText] then
+                                    seen[item.insertText] = true
+                                    table.insert(out, item)
+                                end
+                            end
+                            return out
+                        end
+                    },
                     dictionary = {
-                        module = "blink-cmp-dictionary",
                         name = "Dict",
-                        -- Make sure this is at least 2.
-                        -- 3 is recommended
+                        module = "blink-cmp-dictionary",
+                        score_offset = 3,
+                        -- Make sure this is at least 2. 3 is recommended
                         min_keyword_length = 3,
+                        -- max_items = 10,
                         opts = {
                             dictionary_files = {
                                 "/usr/share/dict/words",
@@ -323,9 +386,9 @@ return {
                         }
                     },
                     emoji = {
-                        module = "blink-emoji",
                         name = "Emoji",
-                        score_offset = 15, -- Tune by preference
+                        module = "blink-emoji",
+                        score_offset = 0,
                         opts = { insert = true }, -- Insert emoji (default) or complete its name
                         -- should_show_items = function()
                         --     return vim.tbl_contains(
