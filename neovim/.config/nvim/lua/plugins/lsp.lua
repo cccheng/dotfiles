@@ -324,6 +324,9 @@ return {
                     "dictionary",
                     "emoji",
                 },
+                per_filetype = {
+                    codecompanion = { "codecompanion" },
+                },
                 providers = {
                     lsp = {
                         name = "LSP",

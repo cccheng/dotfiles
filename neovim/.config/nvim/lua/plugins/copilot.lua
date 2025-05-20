@@ -1,27 +1,94 @@
 return {
     {
-        "github/copilot.vim",
-        event = "InsertEnter",
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "VeryLazy",
+        config = function()
+            require("copilot").setup({
+                suggestion = {
+                    auto_trigger = true,
+                    keymap = {
+                        accept = "<TAB>", -- false, -- handled by blink.cmp
+                    },
+                    panel = {
+                        -- enabled = false,
+                    },
+                },
+            })
+        end,
     },
     {
-        "CopilotC-Nvim/CopilotChat.nvim",
+        "olimorris/codecompanion.nvim",
+        event = "VeryLazy",
         dependencies = {
-            { "github/copilot.vim" },
-            { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter",
+            -- "ravitemer/mcphub.nvim",
         },
-        build = "make tiktoken", -- Only on MacOS or Linux
-        event = "InsertEnter",
         keys = {
-            { "<LEADER>pcc", "<CMD>CopilotChatToggle<CR>", desc = "Copilot Chat" },
-            { "<LEADER>pce", "<CMD>CopilotChatExplain<CR>", desc = "Explanation for the active selection", mode = { "v" } },
-            { "<LEADER>pcr", "<CMD>CopilotChatReview<CR>", desc = "Review the selected code", mode = { "v" }  },
-            { "<LEADER>pcf", "<CMD>CopilotChatFix<CR>", desc = "Rewrite the code with the bug fixed", mode = { "v" }  },
-            { "<LEADER>pco", "<CMD>CopilotChatOptimize<CR>", desc = "Optimize the performance and readability", mode = { "v" }  },
-            { "<LEADER>pcd", "<CMD>CopilotChatDocs<CR>", desc = "Add documentation comment for the selection", mode = { "v" }  },
+            { "<LEADER>a", mode = {"n", "v"}, "<CMD>CodeCompanionActions<CR>", desc = "CodeCompanion Actions" },
         },
         opts = {
-            -- debug = true, -- Enable debugging
-            model = "claude-3.5-sonnet",
+            -- language = "English",
+            strategies = {
+            },
+            display = {
+                action_palette = {
+                    opts = {
+                        show_default_actions = true, -- Show the default actions in the action palette?
+                        show_default_prompt_library = true, -- Show the default prompt library in the action palette?
+                    },
+                },
+                chat = {
+                    window = {
+                    },
+                },
+                diff = {
+                    provider = "default", -- default|mini_diff
+                },
+            },
+            prompt_library = {
+                ["Translate"] = {
+                    strategy = "chat",
+                    description = "Translate the selection into Traditional Chinese.",
+                    opts = {
+                        short_name = "trans",
+                        auto_submit = true,
+                    },
+                    prompts = {
+                        {
+                            role = "system",
+                            content = [[You are an expert translator with fluency in English and Chinese languages.]],
+                        },
+                        {
+                            role = "user",
+                            content = [[Please translate the selection into Traditional Chinese.]],
+                        }
+                    }
+                },
+                ["ProofReader"] = {
+                    strategy = "chat",
+                    description = "Proofread the selection.",
+                    opts = {
+                        short_name = "proof",
+                        auto_submit = true,
+                    },
+                    prompts = {
+                        {
+                            role = "system",
+                            content = [[You are a professional proofreader.]],
+                        },
+                        {
+                            role = "user",
+                            content = [[
+Please review the selection for any spelling, grammar, or punctuation errors, verb tense issues,
+or word choice problems. Once you have finished reviewing the text, please provide me with any
+necessary corrections or suggestions to improve it.
+                            ]],
+                        },
+                    },
+                },
+            },
         },
     },
 }
