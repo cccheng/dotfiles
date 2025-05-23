@@ -1,0 +1,6 @@
+{
+    "folder marker": {
+        "prefix": "foldmarker",
+        "body": "[//] vim:foldmethod=marker:foldmarker=<!--,-->:foldenable"
+    }
+}
