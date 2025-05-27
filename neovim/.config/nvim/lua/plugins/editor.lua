@@ -25,6 +25,23 @@ return {
                     start_jumping = "<LEADER>ss",
                 },
             })
+            -- require("mini.map").setup({
+            --     symbols = {
+            --         -- encode = require("mini.map").gen_encode_symbols.block("3x2"),
+            --         encode = require("mini.map").gen_encode_symbols.dot("4x2"),
+            --         -- encode = require("mini.map").gen_encode_symbols.shade("2x1"),
+            --     },
+            --     integrations = {
+            --         require("mini.map").gen_integration.builtin_search(),
+            --         require("mini.map").gen_integration.diff(),
+            --         require("mini.map").gen_integration.diagnostic(),
+            --         require("mini.map").gen_integration.gitsigns(),
+            --     },
+            --     window = {
+            --         winblend = 10,
+            --         zindex = 100,
+            --     },
+            -- })
             require("mini.move").setup({})
             require("mini.notify").setup({
                 window = {
