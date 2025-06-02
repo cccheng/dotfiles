@@ -23,14 +23,65 @@ return {
         dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",
-            -- "ravitemer/mcphub.nvim",
+            {
+                "Davidyz/VectorCode",
+                dependencies = { "nvim-lua/plenary.nvim" },
+                cmd = "VectorCode",
+                build = "uv tool upgrade vectorcode", -- optional but recommended. This keeps your CLI up-to-date.
+                -- build = "pipx upgrade vectorcode",
+                opts = {},
+            },
+            -- {
+            --     "ravitemer/mcphub.nvim",
+            --     build = "npm install -g mcp-hub@latest",
+            --     cmd = "MCPHub",
+            --     keys = {
+            --         { "<leader>am", "<cmd>MCPHub<cr>", mode = "n", desc = "MCPHub" },
+            --     },
+            --     config = function()
+            --         require("mcphub").setup()
+            --     end
+            -- },
         },
         keys = {
-            { "<LEADER>a", mode = {"n", "v"}, "<CMD>CodeCompanionActions<CR>", desc = "CodeCompanion Actions" },
+            { "<LEADER>a", "", desc = "AI Assistant" },
+            { "<LEADER>aa", "<CMD>CodeCompanionActions<CR>", mode = { "n", "v" }, desc = "CodeCompanion actions" },
+            { "<LEADER>ac", "<CMD>CodeCompanionChat Toggle<CR>", mode = { "n", "v" }, desc = "CodeCompanion chat" },
+            { "<LEADER>ai", "<CMD>CodeCompanion<CR>", mode = { "n", "v" }, desc = "CodeCompanion inline" },
         },
         opts = {
             -- language = "English",
+            adapters = {
+                gemini_25_pro = function()
+                    return require("codecompanion.adapters").extend("copilot", {
+                        schema = {
+                            model = {
+                                default = "gemini-2.5-pro",
+                            },
+                        },
+                    })
+                end,
+                opts = {
+                    show_model_choices = true,
+                },
+            },
             strategies = {
+                chat = {
+                    adapter = "gemini_25_pro",
+                    variables = {
+                        ["buffer"] = {
+                            opts = {
+                                default_params = "watch", -- or "pin"
+                            },
+                        },
+                    },
+                    opts = {
+                        completion_provider = "blink", -- blink|cmp|coc|default
+                    }
+                },
+                inline = {
+                    adapter = "gemini_25_pro",
+                },
             },
             display = {
                 action_palette = {
@@ -44,8 +95,23 @@ return {
                     },
                 },
                 diff = {
-                    provider = "default", -- default|mini_diff
+                    provider = "mini_diff", -- default|mini_diff
                 },
+            },
+            extensions = {
+                vectorcode = {
+                    opts = {
+                        add_tool = true,
+                    }
+                },
+                -- mcphub = {
+                --     callback = "mcphub.extensions.codecompanion",
+                --     opts = {
+                --         make_vars = true,
+                --         make_slash_commands = true,
+                --         show_result_in_chat = true
+                --     }
+                -- },
             },
             prompt_library = {
                 ["Translate"] = {
@@ -54,6 +120,7 @@ return {
                     opts = {
                         short_name = "trans",
                         auto_submit = true,
+                        is_slash_cmd = true,
                     },
                     prompts = {
                         {
@@ -72,6 +139,7 @@ return {
                     opts = {
                         short_name = "proof",
                         auto_submit = true,
+                        is_slash_cmd = true,
                     },
                     prompts = {
                         {
