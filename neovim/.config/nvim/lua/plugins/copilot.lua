@@ -116,8 +116,9 @@ return {
             prompt_library = {
                 ["Translate"] = {
                     strategy = "chat",
-                    description = "Translate the selection into Traditional Chinese.",
+                    description = "Translate the selection into Traditional Chinese",
                     opts = {
+                        index = 100,
                         short_name = "trans",
                         auto_submit = true,
                         is_slash_cmd = true,
@@ -133,10 +134,11 @@ return {
                         }
                     }
                 },
-                ["ProofReader"] = {
+                ["Proofreader"] = {
                     strategy = "chat",
-                    description = "Proofread the selection.",
+                    desCRiption = "Proofread the selection",
                     opts = {
+                        index = 101,
                         short_name = "proof",
                         auto_submit = true,
                         is_slash_cmd = true,
@@ -153,6 +155,38 @@ Please review the selection for any spelling, grammar, or punctuation errors, ve
 or word choice problems. Once you have finished reviewing the text, please provide me with any
 necessary corrections or suggestions to improve it.
                             ]],
+                        },
+                    },
+                },
+                ["Generate a Commit Message"] = {
+                    strategy = "inline",
+                    description = "Generate a commit message",
+                    opts = {
+                        index = 10,
+                        short_name = "commit",
+                        is_default = true,
+                        is_slash_cmd = true,
+                        auto_submit = true,
+                        placement = "before",
+                    },
+                    prompts = {
+                        {
+                            role = "user",
+                            content = [[
+You are an expert at following the Conventional Commit specification.
+I would like you to generate an appropriate commit message using the conventional commit format.
+Do not write any explanations or other words, just reply with the commit message.
+Start with a short headline as summary but then list the individual changes in more detail.
+Text other than Summary needs to be wrapped if it exceeds 80 characters.
+Given the git diff listed below, please generate a commit message for me:
+
+```diff
+]] .. vim.fn.system("git diff --no-color --no-ext-diff --cached") .. [[
+```
+]],
+                            opts = {
+                                contains_code = true,
+                            },
                         },
                     },
                 },
