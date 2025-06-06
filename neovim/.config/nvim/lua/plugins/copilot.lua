@@ -23,14 +23,14 @@ return {
         dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",
-            {
-                "Davidyz/VectorCode",
-                dependencies = { "nvim-lua/plenary.nvim" },
-                cmd = "VectorCode",
-                build = "uv tool upgrade vectorcode", -- optional but recommended. This keeps your CLI up-to-date.
-                -- build = "pipx upgrade vectorcode",
-                opts = {},
-            },
+            -- {
+            --     "Davidyz/VectorCode",
+            --     dependencies = { "nvim-lua/plenary.nvim" },
+            --     cmd = "VectorCode",
+            --     build = "uv tool upgrade vectorcode", -- optional but recommended. This keeps your CLI up-to-date.
+            --     -- build = "pipx upgrade vectorcode",
+            --     opts = {},
+            -- },
             -- {
             --     "ravitemer/mcphub.nvim",
             --     build = "npm install -g mcp-hub@latest",
@@ -99,11 +99,11 @@ return {
                 },
             },
             extensions = {
-                vectorcode = {
-                    opts = {
-                        add_tool = true,
-                    }
-                },
+                -- vectorcode = {
+                --     opts = {
+                --         add_tool = true,
+                --     }
+                -- },
                 -- mcphub = {
                 --     callback = "mcphub.extensions.codecompanion",
                 --     opts = {
