@@ -192,5 +192,8 @@ Given the git diff listed below, please generate a commit message for me:
                 },
             },
         },
+        config = function(_, opts)
+            require("codecompanion").setup(opts)
+        end,
     },
 }

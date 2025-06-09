@@ -67,9 +67,13 @@ return {
                             newfile_status = true,
                             path = 1,
                             padding = { left = 0 },
-                        }
+                        },
                     },
                     lualine_x = {
+                        {
+                            require("plugins.codecompanion.lualine"),
+                            color = { fg = "#ff9e64" },
+                        },
                         {
                             "encoding",
                             show_bomb = true,
