@@ -172,18 +172,19 @@ necessary corrections or suggestions to improve it.
                     prompts = {
                         {
                             role = "user",
-                            content = [[
+                            content = string.format([[
 You are an expert at following the Conventional Commit specification.
 I would like you to generate an appropriate commit message using the conventional commit format.
 Do not write any explanations or other words, just reply with the commit message.
 Start with a short headline as summary but then list the individual changes in more detail.
+Write clear, informative commit messages that explain the 'what' and 'why' behind changes, not just the 'how'.
 Text other than Summary needs to be wrapped if it exceeds 80 characters.
-Given the git diff listed below, please generate a commit message for me:
+Please generate a commit message for me:
 
 ```diff
-]] .. vim.fn.system("git diff --no-color --no-ext-diff --cached") .. [[
+%s
 ```
-]],
+]], vim.fn.system("git diff --no-color --no-ext-diff --cached")),
                             opts = {
                                 contains_code = true,
                             },
