@@ -1,3 +1,5 @@
+local PROMPTS = require("plugins.codecompanion.prompts")
+
 return {
     {
         "zbirenbaum/copilot.lua",
@@ -52,13 +54,14 @@ return {
         opts = {
             -- language = "English",
             adapters = {
-                gemini_25_pro = function()
+                copilot = function()
                     return require("codecompanion.adapters").extend("copilot", {
-                        schema = {
-                            model = {
-                                default = "gemini-2.5-pro",
-                            },
-                        },
+                        schema = { model = { default = "claude-sonnet-4" } },
+                    })
+                end,
+                copilot_inline = function()
+                    return require("codecompanion.adapters").extend("copilot", {
+                        schema = { model = { default = "claude-sonnet-4" } },
                     })
                 end,
                 opts = {
@@ -67,7 +70,21 @@ return {
             },
             strategies = {
                 chat = {
-                    adapter = "gemini_25_pro",
+                    adapter = "copilot",
+                    roles = {
+                        user = "",
+                        llm = function(adapter)
+                            local model_name = ""
+                            if adapter.schema and adapter.schema.model and adapter.schema.model.default then
+                                local model = adapter.schema.model.default
+                                if type(model) == "function" then
+                                    model = model(adapter)
+                                end
+                                model_name = "(" .. model .. ")"
+                            end
+                            return " " .. adapter.formatted_name .. model_name
+                        end,
+                    },
                     variables = {
                         ["buffer"] = {
                             opts = {
@@ -80,7 +97,7 @@ return {
                     }
                 },
                 inline = {
-                    adapter = "gemini_25_pro",
+                    adapter = "copilot_inline",
                 },
             },
             display = {
@@ -113,85 +130,10 @@ return {
                 --     }
                 -- },
             },
-            prompt_library = {
-                ["Translate"] = {
-                    strategy = "chat",
-                    description = "Translate the selection into Traditional Chinese",
-                    opts = {
-                        index = 100,
-                        short_name = "trans",
-                        auto_submit = true,
-                        is_slash_cmd = true,
-                    },
-                    prompts = {
-                        {
-                            role = "system",
-                            content = [[You are an expert translator with fluency in English and Chinese languages.]],
-                        },
-                        {
-                            role = "user",
-                            content = [[Please translate the selection into Traditional Chinese.]],
-                        }
-                    }
-                },
-                ["Proofreader"] = {
-                    strategy = "chat",
-                    desCRiption = "Proofread the selection",
-                    opts = {
-                        index = 101,
-                        short_name = "proof",
-                        auto_submit = true,
-                        is_slash_cmd = true,
-                    },
-                    prompts = {
-                        {
-                            role = "system",
-                            content = [[You are a professional proofreader.]],
-                        },
-                        {
-                            role = "user",
-                            content = [[
-Please review the selection for any spelling, grammar, or punctuation errors, verb tense issues,
-or word choice problems. Once you have finished reviewing the text, please provide me with any
-necessary corrections or suggestions to improve it.
-                            ]],
-                        },
-                    },
-                },
-                ["Generate a Commit Message"] = {
-                    strategy = "inline",
-                    description = "Generate a commit message",
-                    opts = {
-                        index = 10,
-                        short_name = "commit",
-                        is_default = true,
-                        is_slash_cmd = true,
-                        auto_submit = true,
-                        placement = "before",
-                    },
-                    prompts = {
-                        {
-                            role = "user",
-                            content = string.format([[
-You are an expert at following the Conventional Commit specification.
-I would like you to generate an appropriate commit message using the conventional commit format.
-Do not write any explanations or other words, just reply with the commit message.
-Start with a short headline as summary but then list the individual changes in more detail.
-Write clear, informative commit messages that explain the 'what' and 'why' behind changes, not just the 'how'.
-Text other than Summary needs to be wrapped if it exceeds 80 characters.
-Please generate a commit message for me:
-
-```diff
-%s
-```
-]], vim.fn.system("git diff --no-color --no-ext-diff --cached")),
-                            opts = {
-                                contains_code = true,
-                            },
-                        },
-                    },
-                },
+            opts = {
+                system_prompt = PROMPTS.SYSTEM_PROMPT,
             },
+            prompt_library = PROMPTS.PROMPT_LIBRARY,
         },
         config = function(_, opts)
             require("codecompanion").setup(opts)

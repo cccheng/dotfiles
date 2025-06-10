@@ -53,7 +53,7 @@ return {
                         {
                             require("noice").api.statusline.mode.get,
                             cond = require("noice").api.statusline.mode.has,
-                            color = { fg = "#ff9e64" },
+                            color = { fg = vim.fn.synIDattr(vim.fn.hlID("MoreMsg"), "fg") },
                         },
                     },
                     lualine_c = {
@@ -72,7 +72,7 @@ return {
                     lualine_x = {
                         {
                             require("plugins.codecompanion.lualine"),
-                            color = { fg = "#ff9e64" },
+                            color = { fg = vim.fn.synIDattr(vim.fn.hlID("MoreMsg"), "fg") },
                         },
                         {
                             "encoding",
