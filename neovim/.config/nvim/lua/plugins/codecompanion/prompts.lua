@@ -167,6 +167,110 @@ When asked to add documentation, follow these steps:
             },
         },
     },
+    ["Refactor"] = {
+        strategy = "chat",
+        description = "Refactor the selected code for readability, maintainability and performances",
+        opts = {
+            index = 103,
+            auto_submit = true,
+            is_slash_cmd = true,
+            modes = { "v" },
+            short_name = "refactor",
+            stop_context_insertion = true,
+        },
+        prompts = {
+            {
+                role = "system",
+                content = [[
+When asked to optimize code, follow these steps:
+1. **Analyze the Code**: Understand the functionality and identify potential bottlenecks.
+2. **Implement the Optimization**: Apply the optimizations including best practices to the code.
+3. **Shorten the code**: Remove unnecessary code and refactor the code to be more concise.
+3. **Review the Optimized Code**: Ensure the code is optimized for performance and readability. Ensure the code:
+- Maintains the original functionality.
+- Naming conventions that are unclear, misleading or doesn't follow conventions for the language being used.
+- The presence of unnecessary comments, or the lack of necessary ones.
+- Overly complex expressions that could benefit from simplification.
+- High nesting levels that make the code difficult to follow.
+- The use of excessively long names for variables or functions.
+- Any inconsistencies in naming, formatting, or overall coding style.
+- Repetitive code patterns that could be more efficiently handled through abstraction or optimization.
+- Is more efficient in terms of time and space complexity.
+- Follows best practices for readability and maintainability.
+- Is formatted correctly.
+
+Use Markdown formatting and include the programming language name at the start of the code block.
+                ]],
+                opts = {
+                    visible = false,
+                },
+            },
+            {
+                role = "user",
+                content = function(context)
+                    local code = require("codecompanion.helpers.actions").get_code(context.start_line, context.end_line)
+
+                    return "Please optimize the selected code:\n\n```" .. context.filetype .. "\n" .. code .. "\n```\n\n"
+                end,
+                opts = {
+                    contains_code = true,
+                },
+            },
+        },
+    },
+    ["Review Code"] = {
+        strategy = "chat",
+        description = "Review code and provide suggestions for improvement.",
+        opts = {
+            index = 104,
+            auto_submit = true,
+            is_slash_cmd = true,
+            modes = { "v" },
+            short_name = "review",
+            stop_context_insertion = true,
+        },
+        prompts = {
+            {
+                role = "system",
+                content = [[
+Your task is to review the provided code snippet, focusing specifically on its readability and maintainability.
+Identify any issues related to:
+- Naming conventions that are unclear, misleading or doesn't follow conventions for the language being used.
+- The presence of unnecessary comments, or the lack of necessary ones.
+- Overly complex expressions that could benefit from simplification.
+- High nesting levels that make the code difficult to follow.
+- The use of excessively long names for variables or functions.
+- Any inconsistencies in naming, formatting, or overall coding style.
+- Repetitive code patterns that could be more efficiently handled through abstraction or optimization.
+
+Your feedback must be concise, directly addressing each identified issue with:
+- A clear description of the problem.
+- A concrete suggestion for how to improve or correct the issue.
+
+Format your feedback as follows:
+- Explain the high-level issue or problem briefly.
+- Provide a specific suggestion for improvement.
+
+If the code snippet has no readability issues, simply confirm that the code is clear and well-written as is.
+                ]],
+                opts = {
+                    visible = false,
+                },
+            },
+            {
+                role = "user",
+                content = function(context)
+                    local code = require("codecompanion.helpers.actions").get_code(context.start_line, context.end_line)
+
+                    return "Please review the following code and provide suggestions for improvement then refactor the following code to improve its clarity and readability:\n\n```"
+                           .. context.filetype .. "\n" .. code .. "\n```\n\n"
+                end,
+                opts = {
+                    contains_code = true,
+                },
+            },
+        },
+    },
 }
 
 return {
