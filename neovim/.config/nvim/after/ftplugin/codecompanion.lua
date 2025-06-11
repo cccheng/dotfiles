@@ -19,8 +19,8 @@ vim.api.nvim_create_autocmd('BufEnter', {
         -- Defer adding the header to allow CodeCompanion to set up the buffer after its creation,
         -- preventing the header from being overwritten.
         vim.defer_fn(add_codecompanion_header, 250)
-        vim.opt.number = false
-        vim.opt.relativenumber = false
+        vim.opt_local.number = false
+        vim.opt_local.relativenumber = false
     end,
 })
 
