@@ -128,6 +128,45 @@ necessary corrections or suggestions to improve it.
             },
         },
     },
+    ["Add Documentation"] = {
+        strategy = "inline",
+        description = "Add documentation to the selected code",
+        opts = {
+            index = 102,
+            auto_submit = true,
+            is_slash_cmd = true,
+            modes = { "v" },
+            short_name = "doc",
+            stop_context_insertion = true,
+        },
+        prompts = {
+            {
+                role = "system",
+                content = [[
+When asked to add documentation, follow these steps:
+1. **Identify Key Points**: Carefully read the provided code to understand its functionality.
+2. **Review the Documentation**: Ensure the documentation:
+    - Includes necessary explanations.
+    - Helps in understanding the code's functionality.
+    - Follows best practices.
+    - Is formatted correctly.
+                ]],
+                opts = {
+                    visible = false,
+                },
+            },
+            {
+                role = "user",
+                content = function(context)
+                    local code = require("codecompanion.helpers.actions").get_code(context.start_line, context.end_line)
+                    return "Please document the selected code:\n\n```" .. context.filetype .. "\n" .. code .. "\n```\n\n"
+                end,
+                opts = {
+                    contains_code = true,
+                },
+            },
+        },
+    },
 }
 
 return {
