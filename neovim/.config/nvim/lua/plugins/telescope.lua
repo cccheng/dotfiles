@@ -5,6 +5,7 @@ return {
         dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-telescope/telescope-fzf-native.nvim",
+            "nvim-telescope/telescope-symbols.nvim",
         },
         keys = {
             { "<LEADER>t", "", desc = "Telescope" },
@@ -27,6 +28,13 @@ return {
 
             vim.keymap.set("n", "<LEADER>gs", "<CMD>Telescope git_status<CR>", { desc = "Git status" })
             vim.keymap.set("n", "<LEADER>gB", "<CMD>Telescope git_bcommits<CR>", { desc = "Git commits of current buffer" })
+
+            vim.keymap.set("n", "<LEADER>tSe", function() telescope.symbols({ sources = {"emoji"} }) end, { desc = "Telescope emoji symbols" })
+            vim.keymap.set("n", "<LEADER>tSg", function() telescope.symbols({ sources = {"gitmoji"} }) end, { desc = "Telescope gitmoji symbols" })
+            vim.keymap.set("n", "<LEADER>tSk", function() telescope.symbols({ sources = {"kaomoji"} }) end, { desc = "Telescope kaomoji symbols" })
+            vim.keymap.set("n", "<LEADER>tSl", function() telescope.symbols({ sources = {"latex"} }) end, { desc = "Telescope latex symbols" })
+            vim.keymap.set("n", "<LEADER>tSm", function() telescope.symbols({ sources = {"math"} }) end, { desc = "Telescope math symbols" })
+            vim.keymap.set("n", "<LEADER>tSn", function() telescope.symbols({ sources = {"nerd"} }) end, { desc = "Telescope nerd symbols" })
 
             require("telescope").setup({
                 defaults = require("telescope.themes").get_ivy {
