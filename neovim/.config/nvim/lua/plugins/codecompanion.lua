@@ -72,7 +72,7 @@ return {
                 chat = {
                     adapter = "copilot",
                     roles = {
-                        user = "",
+                        user = " " .. os.getenv("USER"),
                         llm = function(adapter)
                             local model_name = ""
                             if adapter.schema and adapter.schema.model and adapter.schema.model.default then
@@ -82,7 +82,7 @@ return {
                                 end
                                 model_name = "(" .. model .. ")"
                             end
-                            return " " .. adapter.formatted_name .. model_name
+                            return "󱚤 " .. adapter.formatted_name .. model_name
                         end,
                     },
                     variables = {
