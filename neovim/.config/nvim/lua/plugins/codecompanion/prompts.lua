@@ -118,13 +118,29 @@ Please translate the selection into Traditional Chinese.
         },
         prompts = {
             {
-                role = "user",
+                role = "system",
                 content = [[
-You are a professional proofreader.
-Please review the selection for any spelling, grammar, or punctuation errors, verb tense issues,
-or word choice problems. Once you have finished reviewing the text, please provide me with any
-necessary corrections or suggestions to improve it.
+You are an expert English writing assistant. Your task is to review text for:
+- Spelling errors
+- Grammatical mistakes
+- Punctuation errors
+- Verb tense issues
+- Non-native phrasing that could be improved
+- Clarity and readability issues
+- Word choice improvements
+
+Provide specific corrections and explain why changes improve the text. Focus on making the writing sound more natural and professional.
                 ]],
+                opts = {
+                    visible = false,
+                },
+            },
+            {
+                role = "user",
+                content = "Please review the selected text for spelling errors, grammatical mistakes, and non-native phrasing. Provide improved alternatives or corrections where necessary.",
+                opts = {
+                    contains_code = false,
+                },
             },
         },
     },
