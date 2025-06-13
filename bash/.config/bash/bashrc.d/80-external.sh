@@ -22,17 +22,17 @@ if [ -d "/usr/local/opt/ruby/bin" ]; then
     add_path "/usr/local/opt/ruby/bin"
 fi
 
-if type eza &>/dev/null; then
+if command -v eza >/dev/null; then
     alias ls="\eza -F --group-directories-first"
     alias ll="\eza -bgHilSF --time-style=long-iso --group-directories-first"
     alias la="\eza -abgHilSF --git --time-style=long-iso --group-directories-first"
 fi
 
-if type lsd &>/dev/null; then
+if command -v lsd >/dev/null; then
     alias lsd="\lsd -AFlig --icon never --group-dirs first --date '+%Y-%m-%d %H:%M'"
 fi
 
-if type bat &>/dev/null; then
+if command -v bat >/dev/null; then
     alias cat="\bat -p --theme=Nord"
 fi
 
