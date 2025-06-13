@@ -1,11 +1,15 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC1091
 
+if command -v mise >/dev/null; then
+    eval "$(mise activate bash)"
+fi
+
 if [ -d "${CARGO_HOME:-$HOME/.cargo}/bin" ]; then
     add_path "${CARGO_HOME:-$HOME/.cargo}/bin"
 fi
 
-if [ -s "${rvm_path:-$HOME/.rvm}/scripts/rvm" ]; then 
+if [ -s "${rvm_path:-$HOME/.rvm}/scripts/rvm" ]; then
     source "${rvm_path:-$HOME/.rvm}/scripts/rvm"
 fi
 
