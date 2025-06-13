@@ -23,7 +23,9 @@ return {
         event = "BufReadPre",
         opts = {
             colorcolumn = {"100"},
-            scope = "window",
+            custom_colorcolumn = {
+                gitcommit = "72",
+            },
             disabled_filetypes = {
                 "qf",
                 "netrw",

@@ -64,7 +64,7 @@ I would like you to generate an appropriate commit message using the conventiona
 Do not write any explanations or other words, just reply with the commit message.
 Start with a short headline as summary but then list the individual changes in more detail.
 Write clear, informative commit messages that explain the 'what' and 'why' behind changes, not just the 'how'.
-Text other than Summary needs to be wrapped if it exceeds 80 characters.
+Text other than Summary needs to be wrapped if it exceeds 72 characters.
 Please generate a commit message for me:
 
 ```diff
