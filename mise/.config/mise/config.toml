@@ -1,8 +1,40 @@
 [tools]
-ruby = "latest"
-rust = "latest"
+clang = "latest"
+clang-format = "latest"
+clangd = "latest"
 go = "latest"
 node = "latest"
 python = "latest"
+ruby = "latest"
+rust = "latest"
 uv = "latest"
+
+fzf = "latest"
+neovim="latest"
 usage = "latest"
+
+"pipx:drgn" = "latest"
+"pipx:neovim-remote" = "latest"
+"pipx:shell-functools" = "latest"           # shell utilities, https://github.com/sharkdp/shell-functools
+"pipx:terminaltexteffects" = "latest"       # terminal visual effects enginel, https://github.com/ChrisBuilds/terminaltexteffects
+"pipx:vectorcode" = "latest"
+
+[settings]
+auto_install = false
+env_file = ".env"
+exec_auto_install = false
+trusted_config_paths = ["~/.config/mise/config.toml"]
+
+[settings.cargo]
+binstall = true
+
+[settings.pipx]
+uvx = true
+
+[settings.rust]
+cargo_home = "~/.local/share/cargo"
+rustup_home = "~/.local/share/rustup"
+
+[settings.status]
+missing_tools = "never"                     # if_other_versions_installed, never, always
+show_env = true
