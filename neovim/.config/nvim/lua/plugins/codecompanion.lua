@@ -92,6 +92,34 @@ return {
                             },
                         },
                     },
+                    keymaps = {
+                        toggle = {
+                            modes = {
+                                n = "q",
+                            },
+                            index = 3,
+                            callback = function()
+                                vim.cmd("CodeCompanionChat Toggle")
+                            end,
+                            description = "Toggle Chat",
+                        },
+                        close = {
+                            modes = {
+                                n = "Q",
+                            },
+                            index = 3,
+                            callback = "keymaps.close",
+                            description = "Close Chat",
+                        },
+                        stop = {
+                            modes = {
+                                n = "<C-c>",
+                            },
+                            index = 4,
+                            callback = "keymaps.stop",
+                            description = "Stop Request",
+                        },
+                    },
                     opts = {
                         completion_provider = "blink", -- blink|cmp|coc|default
                     }
