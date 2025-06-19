@@ -12,6 +12,13 @@ vim.g.autoformat = true
 
 local opt = vim.opt
 
+opt.ttyfast = true              -- Fast terminal connection
+opt.updatetime = 50             -- Faster CursorHold events (default 4000ms)
+opt.timeoutlen = 300            -- Faster key sequence timeout
+opt.ttimeoutlen = 10            -- Faster key code timeout
+opt.redrawtime = 1500           -- Time limit for syntax highlighting
+opt.synmaxcol = 200             -- Limit syntax highlighting to 200 columns
+
 opt.clipboard = "unnamedplus" -- Sync with system clipboard
 opt.cursorline = true -- Enable highlighting of the current line
 opt.formatoptions = "jcroqlnt" -- tcqj
