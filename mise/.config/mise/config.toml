@@ -18,6 +18,7 @@ usage = "latest"
 "pipx:shell-functools" = "latest"           # shell utilities, https://github.com/sharkdp/shell-functools
 "pipx:terminaltexteffects" = "latest"       # terminal visual effects enginel, https://github.com/ChrisBuilds/terminaltexteffects
 "pipx:vectorcode" = "latest"
+"pipx:virtme-ng" = "latest"
 
 [settings]
 auto_install = false
