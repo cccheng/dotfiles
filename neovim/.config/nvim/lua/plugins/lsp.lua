@@ -66,13 +66,21 @@ return {
                 clangd = {
                     capabilities = {
                         offsetEncoding = { "utf-16" },
+                        textDocument = {
+                            inlayHints = { enabled = true },
+                            completion = { editsNearCursor = true },
+                        },
                     },
                     cmd = {
                         "clangd",
                         "--background-index",
+                        "--background-index-priority=background",
+                        "--all-scopes-completion",
+                        "--pch-storage=memory",
                         "--clang-tidy",
                         "--header-insertion=iwyu",
                         "--completion-style=detailed",
+                        "--enable-config",
                         "--function-arg-placeholders",
                         "--fallback-style=llvm",
                     },
@@ -80,6 +88,11 @@ return {
                         usePlaceholders = true,
                         completeUnimported = true,
                         clangdFileStatus = true,
+                    },
+                    settings = {
+                        clangd = {
+                            semanticHighlighting = true,
+                        },
                     },
                 },
                 rust_analyzer = {
