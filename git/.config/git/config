@@ -1,7 +1,7 @@
 [user]
     name = Chung-Chiang Cheng
-    email = cccheng@cccheng.net
-    ; signingkey = 
+    email = git@cccheng.net
+    signingkey = ABAF504AF89BB2CA
 [core]
     editor = nvim
     abbrev = 12
