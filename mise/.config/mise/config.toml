@@ -19,6 +19,7 @@ usage = "latest"
 "pipx:terminaltexteffects" = "latest"       # terminal visual effects enginel, https://github.com/ChrisBuilds/terminaltexteffects
 "pipx:vectorcode" = "latest"
 "pipx:virtme-ng" = "latest"
+"npm:mcp-hub" = "latest"
 
 [settings]
 auto_install = false

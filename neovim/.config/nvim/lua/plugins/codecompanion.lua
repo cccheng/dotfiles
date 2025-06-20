@@ -33,17 +33,17 @@ return {
             --     -- build = "pipx upgrade vectorcode",
             --     opts = {},
             -- },
-            -- {
-            --     "ravitemer/mcphub.nvim",
-            --     build = "npm install -g mcp-hub@latest",
-            --     cmd = "MCPHub",
-            --     keys = {
-            --         { "<leader>am", "<cmd>MCPHub<cr>", mode = "n", desc = "MCPHub" },
-            --     },
-            --     config = function()
-            --         require("mcphub").setup()
-            --     end
-            -- },
+            {
+                "ravitemer/mcphub.nvim",
+                -- build = "npm install -g mcp-hub@latest",
+                cmd = "MCPHub",
+                keys = {
+                    { "<leader>am", "<cmd>MCPHub<cr>", mode = "n", desc = "MCPHub" },
+                },
+                config = function()
+                    require("mcphub").setup()
+                end
+            },
         },
         keys = {
             { "<LEADER>a", "", desc = "AI Assistant" },
@@ -149,14 +149,14 @@ return {
                 --         add_tool = true,
                 --     }
                 -- },
-                -- mcphub = {
-                --     callback = "mcphub.extensions.codecompanion",
-                --     opts = {
-                --         make_vars = true,
-                --         make_slash_commands = true,
-                --         show_result_in_chat = true
-                --     }
-                -- },
+                mcphub = {
+                    callback = "mcphub.extensions.codecompanion",
+                    opts = {
+                        make_vars = true,               -- Convert resources to #variables
+                        make_slash_commands = true,     -- Add prompts as /slash commands
+                        show_result_in_chat = true,     -- Show mcp tool results in chat
+                    }
+                },
             },
             opts = {
                 system_prompt = PROMPTS.SYSTEM_PROMPT,
