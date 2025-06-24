@@ -3,7 +3,7 @@ return {
         "saghen/blink.cmp",
         dependencies = {
             "echasnovski/mini.nvim",
-            "Kaiser-Yang/blink-cmp-dictionary",
+            "archie-judd/blink-cmp-words",
         },
         event = {
             "InsertEnter",
@@ -83,6 +83,7 @@ return {
                     "snippets",
                     "buffer",
                     "dictionary",
+                    "thesaurus",
                 },
                 per_filetype = {
                     codecompanion = { "codecompanion" },
@@ -135,18 +136,36 @@ return {
                             return out
                         end
                     },
-                    dictionary = {
-                        name = "Dict",
-                        module = "blink-cmp-dictionary",
-                        score_offset = 3,
-                        -- Make sure this is at least 2. 3 is recommended
-                        min_keyword_length = 3,
-                        -- max_items = 10,
+                    thesaurus = {
+                        name = "blink-cmp-words",
+                        module = "blink-cmp-words.thesaurus",
+                        -- All available options
                         opts = {
-                            dictionary_files = {
-                                "/usr/share/dict/words",
-                            },
-                        }
+                            -- A score offset applied to returned items.
+                            -- By default the highest score is 0 (item 1 has a score of -1, item 2 of -2 etc..).
+                            score_offset = 0,
+
+                            -- Default pointers define the lexical relations listed under each definition,
+                            -- see Pointer Symbols below.
+                            -- Default is as below ("antonyms", "similar to" and "also see").
+                            pointer_symbols = { "!", "&", "^" },
+                        },
+                    },
+                    dictionary = {
+                        name = "blink-cmp-words",
+                        module = "blink-cmp-words.dictionary",
+                        -- All available options
+                        opts = {
+                            -- The number of characters required to trigger completion.
+                            -- Set this higher if completion is slow, 3 is default.
+                            dictionary_search_threshold = 3,
+
+                            -- See above
+                            score_offset = 0,
+
+                            -- See above
+                            pointer_symbols = { "!", "&", "^" },
+                        },
                     },
                     cmdline = {
                         min_keyword_length = function(ctx)
