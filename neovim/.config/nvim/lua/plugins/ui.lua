@@ -37,6 +37,7 @@ return {
                 "tex",
                 "html",
                 "DiffviewFileHistory",
+                "codecompanion",
             },
         }
     },
