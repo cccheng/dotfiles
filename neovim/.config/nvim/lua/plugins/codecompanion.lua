@@ -136,6 +136,8 @@ return {
                     },
                 },
                 chat = {
+                    intro_message = "",
+                    show_header_separator = true,
                     window = {
                     },
                 },
