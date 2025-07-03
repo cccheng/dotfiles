@@ -25,6 +25,7 @@ usage = "latest"
 auto_install = false
 env_file = ".env"
 exec_auto_install = false
+idiomatic_version_file_enable_tools = []
 trusted_config_paths = ["~/.config/mise/config.toml"]
 
 [settings.cargo]
