@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 # shellcheck disable=SC1090,SC1091,SC2034
 
 add_path() { case :$PATH: in *:$1:*) ;; *) PATH=$1:$PATH;; esac }
@@ -13,7 +12,9 @@ test "$UID"      || UID="$(id -u)"
 test "$USER"     || USER="$(id -un)"
 test "$HOSTNAME" || HOSTNAME="$(hostname)"
 
-[[ "$OSTYPE" =~ gnu$ ]] && GNU=1
+if [ "${OSTYPE%gnu*}" != "$OSTYPE" ]; then
+    GNU=1
+fi
 
 OS_ARCH="$(uname -m)"
 OS_NAME="$(uname)"
@@ -92,7 +93,7 @@ VSCODE_PORTABLE="$XDG_DATA_HOME/vscode"
 set +a
 
 # Local environment customized settings
-if [ -r "$XDG_CONFIG_HOME/bash/bashrc.d/env.${HOSTNAME,,}.sh" ]; then
+if [ -n "$BASH_VERSION" ] && [ -r "$XDG_CONFIG_HOME/bash/bashrc.d/env.${HOSTNAME,,}.sh" ]; then
     source "$XDG_CONFIG_HOME/bash/bashrc.d/env.${HOSTNAME,,}.sh"
 fi
 

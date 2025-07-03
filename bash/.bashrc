@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 # shellcheck source=/dev/null
 
 # ~/.bashrc: executed by bash(1) for non-login shells.
@@ -19,7 +18,7 @@ esac
 
 GPG_TTY="$(tty)"; export GPG_TTY
 
-# Pull in bash modules. 
+# Pull in bash modules.
 while read -r f; do
     source "$f"
 done < <(find "$HOME/.config/bash/bashrc.d/" -name "*-*.sh" | sort)

@@ -11,5 +11,6 @@
 # Enable bashrc if running bash
 if [ -n "$BASH_VERSION" ] && [ -f "$HOME/.bashrc" ]; then
     . "$HOME/.bashrc"
+elif [ -f "$HOME/.config/bash/bashrc.d/env.sh" ]; then
+    . "$HOME/.config/bash/bashrc.d/env.sh"
 fi
-
