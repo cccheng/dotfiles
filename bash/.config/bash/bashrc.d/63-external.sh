@@ -19,9 +19,9 @@ if [ -d "/usr/local/opt/ruby/bin" ]; then
 fi
 
 if command -v eza >/dev/null; then
-    alias ls="\eza -F --group-directories-first"
-    alias ll="\eza -bgHilSF --time-style=long-iso --group-directories-first"
-    alias la="\eza -abgHilSF --git --time-style=long-iso --group-directories-first"
+    alias ls="\eza -F --group-directories-first --icons"
+    alias ll="\eza -bgHilSF --time-style=long-iso --group-directories-first --icons"
+    alias la="\eza -abgHilSF --git --time-style=long-iso --group-directories-first --icons"
 fi
 
 if command -v lsd >/dev/null; then
