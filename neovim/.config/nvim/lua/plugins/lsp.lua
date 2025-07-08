@@ -1,7 +1,10 @@
 return {
     {
         "mason-org/mason.nvim",
-        event = "BufReadPre",
+        lazy = true,
+        cmd = {
+            "Mason",
+        },
         opts = {
             ui = {
                 icons = {
@@ -14,7 +17,10 @@ return {
     },
     {
         "mason-org/mason-lspconfig.nvim",
-        event = "BufReadPre",
+        lazy = true,
+        cmd = {
+            "Mason",
+        },
         dependencies = {
             "mason-org/mason.nvim",
         },
@@ -43,7 +49,7 @@ return {
     },
     {
         "neovim/nvim-lspconfig",
-        event = "BufReadPre",
+        event = "LspAttach",
         dependencies = {
             "williamboman/mason-lspconfig.nvim",
             "saghen/blink.cmp",
@@ -253,7 +259,7 @@ return {
     },
     {
         "DNLHC/glance.nvim",
-        event = "BufReadPre",
+        event = "LspAttach",
         config = function()
             local glance = require("glance")
             local actions = glance.actions

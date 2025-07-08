@@ -40,7 +40,7 @@ return {
                 defaults = require("telescope.themes").get_ivy {
                     winblend = 10,
                     prompt_prefix = "   ",
-                    selection_caret = " ",
+                    selection_caret = "▶ ",
                     -- borderchars = { "━", "┃", "━", "┃", "┏", "┓", "┛", "┗" },
                     mappings = {
                         ["n"] = {
@@ -98,16 +98,16 @@ return {
     },
     {
         "nvim-telescope/telescope-fzf-native.nvim",
-        event = "VeryLazy",
+        lazy = true,
         build = "make"
     },
     {
         "nvim-telescope/telescope-ui-select.nvim",
-        event = "VeryLazy",
+        lazy = true,
     },
     {
         "nvim-telescope/telescope-file-browser.nvim",
-        event = "VeryLazy",
+        lazy = true,
         dependencies = {
             "nvim-telescope/telescope.nvim",
             "nvim-lua/plenary.nvim"

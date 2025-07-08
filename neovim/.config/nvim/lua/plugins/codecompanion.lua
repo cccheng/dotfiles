@@ -3,8 +3,8 @@ local PROMPTS = require("plugins.codecompanion.prompts")
 return {
     {
         "zbirenbaum/copilot.lua",
+        lazy = true,
         cmd = "Copilot",
-        event = "VeryLazy",
         config = function()
             require("copilot").setup({
                 suggestion = {
@@ -21,7 +21,12 @@ return {
     },
     {
         "olimorris/codecompanion.nvim",
-        event = "VeryLazy",
+        lazy = true,
+        cmd = {
+            "CodeCompanion",
+            "CodeCompanionActions",
+            "CodeCompanionChat",
+        },
         dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",

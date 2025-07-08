@@ -1,7 +1,10 @@
 return {
     {
         "lukas-reineke/indent-blankline.nvim",
-        event = "BufReadPre",
+        event = {
+            "BufEnter",
+            "BufReadPre",
+        },
         config = function()
             require("ibl").setup({
                 indent = {
@@ -20,7 +23,10 @@ return {
     },
     {
         "m4xshen/smartcolumn.nvim",
-        event = "BufReadPre",
+        event = {
+            "BufEnter",
+            "BufReadPre",
+        },
         opts = {
             colorcolumn = {"100"},
             custom_colorcolumn = {
@@ -104,7 +110,10 @@ return {
     },
     {
         "petertriho/nvim-scrollbar",
-        event = "BufReadPre",
+        event = {
+            "BufEnter",
+            "BufReadPre",
+        },
         config = function()
             require("scrollbar").setup({
                 handle = {

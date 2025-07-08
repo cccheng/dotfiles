@@ -2,8 +2,14 @@ return {
     {
         "saghen/blink.cmp",
         dependencies = {
-            "echasnovski/mini.nvim",
-            "archie-judd/blink-cmp-words",
+            {
+                "echasnovski/mini.nvim",
+                lazy = true,
+            },
+            {
+                "archie-judd/blink-cmp-words",
+                lazy = true,
+            },
         },
         event = {
             "InsertEnter",

@@ -1,7 +1,7 @@
 return {
     {
         "sindrets/diffview.nvim",
-        event = "BufReadPre",
+        lazy = true,
         keys = {
             { "<LEADER>g", "", desc = "Git" },
             {
@@ -42,7 +42,7 @@ return {
     },
     {
         "FabijanZulj/blame.nvim",
-        event = "BufReadPre",
+        lazy = true,
         keys = {
             { "<LEADER>gb", mode = {"n"}, "<CMD>BlameToggle window<CR>", desc = "Git blame" },
         },

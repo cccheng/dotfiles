@@ -1,7 +1,7 @@
 return {
     {
         "hedyhli/outline.nvim",
-        event = "BufReadPre",
+        lazy = true,
         keys = {
             { "<LEADER>lo", mode = {"n"}, "<CMD>Outline<CR>", desc = "Outline" },
         },
