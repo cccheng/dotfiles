@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+#MISE description="Update Git repositories in subfolders"
+
+Dir
+    .glob("#{ENV['MISE_ORIGINAL_CWD']}/*")
+    .select { |e| File.directory?(e) && File.exist?("#{e}/.git") }
+    .each do |e|
+        puts "» #{e}"
+        Dir.chdir(e)
+        %x[git fetch --all --prune]
+        %x[git pull --rebase --autostash]
+    end
+
