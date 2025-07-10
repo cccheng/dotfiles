@@ -1,7 +1,7 @@
 return {
     {
         "nvim-telescope/telescope.nvim",
-        event = "VeryLazy",
+        lazy = true,
         dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-telescope/telescope-fzf-native.nvim",
@@ -9,33 +9,28 @@ return {
         },
         keys = {
             { "<LEADER>t", "", desc = "Telescope" },
+            { "<LEADER>ts", function() require("telescope.builtin").find_files() end, desc = "Search files" },
+            { "<LEADER>tg", function() require("telescope.builtin").live_grep() end, desc = "Live grep" },
+            { "<LEADER>tf", function() require("telescope.builtin").grep_string() end, desc = "Find current string" },
+            { "<LEADER>tF", function() require("telescope.builtin").grep_string({word_match = "-w"}) end, desc = "Find current word matched string" },
+            { "<LEADER>tb", function() require("telescope.builtin").buffers() end, desc = "Buffers" },
+            { "<LEADER>th", function() require("telescope.builtin").help_tags() end, desc = "Help tags" },
+            { "<LEADER>tk", function() require("telescope.builtin").keymaps() end, desc = "Show keymaps" },
+            { "<LEADER>td", "<CMD>Telescope diagnostics<CR>", desc = "Diagnostics" },
+            { "<LEADER>tm", "<CMD>Telescope man_pages<CR>", desc = "Man pages" },
+            { "<LEADER>f",  "<CMD>Telescope file_browser path=%:p:h select_buffer=true<CR>", desc = "File browser" },
+            { "<LEADER>tj", "<CMD>Telescope jumplist<CR>", desc = "Jump list" },
+            { "<LEADER>tt", "<CMD>Telescope colorscheme enable_preview=true<CR>", desc = "colorscheme" },
+            { "<LEADER>gs", "<CMD>Telescope git_status<CR>", desc = "Git status" },
+            { "<LEADER>gB", "<CMD>Telescope git_bcommits<CR>", desc = "Git commits of current buffer" },
+            { "<LEADER>tSe", function() require("telescope.builtin").symbols({ sources = {"emoji"} }) end, desc = "Telescope emoji symbols" },
+            { "<LEADER>tSg", function() require("telescope.builtin").symbols({ sources = {"gitmoji"} }) end, desc = "Telescope gitmoji symbols" },
+            { "<LEADER>tSk", function() require("telescope.builtin").symbols({ sources = {"kaomoji"} }) end, desc = "Telescope kaomoji symbols" },
+            { "<LEADER>tSl", function() require("telescope.builtin").symbols({ sources = {"latex"} }) end, desc = "Telescope latex symbols" },
+            { "<LEADER>tSm", function() require("telescope.builtin").symbols({ sources = {"math"} }) end, desc = "Telescope math symbols" },
+            { "<LEADER>tSn", function() require("telescope.builtin").symbols({ sources = {"nerd"} }) end, desc = "Telescope nerd symbols" },
         },
         config = function()
-            local telescope = require("telescope.builtin")
-
-            vim.keymap.set("n", "<LEADER>ts", telescope.find_files,  { desc = "Search files" })
-            vim.keymap.set("n", "<LEADER>tg", telescope.live_grep,   { desc = "Live grep" })
-            vim.keymap.set("n", "<LEADER>tf", telescope.grep_string, { desc = "Find current string" })
-            vim.keymap.set("n", "<LEADER>tF", function() telescope.grep_string({word_match = "-w"}) end, { desc = "Find current word matched string" })
-            vim.keymap.set("n", "<LEADER>tb", telescope.buffers,     { desc = "Buffers" })
-            vim.keymap.set("n", "<LEADER>th", telescope.help_tags,   { desc = "Help tags" })
-            vim.keymap.set("n", "<LEADER>tk", telescope.keymaps,     { desc = "Show keymaps" })
-            vim.keymap.set("n", "<LEADER>td", "<CMD>Telescope diagnostics<CR>", { desc = "Diagnostics" })
-            vim.keymap.set("n", "<LEADER>tm", "<CMD>Telescope man_pages<CR>", { desc = "Man pages" })
-            vim.keymap.set("n", "<LEADER>f",  "<CMD>Telescope file_browser path=%:p:h select_buffer=true<CR>", { desc = "File browser" })
-            vim.keymap.set("n", "<LEADER>tj", "<CMD>Telescope jumplist<CR>", { desc = "Jump list" })
-            vim.keymap.set("n", "<LEADER>tt", "<CMD>Telescope colorscheme enable_preview=true<CR>", { desc = "colorscheme" })
-
-            vim.keymap.set("n", "<LEADER>gs", "<CMD>Telescope git_status<CR>", { desc = "Git status" })
-            vim.keymap.set("n", "<LEADER>gB", "<CMD>Telescope git_bcommits<CR>", { desc = "Git commits of current buffer" })
-
-            vim.keymap.set("n", "<LEADER>tSe", function() telescope.symbols({ sources = {"emoji"} }) end, { desc = "Telescope emoji symbols" })
-            vim.keymap.set("n", "<LEADER>tSg", function() telescope.symbols({ sources = {"gitmoji"} }) end, { desc = "Telescope gitmoji symbols" })
-            vim.keymap.set("n", "<LEADER>tSk", function() telescope.symbols({ sources = {"kaomoji"} }) end, { desc = "Telescope kaomoji symbols" })
-            vim.keymap.set("n", "<LEADER>tSl", function() telescope.symbols({ sources = {"latex"} }) end, { desc = "Telescope latex symbols" })
-            vim.keymap.set("n", "<LEADER>tSm", function() telescope.symbols({ sources = {"math"} }) end, { desc = "Telescope math symbols" })
-            vim.keymap.set("n", "<LEADER>tSn", function() telescope.symbols({ sources = {"nerd"} }) end, { desc = "Telescope nerd symbols" })
-
             require("telescope").setup({
                 defaults = require("telescope.themes").get_ivy {
                     winblend = 10,
