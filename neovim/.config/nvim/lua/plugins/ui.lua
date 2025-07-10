@@ -1,27 +1,5 @@
 return {
     {
-        "lukas-reineke/indent-blankline.nvim",
-        event = {
-            "BufEnter",
-            "BufReadPre",
-        },
-        config = function()
-            require("ibl").setup({
-                indent = {
-                    char = "▏",
-                    -- char = "⸽", -- ,⁞, ⋮, ┆, ┊, ┋, ┇, ︙,⸽,
-                    -- tab_char = "▏",
-                    smart_indent_cap = true,
-                },
-                scope = {
-                    enabled = true,
-                    show_start = false,
-                    show_end = false,
-                },
-            })
-        end
-    },
-    {
         "m4xshen/smartcolumn.nvim",
         event = {
             "BufEnter",
