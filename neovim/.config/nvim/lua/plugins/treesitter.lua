@@ -6,17 +6,17 @@ return {
         config = function()
             require("nvim-treesitter.configs").setup({
                 ensure_installed = {
-                    "c", "cpp", "rust", "ruby", "printf", "comment",
-                    "bash", "diff", "regex", "json", "make",
-                    "disassembly", "strace", "objdump",
-                    "kconfig", "editorconfig", "passwd",
-                    "udev", "rst", "typst", "gnuplot", "pem",
-                    "markdown", "markdown_inline", "html", "css",
-                    "git_config", "gitignore", "gitattributes",
-                    "gitcommit", "git_rebase", "dot", "http",
-                    "yaml", "toml", "ini", "dockerfile", "sql",
-                    "lua", "vim", "vimdoc", "gpg", "ssh_config",
-                    "hyprlang", "nix", "tmux", "muttrc", "readline"
+                    "bash", "c", "cmake", "comment", "cpp", "css", "csv",
+                    "diff", "disassembly", "dockerfile", "dot", "editorconfig",
+                    "git_config", "git_rebase", "gitattributes", "gitcommit", "gitignore",
+                    "gnuplot", "go", "gpg", "graphql",
+                    "haskell", "html", "http", "hyprlang", "ini",
+                    "java", "javascript", "json", "kconfig", "lua",
+                    "make", "markdown", "markdown_inline", "mermaid", "muttrc",
+                    "nix", "objdump", "passwd", "pem", "printf", "python",
+                    "readline", "regex", "rst", "ruby", "rust",
+                    "sql", "ssh_config", "strace", "tmux", "toml", "typst",
+                    "udev", "vim", "vimdoc", "xml", "yaml"
                 },
                 sync_install = false,
                 highlight = {
