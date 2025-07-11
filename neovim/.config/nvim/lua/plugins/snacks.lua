@@ -1,5 +1,6 @@
 return {
     "folke/snacks.nvim",
+    lazy = false,
     opts = {
         bigfile = {
             enabled = true,
@@ -15,5 +16,19 @@ return {
                 },
             },
         },
+        scope = {
+            enabled = true,
+        },
+
+        styles = {
+            scratch = {
+                width = 120,
+                height = math.floor(vim.o.lines * 0.85),
+                border = "none",
+            },
+        },
+    },
+    keys = {
+        { "<LEADER><TAB>", function() Snacks.scratch({ ft = "markdown", file = vim.fn.stdpath("data") .. "/scratch.md" }) end, desc = "Todo List" },
     },
 }
