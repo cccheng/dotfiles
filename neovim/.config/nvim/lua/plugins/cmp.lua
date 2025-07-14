@@ -47,7 +47,49 @@ return {
             appearance = {
                 -- "mono" (default) for "Nerd Font Mono" or "normal" for "Nerd Font"
                 -- Adjusts spacing to ensure icons are aligned
-                nerd_font_variant = "mono"
+                nerd_font_variant = "mono",
+                kind_icons = {
+                    Array = " ",
+                    Boolean = "󰨙 ",
+                    Class = " ",
+                    Codeium = "󰘦 ",
+                    Color = " ",
+                    Control = " ",
+                    Collapsed = " ",
+                    Constant = "󰏿 ",
+                    Constructor = " ",
+                    Copilot = " ",
+                    Enum = " ",
+                    EnumMember = " ",
+                    Event = " ",
+                    Field = " ",
+                    File = " ",
+                    Folder = " ",
+                    Function = "󰊕 ",
+                    Interface = " ",
+                    Key = " ",
+                    Keyword = " ",
+                    Method = "󰊕 ",
+                    Module = " ",
+                    Namespace = "󰦮 ",
+                    Null = " ",
+                    Number = "󰎠 ",
+                    Object = " ",
+                    Operator = " ",
+                    Package = " ",
+                    Property = " ",
+                    Reference = " ",
+                    Snippet = "󱄽 ",
+                    String = " ",
+                    Struct = "󰆼 ",
+                    Supermaven = " ",
+                    TabNine = "󰏚 ",
+                    Text = " ",
+                    TypeParameter = " ",
+                    Unit = " ",
+                    Value = " ",
+                    Variable = "󰀫 ",
+                },
             },
 
             completion = {
@@ -59,7 +101,29 @@ return {
                 menu = {
                     winblend = 10,
                     draw = {
-                        treesitter = { "lsp" },
+                        columns = {
+                            { "kind_icon" },
+                            { "label", "label_description", "source_name", gap = 1 },
+                        },
+                        components = {
+                            kind_icon = {
+                                text = function(ctx)
+                                    if ctx.source_id == "cmdline" then return end
+                                    return ctx.kind_icon .. ctx.icon_gap
+                                end,
+                            },
+                            source_name = {
+                                text = function(ctx)
+                                    if ctx.source_id == "cmdline" then return end
+                                    return ctx.source_name:sub(1, 4)
+                                end,
+                            },
+                        },
+
+                        -- for highlighting in completion menu
+                        treesitter = {
+                            "lsp",
+                        },
                     },
                 },
 
