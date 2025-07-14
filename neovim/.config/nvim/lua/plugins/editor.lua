@@ -8,6 +8,7 @@ return {
         config = function()
             require("mini.ai").setup({})
             require("mini.align").setup({})
+            require('mini.bufremove').setup({})
             require("mini.comment").setup({})
             require("mini.cursorword").setup({})
             require("mini.diff").setup({
@@ -17,6 +18,15 @@ return {
             -- require("mini.git").setup({})
             require("mini.hipatterns").setup({
                 highlighters = {
+                    -- Highlight standalone 'FIXME', 'XXX', 'TODO'
+                    -- XXX
+                    fixme = { pattern = '%f[%w]()FIXME()%f[%W]', group = 'MiniHipatternsFixme' },
+                    xxx   = { pattern = '%f[%w]()XXX()%f[%W]',   group = 'MiniHipatternsHack' },
+                    -- hack  = { pattern = '%f[%w]()HACK()%f[%W]',  group = 'MiniHipatternsHack'  },
+                    todo  = { pattern = '%f[%w]()TODO()%f[%W]',  group = 'MiniHipatternsTodo'  },
+                    -- note  = { pattern = '%f[%w]()NOTE()%f[%W]',  group = 'MiniHipatternsNote'  },
+
+                    -- Highlight hex color strings (`#rrggbb`) using that color
                     hex_color = require("mini.hipatterns").gen_highlighter.hex_color(),
                 },
             })
@@ -52,7 +62,8 @@ return {
                     winblend = 50,
                 },
             })
-            -- require("mini.pairs").setup({})
+            require("mini.pairs").setup({})
+            require('mini.splitjoin').setup({})
             require("mini.snippets").setup({
                 snippets = {
                     -- Load custom file with global snippets first (adjust for Windows)
