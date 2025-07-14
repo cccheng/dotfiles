@@ -2,7 +2,7 @@ return {
     {
         "m4xshen/smartcolumn.nvim",
         event = {
-            "BufEnter",
+            "BufNewFile",
             "BufReadPre",
         },
         opts = {
@@ -22,6 +22,7 @@ return {
                 "html",
                 "DiffviewFileHistory",
                 "codecompanion",
+                "mcphub",
             },
         }
     },
@@ -86,7 +87,7 @@ return {
     {
         "petertriho/nvim-scrollbar",
         event = {
-            "BufEnter",
+            "BufNewFile",
             "BufReadPre",
         },
         config = function()

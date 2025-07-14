@@ -54,7 +54,10 @@ return {
     },
     {
         "lewis6991/gitsigns.nvim",
-        event = "BufReadPre",
+        event = {
+            "BufNewFile",
+            "BufReadPre",
+        },
         keys = {
             { "<LEADER>h", "", desc = "Hunk" },
             { "<LEADER>ht", "", desc = "Toggle" },
