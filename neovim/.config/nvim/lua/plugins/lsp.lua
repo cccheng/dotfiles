@@ -18,10 +18,11 @@ return {
     {
         "mason-org/mason-lspconfig.nvim",
         lazy = true,
-        cmd = {
-            "Mason",
-        },
+        -- cmd = {
+        --     "Mason",
+        -- },
         dependencies = {
+            "neovim/nvim-lspconfig",
             "mason-org/mason.nvim",
         },
         config = function()
@@ -49,7 +50,10 @@ return {
     },
     {
         "neovim/nvim-lspconfig",
-        event = "LspAttach",
+        event = {
+            "BufReadPre",
+            "BufNewFile",
+        },
         dependencies = {
             "williamboman/mason-lspconfig.nvim",
             "saghen/blink.cmp",
@@ -102,9 +106,6 @@ return {
                     },
                 },
                 rust_analyzer = {
-                    on_attach = function(_, bufnr)
-                        vim.lsp.inlay_hint.enable(bufnr)
-                    end,
                     settings = {
                         ["rust-analyzer"] = {
                             imports = {
@@ -114,6 +115,8 @@ return {
                                 prefix = "self",
                             },
                             cargo = {
+                                allFeatures = true,
+                                loadOutDirsFromCheck = true,
                                 buildScripts = {
                                     enable = true,
                                 },
@@ -259,7 +262,16 @@ return {
     },
     {
         "DNLHC/glance.nvim",
-        event = "LspAttach",
+        lazy = true,
+        dependencies = {
+            "neovim/nvim-lspconfig",
+        },
+        keys = {
+            { "<LEADER>ld", "<CMD>Glance definitions<CR>", desc = "Definition" },
+            { "<LEADER>lr", "<CMD>Glance references<CR>", desc = "References" },
+            { "<LEADER>lt", "<CMD>Glance type_definitions<CR>", desc = "Type Definition" },
+            { "<LEADER>li", "<CMD>Glance implementations<CR>", desc = "Implementation" },
+        },
         config = function()
             local glance = require("glance")
             local actions = glance.actions
@@ -275,11 +287,6 @@ return {
                     },
                 },
             })
-
-            vim.keymap.set("n", "<LEADER>ld", "<CMD>Glance definitions<CR>", { desc = "Definition" })
-            vim.keymap.set("n", "<LEADER>lr", "<CMD>Glance references<CR>", { desc = "References" })
-            vim.keymap.set("n", "<LEADER>lt", "<CMD>Glance type_definitions<CR>", { desc = "Type Definition" })
-            vim.keymap.set("n", "<LEADER>li", "<CMD>Glance implementations<CR>", { desc = "Implementation" })
         end
     },
 }
