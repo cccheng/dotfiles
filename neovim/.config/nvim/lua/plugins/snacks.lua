@@ -15,6 +15,15 @@ return {
                     total = 250, -- maximum duration
                 },
             },
+            filter = function(buf)
+                local no_indent_fts = {
+                    "gitcommit",
+                }
+                return vim.g.snacks_indent ~= false
+                    and vim.b[buf].snacks_indent ~= false
+                    and vim.bo[buf].buftype == ""
+                    and not vim.tbl_contains(no_indent_fts, vim.bo[buf].filetype)
+            end,
         },
         scope = {
             enabled = true,
