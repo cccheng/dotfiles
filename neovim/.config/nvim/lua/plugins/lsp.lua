@@ -18,9 +18,9 @@ return {
     {
         "mason-org/mason-lspconfig.nvim",
         lazy = true,
-        -- cmd = {
-        --     "Mason",
-        -- },
+        cmd = {
+            "Mason",
+        },
         dependencies = {
             "neovim/nvim-lspconfig",
             "mason-org/mason.nvim",
