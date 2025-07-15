@@ -2,6 +2,7 @@
 clang = "latest"
 clang-format = "latest"
 clangd = "latest"
+go = "latest"
 node = "lts"
 python = "latest"
 ruby = "latest"

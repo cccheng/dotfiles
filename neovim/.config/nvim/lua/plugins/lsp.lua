@@ -2,9 +2,6 @@ return {
     {
         "mason-org/mason.nvim",
         lazy = true,
-        cmd = {
-            "Mason",
-        },
         opts = {
             ui = {
                 icons = {
@@ -44,6 +41,10 @@ return {
                     "jsonls",
                     "taplo", -- toml
                     "dockerls",
+                    "hyprls",
+                    "html",
+                    "cssls",
+                    "cssmodules_ls",
                 }
             })
         end
@@ -179,6 +180,10 @@ return {
                 jsonls = {},
                 taplo = {},
                 dockerls = {},
+                hyprls = {},
+                html = {},
+                cssls = {},
+                cssmodules_ls = {},
             }
 
             -- Iterate over our servers and set them up
