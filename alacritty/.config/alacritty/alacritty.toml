@@ -600,6 +600,10 @@ draw_bold_text_with_bright_colors = true
 #         Default: false
 hide_when_typing = true
 
+bindings = [
+    { mouse = "Left", action = "Copy" },
+]
+
 #     bindings = [{ <mouse>, <mods>, <mode>, <command> | <chars> | <action> },]
 #
 #         See keyboard.bindings for full documentation on mods, mode, command,  chars,  and
