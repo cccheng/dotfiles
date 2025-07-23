@@ -205,44 +205,6 @@ return {
                 end,
             })
 
-            vim.diagnostic.config({
-                -- virtual_text = {
-                --     severity = {
-                --         max = vim.diagnostic.severity.WARN,
-                --     }
-                -- },
-                -- virtual_lines = {
-                --     severity = {
-                --         min = vim.diagnostic.severity.ERROR,
-                --     }
-                -- },
-                virtual_text = true,
-                virtual_lines = false,
-                underline = false,
-                signs = false,
-                update_in_insert = false, -- false so diags are updated on InsertLeave
-                severity_sort = true,
-                float = {
-                    focusable = false,
-                    style = "minimal",
-                    border = "single",
-                    source = true,
-                    header = "",
-                },
-            })
-            vim.api.nvim_create_user_command("ToggleDiagnostics", function()
-                if vim.g.diagnostics_mode == "enabled" then
-                    vim.g.diagnostics_mode = "disabled"
-                    vim.diagnostic.disable()
-                elseif vim.g.diagnostics_mode == "disabled" then
-                    vim.g.diagnostics_mode = "enabled"
-                    vim.diagnostic.enable()
-                else
-                    vim.g.diagnostics_mode = "disabled"
-                    vim.diagnostic.disable()
-                end
-            end, {})
-
             vim.keymap.set("n", "<LEADER>ls",  vim.lsp.buf.hover,                   { desc = "Hover" })
             vim.keymap.set("n", "<LEADER>llD", vim.lsp.buf.declaration,             { desc = "LSP Declaration" })
             vim.keymap.set("n", "<LEADER>lf",  vim.lsp.buf.format,                  { desc = "Format" })
@@ -251,7 +213,6 @@ return {
             vim.keymap.set("n", "<LEADER>lR",  vim.lsp.buf.rename,                  { desc = "Rename" })
             -- vim.keymap.set("n", "<LEADER>lds", vim.diagnostic.open_float,           { desc = "Show diagnostic" })
             -- vim.keymap.set("n", "<LEADER>ldl", vim.diagnostic.setloclist,           { desc = "Diagnostic List" })
-            vim.keymap.set("n", "<LEADER>lD", "<CMD>ToggleDiagnostics<CR>",        { desc = "Toggle diagnostic" })
             vim.keymap.set("n", "<LEADER>llr", "<CMD>Telescope lsp_references<CR>", { desc = "LSP References" })
             vim.keymap.set("n", "<LEADER>lh",  function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, { desc = "Toggle inlay hints" })
             vim.keymap.set("n", "<LEADER>lS",  "<CMD>LspStop<CR>",                  { desc = "Stop LSP" })
@@ -259,10 +220,6 @@ return {
             vim.keymap.set("n", "<LEADER>lld", function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end, { desc = "LSP Definition" })
             -- vim.keymap.set("n", "<LEADER>lt", function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end, { desc = "LSP Type Definition" })
             -- vim.keymap.set("n", "<LEADER>li", function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end, { desc = "LSP Implementation" })
-            vim.keymap.set("n", "[e", function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity["ERROR"] }) end, { desc = "Previous error" })
-            vim.keymap.set("n", "]e", function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity["ERROR"] }) end, { desc = "Next error" })
-            vim.keymap.set("n", "[w", function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity["WARN"] }) end, { desc = "Previous warning" })
-            vim.keymap.set("n", "]w", function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity["WARN"] }) end, { desc = "Next warning" })
         end
     },
     {
