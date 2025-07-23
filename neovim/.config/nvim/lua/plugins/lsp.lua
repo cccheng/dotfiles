@@ -198,13 +198,6 @@ return {
                 })
             end
 
-            vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-                pattern = ".gitlab*",
-                callback = function()
-                    vim.bo.filetype = "yaml.gitlab"
-                end,
-            })
-
             vim.keymap.set("n", "<LEADER>ls",  vim.lsp.buf.hover,                   { desc = "Hover" })
             vim.keymap.set("n", "<LEADER>llD", vim.lsp.buf.declaration,             { desc = "LSP Declaration" })
             vim.keymap.set("n", "<LEADER>lf",  vim.lsp.buf.format,                  { desc = "Format" })
@@ -225,9 +218,6 @@ return {
     {
         "DNLHC/glance.nvim",
         lazy = true,
-        dependencies = {
-            "neovim/nvim-lspconfig",
-        },
         keys = {
             { "<LEADER>ld", "<CMD>Glance definitions<CR>", desc = "Definition" },
             { "<LEADER>lr", "<CMD>Glance references<CR>", desc = "References" },
