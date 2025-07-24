@@ -62,7 +62,7 @@ return {
                     winblend = 50,
                 },
             })
-            require("mini.pairs").setup({})
+            -- require("mini.pairs").setup({})
             require('mini.splitjoin').setup({})
             require("mini.snippets").setup({
                 snippets = {
