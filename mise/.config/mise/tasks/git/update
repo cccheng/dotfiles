@@ -5,7 +5,7 @@ Dir
     .glob("#{ENV['MISE_ORIGINAL_CWD']}/*")
     .select { |e| File.directory?(e) && File.exist?("#{e}/.git") }
     .each do |e|
-        puts "» #{e}"
+        puts "\033[36m»\033[1m #{e}\033[0m"
         Dir.chdir(e)
         %x[git fetch --all --prune]
         %x[git pull --rebase --autostash]
