@@ -12,6 +12,7 @@ uv = "latest"
 fzf = "latest"
 neovim = "latest"
 usage = "latest"
+podman = "latest"
 
 "pipx:drgn" = "latest"
 "pipx:neovim-remote" = "latest"
