@@ -41,7 +41,6 @@ return {
                     "jsonls",
                     "taplo", -- toml
                     "dockerls",
-                    "hyprls",
                     "html",
                     "cssls",
                     "cssmodules_ls",
@@ -180,7 +179,6 @@ return {
                 jsonls = {},
                 taplo = {},
                 dockerls = {},
-                hyprls = {},
                 html = {},
                 cssls = {},
                 cssmodules_ls = {},
