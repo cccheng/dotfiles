@@ -7,31 +7,52 @@
     "passthrough": false,
     "gtk-layer-shell": true,
     "height": 0,
+
     "modules-left": [
-        "hyprland/workspaces"
+        "hyprland/workspaces",
+        "hyprland/window"
     ],
-    "modules-center": ["hyprland/window"],
+    "modules-center": [
+
+    ],
     "modules-right": [
-        "tray",
+        "network",
         "memory",
         "cpu",
-        "network",
-        "battery",
+        "tray",
+        // "mpris",
         "backlight",
+        "battery",
+        "bluetooth",
         "pulseaudio",
         "pulseaudio#microphone",
         "clock"
     ],
 
-    "hyprland/window": {
-        "format": "󰣇 {}"
-    },
-    
     "hyprland/workspaces": {
+        "format": "{icon}",
+        "show-special": true,
+        "special-visible-only": true,
         "disable-scroll": true,
         "all-outputs": true,
-        "on-click": "activate",
-        "format": "{icon}"
+        "sort-by": "id",
+        "format-icons": {
+            "Knuth": "",
+            "Terminal": ""
+        },
+        "on-click": "activate"
+    },
+
+    "hyprland/window": {
+        "format": "{title}",
+        "on-click": "hyprctl dispatch window_activate {id}",
+        "on-scroll-up": "hyprctl dispatch window_raise {id}",
+        "on-scroll-down": "hyprctl dispatch window_lower {id}",
+        "exec": "hyprctl clients -w -f",
+        "rewrite": {
+            "(.*) — Mozilla Firefox": "🦊 $1",
+            "(.*) - Google Chrome": "🌏 $1"
+        }
     },
 
     "tray": {
@@ -39,20 +60,48 @@
         "spacing": 10
     },
 
+    "mpris": {
+        "interval": 5,
+        "format": "{player_icon}",
+        "format-paused": "{player_icon}  {status_icon}",
+        "tooltip-format": "{player}: {title}",
+        "on-click": "playerctl play-pause",
+        "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+",
+        "player-icons": {
+            "default": "",
+            "chromium": "",
+            "firefox": "",
+            "kdeconnect": "",
+            "mopidy": "",
+            "mpv": "󰐹",
+            "spotify": "",
+            "vlc": "󰕼",
+            "strawberry": ""
+        },
+        "status-icons": {
+            "paused": "󰐎",
+            "playing": "󰐊",
+            "stopped": "󰓛"
+        }
+    },
+
     "clock": {
-        "format": "{:%A    %Y-%B-%d    %H:%M:%S }",
+        "format": "{:%A   %Y-%B-%d   %H:%M:%S}",
         "interval": 1,
         "rotate": 0,
         "tooltip-format": "<tt>{calendar}</tt>",
         "calendar": {
-            "mode": "month",
+            "mode": "year",
             "mode-mon-col": 3,
             "on-scroll": 1,
             "on-click-right": "mode",
+            "weeks-pos": "right",
             "format": {
                 "months": "<span color='#a6adc8'><b>{}</b></span>",
+                "weeks": "<span color='#a6adc8'>w{}</span>",
                 "weekdays": "<span color='#a6adc8'><b>{}</b></span>",
-                "today": "<span color='#a6adc8'><b>{}</b></span>",
+                "today": "<span color='#ff6699'><b>{}</b></span>",
                 "days": "<span color='#555869'><b>{}</b></span>"
             }
         }
@@ -61,10 +110,9 @@
     "backlight": {
         "device": "intel_backlight",
         "format": "{icon} {percent}%",
-        "format-icons": ["󰃞", "󰃟", "󰃠"],
+        "format-icons": ["", "", "", "", "", "", "", "", ""],
         "on-scroll-up": "brightnessctl set 1%+",
         "on-scroll-down": "brightnessctl set 1%-",
-        "min-length": 6
     },
 
     "battery": {
@@ -77,21 +125,39 @@
         "format-charging": " {capacity}%",
         "format-plugged": " {capacity}%",
         "format-alt": "{time} {icon}",
-        "format-icons": ["󰂃", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+        "format-alt-icons": ["󰂃", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+        "format-icons": [" ", " ", " ", " ", " "]
+    },
+
+
+    "bluetooth": {
+        "format-on": "",
+        "format-off": "󰂲",
+        "format-disabled": "󰂲",
+        "format-connected": "",
+        "format-connected-battery": " {device_battery_percentage}%",
+        "format-icons": ["󰥇", "󰤾", "󰤿", "󰥀", "󰥁", "󰥂", "󰥃", "󰥄", "󰥅", "󰥆", "󰥈"],
+        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+        "on-click": "blueman-manager"
     },
 
     "pulseaudio": {
-        "format": "{icon}  {volume}%",
-        "tooltip": false,
+        "format": "{icon} {volume}%",
         "format-muted": "  Muted",
+        "format-bluetooth": "{icon} 󰂯{volume}%",
+        "format-bluetooth-muted": "󰖁 󰂯{icon}",
+        "tooltip": false,
         "on-click": "pamixer -t",
         "on-scroll-up": "pamixer -i 1",
         "on-scroll-down": "pamixer -d 1",
         "scroll-step": 5,
         "format-icons": {
             "headphone": "",
-            "hands-free": "",
-            "headset": "",
+            "hands-free": "󱡒",
+            "headset": "󰋎",
             "phone": "",
             "portable": "",
             "car": "",
@@ -116,18 +182,17 @@
             "m": 30 // medium
         },
         "interval": 10,
-        "format": "󰾆 {used}GB",
-        "format-m": "󰾅 {used}GB",
-        "format-h": "󰓅 {used}GB",
-        "format-c": " {used}GB",
+        "format": "󰾆 {used:0.1f}G",
+        "format-m": "󰾅 {used:0.1f}G",
+        "format-h": "󰓅 {used:0.1f}G",
+        "format-c": " {used:0.1f}G",
         "format-alt": "󰾆 {percentage}%",
-        "max-length": 10,
         "tooltip": true,
         "tooltip-format": "󰾆 {percentage}%\n {used:0.1f}GB/{total:0.1f}GB"
     },
 
     "cpu": {
-        "interval": 10,
+        "interval": 2,
         "format": "󰍛 {usage}%",
         "format-alt": "{icon0}{icon1}{icon2}{icon3}",
         "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"]
@@ -135,13 +200,13 @@
 
     "network": {
         "tooltip": true,
-        "format-wifi": "  {essid}",
-        "format-ethernet": "󰈀 ",
-        "tooltip-format": "Network: <big><b>{essid}</b></big>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>",
+        "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+        "format-wifi": "{icon} {essid} <span foreground='#ccffee'> {bandwidthDownBytes}</span> <span foreground='#ffee87'> {bandwidthUpBytes}</span>",
+        "format-ethernet": "󰌘  <span foreground='#ccffee'> {bandwidthDownBytes}</span> <span foreground='#ffee88'> {bandwidthUpBytes}</span>",
         "format-linked": "󰈀 {ifname} (No IP)",
         "format-disconnected": "󰖪 ",
+        "tooltip-format": "Network: <big><b>{essid}</b></big>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>",
         "tooltip-format-disconnected": "Disconnected",
-        "format-alt": "<span foreground='#99ffdd'> {bandwidthDownBytes}</span> <span foreground='#ffcc66'> {bandwidthUpBytes}</span>",
         "interval": 2
     }
 }
