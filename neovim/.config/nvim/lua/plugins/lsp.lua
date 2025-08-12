@@ -148,7 +148,7 @@ return {
                         ["harper-ls"] = {
                             -- userDictPath = vim.fn.stdpath("config") .. "/dict/spell.txt",
                             diagnosticSeverity = "warning", -- "hint", "information", "warning", or "error"
-                            isolateEnglish = true,
+
                             linters = {
                                 SpellCheck = false, -- true,
                                 SpelledNumbers = false,
@@ -175,7 +175,15 @@ return {
                 gitlab_ci_ls = {},
                 dotls = {},
                 marksman = {},
-                yamlls = {},
+                yamlls = {
+                    settings = {
+                        yaml = {
+                            customTags = {
+                                "!reference sequence",  -- gitlab-ci.yml
+                            },
+                        },
+                    },
+                },
                 jsonls = {},
                 taplo = {},
                 dockerls = {},
