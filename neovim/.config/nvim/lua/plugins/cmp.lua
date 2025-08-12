@@ -269,7 +269,7 @@ return {
                 },
                 completion = {
                     menu = {
-                        auto_show = function(ctx)
+                        auto_show = function()
                             return vim.fn.getcmdtype() == ':'
                         end,
                     },
