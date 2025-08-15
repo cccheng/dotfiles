@@ -71,4 +71,5 @@ alias week="date +%V"
 alias datetime="date -Iseconds"
 alias camera="ffplay /dev/video0"
 alias feh="feh --scale-down"
+alias strace="strace -tr --decode-fds=all --syscall-number -a 120"
 
