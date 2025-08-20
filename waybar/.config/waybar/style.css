@@ -101,7 +101,7 @@ window#waybar {
 #window {
     border-radius: 7px;
     margin-left: 10px;
-    margin-right: 60px;
+    margin-right: 10px;
 }
 
 /* make window module transparent when no windows present */

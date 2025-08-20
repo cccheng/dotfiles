@@ -20,7 +20,7 @@
         "memory",
         "cpu",
         "tray",
-        // "mpris",
+        "mpris",
         "backlight",
         "battery",
         "bluetooth",
@@ -45,6 +45,7 @@
 
     "hyprland/window": {
         "format": "{title}",
+        "separate-outputs": true,
         "on-click": "hyprctl dispatch window_activate {id}",
         "on-scroll-up": "hyprctl dispatch window_raise {id}",
         "on-scroll-down": "hyprctl dispatch window_lower {id}",
