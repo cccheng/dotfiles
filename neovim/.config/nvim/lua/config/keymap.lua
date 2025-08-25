@@ -28,7 +28,11 @@ map("n", "<LEADER>tc",
         vim.o.signcolumn = vim.o.signcolumn == "yes" and "no" or "yes"
         vim.o.number = not vim.o.number
         vim.o.relativenumber = not vim.o.relativenumber
-        require("ibl").update({ enabled = not require("ibl.config").get_config(-1).enabled })
+        if vim.g.snacks_indent == nil or vim.g.snacks_indent == true then
+            vim.g.snacks_indent = false
+        else
+            vim.g.snacks_indent = true
+        end
         require("scrollbar.utils").toggle()
     end,
     { desc = "Toggle sign and number columns" })
