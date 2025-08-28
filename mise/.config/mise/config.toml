@@ -14,13 +14,15 @@ neovim = "latest"
 usage = "latest"
 podman = "latest"
 
+gemini-cli = "latest"
+"npm:mcp-hub" = "latest"
+
 "pipx:drgn" = "latest"
 "pipx:neovim-remote" = "latest"
 "pipx:shell-functools" = "latest"           # shell utilities, https://github.com/sharkdp/shell-functools
 "pipx:terminaltexteffects" = "latest"       # terminal visual effects enginel, https://github.com/ChrisBuilds/terminaltexteffects
 "pipx:vectorcode" = "latest"
 "pipx:virtme-ng" = "latest"
-"npm:mcp-hub" = "latest"
 
 [settings]
 auto_install = false
