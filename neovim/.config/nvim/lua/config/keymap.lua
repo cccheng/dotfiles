@@ -45,6 +45,15 @@ map("n", "<C-d>", "<C-d>zz", { noremap = true, silent = true })
 map("n", "*", "*``", { noremap = true, silent = true })
 map("n", "#", "#``", { noremap = true, silent = true })
 
+-- g/ search for word under cursor
+map("n", "g/", "*") -- `:h *`
+
+-- [/ search for first occurrence of the current word
+map("n", "[/", "[<c-i>") -- `:h [_ctrl-i`
+
+-- / search inside selection (visual mode)
+map("x", "/", "<esc>/\\%V") -- `:h /\%V`
+
 -- tabs
 map("n", "<C-h>", "<CMD>:tabprev<CR>", { desc = "Previous tab" })
 map("n", "<C-l>", "<CMD>:tabnext<CR>", { desc = "Next tab" })
