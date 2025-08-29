@@ -3,7 +3,7 @@ return {
         "saghen/blink.cmp",
         dependencies = {
             {
-                "echasnovski/mini.nvim",
+                "nvim-mini/mini.nvim",
                 lazy = true,
             },
             {

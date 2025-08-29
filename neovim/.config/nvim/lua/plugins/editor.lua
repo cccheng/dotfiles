@@ -1,6 +1,6 @@
 return {
     {
-        "echasnovski/mini.nvim",
+        "nvim-mini/mini.nvim",
         event = "VeryLazy",
         keys = {
             { "<LEADER>s", "", desc = "Surrounding/Jump" },
