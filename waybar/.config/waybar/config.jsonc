@@ -16,16 +16,16 @@
 
     ],
     "modules-right": [
-        "network",
-        "memory",
-        "cpu",
         "tray",
-        "mpris",
         "backlight",
         "battery",
         "bluetooth",
         "pulseaudio",
         "pulseaudio#microphone",
+        // "mpris",
+        "network",
+        "memory",
+        "cpu",
         "clock"
     ],
 
@@ -202,11 +202,11 @@
     "network": {
         "tooltip": true,
         "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
-        "format-wifi": "{icon} {essid} <span foreground='#ccffee'> {bandwidthDownBytes}</span> <span foreground='#ffee87'> {bandwidthUpBytes}</span>",
-        "format-ethernet": "󰌘  <span foreground='#ccffee'> {bandwidthDownBytes}</span> <span foreground='#ffee88'> {bandwidthUpBytes}</span>",
+        "format-wifi": "{icon} {essid}",
+        "format-ethernet": "󰌘 {ifname}",
         "format-linked": "󰈀 {ifname} (No IP)",
         "format-disconnected": "󰖪 ",
-        "tooltip-format": "Network: <big><b>{essid}</b></big>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>",
+        "tooltip-format": "Network: <big><b>{essid}</b></big>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>\n<span foreground='#ccffee'> {bandwidthDownBytes}</span> <span foreground='#ffee87'> {bandwidthUpBytes}</span>",
         "tooltip-format-disconnected": "Disconnected",
         "interval": 2
     }
