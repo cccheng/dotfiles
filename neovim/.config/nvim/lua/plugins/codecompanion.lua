@@ -49,18 +49,20 @@ return {
         opts = {
             -- language = "English",
             adapters = {
-                copilot = function()
-                    return require("codecompanion.adapters").extend("copilot", {
-                        schema = { model = { default = "claude-sonnet-4" } },
-                    })
-                end,
-                copilot_inline = function()
-                    return require("codecompanion.adapters").extend("copilot", {
-                        schema = { model = { default = "claude-sonnet-4" } },
-                    })
-                end,
-                opts = {
-                    show_model_choices = true,
+                http = {
+                    copilot = function()
+                        return require("codecompanion.adapters").extend("copilot", {
+                            schema = { model = { default = "claude-sonnet-4" } },
+                        })
+                    end,
+                    copilot_inline = function()
+                        return require("codecompanion.adapters").extend("copilot", {
+                            schema = { model = { default = "claude-sonnet-4" } },
+                        })
+                    end,
+                    opts = {
+                        show_model_choices = true,
+                    },
                 },
             },
             strategies = {
