@@ -5,7 +5,7 @@
 # Don’t group matches by each file.
 --no-heading
 
-# Follow symbolic links while traversing directories, and will check for 
+# Follow symbolic links while traversing directories, and will check for
 # symbolic link loops and report errors if it finds one.
 --follow
 
@@ -23,4 +23,11 @@
 # Don't respect ignore files (.gitignore, .ignore, etc.).
 --no-ignore
 #--ignore-file=$HOME/.config/ripgrep/ignore
+
+# Instructs ripgrep to search in compressed files.
+# Currently gzip, bzip2, xz, LZ4, LZMA, Brotli and Zstd files are supported.
+# This option expects the decompression binaries (such as gzip) to be available in your PATH.
+# If the required binaries are not found, then ripgrep will not emit an error messages by default.
+# Use the --debug flag to see more information.
+--search-zip
 
