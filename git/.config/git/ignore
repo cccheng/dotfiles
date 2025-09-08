@@ -9,6 +9,11 @@
 *.py[co]
 __pycache__
 
+# dotenv
+.env
+.env.*
+!.env.example
+
 # lock & runtime files
 
 # Windows
