@@ -194,7 +194,7 @@ return {
 
             -- Iterate over our servers and set them up
             for name, config in pairs(servers) do
-                lspconfig[name].setup({
+                vim.lsp.config(name, {
                     capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities),
                     init_options = config.init_options,
                     on_attach = config.on_attach,
