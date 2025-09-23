@@ -63,8 +63,6 @@ return {
             { "<LEADER>l", "", desc = "LSP" },
         },
         config = function()
-            local lspconfig = require("lspconfig")
-
             local handlers = {
                 -- none, single, double, rounded, shadow
                 ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
@@ -202,6 +200,8 @@ return {
                     settings = config.settings,
                     handlers = handlers,
                 })
+
+                vim.lsp.enable(name)
             end
 
             vim.keymap.set("n", "<LEADER>ls",  vim.lsp.buf.hover,                   { desc = "Hover" })
