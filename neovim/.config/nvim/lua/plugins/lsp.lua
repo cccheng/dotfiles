@@ -1,3 +1,128 @@
+local lsp_servers = {
+    clangd = {
+        capabilities = {
+            offsetEncoding = { "utf-16" },
+            textDocument = {
+                inlayHints = { enabled = true },
+                completion = { editsNearCursor = true },
+            },
+        },
+        cmd = {
+            "clangd",
+            "--background-index",
+            "--background-index-priority=background",
+            "--all-scopes-completion",
+            "--pch-storage=memory",
+            "--clang-tidy",
+            "--header-insertion=iwyu",
+            "--completion-style=detailed",
+            "--enable-config",
+            "--function-arg-placeholders",
+            "--fallback-style=llvm",
+        },
+        init_options = {
+            usePlaceholders = true,
+            completeUnimported = true,
+            clangdFileStatus = true,
+        },
+        settings = {
+            clangd = {
+                semanticHighlighting = true,
+            },
+        },
+    },
+    rust_analyzer = {
+        settings = {
+            ["rust-analyzer"] = {
+                imports = {
+                    granularity = {
+                        group = "module",
+                    },
+                    prefix = "self",
+                },
+                cargo = {
+                    allFeatures = true,
+                    loadOutDirsFromCheck = true,
+                    buildScripts = {
+                        enable = true,
+                    },
+                },
+                procMacro = {
+                    enable = true,
+                },
+                check = {
+                    command = "clippy",
+                    features = "all",
+                },
+                diagnostics = {
+                    enable = true,
+                }
+            },
+        }
+    },
+    typos_lsp = {
+        init_options = {
+            diagnosticSeverity = "warning",
+        },
+    },
+    harper_ls = {
+        settings = {
+            ["harper-ls"] = {
+                -- userDictPath = vim.fn.stdpath("config") .. "/dict/spell.txt",
+                diagnosticSeverity = "warning", -- "hint", "information", "warning", or "error"
+
+                linters = {
+                    SpellCheck = false, -- true,
+                    SpelledNumbers = false,
+                    AnA = true,
+                    SentenceCapitalization = false, -- true,
+                    UnclosedQuotes = true,
+                    WrongQuotes = false,
+                    LongSentences = true,
+                    RepeatedWords = true,
+                    Spaces = false,
+                    Matcher = true,
+                    CorrectNumberSuffix = true,
+                },
+            },
+        },
+        -- filetypes = {
+        --     "text",
+        --     "markdown",
+        --     "gitcommit",
+        --     "gitsendemail",
+        --     "changelog",
+        -- },
+    },
+    yamlls = {
+        settings = {
+            yaml = {
+                customTags = {
+                    "!reference sequence",  -- gitlab-ci.yml
+                },
+            },
+        },
+    },
+    autotools_ls = {},
+    bashls = {},
+    cssls = {},
+    cssmodules_ls = {},
+    dockerls = {},
+    dotls = {},
+    gitlab_ci_ls = {},
+    html = {},
+    jsonls = {},
+    lua_ls = {},
+    marksman = {}, -- markdown
+    ruby_lsp = {},
+    taplo = {}, -- toml
+}
+
+local lsp_server_names = {}
+for key, _ in pairs(lsp_servers) do
+    table.insert(lsp_server_names, key)
+end
+
 return {
     {
         "mason-org/mason.nvim",
@@ -25,26 +150,7 @@ return {
         config = function()
             require("mason-lspconfig").setup({
                 automatic_enable = false,
-                ensure_installed = {
-                    "clangd",
-                    "rust_analyzer",
-                    "ruby_lsp",
-                    "bashls",
-                    "autotools_ls",
-                    "lua_ls",
-                    "typos_lsp",
-                    "harper_ls",
-                    "gitlab_ci_ls",
-                    "dotls",
-                    "marksman", -- markdown
-                    "yamlls",
-                    "jsonls",
-                    "taplo", -- toml
-                    "dockerls",
-                    "html",
-                    "cssls",
-                    "cssmodules_ls",
-                }
+                ensure_installed = lsp_server_names
             })
         end
     },
@@ -69,129 +175,7 @@ return {
                 ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
             }
 
-            -- :help lspconfig-server-configurations
-            local servers = {
-                clangd = {
-                    capabilities = {
-                        offsetEncoding = { "utf-16" },
-                        textDocument = {
-                            inlayHints = { enabled = true },
-                            completion = { editsNearCursor = true },
-                        },
-                    },
-                    cmd = {
-                        "clangd",
-                        "--background-index",
-                        "--background-index-priority=background",
-                        "--all-scopes-completion",
-                        "--pch-storage=memory",
-                        "--clang-tidy",
-                        "--header-insertion=iwyu",
-                        "--completion-style=detailed",
-                        "--enable-config",
-                        "--function-arg-placeholders",
-                        "--fallback-style=llvm",
-                    },
-                    init_options = {
-                        usePlaceholders = true,
-                        completeUnimported = true,
-                        clangdFileStatus = true,
-                    },
-                    settings = {
-                        clangd = {
-                            semanticHighlighting = true,
-                        },
-                    },
-                },
-                rust_analyzer = {
-                    settings = {
-                        ["rust-analyzer"] = {
-                            imports = {
-                                granularity = {
-                                    group = "module",
-                                },
-                                prefix = "self",
-                            },
-                            cargo = {
-                                allFeatures = true,
-                                loadOutDirsFromCheck = true,
-                                buildScripts = {
-                                    enable = true,
-                                },
-                            },
-                            procMacro = {
-                                enable = true,
-                            },
-                            check = {
-                                command = "clippy",
-                                features = "all",
-                            },
-                            diagnostics = {
-                                enable = true,
-                            }
-                        },
-                    }
-                },
-                -- ruby_lsp = {},
-                bashls = {},
-                autotools_ls = {},
-                lua_ls = {},
-                typos_lsp = {
-                    init_options = {
-                        diagnosticSeverity = "warning",
-                    },
-                },
-                harper_ls = {
-                    settings = {
-                        ["harper-ls"] = {
-                            -- userDictPath = vim.fn.stdpath("config") .. "/dict/spell.txt",
-                            diagnosticSeverity = "warning", -- "hint", "information", "warning", or "error"
-
-                            linters = {
-                                SpellCheck = false, -- true,
-                                SpelledNumbers = false,
-                                AnA = true,
-                                SentenceCapitalization = false, -- true,
-                                UnclosedQuotes = true,
-                                WrongQuotes = false,
-                                LongSentences = true,
-                                RepeatedWords = true,
-                                Spaces = false,
-                                Matcher = true,
-                                CorrectNumberSuffix = true,
-                            },
-                        },
-                    },
-                    -- filetypes = {
-                    --     "text",
-                    --     "markdown",
-                    --     "gitcommit",
-                    --     "gitsendemail",
-                    --     "changelog",
-                    -- },
-                },
-                gitlab_ci_ls = {},
-                dotls = {},
-                marksman = {},
-                yamlls = {
-                    settings = {
-                        yaml = {
-                            customTags = {
-                                "!reference sequence",  -- gitlab-ci.yml
-                            },
-                        },
-                    },
-                },
-                jsonls = {},
-                taplo = {},
-                dockerls = {},
-                html = {},
-                cssls = {},
-                cssmodules_ls = {},
-            }
-
-            -- Iterate over our servers and set them up
-            for name, config in pairs(servers) do
+            for name, config in pairs(lsp_servers) do
                 vim.lsp.config(name, {
                     capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities),
                     init_options = config.init_options,
