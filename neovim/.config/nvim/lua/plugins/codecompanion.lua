@@ -139,7 +139,13 @@ return {
                     },
                 },
                 diff = {
-                    provider = "mini_diff", -- default|mini_diff
+                    provider = "inline", -- mini_diff|split|inline
+                    provider_opts = {
+                        -- Options for inline diff provider
+                        inline = {
+                            layout = "buffer", -- float|buffer - Where to display the diff
+                        },
+                    },
                 },
             },
             extensions = {
