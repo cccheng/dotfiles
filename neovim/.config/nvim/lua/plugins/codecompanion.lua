@@ -50,24 +50,70 @@ return {
             -- language = "English",
             adapters = {
                 http = {
-                    copilot = function()
+                    ["Copilot"] = function()
                         return require("codecompanion.adapters").extend("copilot", {
-                            schema = { model = { default = "claude-sonnet-4" } },
+                            schema = { model = { default = "claude-sonnet-4.5" } },
                         })
                     end,
-                    copilot_inline = function()
+                    ["Copilot inline"] = function()
                         return require("codecompanion.adapters").extend("copilot", {
-                            schema = { model = { default = "claude-sonnet-4" } },
+                            schema = { model = { default = "claude-sonnet-4.5" } },
                         })
                     end,
                     opts = {
                         show_model_choices = true,
                     },
                 },
+                acp = {
+                    ["Gemini CLI"] = function()
+                        return require("codecompanion.adapters").extend("gemini_cli", {
+                            commands = {
+                                ["Gemini 2.5 Pro"] = {
+                                    "gemini",
+                                    "--experimental-acp",
+                                    "-m",
+                                    "gemini-2.5-pro",
+                                },
+                                ["Gemini 2.5 Flash"] = {
+                                    "gemini",
+                                    "--experimental-acp",
+                                    "-m",
+                                    "gemini-2.5-flash",
+                                },
+                            },
+                            defaults = {
+                                auth_method = "gemini-api-key", -- "oauth-personal"|"gemini-api-key"|"vertex-ai"
+                                -- mcpServers = require("mcphub").get_hub_instance():get_servers(),
+                                timeout = 5000, -- 5 seconds
+                            },
+                            env = {
+                                HTTP_PROXY = vim.env.HTTP_PROXY,
+                                HTTPS_PROXY = vim.env.HTTPS_PROXY,
+                            },
+                        })
+                    end,
+                    ["Claude Code"] = function()
+                        return require("codecompanion.adapters").extend("claude_code", {
+                            env = {
+                                -- ANTHROPIC_API_KEY = "my-api-key",
+                                -- CLAUDE_CODE_OAUTH_TOKEN = "my-oauth-token",
+                            },
+                        })
+                    end,
+                },
+            },
+            memory = {
+                opts = {
+                    chat = {
+                        condition = function(chat)
+                            return chat.adapter.type ~= "acp"
+                        end,
+                    },
+                },
             },
             strategies = {
                 chat = {
-                    adapter = "copilot",
+                    adapter = "Copilot",
                     roles = {
                         user = " " .. os.getenv("USER"),
                         llm = function(adapter)
@@ -122,7 +168,7 @@ return {
                     }
                 },
                 inline = {
-                    adapter = "copilot_inline",
+                    adapter = "Copilot inline",
                 },
             },
             display = {
