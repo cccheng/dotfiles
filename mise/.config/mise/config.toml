@@ -7,17 +7,34 @@ node = "lts"
 python = "latest"
 ruby = "latest"
 # rust = "latest"
+cargo-binstall = "latest"
 uv = "latest"
 
 fzf = "latest"
 neovim = "latest"
 usage = "latest"
-podman = "latest"
 shellcheck = "latest"
-
 gemini-cli = "latest"
+
+# Rust tools
+"cargo:cargo-cache" = "latest"              # display information on $CARGO_HOME
+"cargo:cargo-generate" = "latest"           # create a rust project from a git as template
+"cargo:cargo-update" = "latest"             # `cargo install-update`
+"cargo:vmtest" = "latest"
+
+# Rust tools managed by pacman
+"cargo:bat" = "latest"
+"cargo:eza" = "latest"
+"cargo:fd-find" = "latest"
+"cargo:hyperfine" = "latest"
+"cargo:jless" = "latest"
+"cargo:https://github.com/fioncat/otree" = "latest"
+"cargo:https://github.com/ckaznable/tenki" = "latest"
+
+# Node tools
 "npm:mcp-hub" = "latest"
 
+# Python tools
 "pipx:drgn" = "latest"
 "pipx:neovim-remote" = "latest"
 "pipx:shell-functools" = "latest"           # shell utilities, https://github.com/sharkdp/shell-functools
