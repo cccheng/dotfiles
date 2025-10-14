@@ -55,8 +55,8 @@ alias reload='exec "$SHELL" -l'
 # Intuitive map function
 # For example, to list all directories that contain a certain file:
 # find . -name .gitattributes | map dirname
-# alias map="xargs -n1"
-alias m="xargs -n1"
+# alias map="xargs -o -n1"
+alias m="xargs -o -n1"
 
 # Switch to a temporary directory
 alias cdtmp='cd "$(mktemp -d)"'
