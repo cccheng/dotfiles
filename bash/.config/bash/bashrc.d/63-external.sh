@@ -13,6 +13,10 @@ if command -v mise >/dev/null; then
     eval "$(mise activate bash --shims)"
 fi
 
+if command -v intentrace >/dev/null; then
+    alias strace="intentrace"
+fi
+
 # Homebrew ruby
 if [ -d "/usr/local/opt/ruby/bin" ]; then
     add_path "/usr/local/opt/ruby/bin"
