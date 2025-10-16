@@ -1,0 +1,9 @@
+[Unit]
+Description=mouseless
+
+[Service]
+ExecStartPre=/bin/sleep 5
+ExecStart=/usr/bin/mouseless --config /home/cccheng/.config/mouseless/config.yaml
+
+; [Install]
+; WantedBy=multi-user.target
