@@ -715,6 +715,10 @@ bindings = [
 bindings = [
     { key = "Insert", mods = "Shift", action = "Paste" },
     { key = "Insert", mods = "Control", action = "Copy" },
+
+    # tmux bindings. \u0001 is Control-A. Some of these send multiple
+    # characters, which needs "set -g assume-paste-time 0".
+    { key = "F", mods = "Control|Shift", chars = "\u0001[?" },      # Find
 ]
 
 # KEYBOARD
