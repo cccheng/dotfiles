@@ -1,12 +1,8 @@
 [tools]
-clang = "latest"
-clang-format = "latest"
-clangd = "latest"
-go = "latest"
 node = "lts"
 python = "latest"
 ruby = "latest"
-# rust = "latest"
+rust = "latest"
 cargo-binstall = "latest"
 uv = "latest"
 
@@ -40,7 +36,6 @@ gemini-cli = "latest"
 "pipx:neovim-remote" = "latest"
 "pipx:shell-functools" = "latest"           # shell utilities, https://github.com/sharkdp/shell-functools
 "pipx:terminaltexteffects" = "latest"       # terminal visual effects enginel, https://github.com/ChrisBuilds/terminaltexteffects
-"pipx:vectorcode" = "latest"
 "pipx:virtme-ng" = "latest"
 
 [settings]
@@ -57,8 +52,8 @@ binstall = true
 uvx = true
 
 [settings.rust]
-cargo_home = "~/.local/share/cargo"
-rustup_home = "~/.local/share/rustup"
+# cargo_home = "~/.local/share/cargo"
+# rustup_home = "~/.local/share/rustup"
 
 [settings.status]
 missing_tools = "never"                     # if_other_versions_installed, never, always
