@@ -10,6 +10,10 @@ fzf = "latest"
 neovim = "latest"
 usage = "latest"
 shellcheck = "latest"
+
+# AI tools
+claude = "latest"
+codex = "latest"
 gemini-cli = "latest"
 
 # Rust tools
@@ -25,7 +29,9 @@ gemini-cli = "latest"
 "cargo:hyperfine" = "latest"
 "cargo:intentrace" = "latest"
 "cargo:jless" = "latest"
+"cargo:https://github.com/aome510/hackernews-TUI" = "latest"
 "cargo:https://github.com/fioncat/otree" = "latest"
+"cargo:https://github.com/ck-zhang/reddix" = "latest"
 "cargo:https://github.com/ckaznable/tenki" = "latest"
 
 # Node tools
