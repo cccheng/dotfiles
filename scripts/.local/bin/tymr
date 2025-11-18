@@ -1,0 +1,622 @@
+#!/usr/bin/env bash
+
+# source: https://github.com/sahaj-b/tymr
+
+FOREGROUND=false
+NO_SOUND=false
+SOUND_FILE=""
+VOLUME=""
+STOPWATCH=0
+POSITIONAL_ARGS=()
+STATE_FILE="$HOME/.cache/tymr_state"
+DELIMITER="|"
+ORIGINAL_ARGS=("$@")
+SOUND_LOOP_PGID=""
+PLAYER_CMD=""
+PLAYER_VOL_FLAG=""
+PLAYER_VOL_MULTIPLIER=1
+CONFIG_FILE="$HOME/.config/tymr/config"
+NTFY_TOPIC=""
+TIMEOUT=0
+
+if [ -f "$CONFIG_FILE" ]; then
+  # shellcheck source=/dev/null
+  source "$CONFIG_FILE"
+fi
+
+if [ -n "$NO_COLOR" ]; then
+  C_RED=""
+  C_GREEN=""
+  C_YELLOW=""
+  C_MAGENTA=""
+  C_CYAN=""
+  C_BOLD=""
+  C_DIM=""
+  C_RESET=""
+else
+  C_RED="\x1b[31m"
+  C_GREEN="\x1b[32m"
+  C_YELLOW="\x1b[33m"
+  C_MAGENTA="\x1b[35m"
+  C_CYAN="\x1b[36m"
+  C_BOLD="\x1b[1m"
+  C_DIM="\x1b[37m"
+  C_RESET="\x1b[0m"
+fi
+
+cleanup() {
+  local sigint_received=${1:-false}
+  [ -n "$SOUND_LOOP_PGID" ] && kill -- -"$SOUND_LOOP_PGID" 2>/dev/null
+
+  if [ "$sigint_received" = true ]; then
+    # only delete timer if user ctrl+c'ed directly
+    [ -n "$$" ] && delete_timer "$$" false 2>/dev/null
+    # rethrow SIGINT to let parent process also handle it, useful when tymr is in a loop and user do Ctrl+C
+    trap - INT
+    kill -INT $$
+  else
+    exit 0
+  fi
+}
+
+trap cleanup TERM HUP
+trap 'cleanup true' INT
+
+err() {
+  echo -e "${C_RED}✗ $1${C_RESET}" >&2
+}
+warn() {
+  echo -e "${C_YELLOW}⚠ $1${C_RESET}"
+}
+success() {
+  echo -e "${C_GREEN}✓ $1${C_RESET}"
+}
+info() {
+  echo -e "${C_CYAN}ℹ $1${C_RESET}"
+}
+dim() {
+  echo -e "${C_DIM}$1${C_RESET}"
+}
+
+# check dependencies
+for cmd in date notify-send; do
+  if ! command -v "$cmd" &>/dev/null; then
+    err "Command not found: $cmd. Please install it."
+    exit 1
+  fi
+done
+
+opt() {
+  local flags="$1"
+  local desc="$2"
+  printf "  ${C_GREEN}%s${C_RESET}  %s\n" "$flags" "$desc"
+}
+show_time_format() {
+  echo -e "  ${C_BOLD}Plain seconds:${C_RESET}    300, 1500, etc."
+  echo -e "  ${C_BOLD}Duration format:${C_RESET}  5m, 2h30m, 1d12h, etc."
+  echo -e "  ${C_BOLD}Date/time format:${C_RESET} '10:30', '10:30am', 'next Friday 14:00', '+2 days 5:00pm', etc."
+  dim "  See 'date --help' for more information on valid date/time formats."
+}
+show_help() {
+  echo -e "${C_BOLD}USAGE:${C_RESET}"
+  echo -e "  timer ${C_DIM}[OPTIONS]${C_RESET} ${C_YELLOW}TIME/DURATION${C_RESET} ${C_DIM}[TIMER_NAME]${C_RESET}"
+  echo
+  echo -e "${C_BOLD}OPTIONS:${C_RESET}"
+  opt "-s, --stopwatch        " "Run as stopwatch (counts up)"
+  opt "-f, --foreground       " "Run timer in foreground"
+  opt "-n, --no-sound         " "Disable alarm sound"
+  opt "-S, --sound-file PATH  " "Custom sound file to loop"
+  opt "-v, --volume VOL       " "Set volume (1-100)"
+  opt "-t, --timeout MILISEC  " "Set notification/sound timeout in milliseconds(0=infinite)"
+  opt "-N, --ntfy-topic TOPIC " "Send a fallback push via ntfy.sh/TOPIC"
+  opt "-h, --help             " "Show this help message"
+  echo
+  echo -e "${C_BOLD}TIMER MANAGEMENT:${C_RESET}"
+  opt "-l, --list              " "List active timers"
+  opt "-d, --delete [PID/NAME] " "Delete timer. Runs in interactive mode(fzf) if no arg"
+  opt "-r, --revive            " "Revive killed timers' processes"
+  echo
+  echo -e "${C_BOLD}TIME/DURATION FORMATS:${C_RESET}"
+  show_time_format
+}
+
+detect_player() {
+  if [ "$PLAYER_CMD" != "" ]; then
+    if command -v "${PLAYER_CMD%% *}" &>/dev/null; then
+      return
+    else
+      warn "Configured audio player '${PLAYER_CMD%% *}' not found. Detecting automatically."
+    fi
+  fi
+  if [ "$NO_SOUND" = true ]; then
+    return
+  fi
+  if command -v paplay &>/dev/null; then
+    PLAYER_CMD="paplay"
+    PLAYER_VOL_FLAG="--volume="
+    PLAYER_VOL_MULTIPLIER=655
+  elif command -v ffplay &>/dev/null; then
+    PLAYER_CMD="ffplay -nodisp -autoexit -v quiet"
+    PLAYER_VOL_FLAG="-volume "
+  elif command -v mpv &>/dev/null; then
+    PLAYER_CMD="mpv --no-video --no-terminal --no-config"
+    PLAYER_VOL_FLAG="--volume="
+  else
+    warn "No audio player found (paplay, mpv, ffplay). Sound disabled."
+    NO_SOUND=true
+  fi
+}
+
+check_sound_files() {
+  if [ -n "$SOUND_FILE" ]; then
+    if [ ! -f "$SOUND_FILE" ]; then
+      err "Sound file not found: $SOUND_FILE"
+      exit 1
+    fi
+  else
+    if [ ! -f /usr/share/sounds/freedesktop/stereo/service-login.oga ] || [ ! -f /usr/share/sounds/freedesktop/stereo/service-logout.oga ]; then
+      warn "Default sound files not found. Sound disabled."
+      dim "Specify -S / --sound-file with a valid sound file to enable custom sound."
+      NO_SOUND=true
+    fi
+  fi
+}
+
+to_seconds() {
+  local input="$1"
+  local total=0
+
+  while [[ $input =~ ([0-9]+)([smhd]) ]]; do
+    local val="${BASH_REMATCH[1]}"
+    local unit="${BASH_REMATCH[2]}"
+
+    case $unit in
+    s) total=$((total + val)) ;;
+    m) total=$((total + val * 60)) ;;
+    h) total=$((total + val * 3600)) ;;
+    d) total=$((total + val * 86400)) ;;
+    esac
+
+    # yeet the matched part from the string, keep parsing
+    input="${input#*"${BASH_REMATCH[0]}"}"
+  done
+
+  echo "$total"
+}
+
+parse_time_input() {
+  input="$1"
+  if [ -z "$input" ]; then
+    err "No time or seconds provided"
+    echo "Use one of the following formats:" >&2
+    show_time_format >&2
+    return 1
+  fi
+
+  if [[ "$input" =~ ^[0-9]+$ ]]; then
+    echo "$input"
+  elif [[ "$input" =~ ^([0-9]+[dhms])+$ ]]; then
+    to_seconds "$input"
+  elif target_epoch=$(date -d "$input" +%s 2>/dev/null); then
+    current_epoch=$(date +%s)
+    if [ "$target_epoch" -le "$current_epoch" ]; then
+      err "Specified time is in the past: $input"
+      return 1
+    fi
+    echo $((target_epoch - current_epoch))
+  else
+    err "Invalid time format: $input"
+    echo "Use one of the following formats:" >&2
+    show_time_format >&2
+    return 1
+  fi
+}
+
+push_ntfy() {
+  local message="$1"
+  local delay="$2"
+  curl -d "$message" \
+    "https://ntfy.sh/${NTFY_TOPIC}" \
+    -H "Title: tymr: Time's up!" \
+    -H "Delay: ${delay}"
+}
+
+add_to_state() {
+  end_time="$1"
+  echo "$$${DELIMITER}${end_time}${DELIMITER}${TIMER_NAME}" >>"$STATE_FILE"
+}
+
+delete_timer() {
+  local pid_or_name_or_line="$1"
+  if [ -z "$pid_or_name_or_line" ]; then
+    err "No PID or Name provided for deletion"
+    return 1
+  fi
+  local self_call=${2:-true}
+
+  if [ -f "$STATE_FILE" ]; then
+    local tmp_file
+    tmp_file=$(mktemp)
+
+    local REMOVED_LINE=""
+
+    while IFS= read -r line; do
+      local is_killed=false
+      IFS="$DELIMITER" read -r pid end_time name <<<"$line"
+      if [ -z "$name" ]; then
+        name="(no name)"
+      fi
+
+      if ! kill -0 "$pid" 2>/dev/null; then
+        is_killed=true
+      fi
+
+      if [ "$pid" = "$pid_or_name_or_line" ]; then
+        REMOVED_LINE="${C_CYAN}$name${C_RESET} ${C_DIM}(PID: $pid)${C_RESET}"
+        if [ $is_killed = false ]; then
+          # only remove alive processes, coz user never sees PID of killed ones
+          # only way to delete killed ones is via name or full line(fzf)
+          [ "$self_call" = true ] && kill "$pid" 2>/dev/null
+          [ "$self_call" = true ] && success "Removed timer: $REMOVED_LINE"
+          continue
+        fi
+
+      elif [ "$name" = "$pid_or_name_or_line" ] || [ "$line" = "$pid_or_name_or_line" ]; then
+        if [ $is_killed = true ]; then
+          REMOVED_LINE="${C_CYAN}$name${C_RESET}"
+          [ "$self_call" = true ] && success "Removed Killed timer: $REMOVED_LINE"
+          continue
+        else
+          REMOVED_LINE="${C_CYAN}$name${C_RESET} ${C_DIM}(PID: $pid)${C_RESET}"
+          [ "$self_call" = true ] && kill "$pid" 2>/dev/null
+          [ "$self_call" = true ] && success "Removed timer: $REMOVED_LINE"
+          continue
+        fi
+
+      fi
+      echo "$line" >>"$tmp_file"
+    done <"$STATE_FILE"
+
+    mv "$tmp_file" "$STATE_FILE"
+
+    if [ -z "$REMOVED_LINE" ]; then
+      err "No matching PID or Name found for '$pid_or_name_or_line'"
+    fi
+  fi
+}
+
+list_timers() {
+  if [ ! -f "$STATE_FILE" ] || [ ! -s "$STATE_FILE" ]; then
+    info "No active timers."
+    return
+  fi
+
+  local for_fzf=${1:-false}
+  local header
+  header=$(printf "${C_BOLD}%-8s │ %-15s │ %-10s │ %-s${C_RESET}" "PID" "End Time" "Time Left" "Name")
+
+  if [ "$for_fzf" = true ]; then
+    # dummy header for fzf to consume
+    printf "HEADER\t%s\n" "$header"
+  else
+    printf "%s\n" "$header"
+    echo "─────────┼─────────────────┼────────────┼────────────────────"
+  fi
+
+  # printf "%s\n" "$header"
+  # [ "$for_fzf" == "false" ] && echo "─────────┼─────────────────┼────────────┼────────────────────"
+  ALL_ACTIVE=true
+
+  while IFS= read -r line; do
+    IFS="$DELIMITER" read -r pid end_time name <<<"$line"
+    if [ -z "$name" ]; then
+      name="(no name)"
+    fi
+    current_time=$(date +%s)
+
+    # --- PID Processing ---
+    local pid_val="$pid"
+    local pid_color="$C_CYAN"
+    if ! kill -0 "$pid" 2>/dev/null; then
+      ALL_ACTIVE=false
+      pid_val="KILLED"
+      pid_color="$C_RED"
+    fi
+
+    # --- Time Left Processing ---
+    local time_left_val
+    local time_left_color
+    if [ "$end_time" -le "$current_time" ]; then
+      time_left_val="EXPIRED"
+      time_left_color="$C_RED"
+    else
+      remaining=$((end_time - current_time))
+      local days=$((remaining / 86400))
+      local hours=$(((remaining % 86400) / 3600))
+      local minutes=$(((remaining % 3600) / 60))
+      local seconds=$((remaining % 60))
+
+      time_left_val=""
+      [ "$days" -gt 0 ] && time_left_val="${days}d "
+      [ "$hours" -gt 0 ] && time_left_val="${time_left_val}${hours}h "
+      [ "$minutes" -gt 0 ] && time_left_val="${time_left_val}${minutes}m"
+      if [ "$days" -eq 0 ] && [ "$hours" -eq 0 ] && [ "$minutes" -lt 1 ]; then
+        time_left_val="${time_left_val}${seconds}s"
+      fi
+      time_left_val="${time_left_val# }"
+      time_left_color="$C_GREEN"
+    fi
+
+    end_time_str=$(date -d "@$end_time" +"%-d %b %I:%M%P")
+
+    # --- Final Formatting ---
+    local formatted_line
+    formatted_line=$(printf "${pid_color}%-8s${C_RESET} │ %-15s │ ${time_left_color}%-10s${C_RESET} │ ${C_MAGENTA}%s${C_RESET}" \
+      "$pid_val" "$end_time_str" "$time_left_val" "$name")
+
+    if [ "$for_fzf" = true ]; then
+      # $line is used as the unique identifier for deletion
+      printf "%s\t%s\n" "$line" "$formatted_line"
+    else
+      printf "%s\n" "$formatted_line"
+    fi
+  done <"$STATE_FILE"
+
+  if [ "$ALL_ACTIVE" = false ] && [ "$for_fzf" = false ]; then
+    echo
+    err "Some timer processes were KILLED (happens after system restart)"
+    warn "Run ${C_BOLD}tymr --revive${C_RESET}${C_YELLOW} to restore them and clean up EXPIRED ones"
+  fi
+
+}
+
+delete_timer_interactive() {
+  if ! command -v fzf &>/dev/null; then
+    err "fzf not found. Please install fzf to use interactive deletion."
+    exit 1
+  fi
+
+  if [ ! -f "$STATE_FILE" ]; then
+    info "No active timers."
+    return
+  fi
+
+  local selected
+  selected=$(
+    list_timers true | fzf --height 50% --layout reverse --info=inline --multi \
+      --ansi --delimiter='\t' --header-lines=1 --with-nth=2 --accept-nth=1
+  )
+
+  if [ -z "$selected" ]; then
+    info "No timer selected."
+    return
+  fi
+
+  local lines_to_delete=()
+  while IFS= read -r line; do
+    lines_to_delete+=("$line")
+  done <<<"$selected"
+
+  for id_line in "${lines_to_delete[@]}"; do
+    delete_timer "$id_line"
+  done
+}
+
+revive_timers() {
+  if [ ! -f "$STATE_FILE" ]; then
+    info "No timers to revive."
+    return
+  fi
+
+  tmp_file=$(mktemp)
+
+  while IFS= read -r line; do
+    IFS="$DELIMITER" read -r pid end_time name <<<"$line"
+    [ -z "$name" ] && name="(no name)"
+    current_time=$(date +%s)
+
+    if [ "$end_time" -le "$current_time" ]; then
+      warn "Timer expired: ${C_MAGENTA}$name${C_RESET}${C_YELLOW} ${C_DIM}(PID: $pid)${C_RESET}"
+      notify-send -u critical "Timer expired while system was off" "Name: $name\nOn: $(date -d "@$end_time" +'%-d %b %I:%M%P')"
+      continue
+    fi
+
+    if ! kill -0 "$pid" 2>/dev/null; then
+      remaining=$((end_time - current_time))
+      success "Reviving: ${C_MAGENTA}$name${C_RESET}${C_GREEN} - ${C_CYAN}$(date -u -d "@$remaining" +%H:%M:%S)${C_RESET}${C_GREEN} remaining${C_RESET}"
+      "$0" "$remaining" "$name"
+    else
+      echo "$line" >>"$tmp_file"
+    fi
+  done <"$STATE_FILE"
+
+  mv "$tmp_file" "$STATE_FILE"
+}
+
+parse_args() {
+  while [[ "$#" -gt 0 ]]; do
+    case $1 in
+    -h | --help)
+      show_help
+      exit 0
+      ;;
+    -l | --list)
+      list_timers
+      exit 0
+      ;;
+    -r | --revive)
+      revive_timers
+      exit 0
+      ;;
+    -d | --delete)
+      shift
+      if [ -z "$1" ]; then
+        delete_timer_interactive
+        exit 0
+      fi
+      delete_timer "$1"
+      exit 0
+      ;;
+    -s | --stopwatch) STOPWATCH=1 ;;
+    -f | --foreground) FOREGROUND=true ;;
+    -n | --no-sound) NO_SOUND=true ;;
+    -t | --timeout)
+      shift
+      TIMEOUT="$1"
+      if ! [[ "$TIMEOUT" =~ ^[0-9]+$ ]] || [ "$TIMEOUT" -lt 0 ]; then
+        echo "Timeout must be a non-negative integer in seconds"
+        exit 1
+      fi
+      ;;
+    -N | --ntfy-topic)
+      shift
+      NTFY_TOPIC="$1"
+      if [ -z "$NTFY_TOPIC" ]; then
+        err "No topic provided for --ntfy-topic"
+        exit 1
+      fi
+      ;;
+    -S | --sound-file)
+      shift
+      SOUND_FILE="$1"
+      if [ ! -f "$SOUND_FILE" ]; then
+        echo "Sound file not found: $SOUND_FILE"
+        exit 1
+      fi
+      ;;
+    -v | --volume)
+      shift
+      VOLUME="$1"
+      if ! [[ "$VOLUME" =~ ^[0-9]+$ ]] || [ "$VOLUME" -lt 1 ] || [ "$VOLUME" -gt 100 ]; then
+        echo "Volume must be between 1-100"
+        exit 1
+      fi
+      ;;
+    -*)
+      echo "Unknown option: $1"
+      exit 1
+      ;;
+    *)
+      POSITIONAL_ARGS+=("$1")
+      ;;
+    esac
+    shift
+  done
+
+  INPUT_TIME="${POSITIONAL_ARGS[0]}"
+  TIMER_NAME="${POSITIONAL_ARGS[1]}"
+
+  if [[ "$TIMER_NAME" == *"$DELIMITER"* ]]; then
+    err "Name cannot contain the character: $DELIMITER"
+    exit 1
+  fi
+}
+
+parse_args "$@"
+
+detect_player
+check_sound_files
+
+if [ "$FOREGROUND" = false ] && [ $STOPWATCH -eq 0 ]; then
+  if ! SECONDS=$(parse_time_input "$INPUT_TIME"); then
+    exit 1
+  fi
+  nohup "$0" --foreground "${ORIGINAL_ARGS[@]}" >/dev/null 2>&1 &
+  BG_PID=$!
+  end_time=$(($(date +%s) + SECONDS))
+  end_time_str=$(date -d "@$end_time" +"%-d %b %I:%M%P")
+
+  remaining=$SECONDS
+  time_left_val=""
+  [ "$remaining" -ge 86400 ] && time_left_val="$((remaining / 86400))d " && remaining=$((remaining % 86400))
+  [ "$remaining" -ge 3600 ] && time_left_val="${time_left_val}$((remaining / 3600))h " && remaining=$((remaining % 3600))
+  [ "$remaining" -ge 60 ] && time_left_val="${time_left_val}$((remaining / 60))m" && remaining=$((remaining % 60))
+  [ -z "$time_left_val" ] && [ "$remaining" -gt 0 ] && time_left_val="${remaining}s"
+  time_left_val="${time_left_val# }"
+
+  if [ -z "$TIMER_NAME" ]; then
+    success "Timer started"
+  else
+    success "Timer '${C_YELLOW}$TIMER_NAME${C_GREEN}' started"
+  fi
+  echo -e "PID: ${C_YELLOW}$BG_PID${C_RESET}, End Time: ${C_YELLOW}$end_time_str${C_RESET}, Time Left: ${C_YELLOW}$time_left_val${C_RESET}"
+  exit 0
+fi
+
+start_stopwatch() {
+  stty -echoctl
+  trap 'stty echoctl; cleanup true' INT
+  trap 'stty echoctl; cleanup false' TERM HUP
+  end=$(date +%s)
+  while true; do
+    time=$(($(date +%s) - end))
+    printf "${C_CYAN}${C_BOLD}%s${C_RESET}\r" "$(date -u -d "@$time" +%H:%M:%S)"
+    sleep 0.5
+  done
+}
+
+start_timer() {
+  end=$(($(date +%s) + $1))
+  add_to_state "$end"
+  [ "$FOREGROUND" = true ] && stty -echoctl
+  [ "$FOREGROUND" = true ] && trap 'stty echoctl; cleanup true' INT
+  [ "$FOREGROUND" = true ] && trap 'stty echoctl; cleanup false' TERM HUP
+  while [ "$end" -ge "$(date +%s)" ]; do
+    time="$((end - $(date +%s)))"
+    [ "$FOREGROUND" = true ] && printf "${C_GREEN}${C_BOLD}%s${C_RESET}\r" "$(date -u -d "@$time" +%H:%M:%S)"
+    sleep 0.5
+  done
+  [ "$FOREGROUND" = true ] && stty echoctl
+  delete_timer "$$" false
+}
+
+if [ $STOPWATCH -eq 1 ]; then
+  start_stopwatch
+  exit 0
+fi
+
+if ! SECONDS=$(parse_time_input "$INPUT_TIME"); then
+  exit 1
+fi
+
+target_epoch=$(($(date +%s) + SECONDS))
+[ -n "$NTFY_TOPIC" ] && push_ntfy "${TIMER_NAME:-"Timer finished"}" "$target_epoch"
+
+start_timer "$SECONDS"
+
+set -m # enable job control. Needed for killing process groups(SOUND_LOOP_PGID)
+if [ "$NO_SOUND" = false ]; then
+  VOLUME_ARGS=""
+  if [ -n "$VOLUME" ]; then
+    VOL_VALUE=$((VOLUME * PLAYER_VOL_MULTIPLIER))
+    VOLUME_ARGS="$PLAYER_VOL_FLAG$VOL_VALUE"
+  fi
+  if [ -n "$SOUND_FILE" ]; then
+    CMD_TO_RUN="$PLAYER_CMD $VOLUME_ARGS \"$SOUND_FILE\""
+    (while :; do
+      eval "$CMD_TO_RUN"
+    done) &
+    SOUND_LOOP_PGID=$!
+  else
+    CMD_TO_RUN_1="$PLAYER_CMD $VOLUME_ARGS /usr/share/sounds/freedesktop/stereo/service-login.oga"
+    CMD_TO_RUN_2="$PLAYER_CMD $VOLUME_ARGS /usr/share/sounds/freedesktop/stereo/service-logout.oga"
+    (while :; do
+      if command -v timeout &>/dev/null; then
+        # --foreground coz it otherwise timeout spawns a new process group, so kill won't work for players
+        # this fucking took me 2 hours to debug
+        timeout --foreground 2 bash -c "$CMD_TO_RUN_1"
+        timeout --foreground 2 bash -c "$CMD_TO_RUN_2"
+      else
+        bash -c "$CMD_TO_RUN_1"
+        bash -c "$CMD_TO_RUN_2"
+      fi
+    done) &
+    SOUND_LOOP_PGID=$!
+  fi
+fi
+
+notify-send -u critical -w -t $TIMEOUT "Time's Up!" "$TIMER_NAME" 2>/dev/null
+
+if [ "$NO_SOUND" = false ] && [ -n "$SOUND_LOOP_PGID" ]; then
+  kill -- -"$SOUND_LOOP_PGID" 2>/dev/null
+fi
