@@ -25,6 +25,8 @@
     remotes = "! git remote --verbose | column -t"
     find = log --graph --oneline --all --decorate --date-order --regexp-ignore-case --extended-regexp --grep
     contributors = shortlog --summary --numbered
+[am]
+    threeway = true
 [branch]
     sort = -committerdate
 [color]
