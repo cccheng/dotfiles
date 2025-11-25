@@ -123,9 +123,10 @@
             "critical": 20
         },
         "format": "{icon} {capacity}%",
+        "format-time": "{H}h{M}m",
         "format-charging": " {capacity}%",
         "format-plugged": " {capacity}%",
-        "format-alt": "{time} {icon}",
+        "format-alt": "{icon} {time}",
         "format-alt-icons": ["󰂃", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
         "format-icons": [" ", " ", " ", " ", " "]
     },
