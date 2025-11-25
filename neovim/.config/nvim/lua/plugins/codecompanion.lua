@@ -52,12 +52,20 @@ return {
                 http = {
                     ["Copilot"] = function()
                         return require("codecompanion.adapters").extend("copilot", {
-                            schema = { model = { default = "claude-sonnet-4.5" } },
+                            schema = {
+                                model = {
+                                    default = "gemini-3-pro-preview",
+                                }
+                            },
                         })
                     end,
                     ["Copilot inline"] = function()
                         return require("codecompanion.adapters").extend("copilot", {
-                            schema = { model = { default = "claude-sonnet-4.5" } },
+                            schema = {
+                                model = {
+                                    default = "gemini-3-pro-preview",
+                                }
+                            },
                         })
                     end,
                     opts = {
