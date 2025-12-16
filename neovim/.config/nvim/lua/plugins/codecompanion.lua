@@ -22,6 +22,7 @@ return {
     {
         "olimorris/codecompanion.nvim",
         lazy = true,
+        version = "17.33.0",
         cmd = {
             "CodeCompanion",
             "CodeCompanionActions",
