@@ -3,14 +3,19 @@ local PROMPTS = require("plugins.codecompanion.prompts")
 return {
     {
         "zbirenbaum/copilot.lua",
-        lazy = true,
+        event = "InsertEnter",
         cmd = "Copilot",
         config = function()
             require("copilot").setup({
                 suggestion = {
                     auto_trigger = true,
                     keymap = {
-                        accept = "<TAB>", -- false, -- handled by blink.cmp
+                        -- accept = "<M-l>",
+                        -- accept_word = false,
+                        -- accept_line = false,
+                        -- next = "<M-]>",
+                        -- prev = "<M-[>",
+                        -- dismiss = "<C-]>",
                     },
                     panel = {
                         -- enabled = false,
