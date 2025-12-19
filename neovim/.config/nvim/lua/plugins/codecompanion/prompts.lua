@@ -45,7 +45,7 @@ vim.loop.os_uname().sysname
 local PROMPT_LIBRARY = {
     -- Custom the default prompt
     ["Generate a Commit Message"] = {
-        strategy = "inline",
+        interaction = "inline",
         description = "Generate a commit message",
         opts = {
             index = 10,
@@ -53,7 +53,7 @@ local PROMPT_LIBRARY = {
             is_default = true,
             is_slash_cmd = true,
             placement = "before",
-            short_name = "commit",
+            alias ="commit",
         },
         prompts = {
             {
@@ -79,14 +79,14 @@ Please generate a commit message for me:
     },
     -- Additional customized custom prompts
     ["Translate"] = {
-        strategy = "chat",
+        interaction = "chat",
         description = "Translate the selection into Traditional Chinese",
         opts = {
             index = 100,
             auto_submit = true,
             is_slash_cmd = true,
             modes = { "v" },
-            short_name = "trans",
+            alias ="trans",
             adapter = {
                 name = "copilot",
                 model = "gpt-4o",
@@ -103,14 +103,14 @@ Please translate the selection into Traditional Chinese.
         }
     },
     ["Proofreader"] = {
-        strategy = "chat",
+        interaction = "chat",
         description = "Proofread the selection",
         opts = {
             index = 101,
             auto_submit = true,
             is_slash_cmd = true,
             modes = { "v" },
-            short_name = "proof",
+            alias ="proof",
             adapter = {
                 name = "copilot",
                 model = "gpt-4o",
@@ -145,14 +145,14 @@ Provide specific corrections and explain why changes improve the text. Focus on 
         },
     },
     ["Add Documentation"] = {
-        strategy = "inline",
+        interaction = "inline",
         description = "Add documentation to the selected code",
         opts = {
             index = 102,
             auto_submit = true,
             is_slash_cmd = true,
             modes = { "v" },
-            short_name = "doc",
+            alias ="doc",
             stop_context_insertion = true,
         },
         prompts = {
@@ -184,14 +184,14 @@ When asked to add documentation, follow these steps:
         },
     },
     ["Refactor"] = {
-        strategy = "chat",
+        interaction = "chat",
         description = "Refactor the selected code for readability, maintainability and performances",
         opts = {
             index = 103,
             auto_submit = true,
             is_slash_cmd = true,
             modes = { "v" },
-            short_name = "refactor",
+            alias ="refactor",
             stop_context_insertion = true,
         },
         prompts = {
@@ -235,14 +235,14 @@ Use Markdown formatting and include the programming language name at the start o
         },
     },
     ["Review Code"] = {
-        strategy = "chat",
+        interaction = "chat",
         description = "Review code and provide suggestions for improvement.",
         opts = {
             index = 104,
             auto_submit = true,
             is_slash_cmd = true,
             modes = { "v" },
-            short_name = "review",
+            alias ="review",
             stop_context_insertion = true,
         },
         prompts = {
@@ -288,14 +288,14 @@ If the code snippet has no readability issues, simply confirm that the code is c
         },
     },
     ["Review kernel patch"] = {
-        strategy = "chat",
+        interaction = "chat",
         description = "Conduct code reviews like Linus Torvalds.",
         opts = {
             index = 105,
             auto_submit = true,
             is_default = true,
             is_slash_cmd = true,
-            short_name = "review_patch",
+            alias ="review_patch",
         },
         prompts = {
             {

@@ -27,7 +27,6 @@ return {
     {
         "olimorris/codecompanion.nvim",
         lazy = true,
-        version = "17.33.0",
         cmd = {
             "CodeCompanion",
             "CodeCompanionActions",
@@ -37,14 +36,6 @@ return {
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",
             "ravitemer/mcphub.nvim",
-            -- {
-            --     "Davidyz/VectorCode",
-            --     dependencies = { "nvim-lua/plenary.nvim" },
-            --     cmd = "VectorCode",
-            --     build = "uv tool upgrade vectorcode", -- optional but recommended. This keeps your CLI up-to-date.
-            --     -- build = "pipx upgrade vectorcode",
-            --     opts = {},
-            -- },
         },
         keys = {
             { "<LEADER>a", "", desc = "AI Assistant" },
@@ -53,99 +44,47 @@ return {
             { "<LEADER>ai", "<CMD>CodeCompanion<CR>", mode = { "n", "v" }, desc = "CodeCompanion inline" },
         },
         opts = {
-            -- language = "English",
             adapters = {
-                http = {
-                    ["Copilot"] = function()
-                        return require("codecompanion.adapters").extend("copilot", {
-                            schema = {
-                                model = {
-                                    default = "gemini-3-pro-preview",
-                                }
-                            },
-                        })
-                    end,
-                    ["Copilot inline"] = function()
-                        return require("codecompanion.adapters").extend("copilot", {
-                            schema = {
-                                model = {
-                                    default = "gemini-3-pro-preview",
-                                }
-                            },
-                        })
-                    end,
-                    opts = {
-                        show_model_choices = true,
-                    },
-                },
-                acp = {
-                    ["Gemini CLI"] = function()
-                        return require("codecompanion.adapters").extend("gemini_cli", {
-                            commands = {
-                                ["Gemini 2.5 Pro"] = {
-                                    "gemini",
-                                    "--experimental-acp",
-                                    "-m",
-                                    "gemini-2.5-pro",
-                                },
-                                ["Gemini 2.5 Flash"] = {
-                                    "gemini",
-                                    "--experimental-acp",
-                                    "-m",
-                                    "gemini-2.5-flash",
-                                },
-                            },
-                            defaults = {
-                                auth_method = "gemini-api-key", -- "oauth-personal"|"gemini-api-key"|"vertex-ai"
-                                -- mcpServers = require("mcphub").get_hub_instance():get_servers(),
-                                timeout = 5000, -- 5 seconds
-                            },
-                            env = {
-                                HTTP_PROXY = vim.env.HTTP_PROXY,
-                                HTTPS_PROXY = vim.env.HTTPS_PROXY,
-                            },
-                        })
-                    end,
-                    ["Claude Code"] = function()
-                        return require("codecompanion.adapters").extend("claude_code", {
-                            env = {
-                                -- ANTHROPIC_API_KEY = "my-api-key",
-                                -- CLAUDE_CODE_OAUTH_TOKEN = "my-oauth-token",
-                            },
-                        })
-                    end,
-                },
             },
-            memory = {
+            rules = {
                 opts = {
                     chat = {
-                        condition = function(chat)
+                        enabled = function(chat)
                             return chat.adapter.type ~= "acp"
                         end,
                     },
                 },
             },
-            strategies = {
+            interactions = {
                 chat = {
-                    adapter = "Copilot",
+                    adapter = {
+                        name = "copilot",
+                        -- "gpt-5.2", "gpt-5.1", "gpt-5.1-codex", "gpt-5.1-codex-mini", "gpt-5.1-codex-max"
+                        -- "gpt-5", "gpt-5-codex", "gpt-5-mini", "gpt-4o", "gpt-4.1",
+                        -- "claude-haiku-4.5", "claude-sonnet-4.5", "claude-sonnet-4", "claude-opus-4.5", "grok-code-fast-1"
+                        -- "gemini-3-pro-preview", "gemini-3-flash-preview", "gemini-2.5-pro",
+                        model = "claude-sonnet-4.5",
+                    },
                     roles = {
                         user = " " .. os.getenv("USER"),
                         llm = function(adapter)
-                            local model_name = ""
-                            if adapter.schema and adapter.schema.model and adapter.schema.model.default then
-                                local model = adapter.schema.model.default
-                                if type(model) == "function" then
-                                    model = model(adapter)
-                                end
-                                model_name = "(" .. model .. ")"
+                            if adapter.model then
+                                return string.format(
+                                    "󰄛 %s (%s)",
+                                    adapter.formatted_name,
+                                    adapter.model.name
+                                )
+                            else
+                                return "󰄛 " .. adapter.formatted_name
                             end
-                            return "󱚤 " .. adapter.formatted_name .. model_name
                         end,
                     },
                     variables = {
                         ["buffer"] = {
                             opts = {
-                                default_params = "watch", -- or "pin"
+                                -- Always sync the buffer by sharing its "diff"
+                                -- Or choose "all" to share the entire buffer
+                                default_params = "diff", -- or "all"
                             },
                         },
                     },
@@ -179,27 +118,45 @@ return {
                     },
                     opts = {
                         completion_provider = "blink", -- blink|cmp|coc|default
+                        system_prompt = PROMPTS.SYSTEM_PROMPT,
                     }
                 },
                 inline = {
-                    adapter = "Copilot inline",
+                    -- adapter = "",
+                },
+                cmd = {
+                    -- adapter = "",
+                },
+                background = {
+                    -- adapter = "",
                 },
             },
             display = {
                 action_palette = {
                     opts = {
-                        show_default_actions = true, -- Show the default actions in the action palette?
-                        show_default_prompt_library = true, -- Show the default prompt library in the action palette?
+                        show_preset_actions = true, -- Show the default actions in the action palette
+                        show_preset_prompts = true, -- Show the default prompt library in the action palette
                     },
                 },
                 chat = {
                     intro_message = "",
                     show_header_separator = true,
+                    fold_context = true,
                     window = {
+                    },
+                    icons = {
+                        buffer_sync_all = "󰪴 ",
+                        buffer_sync_diff = " ",
+                        chat_context = " ",
+                        chat_fold = " ",
+                        tool_pending = "  ",
+                        tool_in_progress = "  ",
+                        tool_failure = "  ",
+                        tool_success = "  ",
                     },
                 },
                 diff = {
-                    provider = "inline", -- mini_diff|split|inline
+                    enabled = true,
                     provider_opts = {
                         -- Options for inline diff provider
                         inline = {
@@ -209,11 +166,6 @@ return {
                 },
             },
             extensions = {
-                -- vectorcode = {
-                --     opts = {
-                --         add_tool = true,
-                --     }
-                -- },
                 mcphub = {
                     callback = "mcphub.extensions.codecompanion",
                     opts = {
@@ -229,9 +181,6 @@ return {
                         make_slash_commands = true,           -- Add MCP prompts as /slash commands
                     }
                 },
-            },
-            opts = {
-                system_prompt = PROMPTS.SYSTEM_PROMPT,
             },
             prompt_library = PROMPTS.PROMPT_LIBRARY,
         },
