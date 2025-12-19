@@ -186,6 +186,7 @@ return {
         },
         config = function(_, opts)
             require("codecompanion").setup(opts)
+            require("plugins.codecompanion.extmarks").setup()
         end,
     },
     {
