@@ -1,5 +1,3 @@
-local PROMPTS = require("plugins.codecompanion.prompts")
-
 return {
     {
         "zbirenbaum/copilot.lua",
@@ -45,6 +43,8 @@ return {
         },
         opts = {
             adapters = {
+                -- https://docs.github.com/en/copilot/reference/ai-models/supported-models
+                -- https://docs.github.com/en/copilot/reference/ai-models/model-comparison
             },
             rules = {
                 opts = {
@@ -118,7 +118,6 @@ return {
                     },
                     opts = {
                         completion_provider = "blink", -- blink|cmp|coc|default
-                        system_prompt = PROMPTS.SYSTEM_PROMPT,
                     }
                 },
                 inline = {
@@ -157,12 +156,7 @@ return {
                 },
                 diff = {
                     enabled = true,
-                    provider_opts = {
-                        -- Options for inline diff provider
-                        inline = {
-                            layout = "buffer", -- float|buffer - Where to display the diff
-                        },
-                    },
+                    provider = "inline", -- "inline", "split", "mini_diff"
                 },
             },
             extensions = {
@@ -182,7 +176,16 @@ return {
                     }
                 },
             },
-            prompt_library = PROMPTS.PROMPT_LIBRARY,
+            -- prompt_library = PROMPTS.PROMPT_LIBRARY,
+            prompt_library = {
+                markdown = {
+                    dirs = {
+                        vim.fn.stdpath("config") .. "/lua/plugins/codecompanion/prompts",
+                        "~/.config/prompts",
+                        vim.fn.getcwd() .. "/.prompts",
+                    },
+                },
+            },
         },
         config = function(_, opts)
             require("codecompanion").setup(opts)
