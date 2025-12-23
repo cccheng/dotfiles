@@ -26,10 +26,14 @@ return {
                     and not vim.tbl_contains(no_indent_fts, vim.bo[buf].filetype)
             end,
         },
+        picker = {
+            layout = {
+                preset = "ivy",
+            },
+        },
         scope = {
             enabled = true,
         },
-
         styles = {
             scratch = {
                 width = 120,
