@@ -122,7 +122,7 @@ return {
             -- "rcarriga/nvim-notify",
         },
         keys = {
-            { "<LEADER>tn", mode = {"n"}, "<CMD>NoiceTelescope<CR>",  desc = "Noice" },
+            { "<LEADER>tn", mode = {"n"}, "<CMD>NoiceSnacks<CR>",  desc = "Noice" },
         },
         config = function()
             require("noice").setup({

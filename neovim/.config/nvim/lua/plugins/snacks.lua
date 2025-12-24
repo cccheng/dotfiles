@@ -44,5 +44,18 @@ return {
     },
     keys = {
         { "<LEADER><TAB>", function() Snacks.scratch({ ft = "markdown", file = vim.fn.stdpath("data") .. "/scratch.md" }) end, desc = "Todo List" },
+        { "<LEADER>t", "", desc = "Telescope/Picker" },
+        -- search
+        { "<LEADER>ta", function() Snacks.picker.autocmds() end, desc = "Autocmds" },
+        { "<LEADER>tb", function() Snacks.picker.buffers() end, desc = "Buffers" },
+        { "<LEADER>th", function() Snacks.picker.help() end, desc = "Help Pages" },
+        { "<LEADER>tH", function() Snacks.picker.highlights() end, desc = "Highlights" },
+        { "<LEADER>tk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
+        { "<LEADER>td", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
+        { "<LEADER>tj", function() Snacks.picker.jumps() end, desc = "Jumps" },
+        { "<LEADER>tq", function() Snacks.picker.qflist() end, desc = "Quickfix List" },
+        { "<LEADER>tt", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
+        { "<LEADER>tm", function() Snacks.picker.marks() end, desc = "Marks" },
+        { "<LEADER>tM", function() Snacks.picker.man() end, desc = "Man Pages" },
     },
 }
