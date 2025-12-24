@@ -167,6 +167,14 @@ return {
         },
         keys = {
             { "<LEADER>l", "", desc = "LSP" },
+            { "<LEADER>lld", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
+            { "<LEADER>llr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
+            { "<LEADER>lli", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
+            { "<LEADER>llt", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto Type Definition" },
+            { "<LEADER>lls", function() Snacks.picker.lsp_symbols({ filter = LazyVim.config.kind_filter }) end, desc = "LSP Symbols" },
+            { "<LEADER>llw", function() Snacks.picker.lsp_workspace_symbols({ filter = LazyVim.config.kind_filter }) end, desc = "LSP Workspace Symbols" },
+            { "<LEADER>llci", function() Snacks.picker.lsp_incoming_calls() end, desc = "Calls Incoming" },
+            { "<LEADER>llco", function() Snacks.picker.lsp_outgoing_calls() end, desc = "Calls Outgoing" },
         },
         config = function()
             local handlers = {
@@ -188,21 +196,14 @@ return {
                 vim.lsp.enable(name)
             end
 
-            vim.keymap.set("n", "<LEADER>ls",  vim.lsp.buf.hover,                   { desc = "Hover" })
-            vim.keymap.set("n", "<LEADER>llD", vim.lsp.buf.declaration,             { desc = "LSP Declaration" })
-            vim.keymap.set("n", "<LEADER>lf",  vim.lsp.buf.format,                  { desc = "Format" })
-            vim.keymap.set("n", "<LEADER>la",  vim.lsp.buf.code_action,             { desc = "Code action" })
-            vim.keymap.set("n", "<LEADER>lS",  vim.lsp.buf.signature_help,          { desc = "Signature" })
-            vim.keymap.set("n", "<LEADER>lR",  vim.lsp.buf.rename,                  { desc = "Rename" })
-            -- vim.keymap.set("n", "<LEADER>lds", vim.diagnostic.open_float,           { desc = "Show diagnostic" })
-            -- vim.keymap.set("n", "<LEADER>ldl", vim.diagnostic.setloclist,           { desc = "Diagnostic List" })
-            vim.keymap.set("n", "<LEADER>llr", "<CMD>Telescope lsp_references<CR>", { desc = "LSP References" })
-            vim.keymap.set("n", "<LEADER>lh",  function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, { desc = "Toggle inlay hints" })
-            vim.keymap.set("n", "<LEADER>lS",  "<CMD>LspStop<CR>",                  { desc = "Stop LSP" })
-            vim.keymap.set("n", "<LEADER>lI",  "<CMD>LspInfo<CR>",                  { desc = "LSP Info" })
-            vim.keymap.set("n", "<LEADER>lld", function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end, { desc = "LSP Definition" })
-            -- vim.keymap.set("n", "<LEADER>lt", function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end, { desc = "LSP Type Definition" })
-            -- vim.keymap.set("n", "<LEADER>li", function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end, { desc = "LSP Implementation" })
+            vim.keymap.set({"n", "v"}, "<LEADER>la",  vim.lsp.buf.code_action,             { desc = "Code action" })
+            vim.keymap.set({"n", "v"}, "<LEADER>lf",  vim.lsp.buf.format,                  { desc = "Format" })
+            vim.keymap.set({"n", "v"}, "<LEADER>ls",  vim.lsp.buf.hover,                   { desc = "Hover" })
+            vim.keymap.set({"n", "v"}, "<LEADER>lS",  vim.lsp.buf.signature_help,          { desc = "Signature" })
+            vim.keymap.set({"n", "v"}, "<LEADER>lR",  vim.lsp.buf.rename,                  { desc = "Rename" })
+            vim.keymap.set({"n", "v"}, "<LEADER>lh",  function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, { desc = "Toggle inlay hints" })
+            vim.keymap.set({"n", "v"}, "<LEADER>lS",  "<CMD>LspStop<CR>",                  { desc = "Stop LSP" })
+            vim.keymap.set({"n", "v"}, "<LEADER>lI",  "<CMD>LspInfo<CR>",                  { desc = "LSP Info" })
         end
     },
     {

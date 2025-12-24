@@ -12,7 +12,13 @@ return {
             vim.api.nvim_set_hl(0, "TabLine", { fg = "#9a9ca5", bg = "#1f2233", bold = false })
             vim.api.nvim_set_hl(0, "TabLineFill", { fg = "#101218", bg = "#1f2233", bold = false })
             vim.api.nvim_set_hl(0, "TabLineSel", { fg = "#9a9ca5", bg = "#2b335a", bold = true })
-            vim.api.nvim_set_hl(0, "SnacksIndentScope", { fg = "#454d73" })
+
+            vim.api.nvim_set_hl(0, "SnacksIndentScope", { link = "IblScope" })
+            vim.api.nvim_set_hl(0, "SnacksPicker", { link = "Normal" })
+            vim.api.nvim_set_hl(0, "SnacksPicker", { bg = vim.g.terminal_color_0 })
+            vim.api.nvim_set_hl(0, "SnacksPickerBorder", { link = "FoldColumn" })
+            vim.api.nvim_set_hl(0, "SnacksPickerMatch", { link = "TelescopeMatching" })
+            vim.api.nvim_set_hl(0, "SnacksPickerPrompt", { link = "TelescopePromptPrefix" })
         end
     },
     {
