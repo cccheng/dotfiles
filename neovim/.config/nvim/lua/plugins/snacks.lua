@@ -45,11 +45,16 @@ return {
     keys = {
         { "<LEADER><TAB>", function() Snacks.scratch({ ft = "markdown", file = vim.fn.stdpath("data") .. "/scratch.md" }) end, desc = "Todo List" },
         { "<LEADER>t", "", desc = "Telescope/Picker" },
+        -- grep
+        { "<LEADER>tg", function() Snacks.picker.grep() end, desc = "Live grep" },
+        { "<LEADER>tw", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
+        { "<LEADER>tW", function() Snacks.picker.grep_word({ args = {} }) end, desc = "Matched word", mode = { "n", "x" } },
         -- search
         { "<LEADER>ta", function() Snacks.picker.autocmds() end, desc = "Autocmds" },
         { "<LEADER>tb", function() Snacks.picker.buffers() end, desc = "Buffers" },
         { "<LEADER>th", function() Snacks.picker.help() end, desc = "Help Pages" },
         { "<LEADER>tH", function() Snacks.picker.highlights() end, desc = "Highlights" },
+        { "<LEADER>ti", function() Snacks.picker.icons({ layout = { preset = "ivy" } }) end, desc = "Icons" },
         { "<LEADER>tk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
         { "<LEADER>td", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
         { "<LEADER>tj", function() Snacks.picker.jumps() end, desc = "Jumps" },

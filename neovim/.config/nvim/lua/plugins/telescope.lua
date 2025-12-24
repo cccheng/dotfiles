@@ -5,22 +5,12 @@ return {
         dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-telescope/telescope-fzf-native.nvim",
-            "nvim-telescope/telescope-symbols.nvim",
         },
         keys = {
             { "<LEADER>ts", function() require("telescope.builtin").find_files() end, desc = "Search files" },
-            { "<LEADER>tg", function() require("telescope.builtin").live_grep() end, desc = "Live grep" },
-            { "<LEADER>tf", function() require("telescope.builtin").grep_string() end, desc = "Find current string" },
-            { "<LEADER>tF", function() require("telescope.builtin").grep_string({word_match = "-w"}) end, desc = "Find current word matched string" },
             { "<LEADER>f",  "<CMD>Telescope file_browser path=%:p:h select_buffer=true<CR>", desc = "File browser" },
             { "<LEADER>gs", "<CMD>Telescope git_status<CR>", desc = "Git status" },
             { "<LEADER>gB", "<CMD>Telescope git_bcommits<CR>", desc = "Git commits of current buffer" },
-            { "<LEADER>tSe", function() require("telescope.builtin").symbols({ sources = {"emoji"} }) end, desc = "Telescope emoji symbols" },
-            { "<LEADER>tSg", function() require("telescope.builtin").symbols({ sources = {"gitmoji"} }) end, desc = "Telescope gitmoji symbols" },
-            { "<LEADER>tSk", function() require("telescope.builtin").symbols({ sources = {"kaomoji"} }) end, desc = "Telescope kaomoji symbols" },
-            { "<LEADER>tSl", function() require("telescope.builtin").symbols({ sources = {"latex"} }) end, desc = "Telescope latex symbols" },
-            { "<LEADER>tSm", function() require("telescope.builtin").symbols({ sources = {"math"} }) end, desc = "Telescope math symbols" },
-            { "<LEADER>tSn", function() require("telescope.builtin").symbols({ sources = {"nerd"} }) end, desc = "Telescope nerd symbols" },
         },
         config = function()
             require("telescope").setup({
