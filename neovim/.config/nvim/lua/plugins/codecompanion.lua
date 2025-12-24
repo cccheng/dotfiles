@@ -132,6 +132,7 @@ return {
             },
             display = {
                 action_palette = {
+                    provider = "snacks",
                     opts = {
                         show_preset_actions = true, -- Show the default actions in the action palette
                         show_preset_prompts = true, -- Show the default prompt library in the action palette

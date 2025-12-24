@@ -6,6 +6,8 @@ return {
         bigfile = {
             enabled = true,
         },
+        explorer = {
+        },
         indent = {
             enabled = true,
             animate = {
@@ -45,10 +47,21 @@ return {
     keys = {
         { "<LEADER><TAB>", function() Snacks.scratch({ ft = "markdown", file = vim.fn.stdpath("data") .. "/scratch.md" }) end, desc = "Todo List" },
         { "<LEADER>t", "", desc = "Telescope/Picker" },
+        -- files
+        { "<LEADER>f", function() Snacks.explorer({ layout = { preset = "ivy", preview = true } }) end, desc = "File Explorer" },
+        { "<LEADER>tf", function() Snacks.picker.files() end, desc = "Find Files" },
+        { "<LEADER>ts", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
         -- grep
         { "<LEADER>tg", function() Snacks.picker.grep() end, desc = "Live grep" },
         { "<LEADER>tw", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
         { "<LEADER>tW", function() Snacks.picker.grep_word({ args = {} }) end, desc = "Matched word", mode = { "n", "x" } },
+        -- git
+        { "<LEADER>gB", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
+        { "<LEADER>gl", function() Snacks.picker.git_log() end, desc = "Git Log" },
+        { "<LEADER>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
+        { "<LEADER>gS", function() Snacks.picker.git_stash() end, desc = "Git Stash" },
+        { "<LEADER>gD", function() Snacks.picker.git_diff() end, desc = "Git Diff (Hunks)" },
+        { "<LEADER>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
         -- search
         { "<LEADER>ta", function() Snacks.picker.autocmds() end, desc = "Autocmds" },
         { "<LEADER>tb", function() Snacks.picker.buffers() end, desc = "Buffers" },
