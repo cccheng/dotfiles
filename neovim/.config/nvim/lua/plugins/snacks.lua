@@ -51,6 +51,8 @@ return {
         { "<LEADER>f", function() Snacks.explorer({ layout = { preset = "ivy", preview = true } }) end, desc = "File Explorer" },
         { "<LEADER>tf", function() Snacks.picker.files() end, desc = "Find Files" },
         { "<LEADER>ts", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
+        { "<LEADER>tp", function() Snacks.picker.projects() end, desc = "Recent Projects" },
+        { "<LEADER>tr", function() Snacks.picker.recent() end, desc = "Recent Files" },
         -- grep
         { "<LEADER>tg", function() Snacks.picker.grep() end, desc = "Live grep" },
         { "<LEADER>tw", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
@@ -72,6 +74,7 @@ return {
         { "<LEADER>td", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
         { "<LEADER>tj", function() Snacks.picker.jumps() end, desc = "Jumps" },
         { "<LEADER>tq", function() Snacks.picker.qflist() end, desc = "Quickfix List" },
+        { "<LEADER>tR", function() Snacks.picker.registers() end, desc = "Registers" },
         { "<LEADER>tt", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
         { "<LEADER>tm", function() Snacks.picker.marks() end, desc = "Marks" },
         { "<LEADER>tM", function() Snacks.picker.man() end, desc = "Man Pages" },
