@@ -29,6 +29,9 @@ return {
                     language_pad = 1,
                     left_pad = 1,
                 },
+                bullet = {
+                    enabled = false,
+                },
             })
 
             vim.api.nvim_create_user_command("ToggleMarkdown", function()
