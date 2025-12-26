@@ -170,6 +170,11 @@ return {
             { "<LEADER>ls",  function() vim.lsp.buf.hover({ border = "single" }) end, desc = "Hover" },
             { "<LEADER>lS",  function() vim.lsp.buf.signature_help({ border = "single" }) end, desc = "Signature" },
             { "<LEADER>lh",  function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, desc = "Toggle inlay hints" },
+            { "<LEADER>la",  function() vim.lsp.buf.code_action() end, desc = "Code action" },
+            { "<LEADER>lf",  function() vim.lsp.buf.format() end, desc = "Format" },
+            { "<LEADER>lR",  function() vim.lsp.buf.rename() end, desc = "Rename" },
+            { "<LEADER>lS",  "<CMD>LspStop<CR>", desc = "Stop LSP" },
+            { "<LEADER>lI",  "<CMD>LspInfo<CR>", desc = "LSP Info" },
             { "<LEADER>lld", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
             { "<LEADER>llr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
             { "<LEADER>lli", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
@@ -191,12 +196,6 @@ return {
 
                 vim.lsp.enable(name)
             end
-
-            vim.keymap.set({"n", "v"}, "<LEADER>la",  vim.lsp.buf.code_action,             { desc = "Code action" })
-            vim.keymap.set({"n", "v"}, "<LEADER>lf",  vim.lsp.buf.format,                  { desc = "Format" })
-            vim.keymap.set({"n", "v"}, "<LEADER>lR",  vim.lsp.buf.rename,                  { desc = "Rename" })
-            vim.keymap.set({"n", "v"}, "<LEADER>lS",  "<CMD>LspStop<CR>",                  { desc = "Stop LSP" })
-            vim.keymap.set({"n", "v"}, "<LEADER>lI",  "<CMD>LspInfo<CR>",                  { desc = "LSP Info" })
         end
     },
     {
