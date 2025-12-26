@@ -180,12 +180,6 @@ return {
             { "<LEADER>llco", function() Snacks.picker.lsp_outgoing_calls() end, desc = "Calls Outgoing" },
         },
         config = function()
-            local handlers = {
-                -- none, single, double, rounded, shadow
-                ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
-                ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
-            }
-
             for name, config in pairs(lsp_servers) do
                 vim.lsp.config(name, {
                     capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities),
@@ -193,7 +187,6 @@ return {
                     on_attach = config.on_attach,
                     filetypes = config.filetypes,
                     settings = config.settings,
-                    handlers = handlers,
                 })
 
                 vim.lsp.enable(name)
