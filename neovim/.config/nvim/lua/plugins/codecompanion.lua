@@ -88,6 +88,17 @@ return {
                             },
                         },
                     },
+                    slash_commands = {
+                        ["buffer"] = {
+                            opts = { provider = "snacks" },
+                        },
+                        ["file"] = {
+                            opts = { provider = "snacks" },
+                        },
+                        ["terminal"] = {
+                            opts = { provider = "snacks" },
+                        },
+                    },
                     keymaps = {
                         toggle = {
                             modes = {
