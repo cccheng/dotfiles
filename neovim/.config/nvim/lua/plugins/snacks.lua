@@ -48,7 +48,7 @@ return {
         { "<LEADER><TAB>", function() Snacks.scratch({ ft = "markdown", file = vim.fn.stdpath("data") .. "/scratch.md" }) end, desc = "Todo List" },
         { "<LEADER>t", "", desc = "Telescope/Picker" },
         -- files
-        { "<LEADER>f", function() Snacks.explorer({ layout = { preset = "ivy", preview = true } }) end, desc = "File Explorer" },
+        { "<LEADER>f", function() Snacks.explorer({ auto_close = true, layout = { preset = "ivy", preview = true } }) end, desc = "File Explorer" },
         { "<LEADER>tf", function() Snacks.picker.files() end, desc = "Find Files" },
         { "<LEADER>ts", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
         { "<LEADER>tp", function() Snacks.picker.projects() end, desc = "Recent Projects" },
