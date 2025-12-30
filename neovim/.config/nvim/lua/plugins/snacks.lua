@@ -33,7 +33,13 @@ return {
                 preset = "ivy",
             },
         },
+        quickfile = {
+            enabled = true,
+        },
         scope = {
+            enabled = true,
+        },
+        scroll = {
             enabled = true,
         },
         styles = {
@@ -42,6 +48,9 @@ return {
                 height = math.floor(vim.o.lines * 0.85),
                 border = "none",
             },
+        },
+        words = {
+            enabled = true,
         },
     },
     keys = {
