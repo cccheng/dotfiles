@@ -5,6 +5,7 @@ set +o histexpand                   # disable !history expansion
 set -o noclobber                    # Prevent file overwrite on stdout redirection
                                     # Use `>|` to force redirection to an existing file
 # set -o physical                     # resolve symlinks when 'cd'ing
+set -o vi
 
 # shopt -s autocd                     # assume 'cd' when trying to exec a directory
 shopt -s cdspell                    # spell check the path when changing directories.
