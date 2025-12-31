@@ -1,34 +1,25 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
+        branch = "main",
         build = ":TSUpdate",
         event = {
             "BufNewFile",
             "BufReadPre",
         },
         config = function()
-            require("nvim-treesitter.configs").setup({
-                ensure_installed = {
-                    "bash", "c", "cmake", "comment", "cpp", "css", "csv",
-                    "diff", "disassembly", "dockerfile", "dot", "editorconfig",
-                    "git_config", "git_rebase", "gitattributes", "gitcommit", "gitignore",
-                    "gnuplot", "go", "gpg", "graphql",
-                    "haskell", "html", "http", "hyprlang", "ini",
-                    "java", "javascript", "json", "kconfig", "lua",
-                    "make", "markdown", "markdown_inline", "mermaid", "muttrc",
-                    "nix", "objdump", "passwd", "pem", "printf", "python",
-                    "readline", "regex", "rst", "ruby", "rust",
-                    "sql", "ssh_config", "strace", "tmux", "toml", "typst",
-                    "udev", "vim", "vimdoc", "xml", "yaml"
-                },
-                sync_install = false,
-                highlight = {
-                    enable = true
-                },
-                indent = {
-                    enable = false,
-                    disabled = {"c", "cpp"}, -- disabled for C proprocessor directive indent reset
-                },
+            require("nvim-treesitter").install({
+                "bash", "c", "cmake", "comment", "cpp", "css", "csv",
+                "diff", "disassembly", "dockerfile", "dot", "editorconfig",
+                "git_config", "git_rebase", "gitattributes", "gitcommit", "gitignore",
+                "gnuplot", "go", "gpg", "graphql",
+                "haskell", "html", "http", "hyprlang", "ini",
+                "java", "javascript", "json", "kconfig", "lua",
+                "make", "markdown", "markdown_inline", "mermaid", "muttrc",
+                "nix", "objdump", "passwd", "pem", "printf", "python",
+                "readline", "regex", "rst", "ruby", "rust",
+                "sql", "ssh_config", "strace", "tmux", "toml", "typst",
+                "udev", "vim", "vimdoc", "xml", "yaml"
             })
         end
     },
@@ -58,6 +49,7 @@ return {
     },
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
+        branch = "main",
         event = {
             "BufNewFile",
             "BufReadPre",
@@ -65,46 +57,53 @@ return {
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
         },
-        config = function()
-            require("nvim-treesitter.configs").setup({
-                textobjects = {
-                    select = {
-                        enable = true,
-                        -- Automatically jump forward to textobj, similar to targets.vim
-                        lookahead = true,
-                        keymaps = {
-                            ["af"] = "@function.outer",
-                            ["if"] = "@function.inner",
-                            ["ac"] = "@class.outer",
-                            -- You can optionally set descriptions to the mappings (used in the desc parameter of
-                            -- nvim_buf_set_keymap) which plugins like which-key display
-                            ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
-                        },
-                        -- You can choose the select mode (default is charwise 'v')
-                        --
-                        -- Can also be a function which gets passed a table with the keys
-                        -- * query_string: eg '@function.inner'
-                        -- * method: eg 'v' or 'o'
-                        -- and should return the mode ('v', 'V', or '<c-v>') or a table
-                        -- mapping query_strings to modes.
-                        selection_modes = {
-                            ['@parameter.outer'] = 'v', -- charwise
-                            ['@function.outer'] = 'V', -- linewise
-                            ['@class.outer'] = '<c-v>', -- blockwise
-                        },
-                        -- If you set this to `true` (default is `false`) then any textobject is
-                        -- extended to include preceding or succeeding whitespace. Succeeding
-                        -- whitespace has priority in order to act similarly to eg the built-in
-                        -- `ap`.
-                        --
-                        -- Can also be a function which gets passed a table with the keys
-                        -- * query_string: eg '@function.inner'
-                        -- * selection_mode: eg 'v'
-                        -- and should return true of false
-                        include_surrounding_whitespace = true,
+        opts = {
+            select = {
+                lookahead = true,
+                selection_modes = {
+                    ["@class.outer"] = "V",
+                    ["@function.outer"] = "v",
+                    ["@parameter.outer"] = "v",
+                },
+                include_surrounding_whitespace = true,
+                keymaps = {
+                    select_textobject = {
+                        ["aC"] = { query = "@comment.outer", desc = "TSTextObject | Around Comment" },
+                        ["aa"] = { query = "@parameter.outer", desc = "TSTextObject | Outer Argument/Parameter" },
+                        ["ac"] = { query = "@class.outer", desc = "TSTextObject | Around Class" },
+                        ["af"] = { query = "@function.outer", desc = "TSTextObject | Around Function/Method" },
+                        ["iC"] = { query = "@comment.outer", desc = "TSTextObject | Inner Comment" },
+                        ["ia"] = { query = "@parameter.inner", desc = "TSTextObject | Inner Argument/Parameter" },
+                        ["ic"] = { query = "@class.inner", desc = "TSTextObject | Inner Class" },
+                        ["if"] = { query = "@function.inner", desc = "TSTextObject | Inner Function/Method" },
                     },
                 },
-            })
-        end
+            },
+            move = {
+                set_jumps = true,
+                keymaps = {
+                    goto_next_start = {
+                        ["]<C-l>"] = { query = "@loop.*", desc = "TSTextObject | Next Loop Start" },
+                        ["]<C-s>"] = { query = "@scope", query_group = "locals", desc = "TSTextObject | Next Scope Start" },
+                        ["]<M-c>"] = { query = "@conditional.outer", desc = "TSTextObject | Next Condition" },
+                        ["]C"] = { query = "@comment.outer", desc = "TSTextObject | Next Comment Start" },
+                        ["]c"] = { query = "@class.outer", desc = "TSTextObject | Next Class Start" },
+                        ["]f"] = { query = "@function.outer", desc = "TSTextObject | Next Function/Method Start" },
+                        ["]r"] = { query = "@return.outer", desc = "TSTextObject | Next Return" },
+                        ["]F"] = { query = "@fold", query_group = "folds", desc = "TSTextObject | Next Fold Start" },
+                    },
+                    goto_previous_start = {
+                        ["[<C-l>"] = { query = "@loop.*", desc = "TSTextObject | Previous Loop Start" },
+                        ["[<C-s>"] = { query = "@scope", query_group = "locals", desc = "TSTextObject | Previous Scope Start" },
+                        ["[<M-c>"] = { query = "@conditional.outer", desc = "TSTextObject | Previous Condition" },
+                        ["[C"] = { query = "@comment.outer", desc = "TSTextObject | Previous Comment Start" },
+                        ["[c"] = { query = "@class.outer", desc = "TSTextObject | Previous Class Start" },
+                        ["[f"] = { query = "@function.outer", desc = "TSTextObject | Previous Function/Method Start" },
+                        ["[r"] = { query = "@return.outer", desc = "TSTextObject | Previous Return" },
+                        ["[F"] = { query = "@fold", query_group = "folds", desc = "TSTextObject | Previous Fold Start" },
+                    },
+                },
+            },
+        },
     },
 }
