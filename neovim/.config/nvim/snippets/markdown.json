@@ -2,5 +2,35 @@
     "folder marker": {
         "prefix": "foldmarker",
         "body": "[//] vim:foldmethod=marker:foldmarker=<!--,-->:foldenable"
+    },
+    "links": {
+        "prefix": ["l", "link"],
+        "body": ["[${1:text}](${2:url}) ${0}"],
+        "description": "Add links"
+    },
+    "insert Note": {
+        "prefix": ["note", "n"],
+        "body": "> [!NOTE]\n> ",
+        "description": "Insert Note"
+    },
+    "insert Tip": {
+        "prefix": ["tip", "t"],
+        "body": "> [!TIP]\n> ",
+        "description": "Insert Tip"
+    },
+    "insert Important": {
+        "prefix": ["important", "imp"],
+        "body": "> [!IMPORTANT]\n> ",
+        "description": "Insert Important"
+    },
+    "insert Warning": {
+        "prefix": ["warning", "w"],
+        "body": "> [!WARNING]\n> ",
+        "description": "Insert Warning"
+    },
+    "insert Caution": {
+        "prefix": ["caution", "c"],
+        "body": "> [!CAUTION]\n> ",
+        "description": "Insert Caution"
     }
 }

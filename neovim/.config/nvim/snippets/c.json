@@ -1,4 +1,14 @@
 {
+    "comment block": {
+        "prefix": "/",
+        "body": ["/*$0 */"],
+        "description": "Convenient comment block"
+    },
+    "multiline comment": {
+        "prefix": "//",
+        "body": ["/*$0", " */"],
+        "description": "Convenient multiline comment"
+    },
     "#if": {
         "prefix": "#if",
         "body": [

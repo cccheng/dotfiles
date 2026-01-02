@@ -1,0 +1,14 @@
+{
+    "reviewed-by by": {
+        "prefix": "re",
+        "body": ["Reviewed-by: ${1:name} <${2:email}>", "$0"]
+    },
+    "signed off by": {
+        "prefix": "si",
+        "body": ["Signed-off-by: ${1:name} <${2:email}>", "$0"]
+    },
+    "co-authored by": {
+        "prefix": "co",
+        "body": ["Co-authored-by: ${1:name} <${2:email}>", "$0"]
+    }
+}
