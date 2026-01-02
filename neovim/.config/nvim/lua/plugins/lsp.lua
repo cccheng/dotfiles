@@ -114,6 +114,7 @@ local lsp_servers = {
     jsonls = {},
     lua_ls = {},
     marksman = {}, -- markdown
+    pylsp = {},
     ruby_lsp = {},
     taplo = {}, -- toml
 }
