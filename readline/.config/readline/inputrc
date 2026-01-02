@@ -55,14 +55,30 @@ set colored-completion-prefix on
 "\e[1;3C": forward-word                 # Alt-Right
 "\e[1;5D": backward-word                # Ctrl-Left
 "\e[1;5C": forward-word                 # Ctrl-Right
-# "\e[5D": backward-word
-# "\e[5C": forward-word
 "\e\e[D": backward-word                 # Mac Option + Left
 "\e\e[C": forward-word                  # Mac Option + Right
 
-# https://www.gnu.org/software/bash/manual/html_node/Commands-For-Killing.html
+"\e\d": backward-kill-word              # Alt-Backspace to delete previous word
 "\C-b": unix-filename-rubout            # Ctrl-b to delete one element from unix path (i.e. until previous '/')
+
+# Bindings for emacs mode
+set keymap emacs
 "\ee": "\C-asudo \C-e"                  # Alt-e to prepend sudo
-"\el": "\C-e| $PAGER"                  # Alt-l to append PAGER
-"\ev": "\C-e| vim -"                   # Atl-l to redirect to vim
-"\ea": "\C-a"                           # Alt-a to the begin of line. Ctrl-a may be used by tmux.
+"\el": "\C-e| $PAGER"                   # Alt-l to append PAGER
+"\ev": "\C-e| $EDITOR -"                # Atl-l to redirect to EDITOR
+
+# Bindings for vim insert mode
+set keymap vi-insert
+"\ee": "\C-[Isudo \C-[A"                # Alt-e to prepend sudo
+"\el": "\C-[A| $PAGER"                  # Alt-l to append PAGER
+"\ev": "\C-[A| $EDITOR -"               # Alt-v to redirect to EDITOR
+
+# Bindings for vim command mode
+set keymap vi-command
+"\ee": "Isudo \C-[$"                    # Alt-e to prepend sudo
+"\el": "A| $PAGER\C-[$"                 # Alt-l to append PAGER
+"\ev": "A| $EDITOR -\C-[$"              # Alt-v to redirect to EDITOR
+
+# Return to vi mode (keep vim mode active)
+set editing-mode vi
+
