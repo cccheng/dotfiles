@@ -5,7 +5,7 @@ description: Conduct code reviews like Linus Torvalds
 opts:
   auto_submit: true
   modes:
-    - v
+    - n
   stop_context_insertion: true
   user_prompt: false
 ---
@@ -115,7 +115,8 @@ Review code with Linus Torvalds' legendary intensity and technical standards. Ke
 You can use the @{read_file} tool and the @{grep_search} tool to gather more context.
 The modifications are vendor-specific, so you should be tolerant of `#ifdef` wrapping.
 
-```${context.filetype}
-${context.code}
+```diff
+${git.staged_diff}
 ```
+
 

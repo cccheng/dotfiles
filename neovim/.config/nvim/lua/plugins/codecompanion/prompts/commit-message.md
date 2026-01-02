@@ -24,6 +24,6 @@ I would like you to generate an appropriate commit message using the conventiona
 Given the git diff listed below, please generate a commit message for me:
 
 `````diff
-${staged-commit.diff}
+${git.staged_diff}
 `````
 
