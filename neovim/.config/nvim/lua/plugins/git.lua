@@ -93,13 +93,31 @@ return {
                         if vim.wo.diff then return "]c" end
                         vim.schedule(function() gs.next_hunk() end)
                         return "<Ignore>"
-                    end, { expr = true, desc = "Next hunk" })
+                    end, { expr = true, desc = "Next unstaged hunk" })
 
                     map("n", "[c", function()
                         if vim.wo.diff then return "[c" end
                         vim.schedule(function() gs.prev_hunk() end)
                         return "<Ignore>"
-                    end, { expr = true, desc = "Prev hunk" })
+                    end, { expr = true, desc = "Prev unstaged hunk" })
+
+                    -- Previous/next unstaged/staged hunks
+                    map("n", "[h", function()
+                        gs.nav_hunk("prev", {target = "all"})
+                    end, { desc = "Prev hunk" })
+
+                    map("n", "]h", function()
+                        gs.nav_hunk("next", {target = "all"})
+                    end, { desc = "Next hunk" })
+
+                    -- Previous/next staged hunks
+                    map("n", "[H", function()
+                        gs.nav_hunk("prev", {target = "all"})
+                    end, { desc = "Prev staged hunk" })
+
+                    map("n", "]H", function()
+                        gs.nav_hunk("next", {target = "all"})
+                    end, { desc = "Next staged hunk" })
 
                     -- Actions
                     map("n", "<LEADER>hs", gs.stage_hunk, { desc = "Stage hunk" })

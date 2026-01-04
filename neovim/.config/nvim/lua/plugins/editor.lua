@@ -17,12 +17,7 @@ return {
             require("mini.align").setup({})
             require('mini.bufremove').setup({})
             require("mini.comment").setup({})
-            require("mini.diff").setup({
-                -- Disabled by default
-                source = require("mini.diff").gen_source.none(),
-            })
             require("mini.files").setup({})
-            -- require("mini.git").setup({})
             require("mini.hipatterns").setup({
                 highlighters = {
                     -- Highlight standalone 'FIXME', 'XXX', 'TODO'
