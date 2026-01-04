@@ -17,7 +17,6 @@ return {
             require("mini.align").setup({})
             require('mini.bufremove').setup({})
             require("mini.comment").setup({})
-            require("mini.cursorword").setup({})
             require("mini.diff").setup({
                 -- Disabled by default
                 source = require("mini.diff").gen_source.none(),
