@@ -51,6 +51,7 @@ return {
         },
         words = {
             enabled = true,
+            modes = { "n" },
         },
     },
     keys = {
