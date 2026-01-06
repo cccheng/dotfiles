@@ -47,17 +47,4 @@ return {
             vim.api.nvim_set_hl(0, "TabLineSel", { fg = "#9a9ca5", bg = "#2b335a", bold = true })
         end
     },
-    {
-        "webhooked/kanso.nvim",
-        lazy = selected_theme ~= "kanso",
-        priority = 1000,
-        config = function()
-            require("kanso").setup({
-                -- compile = true,
-                keywordStyle = { italic = false },
-            })
-            vim.cmd.colorscheme("kanso-ink")
-            -- vim.cmd.colorscheme("kanso")
-        end
-    },
 }
