@@ -63,7 +63,7 @@ return {
                         -- "gpt-5", "gpt-5-codex", "gpt-5-mini", "gpt-4o", "gpt-4.1",
                         -- "claude-haiku-4.5", "claude-sonnet-4.5", "claude-sonnet-4", "claude-opus-4.5", "grok-code-fast-1"
                         -- "gemini-3-pro-preview", "gemini-3-flash-preview", "gemini-2.5-pro",
-                        model = "claude-sonnet-4.5",
+                        model = "claude-opus-4.5",
                     },
                     roles = {
                         user = " " .. os.getenv("USER"),
