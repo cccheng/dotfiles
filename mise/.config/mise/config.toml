@@ -13,8 +13,8 @@ shellcheck = "latest"
 
 # AI tools
 claude = "latest"
-codex = "latest"
 gemini-cli = "latest"
+opencode = "latest"
 
 # Rust tools
 "cargo:cargo-cache" = "latest"              # display information on $CARGO_HOME
