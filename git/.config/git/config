@@ -125,6 +125,9 @@
     sort = version:refname
     forceSignAnnotated = true
 [include]
+    ; you can apply different config files based on the git directory in config.local
+    ; [includeIf "gitdir:~/work/"]
+    ;     path = ~/.config/git/config.local.work
     path = ~/.config/git/config.local
 [filter "lfs"]
     clean = git-lfs clean -- %f
