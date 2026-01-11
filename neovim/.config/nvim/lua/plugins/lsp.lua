@@ -103,7 +103,6 @@ local lsp_servers = {
             },
         },
     },
-    autotools_ls = {},
     bashls = {},
     cssls = {},
     cssmodules_ls = {},
