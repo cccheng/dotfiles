@@ -18,6 +18,14 @@ return {
                     total = 250, -- maximum duration
                 },
             },
+            chunk = {
+                enabled = true,
+                char = {
+                    corner_top = "╭",
+                    corner_bottom = "╰",
+                    arrow = "",
+                },
+            },
             filter = function(buf)
                 local no_indent_fts = {
                     "gitcommit",
