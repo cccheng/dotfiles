@@ -72,7 +72,7 @@ return {
         { "<LEADER>tp", function() Snacks.picker.projects() end, desc = "Recent Projects" },
         { "<LEADER>tr", function() Snacks.picker.recent() end, desc = "Recent Files" },
         -- grep
-        { "<LEADER>tg", function() Snacks.picker.grep() end, desc = "Live grep" },
+        { "<LEADER>tg", function() Snacks.picker.grep({ hidden = true }) end, desc = "Live grep" },
         { "<LEADER>tw", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
         { "<LEADER>tW", function() Snacks.picker.grep_word({ args = {} }) end, desc = "Matched word", mode = { "n", "x" } },
         -- git
@@ -97,4 +97,23 @@ return {
         { "<LEADER>tm", function() Snacks.picker.marks() end, desc = "Marks" },
         { "<LEADER>tM", function() Snacks.picker.man() end, desc = "Man Pages" },
     },
+    config = function(_, opts)
+        require("snacks").setup(opts)
+
+        vim.api.nvim_set_hl(0, "SnacksIndentScope", { link = "IblScope" })
+        vim.api.nvim_set_hl(0, "SnacksPicker", { link = "Normal" })
+        vim.api.nvim_set_hl(0, "SnacksPicker", { bg = vim.g.terminal_color_0 })
+        vim.api.nvim_set_hl(0, "SnacksPickerBorder", { link = "FoldColumn" })
+        vim.api.nvim_set_hl(0, "SnacksPickerMatch", { link = "TelescopeMatching" })
+        vim.api.nvim_set_hl(0, "SnacksPickerPrompt", { link = "TelescopePromptPrefix" })
+        vim.api.nvim_set_hl(0, "SnacksPickerDir", { link = "Comment" })
+        vim.api.nvim_set_hl(0, "SnacksPickerTotals", { link = "Comment" })
+        vim.api.nvim_set_hl(0, "SnacksPickerBufFlags", { link = "Comment" })
+        vim.api.nvim_set_hl(0, "SnacksPickerKeymapRhs", { link = "Comment" })
+        vim.api.nvim_set_hl(0, "SnacksPickerPathHidden", { link = "Comment" })
+        vim.api.nvim_set_hl(0, "SnacksPickerUnselected", { link = "Comment" })
+        vim.api.nvim_set_hl(0, "SnacksPickerPathIgnored", { link = "Comment" })
+        vim.api.nvim_set_hl(0, "SnacksPickerGitStatusIgnored", { link = "Comment" })
+        vim.api.nvim_set_hl(0, "SnacksPickerGitStatusUntracked", { link = "Comment" })
+    end,
 }
