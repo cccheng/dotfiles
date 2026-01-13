@@ -1,3 +1,23 @@
+local telescope_ivy = {
+    preset = "telescope_ivy",
+    layout = {
+        box = "vertical",
+        backdrop = false,
+        row = -1,
+        width = 0,
+        height = 0.4,
+        border = "top",
+        title = " {title} {live} {flags}",
+        title_pos = "left",
+        {
+            box = "horizontal",
+            { win = "list", border = "none" },
+            { win = "preview", title = "{preview}", width = 0.6, border = true },
+        },
+        { win = "input", height = 1 },
+    },
+}
+
 return {
     "folke/snacks.nvim",
     lazy = false,
@@ -37,8 +57,11 @@ return {
             end,
         },
         picker = {
+            layouts = {
+                telescope_ivy = telescope_ivy,
+            },
             layout = {
-                preset = "ivy",
+                preset = "telescope_ivy",
             },
         },
         quickfile = {
@@ -66,7 +89,7 @@ return {
         { "<LEADER><TAB>", function() Snacks.scratch({ ft = "markdown", file = vim.fn.stdpath("data") .. "/scratch.md" }) end, desc = "Todo List" },
         { "<LEADER>t", "", desc = "Telescope/Picker" },
         -- files
-        { "<LEADER>f", function() Snacks.explorer({ auto_close = true, layout = { preset = "ivy", preview = true } }) end, desc = "File Explorer" },
+        { "<LEADER>f", function() Snacks.explorer({ auto_close = true, layout = { preset = "telescope_ivy", preview = true } }) end, desc = "File Explorer" },
         { "<LEADER>tf", function() Snacks.picker.files() end, desc = "Find Files" },
         { "<LEADER>ts", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
         { "<LEADER>tp", function() Snacks.picker.projects() end, desc = "Recent Projects" },
