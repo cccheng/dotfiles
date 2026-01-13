@@ -15,17 +15,6 @@ return {
         end
     },
     {
-        "sam4llis/nvim-tundra",
-        lazy = selected_theme ~= "tundra",
-        priority = 1000,
-        config = function()
-            require("nvim-tundra").setup({
-                -- transparent_background = true,
-            })
-            vim.cmd.colorscheme("tundra")
-        end
-    },
-    {
         "sho-87/kanagawa-paper.nvim",
         lazy = selected_theme ~= "kanagawa",
         priority = 1000,
