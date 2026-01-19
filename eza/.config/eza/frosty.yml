@@ -113,6 +113,11 @@ broken_path_overlay: {foreground: "#607D8B"}
 filenames:
   # Custom filename-based overrides
   # Cargo.toml: {icon: {glyph: 🦀}}
+  Desktop: {icon: {glyph: 󰇄}}
+  Documents: {icon: {glyph: 󱧶}}
+  Journal: {icon: {glyph: 󰣞}}
+  Videos: {icon: {glyph: 󱧺}}
+  Workspace: {icon: {glyph: 󱁿}}
 
 extensions:
   # Custom extension-based overrides
