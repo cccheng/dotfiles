@@ -43,7 +43,7 @@ return {
                 char = {
                     corner_top = "╭",
                     corner_bottom = "╰",
-                    arrow = "",
+                    arrow = "󰼛",    -- "󰐊"
                 },
             },
             filter = function(buf)
