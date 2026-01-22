@@ -205,7 +205,8 @@ opacity = 0.95
 #             Linux/BSD: { family = "monospace", style = "Regular" }
 #             Windows:   { family = "Consolas",  style = "Regular" }
 #             macOS:     { family = "Menlo",     style = "Regular" }
-normal = { family = "JetBrainsMono Nerd Font", style = "SemiBold" }
+#normal = { family = "JetBrainsMono Nerd Font", style = "SemiBold" }
+normal = { family = "Victor Mono Nerd Font", style = "Bold" }
 
 #     bold = { family = "<string>", style = "<string>" }
 #
@@ -233,6 +234,7 @@ normal = { family = "JetBrainsMono Nerd Font", style = "SemiBold" }
 #         Font size in points.
 #
 #         Default: 11.25
+size = 13
 #     offset = { x = <integer>, y = <integer> }
 #
 #         Offset is the extra space around each character. y can be thought of as modifying
