@@ -5,8 +5,17 @@ if [ -s "${XDG_STATE_HOME}/nix/profile/etc/profile.d/nix.sh" ]; then
     source "${XDG_STATE_HOME}/nix/profile/etc/profile.d/nix.sh"
 fi
 
+if [ -f "/usr/share/doc/pkgfile/command-not-found.bash" ]; then
+    source "/usr/share/doc/pkgfile/command-not-found.bash"
+fi
+
 if [ -d "${CARGO_HOME:-$HOME/.cargo}/bin" ]; then
     add_path "${CARGO_HOME:-$HOME/.cargo}/bin"
+fi
+
+# Homebrew ruby
+if [ -d "/usr/local/opt/ruby/bin" ]; then
+    add_path "/usr/local/opt/ruby/bin"
 fi
 
 if command -v mise >/dev/null; then
@@ -15,11 +24,6 @@ fi
 
 if command -v intentrace >/dev/null; then
     alias strace="intentrace"
-fi
-
-# Homebrew ruby
-if [ -d "/usr/local/opt/ruby/bin" ]; then
-    add_path "/usr/local/opt/ruby/bin"
 fi
 
 if command -v eza >/dev/null; then
