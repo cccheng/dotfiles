@@ -32,7 +32,6 @@ opencode = "latest"
 "cargo:tree-sitter-cli" = "latest"
 "cargo:https://github.com/aome510/hackernews-TUI" = "latest"
 "cargo:https://github.com/fioncat/otree" = "latest"
-"cargo:https://github.com/ck-zhang/reddix" = "latest"
 "cargo:https://github.com/ckaznable/tenki" = "latest"
 
 # Node tools
