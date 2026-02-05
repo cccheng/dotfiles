@@ -10,6 +10,10 @@ return {
                 "archie-judd/blink-cmp-words",
                 lazy = true,
             },
+            {
+                "fang2hou/blink-copilot",
+                lazy = true,
+            },
         },
         event = {
             "InsertEnter",
@@ -148,6 +152,7 @@ return {
             -- elsewhere in your config, without redefining it, due to `opts_extend`
             sources = {
                 default = {
+                    "copilot",
                     "lsp",
                     "path",
                     "snippets",
@@ -159,6 +164,12 @@ return {
                     codecompanion = { "codecompanion" },
                 },
                 providers = {
+                    copilot = {
+                        name = "copilot",
+                        module = "blink-copilot",
+                        score_offset = 100,
+                        async = true,
+                    },
                     lsp = {
                         name = "LSP",
                         module = "blink.cmp.sources.lsp",
