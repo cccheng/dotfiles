@@ -54,7 +54,7 @@ return {
             --         require("mini.map").gen_integration.gitsigns(),
             --     },
             --     window = {
-            --         winblend = 10,
+            --         winblend = 20,
             --         zindex = 100,
             --     },
             -- })
@@ -169,7 +169,7 @@ return {
                     -- border = "solid",
                     -- border = {'┏', '━', '┓', '┃', '┛', '━', '┗', '┃'},
                     show_title = false,
-                    winblend = 10,
+                    winblend = 20,
                 }
             })
         end,

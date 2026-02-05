@@ -40,7 +40,7 @@ return {
                 enabled = true,
                 window = {
                     border = "rounded",
-                    winblend = 10,
+                    winblend = 20,
                 }
             },
 
@@ -99,7 +99,7 @@ return {
                 },
 
                 menu = {
-                    winblend = 10,
+                    winblend = 20,
                     draw = {
                         columns = {
                             { "kind_icon" },
@@ -132,7 +132,7 @@ return {
                     auto_show_delay_ms = 100,
                     window = {
                         border = "single",
-                        winblend = 10,
+                        winblend = 20,
                     },
                 },
 

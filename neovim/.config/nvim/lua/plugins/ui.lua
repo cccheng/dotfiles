@@ -148,7 +148,7 @@ return {
                             style = "rounded",
                         },
                         win_options = {
-                            winblend = 10,
+                            winblend = 20,
                         },
                     },
                 },

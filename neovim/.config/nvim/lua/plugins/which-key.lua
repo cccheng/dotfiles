@@ -27,7 +27,7 @@ return {
         },
         win = {
             wo = {
-                winblend = 10,
+                winblend = 20,
             },
         },
     },
