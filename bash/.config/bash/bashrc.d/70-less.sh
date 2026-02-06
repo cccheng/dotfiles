@@ -12,7 +12,7 @@ set -a
 # -F	Immediately quit if one screen
 # -X	Don't use alternate screen
 # -z-3	Keep 3 line context when scrolling
-LESS="e M q R F X z-3"
+LESS="e M q R F X"
 
 # Set colors for less. Borrowed from https://wiki.archlinux.org/title/Color_output_in_console#less
 # Source: http://unix.stackexchange.com/a/147
