@@ -174,4 +174,15 @@ return {
             })
         end
     },
+    {
+        "nvim-zh/colorful-winsep.nvim",
+        event = { "WinLeave" },
+        config = function()
+            require("colorful-winsep").setup({
+                -- choose between "single", "rounded", "bold" and "double".
+                -- Or pass a table like this: { "─", "│", "┌", "┐", "└", "┘" },
+                border = "rounded",
+            })
+        end
+    },
 }
