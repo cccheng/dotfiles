@@ -87,6 +87,8 @@
 [merge]
     conflictstyle = zdiff3
     tool = vimdiff
+[pager]
+    show = false
 [protocol]
     version = 2
 [pull]
