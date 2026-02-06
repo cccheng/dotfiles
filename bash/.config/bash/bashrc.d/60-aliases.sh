@@ -5,10 +5,11 @@ alias vim="nvim -p"
 alias vimdiff="nvim -d"
 alias view="nvim -R"
 
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
+alias -- -='builtin cd -- -' # go to previous dir
+alias ..='builtin cd ..; '
+alias ...='builtin cd ../..; '
+alias ....='builtin cd ../../..; '
+alias .....='builtin cd ../../../..; '
 
 # Passing aliases
 # https://wiki.archlinux.org/title/Sudo#Passing_aliases
