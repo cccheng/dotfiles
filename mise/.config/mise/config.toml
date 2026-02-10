@@ -21,6 +21,7 @@ opencode = "latest"
 "cargo:cargo-generate" = "latest"           # create a rust project from a git as template
 "cargo:cargo-update" = "latest"             # `cargo install-update`
 "cargo:vmtest" = "latest"
+"cargo:kconfig-lsp" = "latest"
 
 # Rust tools managed by pacman
 "cargo:bat" = "latest"
