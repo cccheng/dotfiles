@@ -56,6 +56,9 @@ return {
                     and not vim.tbl_contains(no_indent_fts, vim.bo[buf].filetype)
             end,
         },
+        notifier = {
+            enabled = true,
+        },
         picker = {
             layouts = {
                 telescope_ivy = telescope_ivy,
@@ -108,6 +111,8 @@ return {
         -- search
         { "<LEADER>ta", function() Snacks.picker.autocmds() end, desc = "Autocmds" },
         { "<LEADER>tb", function() Snacks.picker.buffers() end, desc = "Buffers" },
+        { "<LEADER>tn", function() Snacks.picker.notifications() end, desc = "Notifications History" },
+        { "<LEADER>t:", function() Snacks.picker.command_history() end, desc = "Command History" },
         { "<LEADER>th", function() Snacks.picker.help() end, desc = "Help Pages" },
         { "<LEADER>tH", function() Snacks.picker.highlights() end, desc = "Highlights" },
         { "<LEADER>ti", function() Snacks.picker.icons({ layout = { preset = "ivy" } }) end, desc = "Icons" },

@@ -59,11 +59,14 @@ return {
             --     },
             -- })
             require("mini.move").setup({})
-            require("mini.notify").setup({
-                window = {
-                    winblend = 50,
-                },
-            })
+            -- require("mini.notify").setup({
+            --     lsp_progress = {
+            --         enable = false,
+            --     },
+            --     window = {
+            --         winblend = 50,
+            --     },
+            -- })
             -- require("mini.pairs").setup({})
             require("mini.splitjoin").setup({})
             require("mini.snippets").setup({

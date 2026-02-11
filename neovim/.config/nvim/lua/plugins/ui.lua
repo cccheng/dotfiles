@@ -35,11 +35,6 @@ return {
                     lualine_a = {"mode"},
                     lualine_b = {
                         "branch", "diff", "diagnostics",
-                        {
-                            require("noice").api.statusline.mode.get,
-                            cond = require("noice").api.statusline.mode.has,
-                            color = { fg = vim.fn.synIDattr(vim.fn.hlID("MoreMsg"), "fg") },
-                        },
                     },
                     lualine_c = {
                         {
@@ -108,61 +103,17 @@ return {
         end
     },
     {
-        "folke/noice.nvim",
-        event = "VeryLazy",
+        "j-hui/fidget.nvim",
+        event = "LspAttach",
         opts = {
-            -- add any options here
-        },
-        dependencies = {
-            -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-            "MunifTanjim/nui.nvim",
-            -- OPTIONAL:
-            --   `nvim-notify` is only needed, if you want to use the notification view.
-            --   If not available, we use `mini` as the fallback
-            -- "rcarriga/nvim-notify",
-        },
-        keys = {
-            { "<LEADER>tn", mode = {"n"}, "<CMD>NoiceSnacks<CR>",  desc = "Noice" },
-        },
-        config = function()
-            require("noice").setup({
-                cmdline = {
-                    enabled = true, -- enables the Noice cmdline UI
-                    view = "cmdline", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
-                },
-                lsp = {
-                    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-                    override = {
-                        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-                        ["vim.lsp.util.stylize_markdown"] = true,
-                        ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+            progress = {
+                display = {
+                    progress_icon = {
+                        pattern = { "󰫃", "󰫄", "󰫅", "󰫆", "󰫇", "󰫈", },
                     },
                 },
-                -- you can enable a preset for easier configuration
-                presets = {
-                    lsp_doc_border = true, -- add a border to hover docs and signature help
-                },
-                views = {
-                    hover = {
-                        border = {
-                            style = "rounded",
-                        },
-                        win_options = {
-                            winblend = 20,
-                        },
-                    },
-                },
-                messages = {
-                    view_search = false,
-                },
-                routes = {
-                    {
-                        view = "notify",
-                        filter = { event = "msg_showmode" },
-                    },
-                },
-            })
-        end
+            },
+        },
     },
     {
         "miversen33/sunglasses.nvim",

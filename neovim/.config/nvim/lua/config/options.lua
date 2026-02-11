@@ -12,6 +12,10 @@ vim.g.autoformat = true
 
 local opt = vim.opt
 
+
+opt.cmdheight = 0               -- Use native cmdheight=0 (Neovim 0.8+)
+opt.shortmess:append("c")       -- Show messages in a floating window manually
+
 opt.ttyfast = true              -- Fast terminal connection
 opt.updatetime = 50             -- Faster CursorHold events (default 4000ms)
 opt.timeoutlen = 300            -- Faster key sequence timeout
