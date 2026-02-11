@@ -34,6 +34,7 @@ return {
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",
             "ravitemer/mcphub.nvim",
+            "j-hui/fidget.nvim",
         },
         keys = {
             { "<LEADER>a", "", desc = "AI Assistant" },
@@ -202,6 +203,7 @@ return {
         config = function(_, opts)
             require("codecompanion").setup(opts)
             require("plugins.codecompanion.extmarks").setup()
+            require("plugins.codecompanion.fidget-spinner"):init()
         end,
     },
     {

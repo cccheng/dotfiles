@@ -51,10 +51,6 @@ return {
                     },
                     lualine_x = {
                         {
-                            require("plugins.codecompanion.lualine"),
-                            color = { fg = vim.fn.synIDattr(vim.fn.hlID("MoreMsg"), "fg") },
-                        },
-                        {
                             "encoding",
                             show_bomb = true,
                         },
