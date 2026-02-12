@@ -201,6 +201,7 @@ return {
     {
         "DNLHC/glance.nvim",
         lazy = true,
+        cmd = "Glance",
         keys = {
             { "<LEADER>ld", "<CMD>Glance definitions<CR>", desc = "Definition" },
             { "<LEADER>lr", "<CMD>Glance references<CR>", desc = "References" },
