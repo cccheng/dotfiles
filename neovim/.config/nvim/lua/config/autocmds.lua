@@ -24,3 +24,38 @@ vim.api.nvim_create_autocmd({"InsertEnter", "WinLeave"}, {
     end,
 })
 
+vim.api.nvim_create_autocmd("BufWinEnter", {
+    desc = "Move help window to the right when opened",
+    group = vim.api.nvim_create_augroup("HelpWindowRight", { clear = true }),
+    pattern = { "*.txt", "*.md" },
+    callback = function()
+        if vim.o.filetype == "help" then
+            vim.cmd.winc("L")
+        end
+    end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    desc = "close some filetypes with <q>",
+    group = vim.api.nvim_create_augroup("CloseWithQ", { clear = true }),
+    pattern = {
+        "man",
+        "qf",
+        "help",
+        "checkhealth",
+    },
+    callback = function(event)
+        vim.bo[event.buf].buflisted = false
+        vim.schedule(function()
+            vim.keymap.set("n", "q", function()
+                vim.cmd("quit")
+                pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
+            end, {
+            buffer = event.buf,
+            silent = true,
+            desc = "Quit buffer",
+        })
+    end)
+end,
+})
+
