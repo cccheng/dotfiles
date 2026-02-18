@@ -18,10 +18,10 @@
 local map = vim.keymap.set
 
 -- better up/down
-map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-map({ "n", "x" }, "<DOWN>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-map({ "n", "x" }, "<UP>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+map({"n", "x"}, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+map({"n", "x"}, "<DOWN>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+map({"n", "x"}, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+map({"n", "x"}, "<UP>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
 map("n", "<LEADER>tc",
     function()
@@ -66,8 +66,26 @@ map("n", "]b", "<CMD>bnext<CR>", { desc = "Next buffer" })
 map("n", "[q", vim.cmd.cprev, { desc = "Previous quickfix" })
 map("n", "]q", vim.cmd.cnext, { desc = "Next quickfix" })
 
--- clear search with <ESC>
-map({ "i", "n" }, "<ESC>", "<CMD>noh<CR><ESC>", { desc = "Escape and clear hlsearch" })
+-- clear search and stop snippet on escape with <ESC>
+map({ "i", "n", "s" }, "<ESC>", function()
+    vim.cmd("noh")
+    if vim.snippet then
+        vim.snippet.stop()
+    end
+    return "<ESC>"
+end, { expr = true, desc = "Escape and Clear hlsearch" })
+
+-- move in insert mode, and command-line mode
+map({"i", "c"}, "<C-j>", "<Down>", { desc = "Move Down in insert mode" })
+map({"i", "c"}, "<C-k>", "<Up>", { desc = "Move Up in insert mode" })
+map({"i", "c"}, "<C-h>", "<Left>", { desc = "Move Left in insert mode" })
+map({"i", "c"}, "<C-l>", "<Right>", { desc = "Move Right in insert mode" })
+
+-- resize window using <CTRL> arrow keys
+map("n", "<C-Up>", "<CMD>resize +2<CR>", { desc = "Increase Window Height" })
+map("n", "<C-Down>", "<CMD>resize -2<CR>", { desc = "Decrease Window Height" })
+map("n", "<C-Left>", "<CMD>vertical resize -2<CR>", { desc = "Decrease Window Width" })
+map("n", "<C-Right>", "<CMD>vertical resize +2<CR>", { desc = "Increase Window Width" })
 
 -- better indenting in visual mode
 map("v", "<", "<gv", { silent = true })
@@ -76,4 +94,8 @@ map("v", ">", ">gv", { silent = true })
 -- case change in visual mode
 map("v", "`", "u", { silent = true })
 map("v", "<A-`>", "U", { silent = true })
+
+-- quit
+map("n", "<LEADER>qq", "<CMD>quit<CR>", { desc = "Quit All" })
+map("n", "<LEADER>qa", "<CMD>quitall<CR>", { desc = "Quit All" })
 
