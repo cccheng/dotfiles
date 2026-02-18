@@ -15,6 +15,7 @@ return {
         require("mini.ai").setup({})
         require("mini.align").setup({})
         require('mini.bufremove').setup({})
+        require("mini.cmdline").setup({})
         require("mini.comment").setup({})
         require("mini.files").setup({})
         require("mini.hipatterns").setup({
@@ -68,7 +69,7 @@ return {
         --     },
         -- })
         -- require("mini.pairs").setup({})
-        require("mini.splitjoin").setup({})
+        require("mini.sessions").setup({})
         require("mini.snippets").setup({
             snippets = {
                 -- Load custom file with global snippets first (adjust for Windows)
@@ -85,7 +86,34 @@ return {
                 expand = "<C-s>",
             },
         })
-        require("mini.sessions").setup({
+        require("mini.splitjoin").setup({})
+        require("mini.statusline").setup({
+            use_icons = true,
+            content = {
+                active = function()
+                    local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
+                    local git           = MiniStatusline.section_git({ trunc_width = 40 })
+                    local diff          = MiniStatusline.section_diff({ trunc_width = 75 })
+                    local diagnostics   = MiniStatusline.section_diagnostics({ trunc_width = 75 })
+                    local lsp           = MiniStatusline.section_lsp({ trunc_width = 75 })
+                    local filename      = MiniStatusline.section_filename({ trunc_width = 140 })
+                    local fileinfo      = MiniStatusline.section_fileinfo({ trunc_width = 120 })
+                    local location      = MiniStatusline.section_location({ trunc_width = 75 })
+                    local search        = MiniStatusline.section_searchcount({ trunc_width = 75 })
+                    local macro         = vim.g.macro_recording
+
+                    return MiniStatusline.combine_groups({
+                        { hl = mode_hl,                  strings = { mode } },
+                        { hl = 'MiniStatuslineDevinfo',  strings = { git, diff, diagnostics, lsp } },
+                        '%<', -- Mark general truncate point
+                        { hl = 'MiniStatuslineFilename', strings = { filename } },
+                        '%=', -- End left alignment
+                        { hl = "MiniStatuslineFilename", strings = { macro } },
+                        { hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
+                        { hl = mode_hl,                  strings = { search, location } },
+                    })
+                end,
+            },
         })
         require("mini.surround").setup({
             -- Module mappings. Use `""` (empty string) to disable one.
@@ -105,6 +133,24 @@ return {
         vim.api.nvim_set_hl(0, "MiniJump2dSpot", { bold = true, underline = true })
         vim.api.nvim_set_hl(0, "MiniCursorword", { bold = true })
         vim.api.nvim_set_hl(0, "MiniCursorwordCurrent", { bold = true })
+
+        -- mini.statusline
+        vim.api.nvim_create_autocmd("RecordingEnter", {
+            pattern = "*",
+            callback = function()
+                vim.g.macro_recording = "Recording @" .. vim.fn.reg_recording()
+                vim.cmd("redrawstatus")
+            end,
+        })
+
+        -- Autocmd to track the end of macro recording
+        vim.api.nvim_create_autocmd("RecordingLeave", {
+            pattern = "*",
+            callback = function()
+                vim.g.macro_recording = ""
+                vim.cmd("redrawstatus")
+            end,
+        })
 
         -- mini.files
         vim.api.nvim_create_autocmd("User", {

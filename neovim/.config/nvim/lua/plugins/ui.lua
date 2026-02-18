@@ -27,55 +27,6 @@ return {
         }
     },
     {
-        "nvim-lualine/lualine.nvim",
-        event = "VeryLazy",
-        config = function()
-            require("lualine").setup({
-                sections = {
-                    lualine_a = {"mode"},
-                    lualine_b = {
-                        "branch", "diff", "diagnostics",
-                    },
-                    lualine_c = {
-                        {
-                            function() return vim.fn.getcwd() end,
-                            padding = { right = 0 },
-                            separator = "⫽",
-                        },
-                        {
-                            "filename",
-                            newfile_status = true,
-                            path = 1,
-                            padding = { left = 0 },
-                        },
-                    },
-                    lualine_x = {
-                        {
-                            "encoding",
-                            show_bomb = true,
-                        },
-                        "fileformat",
-                        {
-                            "filetype",
-                            colored = false,
-                        },
-                    },
-                    lualine_y = {"searchcount", "progress"},
-                    lualine_z = {"selectioncount",
-                        {
-                            function()
-                                return string.format("%2d:%d/%d", vim.fn.virtcol("."), vim.fn.line("."), vim.fn.line("$"))
-                            end,
-                        }
-                    },
-                },
-                extensions = {
-                    "lazy", "mason", "man", "quickfix", "toggleterm", "symbols-outline",
-                },
-            })
-        end
-    },
-    {
         "petertriho/nvim-scrollbar",
         event = {
             "BufNewFile",
