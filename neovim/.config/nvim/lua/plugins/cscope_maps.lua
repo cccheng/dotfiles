@@ -10,9 +10,9 @@ return {
         -- "echasnovski/mini.pick", -- optional [for picker="mini-pick"]
         "folke/snacks.nvim", -- optional [for picker="snacks"]
     },
-        keys = {
-            { "<LEADER>c", "", desc = "Cscope" },
-        },
+    keys = {
+        { "<LEADER>c", "", desc = "Cscope" },
+    },
     opts = {
         skip_input_prompt = true, -- "true" doesn't ask for input
         cscope = {

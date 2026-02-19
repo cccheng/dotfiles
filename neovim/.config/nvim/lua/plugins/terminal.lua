@@ -3,7 +3,7 @@ return {
         "akinsho/toggleterm.nvim",
         lazy = true,
         keys = {
-            { "<LEADER>`" },
+            { "<LEADER>`", desc = "Terminal" },
         },
         config = function()
             require("toggleterm").setup({

@@ -89,7 +89,7 @@ return {
         },
     },
     keys = {
-        { "<LEADER><TAB>", function() Snacks.scratch({ ft = "markdown", file = vim.fn.stdpath("data") .. "/scratch.md" }) end, desc = "Todo List" },
+        { "<LEADER><TAB>", function() Snacks.scratch({ ft = "markdown", file = vim.fn.stdpath("data") .. "/scratch.md" }) end, desc = "Scratch" },
         { "<LEADER>t", "", desc = "Telescope/Picker" },
         -- files
         { "<LEADER>f", function() Snacks.explorer({ auto_close = true, layout = { preset = "telescope_ivy", preview = true } }) end, desc = "File Explorer" },

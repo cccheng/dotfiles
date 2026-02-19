@@ -96,6 +96,7 @@ map("v", "`", "u", { silent = true })
 map("v", "<A-`>", "U", { silent = true })
 
 -- quit
+map("n", "<LEADER>q", "", { desc = "Quit" })
 map("n", "<LEADER>qq", "<CMD>quit<CR>", { desc = "Quit All" })
 map("n", "<LEADER>qa", "<CMD>quitall<CR>", { desc = "Quit All" })
 
