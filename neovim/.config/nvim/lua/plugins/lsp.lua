@@ -125,32 +125,27 @@ end
 
 return {
     {
-        "mason-org/mason.nvim",
-        lazy = true,
-        opts = {
-            ui = {
-                icons = {
-                    package_installed = "✓",
-                    package_pending = "➜",
-                    package_uninstalled = "✗",
-                },
-            },
-        },
-    },
-    {
         "mason-org/mason-lspconfig.nvim",
         lazy = true,
-        cmd = {
-            "Mason",
-        },
+        cmd = "Mason",
         dependencies = {
-            "neovim/nvim-lspconfig",
-            "mason-org/mason.nvim",
+            {
+                "mason-org/mason.nvim",
+                opts = {
+                    ui = {
+                        icons = {
+                            package_installed = "✓",
+                            package_pending = "➜",
+                            package_uninstalled = "✗",
+                        },
+                    },
+                },
+            }
         },
         config = function()
             require("mason-lspconfig").setup({
                 automatic_enable = false,
-                ensure_installed = lsp_server_names
+                ensure_installed = lsp_server_names,
             })
         end
     },
