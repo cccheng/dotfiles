@@ -7,18 +7,18 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     end,
 })
 
-vim.api.nvim_create_autocmd({"InsertLeave", "WinEnter"}, {
+vim.api.nvim_create_autocmd({"WinEnter", "BufEnter"}, {
     desc = "Show cursor line only in active window",
-    group = vim.api.nvim_create_augroup("ActiveWinCursor", { clear = true }),
+    group = vim.api.nvim_create_augroup("ActiveWinCursor", { clear = false }),
     callback = function(event)
         if vim.bo[event.buf].buftype == "" then
             vim.opt_local.cursorline = true
         end
     end,
 })
-vim.api.nvim_create_autocmd({"InsertEnter", "WinLeave"}, {
+vim.api.nvim_create_autocmd({"WinLeave", "BufLeave"}, {
     desc = "Show cursor line only in active window",
-    group = vim.api.nvim_create_augroup("ActiveWinCursor", { clear = true }),
+    group = vim.api.nvim_create_augroup("ActiveWinCursor", { clear = false }),
     callback = function()
         vim.opt_local.cursorline = false
     end,
