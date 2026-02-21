@@ -19,11 +19,6 @@ local lsp_servers = {
     "taplo", -- toml
 }
 
-local lsp_server_names = {}
-for key, _ in pairs(lsp_servers) do
-    table.insert(lsp_server_names, key)
-end
-
 return {
     {
         "mason-org/mason-lspconfig.nvim",
@@ -85,6 +80,7 @@ return {
         },
         config = function()
             vim.lsp.enable(lsp_servers)
+            vim.lsp.enable("kconfig")
         end
     },
     {
