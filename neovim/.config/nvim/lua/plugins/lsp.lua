@@ -1,108 +1,9 @@
 local lsp_servers = {
-    clangd = {
-        capabilities = {
-            offsetEncoding = { "utf-16" },
-            textDocument = {
-                inlayHints = { enabled = true },
-                completion = { editsNearCursor = true },
-            },
-        },
-        cmd = {
-            "clangd",
-            "--background-index",
-            "--background-index-priority=background",
-            "--all-scopes-completion",
-            "--pch-storage=memory",
-            "--clang-tidy",
-            "--header-insertion=iwyu",
-            "--completion-style=detailed",
-            "--enable-config",
-            "--function-arg-placeholders",
-            "--fallback-style=llvm",
-        },
-        init_options = {
-            usePlaceholders = true,
-            completeUnimported = true,
-            clangdFileStatus = true,
-        },
-        settings = {
-            clangd = {
-                semanticHighlighting = true,
-            },
-        },
-    },
-    rust_analyzer = {
-        settings = {
-            ["rust-analyzer"] = {
-                imports = {
-                    granularity = {
-                        group = "module",
-                    },
-                    prefix = "self",
-                },
-                cargo = {
-                    allFeatures = true,
-                    loadOutDirsFromCheck = true,
-                    buildScripts = {
-                        enable = true,
-                    },
-                },
-                procMacro = {
-                    enable = true,
-                },
-                check = {
-                    command = "clippy",
-                    features = "all",
-                },
-                diagnostics = {
-                    enable = true,
-                }
-            },
-        }
-    },
-    typos_lsp = {
-        init_options = {
-            diagnosticSeverity = "warning",
-        },
-    },
-    harper_ls = {
-        settings = {
-            ["harper-ls"] = {
-                -- userDictPath = vim.fn.stdpath("config") .. "/dict/spell.txt",
-                diagnosticSeverity = "warning", -- "hint", "information", "warning", or "error"
-
-                linters = {
-                    SpellCheck = false, -- true,
-                    SpelledNumbers = false,
-                    AnA = true,
-                    SentenceCapitalization = false, -- true,
-                    UnclosedQuotes = true,
-                    WrongQuotes = false,
-                    LongSentences = true,
-                    RepeatedWords = true,
-                    Spaces = false,
-                    Matcher = true,
-                    CorrectNumberSuffix = true,
-                },
-            },
-        },
-        -- filetypes = {
-        --     "text",
-        --     "markdown",
-        --     "gitcommit",
-        --     "gitsendemail",
-        --     "changelog",
-        -- },
-    },
-    yamlls = {
-        settings = {
-            yaml = {
-                customTags = {
-                    "!reference sequence",  -- gitlab-ci.yml
-                },
-            },
-        },
-    },
+    clangd = {},
+    rust_analyzer = {},
+    typos_lsp = {},
+    harper_ls = {},
+    yamlls = {},
     bashls = {},
     cssls = {},
     cssmodules_ls = {},
@@ -140,6 +41,9 @@ return {
                         },
                     },
                 },
+            },
+            {
+                "neovim/nvim-lspconfig"
             }
         },
         config = function()
