@@ -2,19 +2,19 @@ return {
     "nvim-mini/mini.nvim",
     event = "VeryLazy",
     keys = {
-        { "<LEADER>F", function() MiniFiles.open() end, desc = "Mini files" },
-        { "<LEADER>s", "", desc = "Surrounding/Jump" },
-        { "<LEADER>S", "", desc = "Sessions" },
-        { "<LEADER>Ss", function() MiniSessions.select() end, desc = "Session select" },
+        { "<LEADER>F",  function() MiniFiles.open() end,          desc = "Mini files" },
+        { "<LEADER>s",  "",                                       desc = "Surrounding/Jump" },
+        { "<LEADER>S",  "",                                       desc = "Sessions" },
+        { "<LEADER>Ss", function() MiniSessions.select() end,     desc = "Session select" },
         { "<LEADER>Sl", function() MiniSessions.get_latest() end, desc = "Session lastest" },
-        { "<LEADER>Sw", function() MiniSessions.write() end, desc = "Session write" },
-        { "<LEADER>Sr", function() MiniSessions.read() end, desc = "Session read" },
-        { "<LEADER>Sd", function() MiniSessions.delete() end, desc = "Session delete" },
+        { "<LEADER>Sw", function() MiniSessions.write() end,      desc = "Session write" },
+        { "<LEADER>Sr", function() MiniSessions.read() end,       desc = "Session read" },
+        { "<LEADER>Sd", function() MiniSessions.delete() end,     desc = "Session delete" },
     },
     config = function()
         require("mini.ai").setup({})
         require("mini.align").setup({})
-        require('mini.bufremove').setup({})
+        require("mini.bufremove").setup({})
         require("mini.cmdline").setup({})
         require("mini.comment").setup({})
         require("mini.files").setup({})
