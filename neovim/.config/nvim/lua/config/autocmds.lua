@@ -35,6 +35,19 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
     end,
 })
 
+vim.api.nvim_create_autocmd("BufNewFile", {
+    desc = "If one exists, use a template when opening a new file",
+    group = vim.api.nvim_create_augroup("NewFileTemplate", { clear = true }),
+    callback = function()
+        local template_dir = vim.env.XDG_TEMPLATE_DIR or (vim.env.XDG_DATA_HOME .. "/templates")
+        local ext = vim.fn.expand("%:e")
+        local template = template_dir .. "/skeleton." .. ext
+        if vim.fn.filereadable(template) == 1 then
+            vim.cmd("0r " .. template)
+        end
+    end,
+})
+
 vim.api.nvim_create_autocmd("FileType", {
     desc = "close some filetypes with <q>",
     group = vim.api.nvim_create_augroup("CloseWithQ", { clear = true }),
