@@ -1,22 +1,22 @@
 local lsp_servers = {
-    clangd = {},
-    rust_analyzer = {},
-    typos_lsp = {},
-    harper_ls = {},
-    yamlls = {},
-    bashls = {},
-    cssls = {},
-    cssmodules_ls = {},
-    dockerls = {},
-    dotls = {},
-    gitlab_ci_ls = {},
-    html = {},
-    jsonls = {},
-    lua_ls = {},
-    marksman = {}, -- markdown
-    pylsp = {},
-    ruby_lsp = {},
-    taplo = {}, -- toml
+    "clangd",
+    "rust_analyzer",
+    "typos_lsp",
+    "harper_ls",
+    "yamlls",
+    "bashls",
+    "cssls",
+    "cssmodules_ls",
+    "dockerls",
+    "dotls",
+    "gitlab_ci_ls",
+    "html",
+    "jsonls",
+    "lua_ls",
+    "marksman", -- markdown
+    "pylsp",
+    "ruby_lsp",
+    "taplo", -- toml
 }
 
 local lsp_server_names = {}
@@ -49,7 +49,7 @@ return {
         config = function()
             require("mason-lspconfig").setup({
                 automatic_enable = false,
-                ensure_installed = lsp_server_names,
+                ensure_installed = lsp_servers,
             })
         end
     },
@@ -84,17 +84,7 @@ return {
             { "<LEADER>llco", function() Snacks.picker.lsp_outgoing_calls() end, desc = "Calls Outgoing" },
         },
         config = function()
-            for name, config in pairs(lsp_servers) do
-                vim.lsp.config(name, {
-                    capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities),
-                    init_options = config.init_options,
-                    on_attach = config.on_attach,
-                    filetypes = config.filetypes,
-                    settings = config.settings,
-                })
-
-                vim.lsp.enable(name)
-            end
+            vim.lsp.enable(lsp_servers)
         end
     },
     {
