@@ -2,6 +2,9 @@
     "diagnostics.globals": [
         "vim",
         "Snacks",
-        "LazyVim"
+        "LazyVim",
+        "MiniSessions",
+        "MiniFiles",
+        "MiniStatusline"
     ]
 }

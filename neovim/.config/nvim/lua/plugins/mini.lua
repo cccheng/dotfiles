@@ -6,7 +6,7 @@ return {
         { "<LEADER>s",  "",                                       desc = "Surrounding/Jump" },
         { "<LEADER>S",  "",                                       desc = "Sessions" },
         { "<LEADER>Ss", function() MiniSessions.select() end,     desc = "Session select" },
-        { "<LEADER>Sl", function() MiniSessions.get_latest() end, desc = "Session lastest" },
+        { "<LEADER>Sl", function() MiniSessions.get_latest() end, desc = "Session latest" },
         { "<LEADER>Sw", function() MiniSessions.write() end,      desc = "Session write" },
         { "<LEADER>Sr", function() MiniSessions.read() end,       desc = "Session read" },
         { "<LEADER>Sd", function() MiniSessions.delete() end,     desc = "Session delete" },
