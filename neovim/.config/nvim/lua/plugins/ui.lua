@@ -81,8 +81,7 @@ return {
                 auto_resize_height = true,
                 preview = {
                     win_height = 24,
-                    -- border = "solid",
-                    -- border = {'┏', '━', '┓', '┃', '┛', '━', '┗', '┃'},
+                    border = "solid",
                     show_title = false,
                     winblend = 20,
                 }
