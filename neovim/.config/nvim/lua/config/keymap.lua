@@ -23,20 +23,6 @@ map({"n", "x"}, "<DOWN>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = t
 map({"n", "x"}, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 map({"n", "x"}, "<UP>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
-map("n", "<LEADER>tc",
-    function()
-        vim.o.signcolumn = vim.o.signcolumn == "yes" and "no" or "yes"
-        vim.o.number = not vim.o.number
-        vim.o.relativenumber = not vim.o.relativenumber
-        if vim.g.snacks_indent == nil or vim.g.snacks_indent == true then
-            vim.g.snacks_indent = false
-        else
-            vim.g.snacks_indent = true
-        end
-        require("scrollbar.utils").toggle()
-    end,
-    { desc = "Toggle sign and number columns" })
-
 -- focus scrolling
 map("n", "<C-u>", "<C-u>zz", { noremap = true, silent = true })
 map("n", "<C-d>", "<C-d>zz", { noremap = true, silent = true })
@@ -67,7 +53,7 @@ map("n", "[q", vim.cmd.cprev, { desc = "Previous quickfix" })
 map("n", "]q", vim.cmd.cnext, { desc = "Next quickfix" })
 
 -- clear search and stop snippet on escape with <ESC>
-map({ "i", "n", "s" }, "<ESC>", function()
+map({"i", "n", "s"}, "<ESC>", function()
     vim.cmd("noh")
     if vim.snippet then
         vim.snippet.stop()
@@ -91,12 +77,39 @@ map("n", "<C-Right>", "<CMD>vertical resize +2<CR>", { desc = "Increase Window W
 map("v", "<", "<gv", { silent = true })
 map("v", ">", ">gv", { silent = true })
 
--- case change in visual mode
-map("v", "`", "u", { silent = true })
-map("v", "<A-`>", "U", { silent = true })
-
 -- quit
 map("n", "<LEADER>q", "", { desc = "Quit" })
 map("n", "<LEADER>qq", "<CMD>quit<CR>", { desc = "Quit All" })
 map("n", "<LEADER>qa", "<CMD>quitall<CR>", { desc = "Quit All" })
+
+-- toggles
+map("n", "<LEADER>tc",
+    function()
+        vim.o.signcolumn = vim.o.signcolumn == "yes" and "no" or "yes"
+        vim.o.number = not vim.o.number
+        vim.o.relativenumber = not vim.o.relativenumber
+        if vim.g.snacks_indent == nil or vim.g.snacks_indent == true then
+            vim.g.snacks_indent = false
+        else
+            vim.g.snacks_indent = true
+        end
+        require("scrollbar.utils").toggle()
+    end,
+    { desc = "Toggle sign and number columns" })
+
+Snacks.toggle.profiler():map("<LEADER>tpp")
+Snacks.toggle.profiler_highlights():map("<LEADER>tph")
+Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<LEADER>tL")
+Snacks.toggle.option("spell", { name = "Spelling" }):map("<LEADER>ts")
+Snacks.toggle.option("wrap", { name = "Wrap" }):map("<LEADER>tw")
+Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2, name = "Conceal Level" }):map("<LEADER>tc")
+Snacks.toggle.diagnostics():map("<LEADER>td")
+Snacks.toggle.dim():map("<LEADER>tD")
+Snacks.toggle.indent():map("<LEADER>ti")
+Snacks.toggle.inlay_hints():map("<LEADER>th")
+Snacks.toggle.line_number():map("<LEADER>tl")
+Snacks.toggle.scroll():map("<LEADER>tS")
+Snacks.toggle.treesitter():map("<LEADER>tT")
+Snacks.toggle.zen():map("<LEADER>tz")
+Snacks.toggle.zoom():map("<LEADER>tZ")
 

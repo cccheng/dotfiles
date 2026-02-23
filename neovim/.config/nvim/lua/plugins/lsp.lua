@@ -63,7 +63,6 @@ return {
             { "<LEADER>l", "", desc = "LSP" },
             { "<LEADER>ls",  function() vim.lsp.buf.hover({ border = "single" }) end, desc = "Hover" },
             { "<LEADER>lS",  function() vim.lsp.buf.signature_help({ border = "single" }) end, desc = "Signature" },
-            { "<LEADER>lh",  function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, desc = "Toggle inlay hints" },
             { "<LEADER>la",  function() vim.lsp.buf.code_action() end, desc = "Code action" },
             { "<LEADER>lf",  function() vim.lsp.buf.format() end, desc = "Format" },
             { "<LEADER>lR",  function() vim.lsp.buf.rename() end, desc = "Rename" },
