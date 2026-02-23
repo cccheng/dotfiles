@@ -3,6 +3,9 @@
 local opt = vim.opt
 
 opt.autoindent = true
+opt.autoread = true
+opt.backspace = {"indent", "eol", "start"}
+opt.backup = false
 opt.breakindent = true                                  -- Indent wrapped lines to match line start
 opt.breakindentopt = "list:-1"                          -- Add padding for lists (if 'wrap' is set)
 opt.clipboard = "unnamedplus"                           -- Sync with system clipboard
@@ -20,6 +23,14 @@ opt.colorcolumn = "+1"                                  -- Draw column on the ri
 opt.completeopt = {"menu", "menuone", "noinsert", "noselect", "fuzzy", "nosort"}
 opt.cursorline = true                                   -- Enable highlighting of the current line
 opt.cursorlineopt = "screenline,number"                 -- Highlight the screen line of the cursor with CursorLine and the line number with CursorLineNr
+opt.diffopt = {
+    "internal",
+    "filler",
+    "closeoff",
+    "algorithm:histogram",
+    "indent-heuristic",
+}
+
 opt.expandtab = true
 opt.fillchars = {
     foldopen = "",
@@ -39,7 +50,11 @@ opt.formatlistpat = [[^\s*[0-9\-\+\*]\+[\.\)]*\s\+]]    -- Pattern for a start o
                                                         -- possibly followed by punctuation (. or `)`) followed by at least one space".
 
 opt.formatoptions = "cjlnoqrt"                          -- Improve comment editing. :help 'fo-table'
+-- opt.grepformat = "%f:%l:%c:%m"
+-- opt.grepprg = "rg --vimgrep -uu"
+opt.hlsearch = true
 opt.ignorecase = true                                   -- Ignore case during search
+opt.inccommand = "nosplit"                              -- preview incremental substitute
 opt.incsearch = true                                    -- Show search matches while typing
 --[[
   Treat dash as `word` textobject part
@@ -61,17 +76,23 @@ opt.listchars = {
     precedes = "«",
     nbsp = "░"
 }
+opt.modeline = true
 opt.mouse = "a"                                         -- Enable mouse
 opt.mousescroll = "ver:25,hor:6"                        -- Customize mouse scroll
 opt.number = true                                       -- Print line number
+opt.numberwidth = 3                                     -- Make the line number column thinner
+opt.pumblend = 10                                       -- Popup blend
 opt.pumheight = 30                                      -- Maximum number of entries in a popup
 opt.relativenumber = true                               -- Relative line numbers
 opt.ruler = false                                       -- Don't show the cursor position since we have a statusline
+opt.scrolloff = 3                                       -- Lines of context
+opt.shiftround = true                                   -- Round indent
 opt.shiftwidth = 4                                      -- Use this number of spaces for indentation
 opt.shortmess:append {
     c = true,                                           -- Don't show completion messages in command line
     I = true,                                           -- Don't show the intro message
 }
+-- opt.showmatch = true -- Show matching brackets by flickering
 opt.showmode = false                                    -- Don't show mode since we have a statusline
 opt.signcolumn = "yes"                                  -- Always show the signcolumn (less flicker)
 opt.smartcase = true                                    -- Don't ignore case with capitals
@@ -100,52 +121,18 @@ opt.switchbuf = "usetab"                                -- Use already opened bu
 ]]
 opt.shada = [[!,'100,<50,f100,s100,:1000,/100,@100,h]]
 opt.softtabstop = 4                                     -- Number of spaces tabs count for
+opt.smoothscroll = true
+opt.synmaxcol = 500                                     -- Limit syntax highlighting to 500 columns
+opt.swapfile = false
 opt.tabstop = 8                                         -- Number of spaces in a tab
-opt.undofile = true                                     -- Enable persistent undo
+opt.termguicolors = true                                    -- True color support
+opt.title = true
+opt.timeoutlen = 300                                    -- Time in milliseconds to wait for a mapped sequence to complete
+opt.ttimeoutlen = 10                                    -- Faster key code timeout
+opt.undofile = true                                     -- Enable persistent undo between sessions
+opt.updatetime = 50                                     -- Faster CursorHold events (default 4000ms)
 opt.virtualedit = "block"                               -- Allow cursor to move where there is no text in visual block mode
+opt.winminwidth = 5                                     -- Minimum window width
 opt.wrap = true                                         -- Enable line wrap
 -- opt.wrapmargin = 1
-
-
-
-
-
-
-opt.ttyfast = true                                      -- Fast terminal connection
-opt.updatetime = 50                                     -- Faster CursorHold events (default 4000ms)
-opt.timeoutlen = 300                                    -- Faster key sequence timeout
-opt.ttimeoutlen = 10                                    -- Faster key code timeout
-opt.redrawtime = 1500                                   -- Time limit for syntax highlighting
-opt.synmaxcol = 200                                     -- Limit syntax highlighting to 200 columns
-
-opt.grepformat = "%f:%l:%c:%m"
-opt.grepprg = "rg --vimgrep"
-opt.inccommand = "nosplit"                              -- preview incremental substitute
-opt.pumblend = 10                                       -- Popup blend
-
-opt.backspace = {"indent", "eol", "start"}
-opt.scrolloff = 4                                       -- Lines of context
-opt.smoothscroll = true
-opt.winminwidth = 5                                     -- Minimum window width
-
--- opt.wildmenu = true
--- opt.wildmode = "longest:full,full"                      -- Command-line completion mode
--- opt.wildmode = "list:longest"                           -- Command-line completion mode
-
-opt.modeline = true
-opt.shiftround = true                                       -- Round indent
-opt.hlsearch = true
-opt.autoread = true
-opt.title = true
-opt.swapfile = false
-opt.backup = false
-opt.spelllang = { "en" }
-opt.termguicolors = true                                    -- True color support
-opt.diffopt = {
-    "internal",
-    "filler",
-    "closeoff",
-    "algorithm:histogram",
-    "indent-heuristic",
-}
 
