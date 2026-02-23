@@ -31,6 +31,7 @@ opencode = "latest"
 "cargo:intentrace" = "latest"
 "cargo:jless" = "latest"
 "cargo:tree-sitter-cli" = "latest"
+"cargo:xfr" = "latest"                      # iperf3 alternative
 "cargo:https://github.com/aome510/hackernews-TUI" = "latest"
 "cargo:https://github.com/fioncat/otree" = "latest"
 "cargo:https://github.com/ckaznable/tenki" = "latest"
