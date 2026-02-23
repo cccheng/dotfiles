@@ -5,7 +5,19 @@ local opt = vim.opt
 opt.autoindent = true
 opt.breakindent = true                                  -- Indent wrapped lines to match line start
 opt.breakindentopt = "list:-1"                          -- Add padding for lists (if 'wrap' is set)
+opt.clipboard = "unnamedplus"                           -- Sync with system clipboard
+opt.cmdheight = 0                                       -- Hide the command bar
 opt.colorcolumn = "+1"                                  -- Draw column on the right of maximum width
+--[[
+  Set completeopt to have a better completion experience
+  :help 'completeopt'
+  menuone: popup even when there's only one match
+  menu: Show a popup menu for completions, even if there's only one match.
+  menuone: Show the menu even when there's only one completion candidate.
+  noinsert: Do not insert text until a selection is made
+  noselect: Do not auto-select, nvim-cmp plugin will handle this for us.
+]]
+opt.completeopt = {"menu", "menuone", "noinsert", "noselect", "fuzzy", "nosort"}
 opt.cursorline = true                                   -- Enable highlighting of the current line
 opt.cursorlineopt = "screenline,number"                 -- Highlight the screen line of the cursor with CursorLine and the line number with CursorLineNr
 opt.expandtab = true
@@ -22,9 +34,23 @@ opt.foldcolumn = "0"                                    -- Don't show the fold c
 opt.foldenable = false
 -- opt.foldmarker = "<!--,-->"
 opt.foldmethod = "indent"
-opt.formatoptions = "cjlnoqrt"                          -- Improve comment editing. Ref: 'fo-table'
+opt.formatlistpat = [[^\s*[0-9\-\+\*]\+[\.\)]*\s\+]]    -- Pattern for a start of numbered list (used in `gw`). This reads as
+                                                        -- "Start of list item is: at least one special character (digit, -, +, *)
+                                                        -- possibly followed by punctuation (. or `)`) followed by at least one space".
+
+opt.formatoptions = "cjlnoqrt"                          -- Improve comment editing. :help 'fo-table'
 opt.ignorecase = true                                   -- Ignore case during search
 opt.incsearch = true                                    -- Show search matches while typing
+--[[
+  Treat dash as `word` textobject part
+  @: All alphabetic characters (letters a-z, A-Z)
+  48-57: ASCII codes for digits 0-9
+  _:  Underscore character
+  192-255: Extended ASCII characters (accented letters like é, ñ, ü)
+  -: Dash/hyphen character (the addition)
+]]
+opt.iskeyword = '@,48-57,_,192-255,-'
+opt.laststatus = 3                                      -- Use global statusline
 opt.linebreak = true                                    -- Wrap lines at 'breakat' (if 'wrap' is set)
 opt.list = false                                        -- Don't show whitespace characters
 opt.listchars = {
@@ -39,6 +65,7 @@ opt.mouse = "a"                                         -- Enable mouse
 opt.mousescroll = "ver:25,hor:6"                        -- Customize mouse scroll
 opt.number = true                                       -- Print line number
 opt.pumheight = 30                                      -- Maximum number of entries in a popup
+opt.relativenumber = true                               -- Relative line numbers
 opt.ruler = false                                       -- Don't show the cursor position since we have a statusline
 opt.shiftwidth = 4                                      -- Use this number of spaces for indentation
 opt.shortmess:append {
@@ -72,14 +99,17 @@ opt.switchbuf = "usetab"                                -- Use already opened bu
   :wshada   - write the shada file (:wrviminfo for vim)
 ]]
 opt.shada = [[!,'100,<50,f100,s100,:1000,/100,@100,h]]
+opt.softtabstop = 4                                     -- Number of spaces tabs count for
+opt.tabstop = 8                                         -- Number of spaces in a tab
 opt.undofile = true                                     -- Enable persistent undo
+opt.virtualedit = "block"                               -- Allow cursor to move where there is no text in visual block mode
 opt.wrap = true                                         -- Enable line wrap
+-- opt.wrapmargin = 1
 
 
 
 
 
-opt.cmdheight = 0                                       -- Use native cmdheight=0 (Neovim 0.8+)
 
 opt.ttyfast = true                                      -- Fast terminal connection
 opt.updatetime = 50                                     -- Faster CursorHold events (default 4000ms)
@@ -88,14 +118,11 @@ opt.ttimeoutlen = 10                                    -- Faster key code timeo
 opt.redrawtime = 1500                                   -- Time limit for syntax highlighting
 opt.synmaxcol = 200                                     -- Limit syntax highlighting to 200 columns
 
-opt.clipboard = "unnamedplus"                           -- Sync with system clipboard
 opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
 opt.inccommand = "nosplit"                              -- preview incremental substitute
-opt.laststatus = 3                                      -- global statusline
 opt.pumblend = 10                                       -- Popup blend
 
-opt.relativenumber = true                               -- Relative line numbers
 opt.backspace = {"indent", "eol", "start"}
 opt.scrolloff = 4                                       -- Lines of context
 opt.smoothscroll = true
@@ -105,28 +132,15 @@ opt.winminwidth = 5                                     -- Minimum window width
 -- opt.wildmode = "longest:full,full"                      -- Command-line completion mode
 -- opt.wildmode = "list:longest"                           -- Command-line completion mode
 
--- Set completeopt to have a better completion experience
--- :help completeopt
--- menuone: popup even when there's only one match
--- noinsert: Do not insert text until a selection is made
--- noselect: Do not auto-select, nvim-cmp plugin will handle this for us.
-opt.completeopt = {"menu", "menuone", "noinsert", "noselect"}
-
 opt.modeline = true
-
-opt.tabstop = 8                                             -- Number of spaces tabs count for
-opt.softtabstop = 4
 opt.shiftround = true                                       -- Round indent
-
 opt.hlsearch = true
-
 opt.autoread = true
 opt.title = true
 opt.swapfile = false
 opt.backup = false
 opt.spelllang = { "en" }
 opt.termguicolors = true                                    -- True color support
-opt.virtualedit = "block"                                   -- Allow cursor to move where there is no text in visual block mode
 opt.diffopt = {
     "internal",
     "filler",
