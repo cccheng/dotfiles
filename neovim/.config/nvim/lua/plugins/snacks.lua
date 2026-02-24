@@ -27,6 +27,7 @@ return {
             enabled = true,
         },
         explorer = {
+            enabled = true,
         },
         indent = {
             enabled = true,
@@ -77,6 +78,12 @@ return {
             enabled = true,
         },
         styles = {
+            notification = {
+                border = "top",
+                wo = {
+                    winblend = 20,
+                },
+            },
             scratch = {
                 width = 120,
                 height = math.floor(vim.o.lines * 0.85),
@@ -125,9 +132,18 @@ return {
         { "<LEADER>pt", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
         { "<LEADER>pm", function() Snacks.picker.marks() end, desc = "Marks" },
         { "<LEADER>pM", function() Snacks.picker.man() end, desc = "Man Pages" },
+        { "]]",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference" },
+        { "[[",         function() Snacks.words.jump(-vim.v.count1) end,  desc = "Prev Reference" },
     },
     config = function(_, opts)
         require("snacks").setup(opts)
+
+        vim.api.nvim_create_autocmd("User", {
+            pattern = "MiniFilesActionRename",
+            callback = function(event)
+                Snacks.rename.on_rename_file(event.data.from, event.data.to)
+            end,
+        })
 
         vim.api.nvim_set_hl(0, "SnacksIndentScope", { link = "IblScope" })
         vim.api.nvim_set_hl(0, "SnacksPicker", { link = "Normal" })
