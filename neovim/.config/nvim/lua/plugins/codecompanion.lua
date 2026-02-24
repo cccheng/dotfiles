@@ -46,6 +46,23 @@ return {
             adapters = {
                 -- https://docs.github.com/en/copilot/reference/ai-models/supported-models
                 -- https://docs.github.com/en/copilot/reference/ai-models/model-comparison
+                --[[
+                    "gpt-5.2", "gpt-5.1", "gpt-5.1-codex", "gpt-5.1-codex-mini", "gpt-5.1-codex-max"
+                    "gpt-5", "gpt-5-codex", "gpt-5-mini", "gpt-4o", "gpt-4.1",
+                    "claude-haiku-4.5", "claude-sonnet-4.5", "claude-sonnet-4", "claude-opus-4.5", "grok-code-fast-1"
+                    "gemini-3-pro-preview", "gemini-3-flash-preview", "gemini-2.5-pro",
+                --]]
+                http = {
+                    copilot = function()
+                        return require("codecompanion.adapters").extend("copilot", {
+                            schema = {
+                                model = {
+                                    default = "gpt-5-mini",
+                                },
+                            },
+                        })
+                    end,
+                },
             },
             rules = {
                 opts = {
@@ -58,14 +75,7 @@ return {
             },
             interactions = {
                 chat = {
-                    adapter = {
-                        name = "copilot",
-                        -- "gpt-5.2", "gpt-5.1", "gpt-5.1-codex", "gpt-5.1-codex-mini", "gpt-5.1-codex-max"
-                        -- "gpt-5", "gpt-5-codex", "gpt-5-mini", "gpt-4o", "gpt-4.1",
-                        -- "claude-haiku-4.5", "claude-sonnet-4.5", "claude-sonnet-4", "claude-opus-4.5", "grok-code-fast-1"
-                        -- "gemini-3-pro-preview", "gemini-3-flash-preview", "gemini-2.5-pro",
-                        model = "claude-opus-4.5",
-                    },
+                    adapter = "copilot",
                     roles = {
                         user = " " .. os.getenv("USER"),
                         llm = function(adapter)
@@ -133,13 +143,13 @@ return {
                     }
                 },
                 inline = {
-                    -- adapter = "",
+                    adapter = "copilot",
                 },
                 cmd = {
-                    -- adapter = "",
+                    adapter = "copilot",
                 },
                 background = {
-                    -- adapter = "",
+                    adapter = "copilot",
                 },
             },
             display = {
