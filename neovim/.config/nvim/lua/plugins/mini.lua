@@ -10,6 +10,7 @@ return {
         { "<LEADER>Sw", function() MiniSessions.write() end,      desc = "Session write" },
         { "<LEADER>Sr", function() MiniSessions.read() end,       desc = "Session read" },
         { "<LEADER>Sd", function() MiniSessions.delete() end,     desc = "Session delete" },
+        { "<LEADER>tm", function() MiniMap.toggle() end,          desc = "Toggle Minimap" },
     },
     config = function()
         require("mini.ai").setup({})
@@ -90,23 +91,24 @@ return {
                 not_current = false,
             },
         })
-        -- require("mini.map").setup({
-        --     symbols = {
-        --         -- encode = require("mini.map").gen_encode_symbols.block("3x2"),
-        --         encode = require("mini.map").gen_encode_symbols.dot("4x2"),
-        --         -- encode = require("mini.map").gen_encode_symbols.shade("2x1"),
-        --     },
-        --     integrations = {
-        --         require("mini.map").gen_integration.builtin_search(),
-        --         require("mini.map").gen_integration.diff(),
-        --         require("mini.map").gen_integration.diagnostic(),
-        --         require("mini.map").gen_integration.gitsigns(),
-        --     },
-        --     window = {
-        --         winblend = 20,
-        --         zindex = 100,
-        --     },
-        -- })
+        require("mini.map").setup({
+            symbols = {
+                -- encode = require("mini.map").gen_encode_symbols.block("3x2"),
+                encode = require("mini.map").gen_encode_symbols.dot("4x2"),
+                -- encode = require("mini.map").gen_encode_symbols.shade("2x1"),
+            },
+            integrations = {
+                require("mini.map").gen_integration.builtin_search(),
+                require("mini.map").gen_integration.diff(),
+                require("mini.map").gen_integration.diagnostic(),
+                require("mini.map").gen_integration.gitsigns(),
+            },
+            window = {
+                winblend = 20,
+                zindex = 1000,
+                show_integration_count = false,
+            },
+        })
         require("mini.move").setup({})
         -- require("mini.notify").setup({
         --     lsp_progress = {
