@@ -1,50 +1,9 @@
 return {
     {
-        "sindrets/diffview.nvim",
-        lazy = true,
-        keys = {
-            { "<LEADER>g", "", desc = "Git" },
-            {
-                "<LEADER>gd",
-                mode = {"n"},
-                function()
-                    if next(require("diffview.lib").views) == nil then
-                        vim.cmd("DiffviewOpen")
-                    else
-                        vim.cmd("DiffviewClose")
-                    end
-                end,
-                desc = "Git diff view"
-            },
-            { "<LEADER>gh", mode = {"n"}, "<CMD>DiffviewFileHistory %<CR>", desc = "Git history for the current file" },
-            { "<LEADER>gH", mode = {"n"}, "<CMD>DiffviewFileHistory<CR>", desc = "Git history for the current branch" },
-        },
-        config = function()
-            require("diffview").setup({
-                enhanced_diff_hl = true,
-                view = {
-                    default = {
-                        layout = "diff2_horizontal",
-                        disable_diagnostics = true,
-                        winbar_info = true,
-                    },
-                },
-                file_panel = {
-                    listing_style = "list",
-                    win_config = {
-                        type = "split",
-                        position = "bottom",
-                        height = 5,
-                    },
-                },
-            })
-        end
-    },
-    {
         "FabijanZulj/blame.nvim",
         lazy = true,
         keys = {
-            { "<LEADER>gb", mode = {"n"}, "<CMD>BlameToggle window<CR>", desc = "Git blame" },
+            { "<LEADER>gb", mode = {"n"}, "<CMD>BlameToggle window<CR>", desc = "Git Blame" },
         },
         config = function()
             require("blame").setup({
@@ -59,6 +18,7 @@ return {
             "BufReadPre",
         },
         keys = {
+            { "<LEADER>g", "", desc = "Git" },
             { "<LEADER>h", "", desc = "Hunk" },
             { "<LEADER>ht", "", desc = "Toggle" },
         },
@@ -127,7 +87,7 @@ return {
                     map("n", "<LEADER>hu", gs.undo_stage_hunk, { desc = "Undo stage hunk" })
                     map("n", "<LEADER>hp", gs.preview_hunk, { desc = "Preview hunk" })
                     map("n", "<LEADER>hb", function() gs.blame_line {full=true} end, { desc = "Blame current line" })
-                    map("n", "<LEADER>hd", function()
+                    map("n", "<LEADER>gd", function()
                         if vim.wo.diff then
                             vim.cmd("diffoff")
                             vim.cmd("only")
