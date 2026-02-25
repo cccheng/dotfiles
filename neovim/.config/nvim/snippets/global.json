@@ -10,5 +10,9 @@
     "current time": {
         "prefix": "ctime",
         "body": "$CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND"
+    },
+    "vim mode line: tab": {
+        "prefix": "vim:tab",
+        "body": "vim:tabstop=4 softtabstop=4 shiftwidth=4 expandtab"
     }
 }
