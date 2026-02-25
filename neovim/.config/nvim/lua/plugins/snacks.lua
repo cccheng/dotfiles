@@ -57,6 +57,10 @@ return {
                     and not vim.tbl_contains(no_indent_fts, vim.bo[buf].filetype)
             end,
         },
+        input = {
+            enabled = true,
+            prompt_pos = "left",
+      },
         notifier = {
             enabled = true,
         },
@@ -78,6 +82,9 @@ return {
             enabled = true,
         },
         styles = {
+            input = {
+                backdrop = true,
+            },
             notification = {
                 border = "top",
                 wo = {
