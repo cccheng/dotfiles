@@ -1,17 +1,5 @@
 return {
     {
-        "FabijanZulj/blame.nvim",
-        lazy = true,
-        keys = {
-            { "<LEADER>gb", mode = {"n"}, "<CMD>BlameToggle window<CR>", desc = "Git Blame" },
-        },
-        config = function()
-            require("blame").setup({
-                date_format = "%Y.%m.%d",
-            })
-        end,
-    },
-    {
         "lewis6991/gitsigns.nvim",
         cmd = "Gitsigns",
         event = {
@@ -116,10 +104,12 @@ return {
                     map("v", "<LEADER>hs", function() gs.stage_hunk { vim.fn.line("."), vim.fn.line("v") } end, { desc = "Stage hunk" })
                     map("v", "<LEADER>hr", function() gs.reset_hunk { vim.fn.line("."), vim.fn.line("v") } end, { desc = "Reset hunk" })
                     map("n", "<LEADER>hu", gs.undo_stage_hunk, { desc = "Undo stage hunk" })
-                    map("n", "<LEADER>hp", gs.preview_hunk, { desc = "Preview hunk" })
-                    map("n", "<LEADER>hb", function() gs.blame_line { full = true } end, { desc = "Blame current line" })
+                    map("n", "<LEADER>hp", gs.preview_hunk_inline, { desc = "Inline preview hunk" })
+                    map("n", "<LEADER>hP", gs.preview_hunk, { desc = "Preview hunk" })
                     map("n", "<LEADER>hq", gs.setqflist, { desc = "Set qflist" })
                     map('n', '<LEADER>hQ', function() gs.setqflist("all") end)
+                    map("n", "<LEADER>gb", function() gs.blame_line { full = true } end, { desc = "Blame current line" })
+                    map("n", "<LEADER>gB", function() gs.blame() end, { desc = "Blame buffer" })
                     map("n", "<LEADER>gd", function()
                         if vim.wo.diff then
                             vim.cmd("diffoff")
@@ -128,6 +118,14 @@ return {
                             gs.diffthis()
                         end
                     end, { desc = "Diff" })
+                    map("n", "<LEADER>gD", function()
+                        if vim.wo.diff then
+                            vim.cmd("diffoff")
+                            vim.cmd("only")
+                        else
+                            gs.diffthis("~")
+                        end
+                    end, { desc = "Diff (cached)" })
 
                     Snacks.toggle({
                         name = "Git Signs",

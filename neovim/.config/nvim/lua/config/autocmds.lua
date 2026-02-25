@@ -55,6 +55,7 @@ vim.api.nvim_create_autocmd("FileType", {
         "man",
         "qf",
         "help",
+        "gitsigns-blame",
         "checkhealth",
     },
     callback = function(event)
