@@ -18,10 +18,13 @@ return {
             "BufNewFile",
             "BufReadPre",
         },
+        dependencies = {
+            "folke/snacks.nvim",
+        },
         keys = {
             { "<LEADER>g", "", desc = "Git" },
             { "<LEADER>h", "", desc = "Hunk" },
-            { "<LEADER>ht", "", desc = "Toggle" },
+            { "<LEADER>tg", "", desc = "Toggle Git" },
         },
         opts = {
             signs = {
@@ -125,10 +128,56 @@ return {
                             gs.diffthis()
                         end
                     end, { desc = "Diff" })
-                    map("n", "<LEADER>htb", gs.toggle_current_line_blame, { desc = "Toggle current line blame" })
-                    map("n", "<LEADER>htd", gs.toggle_deleted, { desc = "Toggle show deleted" })
-                    map("n", "<LEADER>htl", gs.toggle_linehl, { desc = "Toggle line highlight" })
-                    map("n", "<LEADER>htw", gs.toggle_word_diff, { desc = "Toggle word diff" })
+
+                    Snacks.toggle({
+                        name = "Git Signs",
+                        get = function()
+                            return require("gitsigns.config").config.signcolumn
+                        end,
+                        set = function(state)
+                            require("gitsigns").toggle_signs(state)
+                        end,
+                    }):map("<LEADER>tgs")
+
+                    Snacks.toggle({
+                        name = "Current Line Blame",
+                        get = function()
+                            return require("gitsigns.config").config.current_line_blame
+                        end,
+                        set = function(state)
+                            require("gitsigns").toggle_current_line_blame(state)
+                        end,
+                    }):map("<LEADER>tgb")
+
+                    Snacks.toggle({
+                        name = "Show Deleted",
+                        get = function()
+                            return require("gitsigns.config").config.show_deleted
+                        end,
+                        set = function(state)
+                            require("gitsigns").toggle_deleted(state)
+                        end,
+                    }):map("<LEADER>tgd")
+
+                    Snacks.toggle({
+                        name = "Line Highlight",
+                        get = function()
+                            return require("gitsigns.config").config.linehl
+                        end,
+                        set = function(state)
+                            require("gitsigns").toggle_linehl(state)
+                        end,
+                    }):map("<LEADER>tgl")
+
+                    Snacks.toggle({
+                        name = "Word Diff",
+                        get = function()
+                            return require("gitsigns.config").config.word_diff
+                        end,
+                        set = function(state)
+                            require("gitsigns").toggle_word_diff(state)
+                        end,
+                    }):map("<LEADER>tgw")
 
                     -- Text object
                     map({"o", "x"}, "ih", gs.select_hunk)
