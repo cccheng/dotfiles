@@ -76,6 +76,7 @@ opt.listchars = {
     precedes = "«",
     nbsp = "░"
 }
+opt.messagesopt = "wait:1000,history:512"               -- Don't show 'Press ENTER' prompt
 opt.modeline = true
 opt.mouse = "a"                                         -- Enable mouse
 opt.mousescroll = "ver:25,hor:6"                        -- Customize mouse scroll
