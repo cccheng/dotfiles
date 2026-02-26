@@ -1,8 +1,9 @@
-local telescope_ivy = {
-    preset = "telescope_ivy",
+
+local ivy_compact = {
+    preset = "ivy_compact",
     layout = {
         box = "vertical",
-        backdrop = false,
+        backdrop = true,
         row = -1,
         width = 0,
         height = 0.4,
@@ -11,8 +12,8 @@ local telescope_ivy = {
         title_pos = "left",
         {
             box = "horizontal",
-            { win = "list", border = "none" },
-            { win = "preview", title = "{preview}", width = 0.6, border = true },
+            { win = "list", border = "solid" },
+            { win = "preview", title = "{preview}", width = 0.5, border = "rounded" },
         },
         { win = "input", height = 1 },
     },
@@ -65,11 +66,24 @@ return {
             enabled = true,
         },
         picker = {
+            enabled = true,
             layouts = {
-                telescope_ivy = telescope_ivy,
+                ivy_compact = ivy_compact,
             },
             layout = {
-                preset = "telescope_ivy",
+                preset = "ivy_compact",
+            },
+            sources = {
+                files = { hidden = true, ignored = false },
+                grep = { hidden = true },
+                explorer = {
+                    hidden = true,
+                    auto_close = true,
+                    layout = {
+                        preset = "ivy_compact",
+                        preview = "main",
+                    },
+                },
             },
         },
         quickfile = {
@@ -108,7 +122,7 @@ return {
         { "<LEADER>tp", "", desc = "Toggle Profiling" },
         { "<LEADER>p", "", desc = "Picker" },
         -- files
-        { "<LEADER>f", function() Snacks.explorer({ auto_close = true, layout = { preset = "telescope_ivy", preview = true } }) end, desc = "File Explorer" },
+        { "<LEADER>f", function() Snacks.explorer({ auto_close = true, layout = { preset = "ivy_compact", preview = true } }) end, desc = "File Explorer" },
         { "<LEADER>pf", function() Snacks.picker.files() end, desc = "Find Files" },
         { "<LEADER>ps", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
         { "<LEADER>pp", function() Snacks.picker.projects() end, desc = "Recent Projects" },

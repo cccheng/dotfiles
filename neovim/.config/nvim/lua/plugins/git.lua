@@ -84,8 +84,8 @@ return {
                     end, { expr = true, desc = "Next unstaged hunk" })
 
                     -- Previous/next unstaged/staged hunks
-                    map("n", "[h", function() gs.nav_hunk("prev") end, { desc = "Prev hunk" })
-                    map("n", "]h", function() gs.nav_hunk("next") end, { desc = "Next hunk" })
+                    map("n", "[h", function() gs.nav_hunk("prev", { target = "all" }) end, { desc = "Prev hunk" })
+                    map("n", "]h", function() gs.nav_hunk("next", { target = "all" }) end, { desc = "Next hunk" })
 
                     -- Actions
                     map("n", "<LEADER>hs", gs.stage_hunk, { desc = "Stage hunk" })
