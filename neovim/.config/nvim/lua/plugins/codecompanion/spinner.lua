@@ -6,7 +6,8 @@
 --- @field extmark vim.api.keyset.set_extmark Extmark options passed to nvim_buf_set_extmark
 local spinner_opts = {
     spinner_text = '   Processing',
-    spinner_frames = { '⣷', '⣯', '⣟', '⡿', '⢿', '⣻', '⣽', '⣾' },
+    -- spinner_frames = { '⣷', '⣯', '⣟', '⡿', '⢿', '⣻', '⣽', '⣾' },
+    spinner_frames = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" },
     hl_group = 'DiagnosticVirtualTextWarn',
     repeat_interval = 100,
     extmark = {
