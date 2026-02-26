@@ -83,6 +83,7 @@ map("n", "<LEADER>qq", "<CMD>quit<CR>", { desc = "Quit" })
 map("n", "<LEADER>qQ", "<CMD>quit!<CR>", { desc = "Force Quit" })
 map("n", "<LEADER>qa", "<CMD>quitall<CR>", { desc = "Quit All" })
 map("n", "<LEADER>qA", "<CMD>quitall!<CR>", { desc = "Force Quit All" })
+map("n", "<LEADER>qb", function() Snacks.bufdelete({ wipe = true }) end, { desc = "Wipe Buffer" })
 
 -- toggles
 map("n", "<LEADER>tc",
