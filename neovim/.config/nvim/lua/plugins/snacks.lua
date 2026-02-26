@@ -60,7 +60,7 @@ return {
         input = {
             enabled = true,
             prompt_pos = "left",
-      },
+        },
         notifier = {
             enabled = true,
         },

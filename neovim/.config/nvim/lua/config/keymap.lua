@@ -100,6 +100,9 @@ map("n", "<LEADER>tc",
     end,
     { desc = "Toggle sign and number columns" })
 
+map("n", "<LEADER>t-", "<CMD>split<CR>", { desc = "Horizontal split" })
+map("n", "<LEADER>t|", "<CMD>vsplit<CR>", { desc = "Vertical split" })
+
 Snacks.toggle.profiler():map("<LEADER>tpp")
 Snacks.toggle.profiler_highlights():map("<LEADER>tph")
 Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<LEADER>tL")
