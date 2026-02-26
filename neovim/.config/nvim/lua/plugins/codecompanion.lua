@@ -41,6 +41,7 @@ return {
             { "<LEADER>aa", "<CMD>CodeCompanionActions<CR>", mode = { "n", "v" }, desc = "CodeCompanion actions" },
             { "<LEADER>ac", "<CMD>CodeCompanionChat Toggle<CR>", mode = { "n", "v" }, desc = "CodeCompanion chat" },
             { "<LEADER>ai", "<CMD>CodeCompanion<CR>", mode = { "n", "v" }, desc = "CodeCompanion inline" },
+            { "<LEADER>as", "<CMD>CodeCompanionChat Add<CR>", mode = { "v" }, desc = "Add selection to Chat" },
         },
         opts = {
             adapters = {
