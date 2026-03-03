@@ -10,9 +10,6 @@ return {
         -- dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-mini/mini.nvim" }, -- if you use the mini.nvim suite
         -- dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-mini/mini.icons" }, -- if you use standalone mini plugins
         -- dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
-        keys = {
-            { "<LEADER>lm", mode = {"n"}, "<CMD>ToggleMarkdown<CR>", desc = "Markdown render" },
-        },
         config = function()
             require("render-markdown").setup({
                 file_types = {
