@@ -60,7 +60,6 @@ return {
         --         miniclue.gen_clues.z(),
         --     },
         -- })
-        require("mini.cmdline").setup({})
         require("mini.comment").setup({})
         require("mini.files").setup({})
         require("mini.hipatterns").setup({
