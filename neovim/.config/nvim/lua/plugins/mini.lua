@@ -10,7 +10,7 @@ return {
         { "<LEADER>Sw", function() MiniSessions.write() end,      desc = "Session write" },
         { "<LEADER>Sr", function() MiniSessions.read() end,       desc = "Session read" },
         { "<LEADER>Sd", function() MiniSessions.delete() end,     desc = "Session delete" },
-        { "<LEADER>tm", function() MiniMap.toggle() end,          desc = "Toggle Minimap" },
+        { "<LEADER>tM", function() MiniMap.toggle() end,          desc = "Toggle Minimap" },
     },
     config = function()
         require("mini.ai").setup({})

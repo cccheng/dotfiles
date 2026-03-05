@@ -44,7 +44,7 @@ return {
                 set = function(state)
                     require("render-markdown").toggle(state)
                 end,
-            }):map("<LEADER>tM")
+            }):map("<LEADER>tm")
         end,
     }
 }
