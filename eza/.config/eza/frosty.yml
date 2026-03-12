@@ -122,3 +122,6 @@ filenames:
 extensions:
   # Custom extension-based overrides
   # rs: {filename: {foreground: Red}, icon: {glyph: 🦀}}
+  log: {filename: {foreground: "#607D8B"}}
+  old: {filename: {foreground: "#607D8B"}}
+
