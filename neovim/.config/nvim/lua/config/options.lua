@@ -78,7 +78,7 @@ opt.listchars = {
 }
 opt.messagesopt = "wait:1000,history:512"               -- Don't show 'Press ENTER' prompt
 opt.modeline = true
-opt.mouse = "a"                                         -- Enable mouse
+opt.mouse = ""                                          -- Disable mouse
 opt.mousescroll = "ver:25,hor:6"                        -- Customize mouse scroll
 opt.number = true                                       -- Print line number
 opt.numberwidth = 3                                     -- Make the line number column thinner
