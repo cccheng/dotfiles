@@ -96,8 +96,8 @@ return {
                     map("n", "<LEADER>hP", gs.preview_hunk, { desc = "Preview hunk" })
                     map("n", "<LEADER>hq", gs.setqflist, { desc = "Set qflist" })
                     map('n', '<LEADER>hQ', function() gs.setqflist("all") end)
-                    map("n", "<LEADER>gb", function() gs.blame_line { full = true } end, { desc = "Blame current line" })
-                    map("n", "<LEADER>gB", function() gs.blame() end, { desc = "Blame buffer" })
+                    map("n", "<LEADER>gb", function() gs.blame() end, { desc = "Blame buffer" })
+                    map("n", "<LEADER>gB", function() gs.blame_line { full = true } end, { desc = "Blame current line" })
                     map("n", "<LEADER>gd", function()
                         if vim.wo.diff then
                             vim.cmd("diffoff")
