@@ -23,16 +23,29 @@ return {
                     blink = { enabled = true },
                 },
                 heading = {
-                    sign = false,
                     icons = {},
                 },
                 code = {
                     sign = false,
+                    border = "thin",
                     language_pad = 1,
                     left_pad = 1,
+                    left_margin = 1,
                 },
                 bullet = {
-                    enabled = false,
+                    enabled = true,
+                    icons = { '•' },
+                },
+                checkbox = {
+                    enabled = true,
+                    bullet = true,
+                    unchecked = { icon = '󱍫 ', highlight = 'DiagnosticInfo' },
+                    checked = { icon = '󱍧 ', highlight = 'DiagnosticOk' },
+                    custom = {
+                        in_progress = { raw = '[~]', rendered = '󱍬 ', highlight = 'DiagnosticInfo' },
+                        wont_do = { raw = '[>]', rendered = '󱍮 ', highlight = 'DiagnosticError' },
+                        waiting = { raw = '[!]', rendered = '󱍥 ', highlight = 'DiagnosticWarn' },
+                    },
                 },
             })
 

@@ -12,6 +12,19 @@ return {
             vim.api.nvim_set_hl(0, "TabLine", { fg = "#9a9ca5", bg = "#1f2233", bold = false })
             vim.api.nvim_set_hl(0, "TabLineFill", { fg = "#101218", bg = "#1f2233", bold = false })
             vim.api.nvim_set_hl(0, "TabLineSel", { fg = "#9a9ca5", bg = "#2b335a", bold = true })
+
+            vim.api.nvim_set_hl(0, "RenderMarkdownH1Bg", { fg = "#84a0c6", bg = "#2c3157", bold = true })
+            vim.api.nvim_set_hl(0, "RenderMarkdownH2Bg", { fg = "#a093c7", bg = "#293052", bold = true })
+            vim.api.nvim_set_hl(0, "RenderMarkdownH3Bg", { fg = "#89b8c2", bg = "#25304a", bold = true })
+            vim.api.nvim_set_hl(0, "RenderMarkdownH4Bg", { fg = "#b4be82", bg = "#252940", bold = true, italic = true })
+            vim.api.nvim_set_hl(0, "RenderMarkdownH5Bg", { fg = "#e2d478", bg = "#222540", bold = true, italic = true })
+            vim.api.nvim_set_hl(0, "RenderMarkdownH6Bg", { fg = "#e2a478", bg = "#20233c", bold = true, italic = true })
+            vim.api.nvim_set_hl(0, "RenderMarkdownH1", { fg = "#84a0c6", bold = true })
+            vim.api.nvim_set_hl(0, "RenderMarkdownH2", { fg = "#a093c7", bold = true })
+            vim.api.nvim_set_hl(0, "RenderMarkdownH3", { fg = "#89b8c2", bold = true })
+            vim.api.nvim_set_hl(0, "RenderMarkdownH4", { fg = "#b4be82", bold = true, italic = true })
+            vim.api.nvim_set_hl(0, "RenderMarkdownH5", { fg = "#e2d478", bold = true, italic = true })
+            vim.api.nvim_set_hl(0, "RenderMarkdownH6", { fg = "#e2a478", bold = true, italic = true })
         end
     },
     {
