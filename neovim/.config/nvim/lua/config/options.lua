@@ -91,7 +91,7 @@ opt.shiftround = true                                   -- Round indent
 opt.shiftwidth = 4                                      -- Use this number of spaces for indentation
 opt.shortmess:append {
     c = true,                                           -- Don't show completion messages in command line
-    I = true,                                           -- Don't show the intro message
+    -- I = true,                                           -- Don't show the intro message
 }
 -- opt.showmatch = true -- Show matching brackets by flickering
 opt.showmode = false                                    -- Don't show mode since we have a statusline
