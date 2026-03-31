@@ -7,8 +7,8 @@ return {
         },
         config = function()
             require("toggleterm").setup({
-                -- direction = 'vertical' | 'horizontal' | 'tab' | 'float',
-                size = 24,
+                direction = "vertical", -- 'vertical' | 'horizontal' | 'tab' | 'float',
+                size = 120,
                 open_mapping = { "<LEADER>`" },
                 autochdir = true,
             })
