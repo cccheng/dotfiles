@@ -64,6 +64,7 @@ return {
             { "<LEADER>ls",  function() vim.lsp.buf.hover({ border = "single" }) end, desc = "Hover" },
             { "<LEADER>lS",  function() vim.lsp.buf.signature_help({ border = "single" }) end, desc = "Signature" },
             { "<LEADER>la",  function() vim.lsp.buf.code_action() end, desc = "Code action" },
+            { "<LEADER>ln",  function() vim.lsp.codelens.run() end, desc = "Lens" },
             { "<LEADER>lF",  function() vim.lsp.buf.format() end, desc = "Format" },
             { "<LEADER>lR",  function() vim.lsp.buf.rename() end, desc = "Rename" },
             { "<LEADER>lS",  "<CMD>LspStop<CR>", desc = "Stop LSP" },
