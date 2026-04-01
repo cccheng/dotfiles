@@ -103,6 +103,9 @@ map("n", "<LEADER>tc",
 map("n", "<LEADER>t-", "<CMD>split<CR>", { desc = "Horizontal split" })
 map("n", "<LEADER>t|", "<CMD>vsplit<CR>", { desc = "Vertical split" })
 
+vim.cmd("packadd nvim.undotree")
+map("n", "<LEADER>tu", require("undotree").open, { desc = "Undo tree" })
+
 Snacks.toggle.profiler():map("<LEADER>tpp")
 Snacks.toggle.profiler_highlights():map("<LEADER>tph")
 Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<LEADER>tL")
