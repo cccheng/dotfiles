@@ -110,7 +110,7 @@ decorations = "None"
 #         completely transparent and 1.0 is opaque.
 #
 #         Default: 1.0
-opacity = 0.95
+opacity = 0.90
 
 #     blur = true | false # (works on macOS/KDE Wayland)
 #
@@ -234,7 +234,7 @@ normal = { family = "Victor Mono Nerd Font", style = "Bold" }
 #         Font size in points.
 #
 #         Default: 11.25
-size = 13
+size = 11
 #     offset = { x = <integer>, y = <integer> }
 #
 #         Offset is the extra space around each character. y can be thought of as modifying
