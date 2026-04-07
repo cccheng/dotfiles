@@ -2,6 +2,6 @@
 require("config.lazy")
 require("config.options")
 require("config.autocmds")
-require("config.keymap")
+require("config.keymaps")
 require("config.diagnostics")
 
