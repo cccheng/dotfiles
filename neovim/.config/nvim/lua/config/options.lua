@@ -137,3 +137,6 @@ opt.winminwidth = 5                                     -- Minimum window width
 opt.wrap = true                                         -- Enable line wrap
 -- opt.wrapmargin = 1
 
+-- Enable document colors with virtual text style by default
+-- vim.lsp.document_color.enable(true, nil, { style = 'virtual' })
+
