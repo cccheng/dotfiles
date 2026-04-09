@@ -1,4 +1,14 @@
 
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
+    desc = "Auto-reload buffers changed externally",
+    group = vim.api.nvim_create_augroup("AutoReload", { clear = true }),
+    callback = function()
+        if vim.o.buftype ~= "nofile" then
+            vim.cmd.checktime()
+        end
+    end,
+})
+
 vim.api.nvim_create_autocmd("TextYankPost", {
     desc = "Highlight when yanking (copying) text",
     group = vim.api.nvim_create_augroup("HighlightYank", { clear = true }),
