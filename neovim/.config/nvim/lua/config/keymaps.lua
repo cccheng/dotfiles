@@ -100,6 +100,12 @@ map("n", "<LEADER>tc",
     end,
     { desc = "Toggle sign and number columns" })
 
+map("n", "<LEADER>tn",
+    function()
+        vim.lsp.codelens.enable(not vim.lsp.codelens.is_enabled())
+    end,
+    { desc = "Codelens" })
+
 map("n", "<LEADER>t-", "<CMD>split<CR>", { desc = "Horizontal split" })
 map("n", "<LEADER>t|", "<CMD>vsplit<CR>", { desc = "Vertical split" })
 
