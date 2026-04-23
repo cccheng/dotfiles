@@ -26,7 +26,7 @@ follow = keyboard
     # dynamic width from 0 to 300
     # width = (0, 300)
     # constant width of 300
-    width = 300
+    width = (300, 500)
 
     # The height of a single notification, excluding the frame.
     # dynamic height from 0 to 300
@@ -37,7 +37,7 @@ follow = keyboard
     #       and the given value is treated as the maximum height
 
     # Position the notification in the top right corner
-    origin = top-right
+    origin = bottom-right
 
     # Offset from the origin
     # NOTE: Dunst from version 1.11 and older use this alternative notation
@@ -151,7 +151,8 @@ idle_threshold = 0
     ### Text ###
 
     # font = Monospace 8
-font = "JetBrainsMono Nerd Font" 10
+# font = "JetBrainsMono Nerd Font" 10
+font = "Iosevka Nerd Font" 12
 
     # The spacing between lines.  If the height is smaller than the
     # font height, it will get raised to the font height.
@@ -234,7 +235,7 @@ font = "JetBrainsMono Nerd Font" 10
     # icon_theme = "Adwaita, breeze"
 
     # Align icons left/right/top/off
-    icon_position = left
+    icon_position = off
 
     # Scale small icons up to this size, set to 0 to disable. Helpful
     # for e.g. small files or high-dpi screens. In case of conflict,
@@ -244,7 +245,7 @@ min_icon_size = 0
 
     # Scale larger icons down to this size, set to 0 to disable
     # max_icon_size = 128
-max_icon_size = 64
+max_icon_size = 0
 
     # Paths to default icons (only necessary when not using recursive icon lookup)
     # icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
