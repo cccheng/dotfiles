@@ -23,99 +23,101 @@ return {
     "folke/snacks.nvim",
     lazy = false,
     priority = 1000,
-    opts = {
-        bigfile = {
-            enabled = true,
-        },
-        explorer = {
-            enabled = true,
-        },
-        indent = {
-            enabled = true,
-            animate = {
-                style = "out",
-                easing = "linear",
-                duration = {
-                    step = 20, -- ms per step
-                    total = 250, -- maximum duration
-                },
-            },
-            chunk = {
+    opts = function()
+        return {
+            bigfile = {
                 enabled = true,
-                char = {
-                    corner_top = "╭",
-                    corner_bottom = "╰",
-                    arrow = "󰼛",    -- "󰐊"
-                },
             },
-            filter = function(buf)
-                local no_indent_fts = {
-                    "gitcommit",
-                }
-                return vim.g.snacks_indent ~= false
+            explorer = {
+                enabled = true,
+            },
+            indent = {
+                enabled = true,
+                animate = {
+                    style = "out",
+                    easing = "linear",
+                    duration = {
+                        step = 20, -- ms per step
+                        total = 250, -- maximum duration
+                    },
+                },
+                chunk = {
+                    enabled = true,
+                    char = {
+                        corner_top = "╭",
+                        corner_bottom = "╰",
+                        arrow = "󰼛",    -- "󰐊"
+                    },
+                },
+                filter = function(buf)
+                    local no_indent_fts = {
+                        "gitcommit",
+                    }
+                    return vim.g.snacks_indent ~= false
                     and vim.b[buf].snacks_indent ~= false
                     and vim.bo[buf].buftype == ""
                     and not vim.tbl_contains(no_indent_fts, vim.bo[buf].filetype)
-            end,
-        },
-        input = {
-            enabled = true,
-            prompt_pos = "left",
-        },
-        notifier = {
-            enabled = true,
-        },
-        picker = {
-            enabled = true,
-            layouts = {
-                ivy_compact = ivy_compact,
+                end,
             },
-            layout = {
-                preset = "ivy_compact",
+            input = {
+                enabled = true,
+                prompt_pos = "left",
             },
-            sources = {
-                files = { hidden = true, ignored = false },
-                grep = { hidden = true },
-                explorer = {
-                    hidden = true,
-                    auto_close = true,
-                    layout = {
-                        preset = "ivy_compact",
-                        preview = "main",
+            notifier = {
+                enabled = true,
+            },
+            picker = {
+                enabled = true,
+                layouts = {
+                    ivy_compact = ivy_compact,
+                },
+                layout = {
+                    preset = "ivy_compact",
+                },
+                sources = {
+                    files = { hidden = true, ignored = false },
+                    grep = { hidden = true },
+                    explorer = {
+                        hidden = true,
+                        auto_close = true,
+                        layout = {
+                            preset = "ivy_compact",
+                            preview = "main",
+                        },
                     },
                 },
             },
-        },
-        quickfile = {
-            enabled = true,
-        },
-        scope = {
-            enabled = true,
-        },
-        scroll = {
-            enabled = true,
-        },
-        styles = {
-            input = {
-                backdrop = true,
+            quickfile = {
+                enabled = true,
             },
-            notification = {
-                border = "top",
-                wo = {
-                    winblend = 20,
+            scope = {
+                enabled = true,
+            },
+            scroll = {
+                enabled = true,
+            },
+            styles = {
+                input = {
+                    backdrop = true,
+                },
+                notification = {
+                    border = "top",
+                    wo = {
+                        winblend = 20,
+                    },
+                },
+                scratch = {
+                    width = 120,
+                    height = math.floor(vim.o.lines * 0.85),
+                    border = "none",
                 },
             },
-            scratch = {
-                width = 120,
-                height = math.floor(vim.o.lines * 0.85),
-                border = "none",
+            words = {
+                enabled = true,
+                modes = { "n" },
             },
-        },
-        words = {
-            enabled = true,
-            modes = { "n" },
-        },
-    },
+        }
+    end,
     keys = {
         { "<LEADER><TAB>", function() Snacks.scratch({ ft = "markdown", file = vim.fn.stdpath("data") .. "/scratch.md" }) end, desc = "Scratch" },
         { "<LEADER>t", "", desc = "Toggle" },
