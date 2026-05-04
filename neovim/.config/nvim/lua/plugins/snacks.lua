@@ -28,6 +28,17 @@ return {
             bigfile = {
                 enabled = true,
             },
+            dashboard = {
+                enabled = true,
+                preset = {
+                    header = table.concat(require("milli").load({ splash = "lights" }).frames[1], "\n"),
+                },
+                sections = {
+                    { section = "header" },
+                    { title = "Sessions" },
+                    { section = "projects" },
+                },
+            },
             explorer = {
                 enabled = true,
             },
@@ -161,6 +172,8 @@ return {
     },
     config = function(_, opts)
         require("snacks").setup(opts)
+
+        require("milli").snacks({ splash = "lights", loop = true })
 
         vim.api.nvim_create_autocmd("User", {
             pattern = "MiniFilesActionRename",
