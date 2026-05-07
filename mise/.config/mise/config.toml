@@ -7,7 +7,7 @@ cargo-binstall = "latest"
 uv = "latest"
 
 fzf = "latest"
-neovim = "latest"
+# neovim = "latest"
 usage = "latest"
 shellcheck = "latest"
 
