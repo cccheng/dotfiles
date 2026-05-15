@@ -110,7 +110,7 @@ decorations = "None"
 #         completely transparent and 1.0 is opaque.
 #
 #         Default: 1.0
-opacity = 0.90
+opacity = 0.95
 
 #     blur = true | false # (works on macOS/KDE Wayland)
 #
