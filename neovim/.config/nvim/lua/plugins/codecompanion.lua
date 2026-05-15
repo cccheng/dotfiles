@@ -29,6 +29,7 @@ return {
             "CodeCompanion",
             "CodeCompanionActions",
             "CodeCompanionChat",
+            "CodeCompanionCLI",
         },
         dependencies = {
             "nvim-lua/plenary.nvim",
@@ -41,7 +42,8 @@ return {
             { "<LEADER>aa", "<CMD>CodeCompanionActions<CR>", mode = { "n", "v" }, desc = "CodeCompanion actions" },
             { "<LEADER>ac", "<CMD>CodeCompanionChat Toggle<CR>", mode = { "n", "v" }, desc = "CodeCompanion chat" },
             { "<LEADER>ai", "<CMD>CodeCompanion<CR>", mode = { "n", "v" }, desc = "CodeCompanion inline" },
-            { "<LEADER>as", "<CMD>CodeCompanionChat Add<CR>", mode = { "v" }, desc = "Add selection to Chat" },
+            { "<LEADER>av", "<CMD>CodeCompanionChat Add<CR>", mode = { "v" }, desc = "Add selection to Chat" },
+            { "<LEADER>ao", "<CMD>CodeCompanionCLI<CR>", mode = { "n", "v" }, desc = "Opencode" },
         },
         opts = {
             adapters = {
@@ -151,6 +153,17 @@ return {
                 },
                 background = {
                     adapter = "copilot",
+                },
+                cli = {
+                    agent = "opencode",
+                    agents = {
+                        opencode = {
+                            cmd = "opencode",
+                            args = {},
+                            description = "OpenCode",
+                            provider = "terminal",
+                        }
+                    },
                 },
             },
             display = {
