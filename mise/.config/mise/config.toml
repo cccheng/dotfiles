@@ -13,6 +13,10 @@ shellcheck = "latest"
 
 # AI tools
 opencode = "latest"
+claude = "latest"
+codex = "latest"
+crush = "latest"
+gemini-cli = "latest"
 
 # Rust tools
 "cargo:cargo-cache" = "latest"              # display information on $CARGO_HOME
@@ -35,6 +39,8 @@ opencode = "latest"
 "cargo:https://github.com/ckaznable/tenki" = "latest"
 
 # Node tools
+bun = "latest"
+pnpm = "latest"
 "npm:mcp-hub" = "latest"
 
 # Python tools
