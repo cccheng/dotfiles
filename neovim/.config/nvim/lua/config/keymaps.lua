@@ -38,7 +38,9 @@ map("n", "g/", "*") -- `:h *`
 map("n", "[/", "[<c-i>") -- `:h [_ctrl-i`
 
 -- / search inside selection (visual mode)
-map("x", "/", "<esc>/\\%V") -- `:h /\%V`
+map("x", "/", "<ESC>/\\%V") -- `:h /\%V`
+
+map("t", "<ESC><ESC>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- tabs
 map("n", "<C-h>", "<CMD>:tabprev<CR>", { desc = "Previous tab" })
