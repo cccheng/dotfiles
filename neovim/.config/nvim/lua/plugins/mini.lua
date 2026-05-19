@@ -157,7 +157,7 @@ return {
                         '%<', -- Mark general truncate point
                         { hl = 'MiniStatuslineFilename', strings = { filename } },
                         '%=', -- End left alignment
-                        { hl = "MiniStatuslineFilename", strings = { macro } },
+                        { hl = 'MiniIconsRed',           strings = { macro } },
                         { hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
                         { hl = mode_hl,                  strings = { search, location } },
                     })
