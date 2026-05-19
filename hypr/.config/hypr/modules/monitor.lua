@@ -1,3 +1,4 @@
+local hl = _G.hl
 
 -- https://wiki.hypr.land/Configuring/Basics/Monitors/
 

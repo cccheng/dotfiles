@@ -1,3 +1,4 @@
+local hl = _G.hl
 
 -- hyprcursor
 hl.env("XCURSOR_SIZE", "25")

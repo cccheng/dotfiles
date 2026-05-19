@@ -1,3 +1,4 @@
+local hl = _G.hl
 
 -- https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
 hl.workspace_rule({ workspace = "name:Knuth", monitor = "eDP-1", default = true, persistent = true })

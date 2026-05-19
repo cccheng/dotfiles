@@ -1,3 +1,4 @@
+local hl = _G.hl
 
 -- https://wiki.hypr.land/Configuring/Basics/Binds/
 -- https://wiki.hypr.land/Configuring/Basics/Dispatchers/
@@ -9,11 +10,12 @@ hl.bind("SUPER + S", hl.dsp.exec_cmd("hyprshot -m region --clipboard-only"))
 hl.bind("SUPER + Q", hl.dsp.window.close())
 hl.bind("SUPER + P", hl.dsp.window.pseudo())
 hl.bind("SUPER + J", hl.dsp.layout("togglesplit"))    -- dwindle only
+hl.bind("SUPER + SHIFT + F", hl.dsp.window.fullscreen())
 
 hl.bind("SUPER + F", function()
     hl.dispatch(hl.dsp.window.float({ action = "toggle" }))
-    hl.dispatch(hl.dsp.window.resize({ exact = "60% 90%" }))
     hl.dispatch(hl.dsp.window.center())
+    -- hl.dispatch(hl.dsp.window.resize({ x = 0.6, y = 0.9, relative = false }))
 end)
 
 -- Move focus with SUPER + arrow keys

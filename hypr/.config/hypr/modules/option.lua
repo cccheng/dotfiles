@@ -1,3 +1,4 @@
+local hl = _G.hl
 
 hl.config({
     general = {
@@ -10,7 +11,7 @@ hl.config({
             inactive_border = { colors = {"rgb(24273A)", "rgb(24273A)", "rgb(24273A)", "rgb(27273A)"}, angle = 45 },
         },
 
-        layout = "dwindle",
+        layout = "scrolling",
     },
 
     decoration = {
@@ -23,14 +24,25 @@ hl.config({
         blur = {
             enabled = true,
             size    = 5,
+            new_optimizations = true,
+			passes = 1,
+			brightness = 1,
+			noise = 0.05,
+			contrast = 0.89,
+			vibrancy = 0.5,
+			vibrancy_darkness = 0.5,
+			popups = false,
+			popups_ignorealpha = 0.6,
+			input_methods = true,
+			input_methods_ignorealpha = 0.8,
         },
 
         shadow = {
-            enabled      = true,
-            sharp        = false,
-            range        = 10,
-            render_power = 2,
-            color        = "rgba(155,191,191,0.20)",
+            enabled        = true,
+            sharp          = false,
+            range          = 10,
+            render_power   = 2,
+            color          = "rgba(155,191,191,0.20)",
             color_inactive = "rgba(0,0,0,0)",
         },
     },
@@ -58,12 +70,28 @@ hl.config({
         },
     },
 
+    cursor = {
+        inactive_timeout = 7,
+        no_warps = true,
+        enable_hyprcursor = true,
+    },
+
+    -- https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/
     dwindle = {
         -- The split (side/top) will not change regardless of what happens to the container.
         preserve_split = true,
     },
 
-    master = {},
+    -- https://wiki.hypr.land/Configuring/Layouts/Master-Layout/
+    master = {
+
+    },
+
+    -- https://wiki.hypr.land/Configuring/Layouts/Scrolling-Layout/
+    scrolling = {
+        fullscreen_on_one_column = true,
+    },
+
 
     misc = {
         disable_hyprland_logo    = true,
@@ -73,5 +101,17 @@ hl.config({
         mouse_move_enables_dpms  = true,
         key_press_enables_dpms   = true,
     },
+})
+
+hl.gesture({
+    fingers = 3,
+    direction = "horizontal",
+    action = "scroll_move"
+})
+
+hl.gesture({
+    fingers = 3,
+    direction = "vertical",
+    action = "fullscreen"
 })
 
