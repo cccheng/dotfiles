@@ -45,9 +45,6 @@ pnpm = "latest"
 
 # Python tools
 "pipx:drgn" = "latest"
-"pipx:neovim-remote" = "latest"
-"pipx:shell-functools" = "latest"           # shell utilities, https://github.com/sharkdp/shell-functools
-"pipx:terminaltexteffects" = "latest"       # terminal visual effects enginel, https://github.com/ChrisBuilds/terminaltexteffects
 "pipx:virtme-ng" = "latest"
 
 [settings]
