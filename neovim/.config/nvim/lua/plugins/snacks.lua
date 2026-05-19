@@ -19,7 +19,7 @@ local ivy_compact = {
     },
 }
 
-return {
+return {{
     "folke/snacks.nvim",
     lazy = false,
     priority = 1000,
@@ -183,4 +183,16 @@ return {
         vim.api.nvim_set_hl(0, "SnacksPickerGitStatusIgnored", { link = "Comment" })
         vim.api.nvim_set_hl(0, "SnacksPickerGitStatusUntracked", { link = "Comment" })
     end,
-}
+}, {
+    "ecruzolivera/snacks-unicode",
+    event = "VeryLazy",
+    dependencies = { "folke/snacks.nvim" },
+    keys = {
+        { "<LEADER>pu", function() Snacks.picker.pick("unicode") end, desc = "Unicode Symbols", },
+    },
+    config = function()
+        require("snacks-unicode").setup({
+            layout = { preset = "ivy_compact", preview = false }
+        })
+    end,
+}}
