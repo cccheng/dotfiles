@@ -15,7 +15,19 @@ hl.bind("SUPER + SHIFT + F", hl.dsp.window.fullscreen())
 hl.bind("SUPER + F", function()
     hl.dispatch(hl.dsp.window.float({ action = "toggle" }))
     hl.dispatch(hl.dsp.window.center())
-    -- hl.dispatch(hl.dsp.window.resize({ x = 0.6, y = 0.9, relative = false }))
+
+    local window = hl.get_active_window()
+    local monitor = window and window.monitor or hl.get_active_monitor()
+
+    if monitor == nil then
+        return
+    end
+
+    hl.dispatch(hl.dsp.window.resize({
+        x = math.floor(monitor.width * 0.6),
+        y = math.floor(monitor.height * 0.9),
+        relative = false,
+    }))
 end)
 
 -- Move focus with SUPER + arrow keys
@@ -80,7 +92,7 @@ hl.bind("SUPER + L", hl.dsp.send_shortcut({ mods = "", key = "right" }))
 hl.bind("SUPER + ESCAPE", hl.dsp.exec_cmd("pidof -q wlogout || wlogout"))
 
 -- waybar
-hl.bind("CTRL + Escape", hl.dsp.exec_cmd("killall waybar || hyprctl dispatch exec waybar"))
+hl.bind("CTRL + Escape", hl.dsp.exec_cmd("pkill waybar || hyprctl 'dispatch hl.dsp.exec_cmd(\"waybar\")'"))
 
 -- Screenshot
 hl.bind("Print",            hl.dsp.exec_cmd("grimblast --notify copysave screen"))
