@@ -7,7 +7,7 @@ cargo-binstall = "latest"
 uv = "latest"
 
 fzf = "latest"
-# neovim = "latest"
+neovim = "latest"
 usage = "latest"
 shellcheck = "latest"
 
@@ -16,7 +16,6 @@ opencode = "latest"
 claude = "latest"
 codex = "latest"
 crush = "latest"
-gemini-cli = "latest"
 
 # Rust tools
 "cargo:cargo-cache" = "latest"              # display information on $CARGO_HOME
