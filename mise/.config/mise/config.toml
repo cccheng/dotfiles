@@ -20,6 +20,7 @@ crush = "latest"
 # Rust tools
 "cargo:cargo-cache" = "latest"              # display information on $CARGO_HOME
 "cargo:cargo-generate" = "latest"           # create a rust project from a git as template
+"cargo:cargo-selector" = "latest"           # select and execute binary/example targets
 "cargo:cargo-update" = "latest"             # `cargo install-update`
 "cargo:vmtest" = "latest"
 "cargo:kconfig-lsp" = "latest"
