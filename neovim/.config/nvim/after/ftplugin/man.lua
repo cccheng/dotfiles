@@ -10,3 +10,8 @@ vim.opt_local.spell = false
 vim.keymap.set("n", "<LEADER>o", function()
     require("man").show_toc()
 end, { desc = "Man: Show table of content" })
+
+vim.keymap.set("n", "q", function()
+    vim.cmd.quit()
+end, { desc = "Quit buffer" })
+

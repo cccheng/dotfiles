@@ -62,7 +62,6 @@ vim.api.nvim_create_autocmd("FileType", {
     desc = "close some filetypes with <q>",
     group = vim.api.nvim_create_augroup("CloseWithQ", { clear = true }),
     pattern = {
-        "man",
         "qf",
         "help",
         "gitsigns-blame",
