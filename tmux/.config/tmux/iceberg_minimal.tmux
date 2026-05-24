@@ -9,7 +9,7 @@ set -g window-style ""
 set -g window-active-style ""
 
 # modules
-module_left_1="#h"
+module_left_1=" #h"
 
 # module_right_1="%a %d %b"
 module_right_0="#{?pane_input_off,#[fg=red bold]#[default],}"
@@ -34,3 +34,4 @@ set -g window-status-separator "#[fg=#2b2d37]󰇝"
 set -g pane-active-border-style "fg=#6c7189"
 set -g pane-border-style "fg=#1f2233"
 
+# vim:ft=tmux
