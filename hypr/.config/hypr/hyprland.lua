@@ -10,7 +10,9 @@
 -- https://wiki.hypr.land/Configuring/Start/
 --
 
-TERMINAL     = "foot"
+TERMINAL   = "foot"
+MENU       = "tofi-drun"
+SCREENSHOT = "hyprshot -m region --clipboard-only"
 
 require("modules.env")
 require("modules.animation")

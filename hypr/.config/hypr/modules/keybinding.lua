@@ -3,9 +3,9 @@ local hl = _G.hl
 -- https://wiki.hypr.land/Configuring/Basics/Binds/
 -- https://wiki.hypr.land/Configuring/Basics/Dispatchers/
 
-hl.bind("SUPER + A", hl.dsp.exec_cmd("tofi-drun"))
-hl.bind("SUPER + T", hl.dsp.exec_cmd("alacritty"))
-hl.bind("SUPER + S", hl.dsp.exec_cmd("hyprshot -m region --clipboard-only"))
+hl.bind("SUPER + A", hl.dsp.exec_cmd(MENU))
+hl.bind("SUPER + T", hl.dsp.exec_cmd(TERMINAL))
+hl.bind("SUPER + S", hl.dsp.exec_cmd(SCREENSHOT))
 
 hl.bind("SUPER + Q", hl.dsp.window.close())
 hl.bind("SUPER + P", hl.dsp.window.pseudo())
