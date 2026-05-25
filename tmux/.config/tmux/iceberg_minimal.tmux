@@ -8,8 +8,14 @@ set -g status-style "bg=#161822"
 set -g window-style ""
 set -g window-active-style ""
 
-# modules
-module_left_1=" #h"
+%if "#{SSH_CLIENT}"
+    module_left_0=" #[fg=#ea8a8a]󰌘 #[fg=#c7c9d1]#h"
+%else
+    module_left_0=" #[fg=#6c7189] #[fg=#c7c9d1]#h"
+%endif
+
+module_left_1="#[fg=#6c7189] #[fg=#c7c9d1]#S"
+
 
 # module_right_1="%a %d %b"
 module_right_0="#{?pane_input_off,#[fg=red bold]#[default],}"
@@ -17,7 +23,7 @@ module_right_1="%Y-%m-%d"
 module_right_2="%R %Z"
 module_right_3="<#{client_width}x#{client_height}>"
 
-set -g status-left " #[fg=#6c7189]$module_left_1 "
+set -g status-left "$module_left_0 $module_left_1 "
 set -g status-left-style ""
 set -g status-left-length 50
 
