@@ -8,26 +8,19 @@ set -g status-style "bg=#161822"
 set -g window-style ""
 set -g window-active-style ""
 
-%if "#{SSH_CLIENT}"
-    module_left_0=" #[fg=#ea8a8a]󰌘 #[fg=#c7c9d1]#h"
-%else
-    module_left_0=" #[fg=#6c7189] #[fg=#c7c9d1]#h"
-%endif
-
+module_left_0="#{?SSH_CLIENT,#[fg=#ea8a8a]󰌘,#[fg=#6c7189]} #[fg=#c7c9d1]#h"
 module_left_1="#[fg=#6c7189] #[fg=#c7c9d1]#S"
 
+module_right_0="#{?pane_input_off,#[fg=red bold] #[default],}"
+module_right_1="#[fg=#2b2d37]│ #[fg=#6c7189] %Y-%m-%d"
+module_right_2="#[fg=#c7c9d1] %R %Z"
+module_right_3="#[fg=#6c7189]#{client_width}×#{client_height}"
 
-# module_right_1="%a %d %b"
-module_right_0="#{?pane_input_off,#[fg=red bold]#[default],}"
-module_right_1="%Y-%m-%d"
-module_right_2="%R %Z"
-module_right_3="<#{client_width}x#{client_height}>"
-
-set -g status-left "$module_left_0 $module_left_1 "
+set -g status-left " $module_left_0 $module_left_1 #[fg=#2b2d37]│ "
 set -g status-left-style ""
 set -g status-left-length 50
 
-set -g status-right "$module_right_0 $module_right_1 #[fg=#c7c9d1]$module_right_2 #[fg=#6c7189]$module_right_3"
+set -g status-right "$module_right_0 $module_right_1 $module_right_2 $module_right_3 "
 set -g status-right-style "fg=#6c7189"
 set -g status-right-length 40
 
