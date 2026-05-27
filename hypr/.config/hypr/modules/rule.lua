@@ -52,7 +52,7 @@ hl.window_rule({
 
 -- Floating tagged windows
 hl.window_rule({
-    name  = "tag-floating",
+    name  = "tag-floating-widgets",
     match = { class = "^(nm-connection-editor|blueman-manager)$" },
     tag   = "+floating",
 })
@@ -60,6 +60,13 @@ hl.window_rule({
 hl.window_rule({
     name  = "tag-floating-nwg",
     match = { class = "^(nwg-look|nwg-display)$" },
+    tag   = "+floating",
+})
+
+hl.window_rule({
+    name  = "tag-floating-live-caption",
+    match = { title = "^(Live Caption)$" },
+    move  = "(monitor_w-window_w-10) (monitor_h-window_h-10)",
     tag   = "+floating",
 })
 
