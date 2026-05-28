@@ -14,9 +14,9 @@ shellcheck = "latest"
 
 # AI tools
 opencode = "latest"
+"cargo:oc-session" = "latest"
 claude = "latest"
 codex = "latest"
-crush = "latest"
 
 # Rust tools
 "cargo:cargo-cache" = "latest"              # display information on $CARGO_HOME
