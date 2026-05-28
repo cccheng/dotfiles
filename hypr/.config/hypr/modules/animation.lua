@@ -7,7 +7,6 @@ hl.curve("easeInOutCubic",   { type = "bezier", points = {  {0.65,    0.05}, {0.
 hl.curve("linear",           { type = "bezier", points = {  {0,       0},    {1,    1}        } })
 hl.curve("almostLinear",     { type = "bezier", points = {  {0.5,     0.5},  {0.75, 1}        } })
 hl.curve("quick",            { type = "bezier", points = {  {0.15,    0},    {0.1,  1}        } })
-hl.curve("bounce",           { type = "bezier", points = {  {0.91,    0.12}, {0.86, 1.36}     } })
 
 hl.curve("spring_menu",      { type = "spring", mass   = 1, stiffness =      80,    dampening = 14 })
 hl.curve("spring_window",    { type = "spring", mass   = 1, stiffness =      30,    dampening = 8  })

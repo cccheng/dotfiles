@@ -100,6 +100,8 @@ hl.config({
         animate_manual_resizes   = true,
         mouse_move_enables_dpms  = true,
         key_press_enables_dpms   = true,
+        enable_swallow = true,
+        swallow_regex = "(kitty|Alacritty|foot|ghostty)",
     },
 })
 

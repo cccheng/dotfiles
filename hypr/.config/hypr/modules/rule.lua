@@ -8,13 +8,18 @@ hl.workspace_rule({ workspace = "special:Terminal", on_created_empty = "[float; 
 hl.layer_rule({
     name  = "waybar-slide",
     match = { namespace = "waybar" },
-    animation = "slide",
+    blur = true,
+    blur_popups = true,
+    ignore_alpha = 0,
+    animation = "slide top",
 })
 
 hl.layer_rule({
     name  = "notifications-slide",
     match = { namespace = "notifications" },
-    animation = "slide",
+    blur = true,
+    ignore_alpha = 0,
+    animation = "slide right",
 })
 
 -- https://wiki.hypr.land/Configuring/Basics/Window-Rules/
