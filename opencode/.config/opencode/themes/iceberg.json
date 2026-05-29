@@ -1,0 +1,224 @@
+{
+    "$schema": "https://opencode.ai/theme.json",
+    "defs": {
+        "iceberg0": "#161822",
+        "iceberg1": "#1f2233",
+        "iceberg2": "#282d43",
+        "iceberg3": "#3d425c",
+        "iceberg4": "#454d73",
+        "iceberg5": "#6c7189",
+        "iceberg6": "#c7c9d1",
+        "iceberg7": "#85a0c7",
+        "iceberg8": "#89b9c2",
+        "iceberg9": "#b5bf82",
+        "iceberg10": "#e2a578",
+        "iceberg11": "#e27878",
+        "iceberg12": "#a093c8",
+        "iceberg13": "#a4aecc",
+        "iceberg14": "#cfd3e8",
+        "iceberg15": "#525e98",
+        "iceberg16": "#252941"
+    },
+    "theme": {
+        "primary": {
+            "dark": "iceberg7",
+            "light": "iceberg7"
+        },
+        "secondary": {
+            "dark": "iceberg8",
+            "light": "iceberg8"
+        },
+        "accent": {
+            "dark": "iceberg10",
+            "light": "iceberg10"
+        },
+        "error": {
+            "dark": "iceberg11",
+            "light": "iceberg11"
+        },
+        "warning": {
+            "dark": "iceberg10",
+            "light": "iceberg10"
+        },
+        "success": {
+            "dark": "iceberg9",
+            "light": "iceberg9"
+        },
+        "info": {
+            "dark": "iceberg8",
+            "light": "iceberg8"
+        },
+        "text": {
+            "dark": "iceberg6",
+            "light": "iceberg6"
+        },
+        "textMuted": {
+            "dark": "iceberg5",
+            "light": "iceberg5"
+        },
+        "background": {
+            "dark": "iceberg0",
+            "light": "iceberg0"
+        },
+        "backgroundPanel": {
+            "dark": "iceberg1",
+            "light": "iceberg1"
+        },
+        "backgroundElement": {
+            "dark": "iceberg3",
+            "light": "iceberg3"
+        },
+        "border": {
+            "dark": "iceberg4",
+            "light": "iceberg4"
+        },
+        "borderActive": {
+            "dark": "iceberg7",
+            "light": "iceberg7"
+        },
+        "borderSubtle": {
+            "dark": "iceberg4",
+            "light": "iceberg4"
+        },
+        "diffAdded": {
+            "dark": "iceberg9",
+            "light": "iceberg9"
+        },
+        "diffRemoved": {
+            "dark": "iceberg11",
+            "light": "iceberg11"
+        },
+        "diffContext": {
+            "dark": "iceberg5",
+            "light": "iceberg5"
+        },
+        "diffHunkHeader": {
+            "dark": "iceberg5",
+            "light": "iceberg5"
+        },
+        "diffHighlightAdded": {
+            "dark": "iceberg9",
+            "light": "iceberg9"
+        },
+        "diffHighlightRemoved": {
+            "dark": "iceberg11",
+            "light": "iceberg11"
+        },
+        "diffAddedBg": {
+            "dark": "iceberg1",
+            "light": "iceberg1"
+        },
+        "diffRemovedBg": {
+            "dark": "iceberg1",
+            "light": "iceberg1"
+        },
+        "diffContextBg": {
+            "dark": "iceberg1",
+            "light": "iceberg1"
+        },
+        "diffLineNumber": {
+            "dark": "iceberg4",
+            "light": "iceberg4"
+        },
+        "diffAddedLineNumberBg": {
+            "dark": "iceberg1",
+            "light": "iceberg1"
+        },
+        "diffRemovedLineNumberBg": {
+            "dark": "iceberg1",
+            "light": "iceberg1"
+        },
+        "markdownText": {
+            "dark": "iceberg6",
+            "light": "iceberg6"
+        },
+        "markdownHeading": {
+            "dark": "iceberg7",
+            "light": "iceberg7"
+        },
+        "markdownLink": {
+            "dark": "iceberg8",
+            "light": "iceberg8"
+        },
+        "markdownLinkText": {
+            "dark": "iceberg8",
+            "light": "iceberg8"
+        },
+        "markdownCode": {
+            "dark": "iceberg9",
+            "light": "iceberg9"
+        },
+        "markdownBlockQuote": {
+            "dark": "iceberg5",
+            "light": "iceberg5"
+        },
+        "markdownEmph": {
+            "dark": "iceberg10",
+            "light": "iceberg10"
+        },
+        "markdownStrong": {
+            "dark": "iceberg10",
+            "light": "iceberg10"
+        },
+        "markdownHorizontalRule": {
+            "dark": "iceberg5",
+            "light": "iceberg5"
+        },
+        "markdownListItem": {
+            "dark": "iceberg7",
+            "light": "iceberg7"
+        },
+        "markdownListEnumeration": {
+            "dark": "iceberg8",
+            "light": "iceberg8"
+        },
+        "markdownImage": {
+            "dark": "iceberg8",
+            "light": "iceberg8"
+        },
+        "markdownImageText": {
+            "dark": "iceberg8",
+            "light": "iceberg8"
+        },
+        "markdownCodeBlock": {
+            "dark": "iceberg6",
+            "light": "iceberg6"
+        },
+        "syntaxComment": {
+            "dark": "iceberg5",
+            "light": "iceberg5"
+        },
+        "syntaxKeyword": {
+            "dark": "iceberg7",
+            "light": "iceberg7"
+        },
+        "syntaxFunction": {
+            "dark": "iceberg13",
+            "light": "iceberg13"
+        },
+        "syntaxVariable": {
+            "dark": "iceberg6",
+            "light": "iceberg6"
+        },
+        "syntaxString": {
+            "dark": "iceberg8",
+            "light": "iceberg8"
+        },
+        "syntaxNumber": {
+            "dark": "iceberg12",
+            "light": "iceberg12"
+        },
+        "syntaxType": {
+            "dark": "iceberg7",
+            "light": "iceberg7"
+        },
+        "syntaxOperator": {
+            "dark": "iceberg6",
+            "light": "iceberg6"
+        },
+        "syntaxPunctuation": {
+            "dark": "iceberg6",
+            "light": "iceberg6"
+        }
+    }
+}

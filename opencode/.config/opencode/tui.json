@@ -1,0 +1,14 @@
+{
+    "$schema": "https://opencode.ai/tui.json",
+    "keybinds": {
+        "leader": "\\",
+        "messages_page_up": "pageup,ctrl+b",
+        "messages_page_down": "pagedown,ctrl+f",
+        "messages_line_up": "ctrl+y",
+        "messages_line_down": "ctrl+e",
+        "messages_half_page_up": "ctrl+u",
+        "messages_half_page_down": "ctrl+d",
+    },
+    "mouse": false,
+    "theme": "iceberg"
+}
