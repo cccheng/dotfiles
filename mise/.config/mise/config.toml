@@ -7,7 +7,7 @@ cargo-binstall = "latest"
 uv = "latest"
 
 fzf = "latest"
-# neovim = "latest"
+neovim = "latest"
 tmux = "latest"
 usage = "latest"
 shellcheck = "latest"
@@ -38,6 +38,7 @@ codex = "latest"
 "cargo:https://github.com/aome510/hackernews-TUI" = "latest"
 "cargo:https://github.com/fioncat/otree" = "latest"
 "cargo:https://github.com/ckaznable/tenki" = "latest"
+"cargo:https://github.com/mendrik-private/sqv" = "latest"               # sqlite3 viewer
 
 # Node tools
 bun = "latest"
