@@ -38,7 +38,7 @@ hl.bind("SUPER + up",    hl.dsp.focus({ direction = "up" }))
 hl.bind("SUPER + down",  hl.dsp.focus({ direction = "down" }))
 
 hl.bind("ALT + tab", function()
-    hl.dispatch(hl.dsp.window.alter_zorder("bottom"))
+    hl.dispatch(hl.dsp.window.alter_zorder({ mode = "bottom" }))
     hl.dispatch(hl.dsp.window.cycle_next())
 end)
 
