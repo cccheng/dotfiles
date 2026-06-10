@@ -9,7 +9,6 @@ hl.bind("SUPER + S", hl.dsp.exec_cmd(SCREENSHOT))
 
 hl.bind("SUPER + Q", hl.dsp.window.close())
 hl.bind("SUPER + P", hl.dsp.window.pseudo())
-hl.bind("SUPER + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 hl.bind("SUPER + SHIFT + F", hl.dsp.window.fullscreen())
 
 hl.bind("SUPER + F", function()
@@ -63,6 +62,37 @@ hl.bind("SUPER + tab", function ()
     hl.workspace_rule({ workspace = workspace.name, layout = next_layout })
 end)
 
+local function layout_bind(bind_table)
+    return function ()
+        local workspace = hl.get_active_special_workspace() or
+        hl.get_active_workspace()
+
+        if not workspace then
+            return
+        end
+
+        local layout = workspace.tiled_layout
+
+        if bind_table[layout] then
+            hl.dispatch(bind_table[layout])
+        end
+    end
+end
+
+hl.bind("SUPER + H", layout_bind({
+    scrolling = hl.dsp.layout("swapcol l"),  -- Scrolling: swap column with left one
+    dwindle   = hl.dsp.layout("swapsplit"),  -- Dwindle: swap window split
+    monocle   = hl.dsp.layout("cycleprev"),  -- Monocle and master: cycle prev window
+    master    = hl.dsp.layout("cycleprev"),
+}))
+
+hl.bind("SUPER + L", layout_bind({
+    scrolling = hl.dsp.layout("swapcol r"),   -- Scrolling: swap column with right one
+    dwindle   = hl.dsp.layout("togglesplit"), -- Dwindle: toggle window split
+    monocle   = hl.dsp.layout("cyclenext"),   -- Monocle and master: cycle next window
+    master    = hl.dsp.layout("cyclenext"),
+}))
+
 -- Switch workspaces with SUPER + [0-9]
 for i = 1, 9 do
     hl.bind("SUPER + " .. i,           hl.dsp.focus({ workspace = i }))
@@ -102,12 +132,6 @@ hl.bind("SUPER + SHIFT + P", hl.dsp.exec_cmd("hyprpicker | wl-copy"))
 
 -- Screen locking
 hl.bind("SUPER + SHIFT + L", hl.dsp.exec_cmd("hyprlock"))
-
--- vim-like arrow key sendshortcut
-hl.bind("SUPER + H", hl.dsp.send_shortcut({ mods = "", key = "left" }))
-hl.bind("SUPER + J", hl.dsp.send_shortcut({ mods = "", key = "down" }))
-hl.bind("SUPER + K", hl.dsp.send_shortcut({ mods = "", key = "up" }))
-hl.bind("SUPER + L", hl.dsp.send_shortcut({ mods = "", key = "right" }))
 
 -- wlogout
 hl.bind("SUPER + ESCAPE", hl.dsp.exec_cmd("pidof -q wlogout || wlogout"))
