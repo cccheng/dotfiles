@@ -11,7 +11,7 @@ hl.config({
             inactive_border = { colors = {"rgb(24273A)", "rgb(24273A)", "rgb(24273A)", "rgb(27273A)"}, angle = 45 },
         },
 
-        layout = "scrolling",
+        layout = "master",
     },
 
     decoration = {

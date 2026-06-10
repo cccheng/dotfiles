@@ -31,7 +31,7 @@ hl.bind("SUPER + F", function()
 end)
 
 -- Move focus with SUPER + arrow keys
-hl.bind("SUPER + tab", hl.dsp.focus({ monitor = "+1" }))
+-- hl.bind("SUPER + tab", hl.dsp.focus({ monitor = "+1" }))
 hl.bind("SUPER + left",  hl.dsp.focus({ direction = "left" }))
 hl.bind("SUPER + right", hl.dsp.focus({ direction = "right" }))
 hl.bind("SUPER + up",    hl.dsp.focus({ direction = "up" }))
@@ -40,6 +40,27 @@ hl.bind("SUPER + down",  hl.dsp.focus({ direction = "down" }))
 hl.bind("ALT + tab", function()
     hl.dispatch(hl.dsp.window.alter_zorder({ mode = "bottom" }))
     hl.dispatch(hl.dsp.window.cycle_next())
+end)
+
+-- Cycle layout for current workspace
+hl.bind("SUPER + tab", function ()
+    local layouts     = { "scrolling", "dwindle", "master", "monocle" }
+    local workspace   = hl.get_active_workspace()
+    local next_layout = "dwindle"
+
+    if not workspace then
+        return
+    end
+
+    for i = 1, #layouts do
+        if layouts[i] == workspace.tiled_layout then
+            local next_layout_idx = (i % #layouts) + 1
+            next_layout = layouts[next_layout_idx]
+            break
+        end
+    end
+
+    hl.workspace_rule({ workspace = workspace.name, layout = next_layout })
 end)
 
 -- Switch workspaces with SUPER + [0-9]
