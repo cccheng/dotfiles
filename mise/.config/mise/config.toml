@@ -14,9 +14,10 @@ shellcheck = "latest"
 
 # AI tools
 opencode = "latest"
-"cargo:oc-session" = "latest"
 claude = "latest"
 codex = "latest"
+"cargo:oc-session" = "latest"
+"cargo:modelsdev" = "latest"                                    # browsing AI models, benchmarks, coding agents, and provider statuses.
 
 # Rust tools
 "cargo:cargo-cache" = "latest"              # display information on $CARGO_HOME
